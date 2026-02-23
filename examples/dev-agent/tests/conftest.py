@@ -47,44 +47,36 @@ from tests.fixtures import (
 # ──────────────────────────────────────────────
 
 
-def make_mock_github_tool(mock_response: dict | Exception) -> ToolDefinition:
-    """Create a mock version of the github_repo_metadata tool.
-
-    If mock_response is a dict, the tool returns it successfully.
-    If mock_response is an Exception, the tool raises it.
-
-    This pattern is what AgentCI should provide as a built-in utility:
-        agentci.mock_tool("github_repo_metadata", response={...})
-    
-    Building it manually here teaches us what the API should feel like.
-    """
+def make_mock_github_tool(mock_response: dict | Exception | Any) -> ToolDefinition:
+    """Create a mock version of the github_repo_metadata tool."""
     async def mock_handler(owner: str, repo: str) -> dict:
-        if isinstance(mock_response, Exception):
-            raise mock_response
+        resp = mock_response(owner, repo) if callable(mock_response) else mock_response
+        if isinstance(resp, Exception):
+            raise resp
 
         # Simulate the real handler's output mapping
         return RepoMetadataOutput(
-            owner=mock_response["owner"]["login"],
-            repo=mock_response["name"],
-            full_name=mock_response["full_name"],
-            description=mock_response.get("description"),
-            language=mock_response.get("language"),
-            stars=mock_response["stargazers_count"],
-            forks=mock_response["forks_count"],
-            open_issues=mock_response["open_issues_count"],
-            watchers=mock_response["subscribers_count"],
+            owner=resp["owner"]["login"],
+            repo=resp["name"],
+            full_name=resp["full_name"],
+            description=resp.get("description"),
+            language=resp.get("language"),
+            stars=resp["stargazers_count"],
+            forks=resp["forks_count"],
+            open_issues=resp["open_issues_count"],
+            watchers=resp["subscribers_count"],
             license_name=(
-                mock_response["license"]["name"]
-                if mock_response.get("license")
+                resp["license"]["name"]
+                if resp.get("license")
                 else None
             ),
-            default_branch=mock_response["default_branch"],
-            created_at=mock_response["created_at"],
-            last_pushed_at=mock_response["pushed_at"],
-            is_fork=mock_response["fork"],
-            is_archived=mock_response["archived"],
-            topics=mock_response.get("topics", []),
-            size_kb=mock_response["size"],
+            default_branch=resp["default_branch"],
+            created_at=resp["created_at"],
+            last_pushed_at=resp["pushed_at"],
+            is_fork=resp["fork"],
+            is_archived=resp["archived"],
+            topics=resp.get("topics", []),
+            size_kb=resp["size"],
         ).model_dump()
 
     return ToolDefinition(
@@ -96,14 +88,15 @@ def make_mock_github_tool(mock_response: dict | Exception) -> ToolDefinition:
     )
 
 
-def make_mock_list_files_tool(mock_response: dict | Exception) -> ToolDefinition:
+def make_mock_list_files_tool(mock_response: dict | Exception | Any) -> ToolDefinition:
     """Create a mock version of the github_list_files tool."""
     from devagent.tools.github_list_files import github_list_files_tool, ListFilesOutput
     
     async def mock_handler(owner: str, repo: str, tree_sha: str = "HEAD", recursive: bool = True) -> dict:
-        if isinstance(mock_response, Exception):
-            raise mock_response
-        return ListFilesOutput(**mock_response).model_dump()
+        resp = mock_response(owner, repo, tree_sha, recursive) if callable(mock_response) else mock_response
+        if isinstance(resp, Exception):
+            raise resp
+        return ListFilesOutput(**resp).model_dump()
         
     return ToolDefinition(
         name=github_list_files_tool.name,
@@ -120,6 +113,9 @@ def make_mock_read_file_tool(mock_responses: dict[str, dict | Exception]) -> Too
     
     async def mock_handler(owner: str, repo: str, path: str, ref: str | None = None) -> dict:
         response = mock_responses.get(path)
+        if callable(response):
+            response = response(owner, repo, path, ref)
+            
         if response is None:
             import httpx
             raise httpx.HTTPStatusError(
@@ -212,13 +208,13 @@ def make_mock_community_scorer(mock_response: dict | Exception) -> ToolDefinitio
 
 
 def make_mock_registry(
-    mock_metadata_response: dict | Exception,
-    mock_tree_response: dict | Exception | None = None,
-    mock_file_responses: dict[str, dict | Exception] | None = None,
-    mock_dep_responses: dict[str, dict | Exception] | None = None,
-    mock_actions_response: dict | Exception | None = None,
-    mock_license_response: dict | Exception | None = None,
-    mock_community_response: dict | Exception | None = None,
+    mock_metadata_response: dict | Exception | Any,
+    mock_tree_response: dict | Exception | Any | None = None,
+    mock_file_responses: dict[str, dict | Exception | Any] | None = None,
+    mock_dep_responses: dict[str, dict | Exception | Any] | None = None,
+    mock_actions_response: dict | Exception | Any | None = None,
+    mock_license_response: dict | Exception | Any | None = None,
+    mock_community_response: dict | Exception | Any | None = None,
 ) -> ToolRegistry:
     """Create a ToolRegistry with all Phase 1 and 2 mocked tools."""
     registry = ToolRegistry()
@@ -314,11 +310,25 @@ def mock_anthropic_client(fixture_name: str):
         mocker = AnthropicMocker(
             mock_responses=[
                 {"tool": "github_repo_metadata", "input": {"owner": REPO_NONEXISTENT["owner"], "repo": REPO_NONEXISTENT["repo"]}, "input_tokens": 500, "output_tokens": 100},
+                # We expect the agent to retry the 500 error 3 times and then the mock LLM should see the final error string.
                 {"text": (
-                    "I could not analyze the repository because it does not exist or is inaccessible. "
-                    "The github_repo_metadata tool returned a 404 Not Found error. "
-                    "Please check the URL and try again."
+                    "I could not analyze the repository due to a server error. "
+                    "The github_repo_metadata tool returned a 500 error."
                 ), "input_tokens": 600, "output_tokens": 100}
+            ]
+        )
+        
+    elif fixture_name == "missing_file":
+        mocker = AnthropicMocker(
+            mock_responses=[
+                {"tool": "github_repo_metadata", "input": {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"]}, "input_tokens": 500, "output_tokens": 100},
+                {"tool": "github_list_files", "input": {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"], "recursive": True}, "input_tokens": 600, "output_tokens": 100},
+                {"tool": "github_read_file", "input": {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"], "path": "package.json"}, "input_tokens": 1600, "output_tokens": 100},
+                {"text": (
+                    "### Repository Health Report: langchain-ai/langchain\n\n"
+                    "**Security & Dependencies**\n"
+                    "- Could not read the file due to an error (404 Not Found)."
+                ), "input_tokens": 2000, "output_tokens": 300}
             ]
         )
 
@@ -405,17 +415,69 @@ async def agent_minimal() -> DevAgent:
 
 @pytest_asyncio.fixture
 async def agent_error() -> DevAgent:
-    """Agent with mocked GitHub API that raises a 404 error."""
+    """Agent with mocked GitHub API that raises a 500 error (Complete Failure)."""
     import httpx
 
     error = httpx.HTTPStatusError(
-        "404 Not Found",
+        "500 Internal Server Error",
         request=httpx.Request("GET", "https://api.github.com/repos/x/y"),
-        response=httpx.Response(404),
+        response=httpx.Response(500),
     )
     registry = make_mock_registry(error)
     agent = DevAgent(registry=registry)
     agent.client = mock_anthropic_client("error")
+    return agent
+
+
+@pytest_asyncio.fixture
+async def agent_rate_limit() -> DevAgent:
+    """Agent with simulated rate limit that recovers after 2 retries."""
+    import httpx
+    
+    state = {"calls": 0}
+    def mock_metadata(owner, repo):
+        state["calls"] += 1
+        if state["calls"] <= 2:
+            raise httpx.HTTPStatusError(
+                "403 Forbidden - Rate limit exceeded",
+                request=httpx.Request("GET", f"https://api.github.com/repos/{owner}/{repo}"),
+                response=httpx.Response(403),
+            )
+        return MOCK_HEALTHY_RESPONSE
+
+    registry = make_mock_registry(
+        mock_metadata_response=mock_metadata,
+        mock_tree_response={"tree": [{"path": "package.json", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}, {"path": ".github/workflows/ci.yml", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}, {"path": "LICENSE", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}], "truncated": False},
+        mock_file_responses={"package.json": {"path": "package.json", "content": "{\"dependencies\": {\"lodash\": \"4.17.10\"}}", "size": 100, "encoding": "utf-8"}},
+        mock_dep_responses={"npm": {"total_dependencies_found": 15, "critical_vulnerabilities": 0, "high_vulnerabilities": 1, "medium_vulnerabilities": 3, "low_vulnerabilities": 1, "notes": "Found vulnerabilities."}},
+        mock_actions_response={"has_workflows": True, "workflow_count": 1, "workflow_triggers": ["push"], "notes": "Found workflow."},
+        mock_license_response={"has_license_file": True, "license_type": "MIT", "is_osi_approved": True, "notes": "Found MIT license."},
+        mock_community_response={"has_contributing": True, "has_code_of_conduct": True, "has_issue_templates": True, "has_pr_template": True, "health_score_adjustment": 2, "notes": "All community standards met."}
+    )
+    agent = DevAgent(registry=registry, max_tool_calls=10)
+    agent.client = mock_anthropic_client("healthy") # LLM sees success ultimately
+    return agent
+
+
+@pytest_asyncio.fixture
+async def agent_missing_file() -> DevAgent:
+    """Agent with a healthy repo but github_read_file returns a 404 for package.json."""
+    import httpx
+    
+    def mock_read_file(owner, repo, path, ref):
+        raise httpx.HTTPStatusError(
+            "404 Not Found",
+            request=httpx.Request("GET", f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"),
+            response=httpx.Response(404),
+        )
+
+    registry = make_mock_registry(
+        mock_metadata_response=MOCK_HEALTHY_RESPONSE,
+        mock_tree_response={"tree": [{"path": "package.json", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}], "truncated": False},
+        mock_file_responses={"package.json": mock_read_file}
+    )
+    agent = DevAgent(registry=registry, max_tool_calls=10)
+    agent.client = mock_anthropic_client("missing_file")
     return agent
 
 
@@ -428,7 +490,6 @@ async def agent_live() -> DevAgent:
 @pytest.fixture
 def trace_healthy(agent_healthy):
     """Pre-run trace for a healthy repo. Use when you need the trace, not the agent."""
-    # This is a factory fixture — call it to get the trace
     async def _run():
         return await agent_healthy.analyze(REPO_HEALTHY["url"])
     return _run
@@ -448,3 +509,28 @@ def trace_minimal(agent_minimal):
     async def _run():
         return await agent_minimal.analyze(REPO_MINIMAL["url"])
     return _run
+
+
+@pytest.fixture
+def trace_rate_limit(agent_rate_limit):
+    """Pre-run trace for a rate limited repo."""
+    async def _run():
+        return await agent_rate_limit.analyze(REPO_HEALTHY["url"])
+    return _run
+
+
+@pytest.fixture
+def trace_missing_file(agent_missing_file):
+    """Pre-run trace for a missing file repo."""
+    async def _run():
+        return await agent_missing_file.analyze(REPO_HEALTHY["url"])
+    return _run
+
+
+@pytest.fixture
+def trace_error(agent_error):
+    """Pre-run trace for a server error repo."""
+    async def _run():
+        return await agent_error.analyze(REPO_NONEXISTENT["url"])
+    return _run
+

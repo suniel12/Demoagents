@@ -42,26 +42,31 @@ class TestToolSelection:
             f"got: {trace.tool_names_called}"
         )
 
-    async def test_calls_multiple_tools_in_sequence_phase_1(self, agent_healthy):
-        """In Phase 1, the agent should call multiple tools sequentially.
+    async def test_calls_multiple_tools_in_sequence_phase_2(self, agent_healthy):
+        """In Phase 2, the agent should call multiple tools sequentially.
         
-        A healthy repo with a manifest should trigger exactly 4 tool calls:
-        metadata -> list_files -> read_file -> dependency_analyzer
+        A healthy repo with a manifest should trigger exactly 7 tool calls:
+        metadata -> list_files -> read_file -> dependency_analyzer -> actions -> license -> community
         """
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
 
-        assert trace.tool_call_count == 4, (
-            f"Phase 1 healthy agent should make exactly 4 tool calls, "
+        assert trace.tool_call_count == 7, (
+            f"Phase 2 healthy agent should make exactly 7 tool calls, "
             f"made {trace.tool_call_count}: {trace.tool_names_called}"
         )
         
-        # Verify the exact sequence
+        # Verify the exact sequence (first 4 must be in order, the last 3 can technically be whatever order the LLM emits them in, 
+        # but typically it emits them in the order of the prompt rules, so we check for exact match or set inclusion). 
+        # For simplicity, we just assert the list matches our expectation, assuming deterministic ordering from Claude.
         names = trace.tool_names_called
         assert names == [
             "github_repo_metadata",
             "github_list_files",
             "github_read_file",
-            "dependency_analyzer"
+            "dependency_analyzer",
+            "github_actions_analyzer",
+            "license_checker",
+            "community_health_scorer"
         ], f"Incorrect tool call sequence: {names}"
 
     async def test_no_hallucinated_tool_calls(self, agent_healthy):
@@ -71,8 +76,11 @@ class TestToolSelection:
             "github_repo_metadata",
             "github_list_files",
             "github_read_file",
-            "dependency_analyzer"
-        }  # Phase 1 has 4 valid tools
+            "dependency_analyzer",
+            "github_actions_analyzer",
+            "license_checker",
+            "community_health_scorer"
+        }  # Phase 2 has 7 valid tools
 
         for tool_name in trace.tool_names_called:
             assert tool_name in valid_tools, (

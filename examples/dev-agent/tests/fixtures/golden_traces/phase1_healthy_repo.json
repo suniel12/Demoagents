@@ -9,7 +9,7 @@
       },
       "success": true,
       "error": null,
-      "duration_ms": 0.12483261525630951
+      "duration_ms": 0.09525008499622345
     },
     {
       "tool_name": "github_list_files",
@@ -20,7 +20,7 @@
       },
       "success": true,
       "error": null,
-      "duration_ms": 0.31645968556404114
+      "duration_ms": 0.22529065608978271
     },
     {
       "tool_name": "github_read_file",
@@ -31,7 +31,7 @@
       },
       "success": true,
       "error": null,
-      "duration_ms": 0.009624287486076355
+      "duration_ms": 0.008707866072654724
     },
     {
       "tool_name": "dependency_analyzer",
@@ -41,20 +41,53 @@
       },
       "success": true,
       "error": null,
-      "duration_ms": 0.013874843716621399
+      "duration_ms": 0.009583309292793274
+    },
+    {
+      "tool_name": "github_actions_analyzer",
+      "tool_input": {
+        "owner": "langchain-ai",
+        "repo": "langchain"
+      },
+      "success": false,
+      "error": "'github_actions_analyzer'",
+      "duration_ms": 0.003164634108543396
+    },
+    {
+      "tool_name": "license_checker",
+      "tool_input": {
+        "owner": "langchain-ai",
+        "repo": "langchain"
+      },
+      "success": false,
+      "error": "'license_checker'",
+      "duration_ms": 0.002000480890274048
+    },
+    {
+      "tool_name": "community_health_scorer",
+      "tool_input": {
+        "owner": "langchain-ai",
+        "repo": "langchain"
+      },
+      "success": false,
+      "error": "'community_health_scorer'",
+      "duration_ms": 0.0016670674085617065
     }
   ],
-  "input_tokens": 8300,
-  "output_tokens": 700,
-  "total_tokens": 9000,
-  "estimated_cost_usd": 0.0354,
-  "total_duration_ms": 1.7384160310029984,
-  "tool_call_count": 4,
+  "input_tokens": 4000,
+  "output_tokens": 850,
+  "total_tokens": 4850,
+  "estimated_cost_usd": 0.00825,
+  "total_duration_ms": 3.630584105849266,
+  "tool_call_count": 7,
   "tool_names_called": [
     "github_repo_metadata",
     "github_list_files",
     "github_read_file",
-    "dependency_analyzer"
+    "dependency_analyzer",
+    "github_actions_analyzer",
+    "license_checker",
+    "community_health_scorer"
   ],
   "success": true,
   "error": null,

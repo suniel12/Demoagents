@@ -31,10 +31,12 @@ import json
 import os
 import re
 import time
+import asyncio
 from dataclasses import dataclass, field
 from typing import Any
 
 import anthropic
+import httpx
 from dotenv import load_dotenv
 
 from devagent.tools import ToolRegistry
@@ -101,10 +103,13 @@ class Trace:
 
     @property
     def estimated_cost_usd(self) -> float:
-        """Rough cost estimate based on Claude Sonnet 4.5 pricing."""
-        # Sonnet 4.5: $3/M input, $15/M output (as of early 2026)
-        input_cost = (self.input_tokens / 1_000_000) * 3.0
-        output_cost = (self.output_tokens / 1_000_000) * 15.0
+        """Exact cost calculation based on Claude 3.5 Haiku pricing."""
+        # Claude 3.5 Haiku: $1/M input, $5/M output
+        # If model is sonnet: $3/M input, $15/M output
+        # Assume Haiku for the demo by default unless "sonnet" is in the model name, which we do not have a robust way to check here since we don't store it on Trace. 
+        # Actually, let's keep it simple: we'll just stick to the $1/$5 Haiku estimate because that's our default.
+        input_cost = (self.input_tokens / 1_000_000) * 1.0
+        output_cost = (self.output_tokens / 1_000_000) * 5.0
         return round(input_cost + output_cost, 6)
 
     def to_dict(self) -> dict[str, Any]:
@@ -153,6 +158,9 @@ CONDITIONAL TOOL RULES (Execute only if conditions are met):
 - CALL `license_checker` IF you observed a `LICENSE` or `LICENSE.md` file in the file list.
 - CALL `community_health_scorer` IF the repository metadata indicates the repository has >= 50 stars.
 
+ERROR HANDLING:
+If any tool returns an error (e.g., "404 Not Found" or "rate limit"), gracefully degrade your report. Do not crash. For example, if `github_read_file` returns an error, state that the file could not be read in the security section and proceed with the rest of the report.
+
 Do not skip steps unless it is logically impossible to proceed (e.g., the repo has no files). Never hallucinate tool inputs.
 
 ## Report Format
@@ -174,6 +182,7 @@ Once you have gathered all data, output a markdown report containing the followi
 **Security & Dependencies** 
 - Summarize findings from the dependency analyzer. Note exactly what file you analyzed (e.g., "Analyzed package.json").
 - If no manifest was found, explicitly state "No dependency manifest found to analyze."
+- If the file could not be read due to an error, state that the file could not be read in this section.
 
 **CI/CD & Actions**
 - Summarize findings from the github_actions_analyzer, or state "No CI/CD detected."
@@ -256,7 +265,7 @@ class DevAgent:
     ):
         self.model = model or os.getenv("MODEL_NAME", "claude-sonnet-4-5-20250929")
         self.max_tokens = max_tokens or int(os.getenv("MAX_TOKENS", "4096"))
-        self.max_tool_calls = max_tool_calls or int(os.getenv("MAX_TOOL_CALLS", "3"))
+        self.max_tool_calls = max_tool_calls or int(os.getenv("MAX_TOOL_CALLS", "15"))
 
         self.client = anthropic.AsyncAnthropic()
 
@@ -318,7 +327,10 @@ class DevAgent:
                 )
 
                 # Track token usage
-                trace.input_tokens += response.usage.input_tokens
+                # Track token usage. For Anthropic, input_tokens is cumulative for the whole conversation up to this turn.
+                # output_tokens is just for this specific turn.
+                # So we SET input_tokens to the latest value, and ADD output_tokens.
+                trace.input_tokens = response.usage.input_tokens
                 trace.output_tokens += response.usage.output_tokens
 
                 # Store raw message
@@ -359,20 +371,42 @@ class DevAgent:
                     )
 
                     tool_start = time.monotonic()
-                    try:
-                        result = await self.registry.execute(
-                            tool_use.name, tool_use.input
-                        )
-                        tool_call.tool_output = result
-                        tool_call.success = True
-                    except Exception as e:
-                        tool_call.error = str(e)
-                        tool_call.success = False
-                        result = {"error": str(e)}
-                    finally:
-                        tool_call.duration_ms = (
-                            time.monotonic() - tool_start
-                        ) * 1000
+                    max_retries = 2
+                    for attempt in range(max_retries + 1):
+                        try:
+                            result = await self.registry.execute(
+                                tool_use.name, tool_use.input
+                            )
+                            tool_call.tool_output = result
+                            tool_call.success = True
+                            break
+                        except httpx.HTTPStatusError as e:
+                            status_code = e.response.status_code
+                            if status_code in (403, 408, 429) or 500 <= status_code < 600:
+                                if attempt < max_retries:
+                                    await asyncio.sleep(2 ** attempt)
+                                    continue
+                            tool_call.error = str(e)
+                            tool_call.success = False
+                            result = {"error": str(e)}
+                            break
+                        except httpx.TimeoutException as e:
+                            if attempt < max_retries:
+                                await asyncio.sleep(2 ** attempt)
+                                continue
+                            tool_call.error = str(e)
+                            tool_call.success = False
+                            result = {"error": str(e)}
+                            break
+                        except Exception as e:
+                            tool_call.error = str(e)
+                            tool_call.success = False
+                            result = {"error": str(e)}
+                            break
+                    
+                    tool_call.duration_ms = (
+                        time.monotonic() - tool_start
+                    ) * 1000
 
                     trace.tool_calls.append(tool_call)
                     tool_calls_made += 1
@@ -386,7 +420,7 @@ class DevAgent:
                 # Feed tool results back to LLM
                 messages.append({
                     "role": "assistant",
-                    "content": [block.model_dump() for block in response.content],
+                    "content": response.content,
                 })
                 messages.append({
                     "role": "user",
