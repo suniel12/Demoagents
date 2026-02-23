@@ -19,9 +19,12 @@ import pytest_asyncio
 @pytest.fixture(autouse=True)
 def dummy_env_vars():
     """Ensure Anthropic client can initialize without a real API key during tests."""
-    os.environ["ANTHROPIC_API_KEY"] = "sk-ant-dummy-key-for-testing"
+    original_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not original_key:
+        os.environ["ANTHROPIC_API_KEY"] = "sk-ant-dummy-key-for-testing"
     yield
-    os.environ.pop("ANTHROPIC_API_KEY", None)
+    if not original_key:
+        os.environ.pop("ANTHROPIC_API_KEY", None)
 
 from devagent.agent.core import DevAgent, Trace
 from devagent.tools import ToolRegistry, ToolDefinition

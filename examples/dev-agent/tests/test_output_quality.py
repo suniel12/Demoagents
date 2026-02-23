@@ -240,43 +240,28 @@ class TestAntiHallucination:
 
 @pytest.mark.asyncio
 class TestLLMAsJudge:
-    """Uses an LLM (Claude) to evaluate the quality of the agent's report."""
+    """Uses AgentCI's llm_judge assertion to evaluate report quality."""
 
-    async def test_report_quality_with_llm_judge(self, trace_healthy):
-        """Passes the generated report to an LLM judge to grade its quality."""
+    async def test_report_quality_with_llm_judge_assertion(self, trace_healthy):
+        """Passes the generated report to an LLM judge via AgentCI."""
         import os
-        from anthropic import AsyncAnthropic
+        from agentci.models import Assertion
+        from agentci.assertions import evaluate_assertion
 
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if not api_key or api_key == "sk-ant-dummy-key-for-testing":
+        if not os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_API_KEY") == "sk-ant-dummy-key-for-testing":
             pytest.skip("Skipping LLM-as-judge test: real ANTHROPIC_API_KEY not set.")
         
         trace = await trace_healthy()
-        report = trace.final_report
 
-        client = AsyncAnthropic(api_key=api_key)
+        rule = """
+        The report must clearly and professionally assess the repository's health. It must:
+        1. Mention the repository name
+        2. Include key metrics (like stars and forks)
+        3. Provide a composite score (e.g. A, B, C, D, F)
+        4. Provide actionable recommendations
+        """
         
-        prompt = f"""You are an expert technical evaluator grading an AI agent. 
-Review the following repository health report:
-
-<report>
-{report}
-</report>
-
-Does this report clearly and professionally assess the repository's health? It must:
-1. Mention the repository name
-2. Include key metrics (like stars and forks)
-3. Provide a composite score (e.g. A, B, C, D, F)
-4. Provide actionable recommendations
-
-Answer ONLY with "YES" or "NO" on the first line. 
-On subsequent lines, provide your reasoning.
-"""
-        response = await client.messages.create(
-            model="claude-3-haiku-20240307",
-            max_tokens=200,
-            messages=[{"role": "user", "content": prompt}],
-        )
+        assertion = Assertion(type="llm_judge", value=rule)
+        passed, message = evaluate_assertion(assertion, trace)
         
-        judgment = response.content[0].text.strip()
-        assert judgment.upper().startswith("YES"), f"LLM Judge failed the report. Judge output:\n{judgment}"
+        assert passed, message

@@ -1,0 +1,70 @@
+name: AgentCI — Dev Agent Tests
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'examples/dev-agent/**'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'examples/dev-agent/**'
+
+jobs:
+  agentci-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/dev-agent
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install agentci wheel
+        run: |
+          pip install --upgrade pip
+          # Install the latest agentci wheel from the AgentCI repo — update pin as needed
+          pip install agentci --find-links ../../AgentCI/dist/ || pip install agentci
+
+      - name: Install devagent dependencies
+        run: |
+          pip install anthropic httpx python-dotenv pytest pytest-asyncio pytest-anyio agentci
+
+      - name: Install devagent in editable mode
+        run: pip install -e .
+
+      - name: Run deterministic AgentCI tests (no real API calls)
+        # These always run — they use mocked tools and a mocked LLM client
+        run: |
+          pytest tests/ -v -m "not live" \
+            --tb=short \
+            2>&1 | tee agentci-test-results.txt
+        env:
+          # Mocked key — tests that need a real key will auto-skip
+          ANTHROPIC_API_KEY: sk-ant-dummy-key-for-testing
+
+      - name: Run LLM-as-judge tests (requires API key secret)
+        # The real ANTHROPIC_API_KEY must be set as a repo secret.
+        # When it is not (e.g. in forked PRs), this step runs but the test
+        # auto-skips via the check inside test_output_quality.py.
+        run: |
+          pytest tests/test_output_quality.py::TestLLMAsJudge -v \
+            --tb=short
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_DEVAGENT }}
+        continue-on-error: false  # LLM judge failures count as CI failures
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentci-test-results
+          path: examples/dev-agent/agentci-test-results.txt
+          retention-days: 14
