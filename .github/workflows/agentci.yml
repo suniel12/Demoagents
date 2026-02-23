@@ -26,15 +26,15 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install agentci wheel
+      - name: Install agentci
         run: |
           pip install --upgrade pip
-          # Install the latest agentci wheel from the AgentCI repo — update pin as needed
-          pip install agentci --find-links ../../AgentCI/dist/ || pip install agentci
+          # Install the latest agentci directly from GitHub
+          pip install git+https://github.com/suniel12/AgentCI.git@main
 
       - name: Install devagent dependencies
         run: |
-          pip install anthropic httpx python-dotenv pytest pytest-asyncio pytest-anyio agentci
+          pip install anthropic httpx python-dotenv pytest pytest-asyncio pytest-anyio
 
       - name: Install devagent in editable mode
         run: pip install -e .
