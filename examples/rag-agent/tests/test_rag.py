@@ -199,10 +199,10 @@ def test_regression_against_baseline():
         baseline = agentci.load_baseline("rag-v1-gpt4o-mini")
         for case in GOLDEN_QUERIES:
             current_trace = run_agent(case["query"])
-            diff = agentci.diff(baseline[case["query"]], current_trace)
+            diff = agentci.diff(baseline[case["query"]], current_trace._trace)
             assert not diff.has_regression, \
                 f"Regression detected for '{case['query']}': {diff.summary}"
-    except (FileNotFoundError, AttributeError):
+    except (FileNotFoundError, AttributeError) as e:
         # Gracefully skip if baseline files aren't generated yet or diff object is unavailable
-        pytest.skip("Baseline 'rag-v1-gpt4o-mini' not found or diff API not initialized")
+        pytest.skip(f"Baseline 'rag-v1-gpt4o-mini' not found or diff API not initialized: {e}")
 

@@ -1,0 +1,19 @@
+{
+  "What is the refund policy for enterprise customers?": {
+    "trace_id": "dummy1",
+    "total_cost_usd": 0.005,
+    "total_tokens": 1000,
+    "total_llm_calls": 3,
+    "total_tool_calls": 1,
+    "spans": [
+      {
+        "span_id": "span1",
+        "kind": "agent",
+        "name": "generate_answer_api",
+        "tool_calls": [
+            {"tool_name": "retrieve_docs", "arguments": {}}
+        ]
+      }
+    ]
+  }
+}
