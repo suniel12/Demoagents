@@ -1,0 +1,37 @@
+# agentci.yaml — Researcher Agent (LangGraph)
+name: "researcher_agent_tests"
+agent: "agents.researcher_agent:run_agent"
+framework: "langgraph"
+
+defaults:
+  max_cost_usd: 0.05
+  max_steps: 10
+
+tests:
+  - name: "research_query"
+    description: "Agent should search for population of France"
+    input: "What is the population of France?"
+    golden_trace: "golden/research_query.golden.json"
+    assertions:
+      - type: tool_called
+        tool: web_search
+      - type: arg_contains
+        tool: web_search
+        field: query
+        value: "france"
+      - type: output_contains
+        value: "68 million"
+      - type: cost_under
+        threshold: 0.01
+
+  - name: "research_capital"
+    description: "Agent should search for the capital of Japan"
+    input: "What is the capital of Japan?"
+    assertions:
+      - type: tool_called
+        tool: web_search
+      - type: output_contains
+        value: "Tokyo"
+      - type: cost_under
+        threshold: 0.01
+    tags: [basic]

@@ -1,0 +1,86 @@
+{
+  "trace_id": "54f3e73ec2f440d1",
+  "created_at": "2026-02-18T00:53:43.856422Z",
+  "spans": [
+    {
+      "span_id": "3cda385dd1004edd",
+      "parent_span_id": null,
+      "kind": "agent",
+      "name": "agents.summarizer_agent:run_agent",
+      "input_data": null,
+      "output_data": "I've fetched and saved the article summary for you.",
+      "tool_calls": [
+        {
+          "tool_name": "fetch_article",
+          "arguments": {
+            "url": "https://example.com/ai"
+          },
+          "result": null,
+          "error": null,
+          "timestamp": "2026-02-18T00:53:44.129380+00:00",
+          "duration_ms": 0.0
+        },
+        {
+          "tool_name": "save_summary",
+          "arguments": {
+            "title": "The Rise of AI Agents",
+            "summary": "AI agents are autonomous software programs that can perceive their environment, make decisions, and take actions to achieve goals. They represent a si..."
+          },
+          "result": null,
+          "error": null,
+          "timestamp": "2026-02-18T00:53:44.129421+00:00",
+          "duration_ms": 0.0
+        }
+      ],
+      "llm_calls": [
+        {
+          "model": "claude-haiku-4-5-20251001",
+          "provider": "anthropic",
+          "input_messages": [],
+          "output_text": "",
+          "tokens_in": 250,
+          "tokens_out": 40,
+          "cost_usd": 0.00036,
+          "duration_ms": 0.007625669240951538,
+          "timestamp": "2026-02-18T00:53:44.129367Z"
+        },
+        {
+          "model": "claude-haiku-4-5-20251001",
+          "provider": "anthropic",
+          "input_messages": [],
+          "output_text": "",
+          "tokens_in": 350,
+          "tokens_out": 60,
+          "cost_usd": 0.00052,
+          "duration_ms": 0.013374723494052887,
+          "timestamp": "2026-02-18T00:53:44.129417Z"
+        },
+        {
+          "model": "claude-haiku-4-5-20251001",
+          "provider": "anthropic",
+          "input_messages": [],
+          "output_text": "",
+          "tokens_in": 200,
+          "tokens_out": 30,
+          "cost_usd": 0.00028,
+          "duration_ms": 0.007125549018383026,
+          "timestamp": "2026-02-18T00:53:44.129440Z"
+        }
+      ],
+      "total_tokens_in": 800,
+      "total_tokens_out": 130,
+      "total_cost_usd": 0.00116,
+      "duration_ms": 0.0,
+      "metadata": {}
+    }
+  ],
+  "total_cost_usd": 0.00116,
+  "total_tokens": 930,
+  "total_duration_ms": 23.673499934375286,
+  "total_llm_calls": 3,
+  "total_tool_calls": 2,
+  "test_name": "summarize_article",
+  "agent_name": "agents.summarizer_agent:run_agent",
+  "framework": "",
+  "metadata": {}
+}
