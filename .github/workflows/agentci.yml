@@ -5,6 +5,7 @@ on:
     branches: [main, master]
     paths:
       - 'examples/dev-agent/**'
+      - 'examples/rag-agent/**'
       - '.github/workflows/**'
 
 jobs:
