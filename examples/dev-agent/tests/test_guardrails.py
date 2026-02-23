@@ -32,10 +32,10 @@ from tests.fixtures import REPO_HEALTHY, REPO_STALE, REPO_MINIMAL
 class TestTokenBudget:
     """Ensure the agent stays within token limits."""
 
-    # Phase 0 thresholds — a single tool call + report generation
-    MAX_INPUT_TOKENS = 2000
-    MAX_OUTPUT_TOKENS = 2000
-    MAX_TOTAL_TOKENS = 4000
+    # Phase 1 thresholds — up to 4 tool calls + report generation
+    MAX_INPUT_TOKENS = 12000
+    MAX_OUTPUT_TOKENS = 4000
+    MAX_TOTAL_TOKENS = 16000
 
     async def test_input_tokens_within_budget(self, agent_healthy):
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
@@ -82,8 +82,8 @@ class TestTokenBudget:
 class TestCostGuardrails:
     """Ensure the agent stays within cost limits."""
 
-    # Phase 0: A single analysis should cost well under 1 cent
-    MAX_COST_USD = 0.01
+    # Phase 1: Multiple analysis calls increase total cost
+    MAX_COST_USD = 0.05
 
     async def test_single_analysis_cost(self, agent_healthy):
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
@@ -132,7 +132,7 @@ class TestCostGuardrails:
 class TestToolCallLimits:
     """Prevent runaway tool call loops."""
 
-    MAX_TOOL_CALLS = 3  # Phase 0 should need exactly 1
+    MAX_TOOL_CALLS = 10  # Phase 1 can need up to 4-6 calls
 
     async def test_tool_calls_within_limit(self, agent_healthy):
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])

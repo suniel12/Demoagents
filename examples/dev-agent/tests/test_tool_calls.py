@@ -42,28 +42,37 @@ class TestToolSelection:
             f"got: {trace.tool_names_called}"
         )
 
-    async def test_calls_exactly_one_tool_in_phase_0(self, agent_healthy):
-        """In Phase 0, the agent should call exactly one tool.
-
-        This is a PHASE-SPECIFIC assertion. In Phase 1+, the expected
-        count will increase. Track this — it's a natural regression test.
+    async def test_calls_multiple_tools_in_sequence_phase_1(self, agent_healthy):
+        """In Phase 1, the agent should call multiple tools sequentially.
+        
+        A healthy repo with a manifest should trigger exactly 4 tool calls:
+        metadata -> list_files -> read_file -> dependency_analyzer
         """
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
 
-        assert trace.tool_call_count == 1, (
-            f"Phase 0 agent should make exactly 1 tool call, "
+        assert trace.tool_call_count == 4, (
+            f"Phase 1 healthy agent should make exactly 4 tool calls, "
             f"made {trace.tool_call_count}: {trace.tool_names_called}"
         )
+        
+        # Verify the exact sequence
+        names = trace.tool_names_called
+        assert names == [
+            "github_repo_metadata",
+            "github_list_files",
+            "github_read_file",
+            "dependency_analyzer"
+        ], f"Incorrect tool call sequence: {names}"
 
     async def test_no_hallucinated_tool_calls(self, agent_healthy):
-        """The agent must ONLY call tools that exist in the registry.
-
-        This catches a common LLM failure mode: inventing tool names
-        that sound plausible but aren't registered (e.g., 'github_get_readme',
-        'analyze_dependencies').
-        """
+        """The agent must ONLY call tools that exist in the registry."""
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
-        valid_tools = {"github_repo_metadata"}  # Phase 0 only has one tool
+        valid_tools = {
+            "github_repo_metadata",
+            "github_list_files",
+            "github_read_file",
+            "dependency_analyzer"
+        }  # Phase 1 has 4 valid tools
 
         for tool_name in trace.tool_names_called:
             assert tool_name in valid_tools, (
@@ -73,12 +82,13 @@ class TestToolSelection:
 
     async def test_stale_repo_still_calls_metadata_tool(self, agent_stale):
         """Even for archived/stale repos, the agent should still fetch metadata.
-        It should NOT skip the tool call and hallucinate a report.
+        It should fetch metadata and list files, but might stop there.
         """
         trace = await agent_stale.analyze(REPO_STALE["url"])
 
-        assert trace.tool_call_count == 1
+        assert trace.tool_call_count >= 1
         assert "github_repo_metadata" in trace.tool_names_called
+        assert "github_list_files" in trace.tool_names_called
 
 
 # ──────────────────────────────────────────────

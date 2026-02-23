@@ -1,0 +1,84 @@
+{
+  "repo_url": "https://github.com/langchain-ai/langchain",
+  "tool_calls": [
+    {
+      "tool_name": "github_repo_metadata",
+      "tool_input": {
+        "owner": "langchain-ai",
+        "repo": "langchain"
+      },
+      "success": true,
+      "error": null,
+      "duration_ms": 0.12483261525630951
+    },
+    {
+      "tool_name": "github_list_files",
+      "tool_input": {
+        "owner": "langchain-ai",
+        "repo": "langchain",
+        "recursive": true
+      },
+      "success": true,
+      "error": null,
+      "duration_ms": 0.31645968556404114
+    },
+    {
+      "tool_name": "github_read_file",
+      "tool_input": {
+        "owner": "langchain-ai",
+        "repo": "langchain",
+        "path": "package.json"
+      },
+      "success": true,
+      "error": null,
+      "duration_ms": 0.009624287486076355
+    },
+    {
+      "tool_name": "dependency_analyzer",
+      "tool_input": {
+        "manifest_content": "{\"dependencies\": {\"lodash\": \"4.17.10\"}}",
+        "manifest_type": "npm"
+      },
+      "success": true,
+      "error": null,
+      "duration_ms": 0.013874843716621399
+    }
+  ],
+  "input_tokens": 8300,
+  "output_tokens": 700,
+  "total_tokens": 9000,
+  "estimated_cost_usd": 0.0354,
+  "total_duration_ms": 1.7384160310029984,
+  "tool_call_count": 4,
+  "tool_names_called": [
+    "github_repo_metadata",
+    "github_list_files",
+    "github_read_file",
+    "dependency_analyzer"
+  ],
+  "success": true,
+  "error": null,
+  "assertions": {
+    "success": {
+      "value": true,
+      "op": "eq"
+    },
+    "tool_call_count": {
+      "value": 4,
+      "op": "eq"
+    },
+    "tool_names_called": {
+      "value": [
+        "github_repo_metadata",
+        "github_list_files",
+        "github_read_file",
+        "dependency_analyzer"
+      ],
+      "op": "eq"
+    },
+    "estimated_cost_usd": {
+      "value": 0.05,
+      "op": "lte"
+    }
+  }
+}

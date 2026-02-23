@@ -34,100 +34,64 @@ from tests.fixtures import REPO_HEALTHY, load_golden_trace
 def assert_trace_matches_golden(
     live_trace: Trace,
     golden: dict,
-    token_tolerance: float = 0.5,  # Allow 50% variance in tokens
+    token_tolerance: float = 0.5,
     cost_tolerance: float = 0.5,
 ) -> None:
-    """Compare a live trace against a golden trace.
+    """Compare a live trace against a golden trace using AgentCI diff engine."""
+    from agentci.models import Trace as AgentCITrace, Span, ToolCall as AgentCIToolCall
+    from agentci.diff_engine import diff
 
-    This function is what AgentCI should provide as a built-in:
-        agentci.assert_golden_match(trace, "phase0_healthy_repo")
-
-    Building it manually teaches us what developers need.
-    """
-    assertions = golden.get("assertions", {})
-    errors = []
-
-    # Tool call count
-    if "tool_call_count" in assertions:
-        expected = assertions["tool_call_count"]["value"]
-        actual = live_trace.tool_call_count
-        op = assertions["tool_call_count"]["op"]
-
-        if op == "eq" and actual != expected:
-            errors.append(
-                f"tool_call_count: expected {expected}, got {actual}"
+    # 1. Convert DevAgent Trace to AgentCI Trace
+    agentci_live = AgentCITrace(
+        spans=[
+            Span(
+                name="devagent",
+                tool_calls=[
+                    AgentCIToolCall(
+                        tool_name=tc.tool_name,
+                        arguments=tc.tool_input,
+                        result=tc.tool_output,
+                        error=tc.error,
+                        duration_ms=tc.duration_ms,
+                    )
+                    for tc in live_trace.tool_calls
+                ],
+                total_tokens_in=live_trace.input_tokens,
+                total_tokens_out=live_trace.output_tokens,
+                total_cost_usd=live_trace.estimated_cost_usd,
+                duration_ms=live_trace.total_duration_ms,
             )
-        elif op == "lte" and actual > expected:
-            errors.append(
-                f"tool_call_count: expected <= {expected}, got {actual}"
+        ]
+    )
+    agentci_live.compute_metrics()
+
+    # 2. Convert Golden dict to AgentCI Trace
+    agentci_golden = AgentCITrace(
+        spans=[
+            Span(
+                name="devagent",
+                tool_calls=[
+                    AgentCIToolCall(
+                        tool_name=tc["tool_name"],
+                        arguments=tc["tool_input"],
+                        result=None, # Baseline doesn't always have outputs
+                        error=tc.get("error"),
+                        duration_ms=tc.get("duration_ms", 0.0),
+                    )
+                    for tc in golden.get("tool_calls", [])
+                ],
+                total_cost_usd=golden.get("assertions", {}).get("estimated_cost_usd", {}).get("value", 0.0),
             )
+        ]
+    )
+    agentci_golden.compute_metrics()
 
-    # Tool names called
-    if "tool_names_called" in assertions:
-        expected = assertions["tool_names_called"]["value"]
-        actual = live_trace.tool_names_called
+    # 3. Run Diff
+    report = diff(agentci_golden, agentci_live)
 
-        if assertions["tool_names_called"]["op"] == "eq":
-            if actual != expected:
-                errors.append(
-                    f"tool_names_called: expected {expected}, got {actual}"
-                )
-
-    # Success
-    if "success" in assertions:
-        expected = assertions["success"]["value"]
-        if live_trace.success != expected:
-            errors.append(
-                f"success: expected {expected}, got {live_trace.success}"
-            )
-
-    # Token budget (with tolerance)
-    if "total_tokens" in assertions:
-        max_tokens = assertions["total_tokens"]["value"]
-        if live_trace.total_tokens > max_tokens:
-            errors.append(
-                f"total_tokens: {live_trace.total_tokens} exceeded "
-                f"limit {max_tokens}"
-            )
-
-    # Cost budget (with tolerance)
-    if "estimated_cost_usd" in assertions:
-        max_cost = assertions["estimated_cost_usd"]["value"]
-        if live_trace.estimated_cost_usd > max_cost:
-            errors.append(
-                f"estimated_cost_usd: ${live_trace.estimated_cost_usd:.6f} "
-                f"exceeded limit ${max_cost}"
-            )
-
-    # Tool call input matching
-    golden_tool_calls = golden.get("tool_calls", [])
-    for i, golden_tc in enumerate(golden_tool_calls):
-        if i >= len(live_trace.tool_calls):
-            errors.append(
-                f"Missing tool call #{i}: expected {golden_tc['tool_name']}"
-            )
-            continue
-
-        live_tc = live_trace.tool_calls[i]
-
-        if live_tc.tool_name != golden_tc["tool_name"]:
-            errors.append(
-                f"Tool call #{i}: expected '{golden_tc['tool_name']}', "
-                f"got '{live_tc.tool_name}'"
-            )
-
-        if live_tc.tool_input != golden_tc["tool_input"]:
-            errors.append(
-                f"Tool call #{i} input mismatch:\n"
-                f"  expected: {golden_tc['tool_input']}\n"
-                f"  got:      {live_tc.tool_input}"
-            )
-
-    if errors:
-        raise AssertionError(
-            f"Golden trace mismatch ({len(errors)} differences):\n"
-            + "\n".join(f"  - {e}" for e in errors)
-        )
+    # 4. Assert no regressions
+    if report.has_regression:
+        raise AssertionError(f"Golden trace regression detected:\n{report.summary}")
 
 
 # ──────────────────────────────────────────────
@@ -143,31 +107,15 @@ class TestGoldenTraces:
         """The most important regression test. If this fails after a
         code change, something fundamental about agent behavior changed.
         """
-        golden = load_golden_trace("phase0_healthy_repo")
+        golden = load_golden_trace("phase1_healthy_repo")
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
 
         assert_trace_matches_golden(trace, golden)
 
     async def test_golden_trace_tool_inputs_exact_match(self, agent_healthy):
-        """Tool inputs should match the golden trace exactly.
-        This catches: URL parsing changes, field name changes,
-        prompt regressions that alter how the LLM structures inputs.
-        """
-        golden = load_golden_trace("phase0_healthy_repo")
+        """Tool inputs should match the golden trace exactly."""
+        golden = load_golden_trace("phase1_healthy_repo")
         trace = await agent_healthy.analyze(REPO_HEALTHY["url"])
-
-        assert len(trace.tool_calls) == len(golden["tool_calls"]), (
-            f"Tool call count mismatch: "
-            f"live={len(trace.tool_calls)}, "
-            f"golden={len(golden['tool_calls'])}"
-        )
-
-        for i, (live_tc, golden_tc) in enumerate(
-            zip(trace.tool_calls, golden["tool_calls"])
-        ):
-            assert live_tc.tool_input == golden_tc["tool_input"], (
-                f"Tool call #{i} ({live_tc.tool_name}) input changed:\n"
-                f"  Golden: {golden_tc['tool_input']}\n"
-                f"  Live:   {live_tc.tool_input}\n"
-                f"This may indicate a prompt regression."
-            )
+        
+        # Test will now inherently check input matching via assert_trace_matches_golden
+        assert_trace_matches_golden(trace, golden)

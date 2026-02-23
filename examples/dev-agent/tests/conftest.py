@@ -96,58 +96,133 @@ def make_mock_github_tool(mock_response: dict | Exception) -> ToolDefinition:
     )
 
 
-def make_mock_registry(mock_response: dict | Exception) -> ToolRegistry:
-    """Create a ToolRegistry with mocked tools."""
+def make_mock_list_files_tool(mock_response: dict | Exception) -> ToolDefinition:
+    """Create a mock version of the github_list_files tool."""
+    from devagent.tools.github_list_files import github_list_files_tool, ListFilesOutput
+    
+    async def mock_handler(owner: str, repo: str, tree_sha: str = "HEAD", recursive: bool = True) -> dict:
+        if isinstance(mock_response, Exception):
+            raise mock_response
+        return ListFilesOutput(**mock_response).model_dump()
+        
+    return ToolDefinition(
+        name=github_list_files_tool.name,
+        description=github_list_files_tool.description,
+        input_schema=github_list_files_tool.input_schema,
+        handler=mock_handler,
+        output_model=github_list_files_tool.output_model,
+    )
+
+
+def make_mock_read_file_tool(mock_responses: dict[str, dict | Exception]) -> ToolDefinition:
+    """Create a mock version of github_read_file mapping paths to responses."""
+    from devagent.tools.github_read_file import github_read_file_tool, ReadFileOutput
+    
+    async def mock_handler(owner: str, repo: str, path: str, ref: str | None = None) -> dict:
+        response = mock_responses.get(path)
+        if response is None:
+            import httpx
+            raise httpx.HTTPStatusError(
+                "404 Not Found",
+                request=httpx.Request("GET", f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"),
+                response=httpx.Response(404),
+            )
+        if isinstance(response, Exception):
+            raise response
+        return ReadFileOutput(**response).model_dump()
+        
+    return ToolDefinition(
+        name=github_read_file_tool.name,
+        description=github_read_file_tool.description,
+        input_schema=github_read_file_tool.input_schema,
+        handler=mock_handler,
+        output_model=github_read_file_tool.output_model,
+    )
+
+
+def make_mock_dependency_analyzer(mock_responses: dict[str, dict | Exception]) -> ToolDefinition:
+    """Create a mock version of dependency_analyzer mapping manifest strings to responses."""
+    from devagent.tools.dependency_analyzer import dependency_analyzer_tool, DependencyAnalyzerOutput
+    
+    async def mock_handler(manifest_content: str, manifest_type: str) -> dict:
+        # Simple lookup fallback
+        response = mock_responses.get(manifest_type, mock_responses.get("default"))
+        if isinstance(response, Exception):
+            raise response
+        return DependencyAnalyzerOutput(**response).model_dump()
+        
+    return ToolDefinition(
+        name=dependency_analyzer_tool.name,
+        description=dependency_analyzer_tool.description,
+        input_schema=dependency_analyzer_tool.input_schema,
+        handler=mock_handler,
+        output_model=dependency_analyzer_tool.output_model,
+    )
+
+
+def make_mock_registry(
+    mock_metadata_response: dict | Exception,
+    mock_tree_response: dict | Exception | None = None,
+    mock_file_responses: dict[str, dict | Exception] | None = None,
+    mock_dep_responses: dict[str, dict | Exception] | None = None,
+) -> ToolRegistry:
+    """Create a ToolRegistry with all Phase 1 mocked tools."""
     registry = ToolRegistry()
-    registry.register(make_mock_github_tool(mock_response))
+    registry.register(make_mock_github_tool(mock_metadata_response))
+    
+    if mock_tree_response is not None:
+        registry.register(make_mock_list_files_tool(mock_tree_response))
+        
+    if mock_file_responses is not None:
+        registry.register(make_mock_read_file_tool(mock_file_responses))
+        
+    if mock_dep_responses is not None:
+        registry.register(make_mock_dependency_analyzer(mock_dep_responses))
+        
     return registry
 
 
 # ──────────────────────────────────────────────
-# Pytest Fixtures
+# Mock LLM Client
 # ──────────────────────────────────────────────
 
 
 def mock_anthropic_client(fixture_name: str) -> AsyncMock:
-    """Creates a mock Anthropic client that generates deterministic tool calls.
-    
-    This replaces the live LLM so tests run fast, free, and deterministically.
-    """
+    """Creates a mock Anthropic client that generates deterministic tool calls."""
     mock_client = AsyncMock()
     
-    # We need to simulate the multi-turn agent loop:
-    # 1st call: LLM decides to use the github_repo_metadata tool
-    # 2nd call: LLM sees the tool result and generates the final text report
-    
-    # Mock the response for the 1st turn (Tool Use)
-    tool_use_block = MagicMock()
-    tool_use_block.type = "tool_use"
-    tool_use_block.id = "mock_tool_id_123"
-    tool_use_block.name = "github_repo_metadata"
-    
+    # helper for creating a tool use object with some token usage
+    def make_response(tool_name: str, input_dict: dict, in_tok: int, out_tok: int):
+        tu = MagicMock()
+        tu.type = "tool_use"
+        tu.id = f"mock_{tool_name}"
+        tu.name = tool_name
+        tu.input = input_dict
+        r = MagicMock()
+        r.content = [tu]
+        r.stop_reason = "tool_use"
+        r.usage.input_tokens = in_tok
+        r.usage.output_tokens = out_tok
+        return r
+        
+    def make_text_response(text: str, in_tok: int, out_tok: int):
+        t = MagicMock()
+        t.type = "text"
+        t.text = text
+        r = MagicMock()
+        r.content = [t]
+        r.stop_reason = "end_turn"
+        r.usage.input_tokens = in_tok
+        r.usage.output_tokens = out_tok
+        return r
+
     # Determine input based on fixture type
     if fixture_name == "healthy":
-        tool_use_block.input = {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"]}
-    elif fixture_name == "stale":
-        tool_use_block.input = {"owner": REPO_STALE["owner"], "repo": REPO_STALE["repo"]}
-    elif fixture_name == "minimal":
-        tool_use_block.input = {"owner": REPO_MINIMAL["owner"], "repo": REPO_MINIMAL["repo"]}
-    elif fixture_name == "error":
-        tool_use_block.input = {"owner": REPO_NONEXISTENT["owner"], "repo": REPO_NONEXISTENT["repo"]}
-        
-    first_response = MagicMock()
-    first_response.content = [tool_use_block]
-    first_response.stop_reason = "tool_use"
-    first_response.usage.input_tokens = 500
-    first_response.usage.output_tokens = 100
-    
-    # Mock the response for the 2nd turn (Final Report)
-    text_block = MagicMock()
-    text_block.type = "text"
-    
-    # Determine realistic report content based on fixture
-    if fixture_name == "healthy":
-        text_block.text = (
+        r1 = make_response("github_repo_metadata", {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"]}, 500, 100)
+        r2 = make_response("github_list_files", {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"], "recursive": True}, 600, 100)
+        r3 = make_response("github_read_file", {"owner": REPO_HEALTHY["owner"], "repo": REPO_HEALTHY["repo"], "path": "package.json"}, 1600, 100)
+        r4 = make_response("dependency_analyzer", {"manifest_content": '{"dependencies": {"lodash": "4.17.10"}}', "manifest_type": "npm"}, 2600, 100)
+        r5 = make_text_response(
             "### Repository Health Report: langchain-ai/langchain\n\n"
             "**Overview**\n"
             "- Description: Build context-aware reasoning applications\n"
@@ -155,15 +230,24 @@ def mock_anthropic_client(fixture_name: str) -> AsyncMock:
             "- License: MIT License\n\n"
             "**Popularity & Activity Metrics**\n"
             "- Stars: 102,000 | Forks: 15800\n\n"
+            "**Security & Dependencies**\n"
+            "- Analyzed package.json. Found 1 high and 3 medium vulnerabilities.\n\n"
             "**Initial Health Signals**\n"
             "- [GOOD] Activity: high\n"
-            "- [GOOD] License: present\n\n"
+            "- [GOOD] License: present\n"
+            "- [WARN] Security: Has vulnerabilities\n\n"
             "**Composite Score**: A — Excellent health\n\n"
             "**Recommendations**\n"
-            "- Keep merging PRs"
+            "- Keep merging PRs",
+            3000, 300
         )
+        mock_client.messages.create.side_effect = [r1, r2, r3, r4, r5]
+
     elif fixture_name == "stale":
-        text_block.text = (
+        r1 = make_response("github_repo_metadata", {"owner": REPO_STALE["owner"], "repo": REPO_STALE["repo"]}, 500, 100)
+        r2 = make_response("github_list_files", {"owner": REPO_STALE["owner"], "repo": REPO_STALE["repo"], "recursive": True}, 600, 100)
+        # Skip read file and dependency analyzer (e.g. no manifest found)
+        r3 = make_text_response(
             "### Repository Health Report: facebookarchive/react-native-fbsdk\n\n"
             "**Overview**\n"
             "- Description: Archived react native SDK\n"
@@ -171,20 +255,33 @@ def mock_anthropic_client(fixture_name: str) -> AsyncMock:
             "- License: MIT\n\n"
             "**Popularity & Activity Metrics**\n"
             "- Stars: 5,000 | Forks: 1000\n\n"
+            "**Security & Dependencies**\n"
+            "- No dependency manifest found to analyze.\n\n"
             "**Initial Health Signals**\n"
             "- [CONCERN] Activity: Repo is archived and stale\n\n"
             "**Composite Score**: F — Archived\n\n"
             "**Recommendations**\n"
-            "- Do not use this repo"
+            "- Do not use this repo",
+            1000, 300
         )
+        mock_client.messages.create.side_effect = [r1, r2, r3]
+
     elif fixture_name == "error":
-        text_block.text = (
+        r1 = make_response("github_repo_metadata", {"owner": REPO_NONEXISTENT["owner"], "repo": REPO_NONEXISTENT["repo"]}, 500, 100)
+        r2 = make_text_response(
             "I could not analyze the repository because it does not exist or is inaccessible. "
             "The github_repo_metadata tool returned a 404 Not Found error. "
-            "Please check the URL and try again."
+            "Please check the URL and try again.",
+            600, 100
         )
+        mock_client.messages.create.side_effect = [r1, r2]
+
     else:  # minimal
-        text_block.text = (
+        r1 = make_response("github_repo_metadata", {"owner": REPO_MINIMAL["owner"], "repo": REPO_MINIMAL["repo"]}, 500, 100)
+        r2 = make_response("github_list_files", {"owner": REPO_MINIMAL["owner"], "repo": REPO_MINIMAL["repo"], "recursive": True}, 600, 100)
+        r3 = make_response("github_read_file", {"owner": REPO_MINIMAL["owner"], "repo": REPO_MINIMAL["repo"], "path": "requirements.txt"}, 800, 100)
+        r4 = make_response("dependency_analyzer", {"manifest_content": "requests==2.20", "manifest_type": "pip"}, 1000, 100)
+        r5 = make_text_response(
             "### Repository Health Report: user/repo\n\n"
             "**Overview**\n"
             "- Description: None\n"
@@ -192,21 +289,16 @@ def mock_anthropic_client(fixture_name: str) -> AsyncMock:
             "- License: None specified\n\n"
             "**Popularity & Activity Metrics**\n"
             "- Stars: 100 | Forks: 10\n\n"
+            "**Security & Dependencies**\n"
+            "- Analyzed requirements.txt. Found 1 critical vulnerability.\n\n"
             "**Initial Health Signals**\n"
             "- [WARN] Warning\n\n"
             "**Composite Score**: C — Needs work\n\n"
             "**Recommendations**\n"
-            "- Add a license"
+            "- Add a license",
+            1500, 300
         )
-    
-    second_response = MagicMock()
-    second_response.content = [text_block]
-    second_response.stop_reason = "end_turn"
-    second_response.usage.input_tokens = 800
-    second_response.usage.output_tokens = 300
-    
-    # .side_effect allows us to return different things on sequential calls
-    mock_client.messages.create.side_effect = [first_response, second_response]
+        mock_client.messages.create.side_effect = [r1, r2, r3, r4, r5]
     
     return mock_client
 
@@ -214,8 +306,13 @@ def mock_anthropic_client(fixture_name: str) -> AsyncMock:
 @pytest_asyncio.fixture
 async def agent_healthy() -> DevAgent:
     """Agent with mocked GitHub API returning a healthy repo."""
-    registry = make_mock_registry(MOCK_HEALTHY_RESPONSE)
-    agent = DevAgent(registry=registry)
+    registry = make_mock_registry(
+        mock_metadata_response=MOCK_HEALTHY_RESPONSE,
+        mock_tree_response={"tree": [{"path": "package.json", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}], "truncated": False},
+        mock_file_responses={"package.json": {"path": "package.json", "content": "{\"dependencies\": {\"lodash\": \"4.17.10\"}}", "size": 100, "encoding": "utf-8"}},
+        mock_dep_responses={"npm": {"total_dependencies_found": 15, "critical_vulnerabilities": 0, "high_vulnerabilities": 1, "medium_vulnerabilities": 3, "low_vulnerabilities": 1, "notes": "Found vulnerabilities."}}
+    )
+    agent = DevAgent(registry=registry, max_tool_calls=10)
     agent.client = mock_anthropic_client("healthy")
     return agent
 
@@ -223,8 +320,13 @@ async def agent_healthy() -> DevAgent:
 @pytest_asyncio.fixture
 async def agent_stale() -> DevAgent:
     """Agent with mocked GitHub API returning a stale/archived repo."""
-    registry = make_mock_registry(MOCK_STALE_RESPONSE)
-    agent = DevAgent(registry=registry)
+    registry = make_mock_registry(
+        mock_metadata_response=MOCK_STALE_RESPONSE,
+        mock_tree_response={"tree": [{"path": "README.md", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}], "truncated": False},
+        mock_file_responses={"README.md": {"path": "README.md", "content": "Archived repo", "size": 100, "encoding": "utf-8"}},
+        mock_dep_responses={}
+    )
+    agent = DevAgent(registry=registry, max_tool_calls=10)
     agent.client = mock_anthropic_client("stale")
     return agent
 
@@ -232,8 +334,13 @@ async def agent_stale() -> DevAgent:
 @pytest_asyncio.fixture
 async def agent_minimal() -> DevAgent:
     """Agent with mocked GitHub API returning a minimal repo."""
-    registry = make_mock_registry(MOCK_MINIMAL_RESPONSE)
-    agent = DevAgent(registry=registry)
+    registry = make_mock_registry(
+        mock_metadata_response=MOCK_MINIMAL_RESPONSE,
+        mock_tree_response={"tree": [{"path": "requirements.txt", "mode": "100644", "type": "blob", "size": 100, "sha": "abc"}], "truncated": False},
+        mock_file_responses={"requirements.txt": {"path": "requirements.txt", "content": "requests==2.20", "size": 100, "encoding": "utf-8"}},
+        mock_dep_responses={"pip": {"total_dependencies_found": 15, "critical_vulnerabilities": 1, "high_vulnerabilities": 2, "medium_vulnerabilities": 0, "low_vulnerabilities": 1, "notes": "Vulnerable."}}
+    )
+    agent = DevAgent(registry=registry, max_tool_calls=10)
     agent.client = mock_anthropic_client("minimal")
     return agent
 

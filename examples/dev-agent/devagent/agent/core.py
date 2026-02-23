@@ -137,19 +137,22 @@ class Trace:
 # System Prompt
 # ──────────────────────────────────────────────
 
-SYSTEM_PROMPT = """\
-You are DevAgent, a GitHub repository health analyzer. Given a GitHub repository URL, \
-you analyze the repository and produce a structured health report.
+SYSTEM_PROMPT = """You are a specialized developer agent that evaluates the health, structure, and security of open-source GitHub repositories.
 
-## Your Process (Phase 0)
+Your task is to analyze the provided repository URL and generate a comprehensive health report.
 
-1. Parse the repository URL to extract the owner and repo name.
-2. Use the `github_repo_metadata` tool to fetch repository information.
-3. Analyze the metadata and produce a health report.
+CRITICAL INSTRUCTION - SEQUENTIAL WORKFLOW:
+You MUST follow this specific sequence of actions to gather the necessary data before generating your report. Do not try to guess file contents. You must read them.
+1. CALL `github_repo_metadata` to retrieve the basic stats (stars, forks, description).
+2. CALL `github_list_files` to understand the full directory and file structure of the repository. Look for manifest files like package.json, requirements.txt, pyproject.toml, or Cargo.toml.
+3. CALL `github_read_file` to read the contents of the most important configuration, documentation, or manifest files you found in the previous step. Do not try to read binary files.
+4. CALL `dependency_analyzer` IF (and only if) you found and read a dependency manifest file in the previous step. You must pass the raw text content of that file to this tool to check for vulnerabilities.
+
+Do not skip steps unless it is logically impossible to proceed (e.g., the repo has no files). Never hallucinate tool inputs.
 
 ## Report Format
 
-Produce a report in this exact structure:
+Once you have gathered all data, output a markdown report containing the following exact sections:
 
 ### Repository Health Report: {owner}/{repo}
 
@@ -163,20 +166,19 @@ Produce a report in this exact structure:
 - Stars: {n} | Forks: {n} | Open Issues: {n} | Watchers: {n}
 - Topics: {list}
 
+**Security & Dependencies** 
+- Summarize findings from the dependency analyzer. Note exactly what file you analyzed (e.g., "Analyzed package.json").
+- If no manifest was found, explicitly state "No dependency manifest found to analyze."
+
 **Initial Health Signals**
-- [GOOD/WARN/CONCERN] Activity: {assessment based on last push date}
+- [GOOD/WARN/CONCERN] Activity: {assessment}
 - [GOOD/WARN/CONCERN] License: {assessment}
-- [GOOD/WARN/CONCERN] Issue Backlog: {assessment based on open issues vs stars ratio}
+- [GOOD/WARN/CONCERN] Security: {assessment based on dependencies}
 
 **Composite Score**: {A/B/C/D/F} — {one-line justification}
 
-**Recommendations** (2-3 specific, actionable items based on findings)
-
-## Rules
-- Only use tools available to you. Do NOT invent data.
-- If the repository doesn't exist or is inaccessible, say so clearly.
-- Be specific in your assessments — reference actual numbers from the metadata.
-- Do NOT hallucinate metrics you didn't receive from the tool.
+**Recommendations** 
+(2-3 specific, actionable recommendations based ONLY on the data you pulled, not generic advice. Reference specific files where applicable.)
 """
 
 
@@ -249,7 +251,16 @@ class DevAgent:
         # Set up tool registry
         self.registry = registry or ToolRegistry()
         if not registry:
+            from devagent.tools import (
+                github_repo_metadata_tool,
+                github_list_files_tool,
+                github_read_file_tool,
+                dependency_analyzer_tool,
+            )
             self.registry.register(github_repo_metadata_tool)
+            self.registry.register(github_list_files_tool)
+            self.registry.register(github_read_file_tool)
+            self.registry.register(dependency_analyzer_tool)
 
     async def analyze(self, repo_url: str) -> Trace:
         """Run a full analysis of a GitHub repository.

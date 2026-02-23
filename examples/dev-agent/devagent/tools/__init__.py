@@ -40,6 +40,9 @@ class ToolRegistry:
     Usage:
         registry = ToolRegistry()
         registry.register(github_repo_metadata_tool)
+        registry.register(github_list_files_tool)
+        registry.register(github_read_file_tool)
+        registry.register(dependency_analyzer_tool)
         
         # For the LLM
         anthropic_tools = registry.to_anthropic_format()
@@ -97,3 +100,17 @@ class ToolRegistry:
             return validated.model_dump()
 
         return result
+
+from devagent.tools.github_repo_metadata import github_repo_metadata_tool
+from devagent.tools.github_list_files import github_list_files_tool
+from devagent.tools.github_read_file import github_read_file_tool
+from devagent.tools.dependency_analyzer import dependency_analyzer_tool
+
+__all__ = [
+    "ToolDefinition",
+    "ToolRegistry",
+    "github_repo_metadata_tool",
+    "github_list_files_tool",
+    "github_read_file_tool",
+    "dependency_analyzer_tool",
+]
