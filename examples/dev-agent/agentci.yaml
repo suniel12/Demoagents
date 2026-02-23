@@ -1,0 +1,41 @@
+# agentci.yaml — Configuration for AgentCI test runner
+#
+# This file tells AgentCI how to discover tests, where to find
+# golden traces, and what global guardrails to enforce.
+
+project:
+  name: devagent
+  version: "0.1.0"
+
+# Where to find tests
+test_discovery:
+  paths:
+    - tests/
+  pattern: "test_*.py"
+
+# Golden trace storage
+golden_traces:
+  directory: tests/golden_traces/
+  format: json
+
+# Global guardrails (override per-test if needed)
+guardrails:
+  max_input_tokens: 2000
+  max_output_tokens: 2000
+  max_total_tokens: 4000
+  max_tool_calls: 3
+  max_duration_ms: 30000
+  max_cost_usd: 0.01
+
+# Model configuration for test runs
+model:
+  name: claude-sonnet-4-5-20250929
+  # For deterministic testing, set temperature to 0
+  temperature: 0
+
+# Reporting
+reporting:
+  format: terminal   # terminal | json | html
+  verbose: true
+  save_traces: true
+  trace_output_dir: traces/test_runs/

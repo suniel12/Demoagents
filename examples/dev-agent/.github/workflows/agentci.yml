@@ -1,0 +1,88 @@
+# .github/workflows/agentci.yml
+#
+# This workflow runs the full AgentCI test suite on every push and PR.
+# It's the "full circle" demo: an AI agent tested by an AI agent
+# testing framework, running in CI, on every commit.
+#
+# Secrets required:
+#   ANTHROPIC_API_KEY — for the LLM calls in tests
+#   GITHUB_TOKEN — automatically provided by GitHub Actions
+
+name: AgentCI Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  MODEL_NAME: claude-sonnet-4-5-20250929
+
+jobs:
+  # ─────────────────────────────────────────
+  # Unit Tests (no LLM, no API, instant)
+  # ─────────────────────────────────────────
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: pytest tests/test_url_parser.py -v
+
+  # ─────────────────────────────────────────
+  # Agent Tests (mocked tools, LLM calls)
+  # ─────────────────────────────────────────
+  agent-tests:
+    name: Agent Tests (Mocked)
+    runs-on: ubuntu-latest
+    needs: unit-tests  # Only run if unit tests pass
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+
+      - name: Run tool call tests
+        run: pytest tests/test_tool_calls.py -v --tb=long
+
+      - name: Run output quality tests
+        run: pytest tests/test_output_quality.py -v --tb=long
+
+      - name: Run guardrail tests
+        run: pytest tests/test_guardrails.py -v --tb=long
+
+      - name: Run error handling tests
+        run: pytest tests/test_error_handling.py -v --tb=long
+
+      - name: Run golden trace tests
+        run: pytest tests/test_golden_traces.py -v --tb=long
+
+  # ─────────────────────────────────────────
+  # Full Suite Summary
+  # ─────────────────────────────────────────
+  summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [unit-tests, agent-tests]
+    if: always()
+    steps:
+      - name: Check results
+        run: |
+          echo "Unit tests: ${{ needs.unit-tests.result }}"
+          echo "Agent tests: ${{ needs.agent-tests.result }}"
+
+          if [ "${{ needs.unit-tests.result }}" != "success" ] || \
+             [ "${{ needs.agent-tests.result }}" != "success" ]; then
+            echo "❌ Some tests failed"
+            exit 1
+          fi
+
+          echo "✅ All AgentCI tests passed"

@@ -1,0 +1,12 @@
+[project]
+name = "devagent"
+version = "0.1.0"
+description = "AI-powered GitHub repository health analyzer — AgentCI reference demo"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "live: tests that call real APIs (deselect with -m 'not live')",
+]
