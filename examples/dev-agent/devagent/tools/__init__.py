@@ -105,6 +105,9 @@ from devagent.tools.github_repo_metadata import github_repo_metadata_tool
 from devagent.tools.github_list_files import github_list_files_tool
 from devagent.tools.github_read_file import github_read_file_tool
 from devagent.tools.dependency_analyzer import dependency_analyzer_tool
+from devagent.tools.github_actions_analyzer import github_actions_analyzer_tool
+from devagent.tools.license_checker import license_checker_tool
+from devagent.tools.community_health_scorer import community_health_scorer_tool
 
 __all__ = [
     "ToolDefinition",
@@ -113,4 +116,7 @@ __all__ = [
     "github_list_files_tool",
     "github_read_file_tool",
     "dependency_analyzer_tool",
+    "github_actions_analyzer_tool",
+    "license_checker_tool",
+    "community_health_scorer_tool",
 ]

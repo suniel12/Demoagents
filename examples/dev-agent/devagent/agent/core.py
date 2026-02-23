@@ -141,12 +141,17 @@ SYSTEM_PROMPT = """You are a specialized developer agent that evaluates the heal
 
 Your task is to analyze the provided repository URL and generate a comprehensive health report.
 
-CRITICAL INSTRUCTION - SEQUENTIAL WORKFLOW:
+CRITICAL INSTRUCTION - SEQUENTIAL WORKFLOW & CONDITIONAL BRANCHING:
 You MUST follow this specific sequence of actions to gather the necessary data before generating your report. Do not try to guess file contents. You must read them.
 1. CALL `github_repo_metadata` to retrieve the basic stats (stars, forks, description).
 2. CALL `github_list_files` to understand the full directory and file structure of the repository. Look for manifest files like package.json, requirements.txt, pyproject.toml, or Cargo.toml.
 3. CALL `github_read_file` to read the contents of the most important configuration, documentation, or manifest files you found in the previous step. Do not try to read binary files.
-4. CALL `dependency_analyzer` IF (and only if) you found and read a dependency manifest file in the previous step. You must pass the raw text content of that file to this tool to check for vulnerabilities.
+
+CONDITIONAL TOOL RULES (Execute only if conditions are met):
+- CALL `dependency_analyzer` IF (and only if) you found and read a dependency manifest file.
+- CALL `github_actions_analyzer` IF you observed `.github/workflows/`, `.circleci/`, or a `Jenkinsfile` in the file list.
+- CALL `license_checker` IF you observed a `LICENSE` or `LICENSE.md` file in the file list.
+- CALL `community_health_scorer` IF the repository metadata indicates the repository has >= 50 stars.
 
 Do not skip steps unless it is logically impossible to proceed (e.g., the repo has no files). Never hallucinate tool inputs.
 
@@ -159,7 +164,7 @@ Once you have gathered all data, output a markdown report containing the followi
 **Overview**
 - Description: {description}
 - Primary Language: {language}
-- License: {license}
+- License: {license output from license_checker, or 'Not analyzed'}
 - Created: {date} | Last Active: {date}
 
 **Popularity & Activity Metrics**
@@ -170,10 +175,17 @@ Once you have gathered all data, output a markdown report containing the followi
 - Summarize findings from the dependency analyzer. Note exactly what file you analyzed (e.g., "Analyzed package.json").
 - If no manifest was found, explicitly state "No dependency manifest found to analyze."
 
+**CI/CD & Actions**
+- Summarize findings from the github_actions_analyzer, or state "No CI/CD detected."
+
+**Community Standards**
+- Summarize findings from the community_health_scorer, or state "Not analyzed (insufficient stars)."
+
 **Initial Health Signals**
-- [GOOD/WARN/CONCERN] Activity: {assessment}
-- [GOOD/WARN/CONCERN] License: {assessment}
+- [GOOD/WARN/CONCERN] Activity: {assessment based on commit recency and stars}
+- [GOOD/WARN/CONCERN] License: {assessment based on license_checker}
 - [GOOD/WARN/CONCERN] Security: {assessment based on dependencies}
+- [GOOD/WARN/CONCERN] Community: {assessment based on templates and conduct metrics}
 
 **Composite Score**: {A/B/C/D/F} — {one-line justification}
 
@@ -256,11 +268,17 @@ class DevAgent:
                 github_list_files_tool,
                 github_read_file_tool,
                 dependency_analyzer_tool,
+                github_actions_analyzer_tool,
+                license_checker_tool,
+                community_health_scorer_tool,
             )
             self.registry.register(github_repo_metadata_tool)
             self.registry.register(github_list_files_tool)
             self.registry.register(github_read_file_tool)
             self.registry.register(dependency_analyzer_tool)
+            self.registry.register(github_actions_analyzer_tool)
+            self.registry.register(license_checker_tool)
+            self.registry.register(community_health_scorer_tool)
 
     async def analyze(self, repo_url: str) -> Trace:
         """Run a full analysis of a GitHub repository.
