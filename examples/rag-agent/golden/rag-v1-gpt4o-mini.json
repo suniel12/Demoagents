@@ -1,18 +1,100 @@
 {
   "What is the refund policy for enterprise customers?": {
-    "trace_id": "dummy1",
+    "trace_id": "demo_trace",
     "total_cost_usd": 0.005,
-    "total_tokens": 1000,
-    "total_llm_calls": 3,
-    "total_tool_calls": 1,
+    "final_output": "Enterprise customers are eligible for a full refund within 30 days.",
     "spans": [
       {
-        "span_id": "span1",
-        "kind": "agent",
         "name": "generate_answer_api",
-        "tool_calls": [
-            {"tool_name": "retrieve_docs", "arguments": {}}
-        ]
+        "output": "Enterprise customers are eligible for a full refund within 30 days."
+      }
+    ]
+  },
+  "Compare enterprise and business plan features.": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "The Enterprise and Business plans have several key differences in features and pricing:\n\n### Features:\n- **Single Sign-On (SSO)**: Available in the Enterprise plan but not mentioned for the Business plan.\n- **Audit Logs**: Included in the Enterprise plan; not specified for the Business plan.\n- **Support**: Enterprise plan offers dedicated support, while the Business plan provides only email support.\n- **Analytics**: The Business plan includes basic analytics, whereas the Enterprise plan does not specify analytics features, likely indicating more advanced options are available but not explicitly listed.\n\n### Refund Policy:\n- **Enterprise Plan**: Full refund within 30 days.\n- **Business Plan**: No specific refund period mentioned, but it typically aligns with the refund policies of similar plans.\n\n### Pricing:\n- **Enterprise Plan**: $499/month\n- **Business Plan**: $199/month\n\n### Uptime SLA:\n- **Enterprise Plan**: 99.9% uptime SLA\n- **Business Plan**: 99.5% uptime SLA\n- **Free Tier**: No SLA guaranteed\n\nIn summary, the Enterprise plan provides more advanced features, better uptime SLA, and dedicated support compared to the Business plan, making it more suitable for larger organizations or those with greater needs. The Business plan is more affordable but offers limited features and only email support.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "The Enterprise and Business plans have several key differences in features and pricing:\n\n### Features:\n- **Single Sign-On (SSO)**: Available in the Enterprise plan but not mentioned for the Business plan.\n- **Audit Logs**: Included in the Enterprise plan; not specified for the Business plan.\n- **Support**: Enterprise plan offers dedicated support, while the Business plan provides only email support.\n- **Analytics**: The Business plan includes basic analytics, whereas the Enterprise plan does not specify analytics features, likely indicating more advanced options are available but not explicitly listed.\n\n### Refund Policy:\n- **Enterprise Plan**: Full refund within 30 days.\n- **Business Plan**: No specific refund period mentioned, but it typically aligns with the refund policies of similar plans.\n\n### Pricing:\n- **Enterprise Plan**: $499/month\n- **Business Plan**: $199/month\n\n### Uptime SLA:\n- **Enterprise Plan**: 99.9% uptime SLA\n- **Business Plan**: 99.5% uptime SLA\n- **Free Tier**: No SLA guaranteed\n\nIn summary, the Enterprise plan provides more advanced features, better uptime SLA, and dedicated support compared to the Business plan, making it more suitable for larger organizations or those with greater needs. The Business plan is more affordable but offers limited features and only email support."
+      }
+    ]
+  },
+  "What's the CEO's favorite restaurant?": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "The provided context does not include information about the CEO's favorite restaurant. Therefore, I cannot answer that question.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "The provided context does not include information about the CEO's favorite restaurant. Therefore, I cannot answer that question."
+      }
+    ]
+  },
+  "Hello!": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "Hello! How can I assist you today?",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "Hello! How can I assist you today?"
+      }
+    ]
+  },
+  "How do I reset my password?": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "To reset your password, go to Settings > Security > Reset. Follow the instructions provided there to complete the password reset process.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "To reset your password, go to Settings > Security > Reset. Follow the instructions provided there to complete the password reset process."
+      }
+    ]
+  },
+  "What's NovaCorp's uptime guarantee for the business plan?": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "NovaCorp's uptime guarantee for the Business plan is 99.5%.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "NovaCorp's uptime guarantee for the Business plan is 99.5%."
+      }
+    ]
+  },
+  "Is NovaCorp SOC 2 compliant?": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "Yes, NovaCorp is SOC 2 Type II certified, which indicates that they are compliant with the SOC 2 standards.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "Yes, NovaCorp is SOC 2 Type II certified, which indicates that they are compliant with the SOC 2 standards."
+      }
+    ]
+  },
+  "What's the weather in Austin?": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "I'm sorry, but I can't provide real-time weather updates. You might want to check a reliable weather website or app for the current weather in Austin, TX.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "I'm sorry, but I can't provide real-time weather updates. You might want to check a reliable weather website or app for the current weather in Austin, TX."
+      }
+    ]
+  },
+  "How do I configure the AWS load balancer for the enterprise tier?": {
+    "trace_id": "demo_trace",
+    "total_cost_usd": 0.005,
+    "final_output": "I don't have information about configuring AWS load balancers in the provided context.",
+    "spans": [
+      {
+        "name": "generate_answer_api",
+        "output": "I don't have information about configuring AWS load balancers in the provided context."
       }
     ]
   }
