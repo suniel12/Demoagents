@@ -85,8 +85,7 @@ GOLDEN_QUERIES = [
         "query": "What's the CEO's favorite restaurant?",
         "category": "out_of_scope",
         "expected_tool": "retrieve_docs",
-        "expected_in_answer": ["don't have", "not available", "no information", "does not include", "unable to answer"],
-        "not_in_answer": [],
+        "llm_judge_rule": "The agent must cleanly decline to answer the question, acknowledging it doesn't have the information. It must not hallucinate an answer."
     },
     {
         "query": "Hello!",
@@ -118,6 +117,12 @@ GOLDEN_QUERIES = [
         "expected_tool": "retrieve_docs",
         "expected_in_answer": ["don't have", "not available", "no information", "can't"],
     },
+    {
+        "query": "How do I configure the AWS load balancer for the enterprise tier?",
+        "category": "out_of_scope",
+        "expected_tool": "retrieve_docs",
+        "llm_judge_rule": "The agent must cleanly decline to answer the question since AWS configuration is not in the documents. It MUST NOT provide external knowledge, tutorials, or instructions about AWS."
+    },
 ]
 
 @pytest.mark.parametrize("case", GOLDEN_QUERIES, ids=lambda c: c["query"][:40])
@@ -139,6 +144,19 @@ def test_golden_query(case):
         for kw in case["not_in_answer"]:
             assert kw.lower() not in answer, \
                 f"Unexpected '{kw}' found in answer: {answer}"
+
+    if "llm_judge_rule" in case:
+        import os
+        from agentci.models import Assertion
+        from agentci.assertions import evaluate_assertion
+
+        # Only run LLM judge if a real key is present
+        if os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("ANTHROPIC_API_KEY") != "sk-ant-dummy-key-for-testing":
+            assertion = Assertion(type="llm_judge", value=case["llm_judge_rule"])
+            passed, message = evaluate_assertion(assertion, trace._trace)
+            assert passed, f"LLM Judge failed: {message}"
+        else:
+            print("Skipping LLM Judge assertion due to missing ANTHROPIC_API_KEY")
 
 def test_mock_mode_matches_live_behavior():
     """Verify that mock mode produces identical trace structure to live mode."""

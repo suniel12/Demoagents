@@ -84,7 +84,7 @@ def generate_answer(state: MessagesState):
     original_query = state["messages"][0].content
     
     messages = [
-        SystemMessage(content="You are a helpful assistant with access to a knowledge base. Answer the user's question based on the provided context."),
+        SystemMessage(content="You are a helpful assistant with access to a knowledge base. Answer the user's question based strictly on the provided context. If the context does not contain the answer, you must reply 'I don't have information about that.' Do not use your pre-trained knowledge to answer."),
         HumanMessage(content=f"Context: {docs_msg.content}\n\nQuestion: {original_query}")
     ]
     response = llm.invoke(messages)
