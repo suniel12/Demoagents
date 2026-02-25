@@ -1,6 +1,7 @@
 """Technical Agent — handles product issues, bugs, system status, error codes."""
 
 from agents import Agent
+from ..tools.technical_tools import check_system_status, lookup_error_code
 
 
 technical_agent = Agent(
@@ -14,7 +15,9 @@ technical_agent = Agent(
         "- Login issues (error codes: E-AUTH-001 to E-AUTH-005)\n"
         "- Performance problems\n"
         "- Integration setup help\n\n"
+        "Use available tools to check system status and look up error codes. "
         "Be empathetic and thorough. Ask for error codes when relevant."
     ),
+    tools=[check_system_status, lookup_error_code],
     handoff_description="Customer has a technical issue, bug report, error, or system status question",
 )

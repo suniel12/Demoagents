@@ -1,6 +1,7 @@
-"""General Agent — handles FAQ, product info, feature requests, anything else."""
+"""General Agent — handles product info, feature requests, FAQ, and anything else."""
 
 from agents import Agent
+from ..tools.general_tools import search_knowledge_base
 
 
 general_agent = Agent(
@@ -15,7 +16,9 @@ general_agent = Agent(
         "priority support, team management\n"
         "- CloudSync Enterprise ($499/mo): unlimited storage, dedicated support, "
         "custom integrations, SLA guarantee\n\n"
+        "Use the knowledge base tool to find accurate product information. "
         "Be helpful and concise."
     ),
+    tools=[search_knowledge_base],
     handoff_description="Customer has a general question, feature request, or FAQ",
 )
