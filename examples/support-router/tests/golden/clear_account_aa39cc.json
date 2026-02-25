@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_40636a87f05c4b6cab4ab712230757d4",
-  "created_at": "2026-02-25T22:58:18.502520Z",
+  "trace_id": "trace_fcb855dfb1ea4738aa7d18a9283f6b9d",
+  "created_at": "2026-02-25T23:40:09.487669Z",
   "spans": [
     {
-      "span_id": "span_10432b3233814bd588266fc1",
-      "parent_span_id": "span_9b932f2f0d694d438e36584c",
+      "span_id": "span_7e1c02540dc147508e8a28f0",
+      "parent_span_id": "span_1283fc702d324a198f9af7d8",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.012831762433052063,
+      "duration_ms": 0.013416633009910583,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_ea2a9a1b165c4721b4294d26",
-      "parent_span_id": "span_9b932f2f0d694d438e36584c",
+      "span_id": "span_816059a615ee48dbaa866c30",
+      "parent_span_id": "span_1283fc702d324a198f9af7d8",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.010790303349494934,
+      "duration_ms": 0.012792646884918213,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_b99624e09ae94d47ab6f9c65",
-      "parent_span_id": "span_9b932f2f0d694d438e36584c",
+      "span_id": "span_039d7974ab6248b7804bbb98",
+      "parent_span_id": "span_1283fc702d324a198f9af7d8",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 999.3482083082199,
-          "timestamp": "2026-02-25T22:58:19.502549Z"
+          "duration_ms": 1278.4817088395357,
+          "timestamp": "2026-02-25T23:40:10.766879Z"
         }
       ],
       "total_tokens_in": 292,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 999.3482083082199,
+      "duration_ms": 1278.4817088395357,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d98c8d7031a44ad6a5e776d6",
-      "parent_span_id": "span_9b932f2f0d694d438e36584c",
+      "span_id": "span_1555a1e485104b5fb3a4c24b",
+      "parent_span_id": "span_1283fc702d324a198f9af7d8",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.16083195805549622,
+      "duration_ms": 0.08570775389671326,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Account Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_9b932f2f0d694d438e36584c",
+      "span_id": "span_1283fc702d324a198f9af7d8",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1000.8245836943388,
+      "duration_ms": 1280.0282500684261,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_faabf273851e4e2193901ea1",
-      "parent_span_id": "span_248b37df218a47be9c775060",
+      "span_id": "span_24f4234648de499db80f5837",
+      "parent_span_id": "span_a59ac328a25345ecbbd084d5",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 275,
-          "tokens_out": 74,
+          "tokens_out": 64,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1330.976165831089,
-          "timestamp": "2026-02-25T22:58:20.835046Z"
+          "duration_ms": 2051.0923750698566,
+          "timestamp": "2026-02-25T23:40:12.819520Z"
         }
       ],
       "total_tokens_in": 275,
-      "total_tokens_out": 74,
+      "total_tokens_out": 64,
       "total_cost_usd": 0.0,
-      "duration_ms": 1330.976165831089,
+      "duration_ms": 2051.0923750698566,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_248b37df218a47be9c775060",
+      "span_id": "span_a59ac328a25345ecbbd084d5",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Account Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1331.785874441266,
+      "duration_ms": 2052.3303747177124,
       "metadata": {
         "handoffs": [],
         "tools": [
           "verify_identity",
           "reset_password",
           "toggle_2fa"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 654,
+  "total_tokens": 644,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "To process your account cancellation request, I'll need to verify your identity for security reasons. Please provide the email address associated with your account so I can send you a verification code. Once your identity is confirmed, I'll explain the cancellation process, including the 30-day cooling-off period and options to export your data if needed.\n\nCould you please share your account email?"
+    "final_output": "To help you cancel your account, I need to verify your identity first as part of our security procedures. Could you please provide the email address associated with your account? Once verified, I’ll outline the next steps, including the 30-day cooling-off period and any data export options you may need before cancellation."
   }
 }

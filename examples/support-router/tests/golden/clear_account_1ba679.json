@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_efffaefdf2b5436fb1a9345e73fbfc76",
-  "created_at": "2026-02-25T22:58:15.857994Z",
+  "trace_id": "trace_003dcae9e3f54a24bcf0a6c8a2d942a2",
+  "created_at": "2026-02-25T23:40:05.153906Z",
   "spans": [
     {
-      "span_id": "span_7f2382d714d0489aa6e471dd",
-      "parent_span_id": "span_23c3c8d5c85d46508e2b7cf4",
+      "span_id": "span_c8f992d66a3a4c39aa2adf47",
+      "parent_span_id": "span_ba81f5f92cad4526a5f46231",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.011416152119636536,
+      "duration_ms": 0.012874603271484375,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_101bb08bf28e4992a67433d4",
-      "parent_span_id": "span_23c3c8d5c85d46508e2b7cf4",
+      "span_id": "span_8b88d06fe9d44e339a6d356a",
+      "parent_span_id": "span_ba81f5f92cad4526a5f46231",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.011416152119636536,
+      "duration_ms": 0.011749565601348877,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_6cfd28f9f31344fc95fdbed8",
-      "parent_span_id": "span_23c3c8d5c85d46508e2b7cf4",
+      "span_id": "span_f3aa97fde29a4d8188115426",
+      "parent_span_id": "span_ba81f5f92cad4526a5f46231",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 744.5155419409275,
-          "timestamp": "2026-02-25T22:58:16.603115Z"
+          "duration_ms": 1407.944206148386,
+          "timestamp": "2026-02-25T23:40:06.562527Z"
         }
       ],
       "total_tokens_in": 294,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 744.5155419409275,
+      "duration_ms": 1407.944206148386,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_5cf7023d4adf4d4dba1cb115",
-      "parent_span_id": "span_23c3c8d5c85d46508e2b7cf4",
+      "span_id": "span_7ae2f2cef62f47fa8e354d91",
+      "parent_span_id": "span_ba81f5f92cad4526a5f46231",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.1081656664609909,
+      "duration_ms": 0.10745786130428314,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Account Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_23c3c8d5c85d46508e2b7cf4",
+      "span_id": "span_ba81f5f92cad4526a5f46231",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 745.5734573304653,
+      "duration_ms": 1408.938793465495,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_1b3239b7ebf848e39fa5a22d",
-      "parent_span_id": "span_8daa9182ad6a45729fe3ad7f",
+      "span_id": "span_a56012d92c4240be9687c7a8",
+      "parent_span_id": "span_f51606337f5a407390011363",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 277,
-          "tokens_out": 106,
+          "tokens_out": 120,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1873.8556671887636,
-          "timestamp": "2026-02-25T22:58:18.478014Z"
+          "duration_ms": 2889.9980429559946,
+          "timestamp": "2026-02-25T23:40:09.453634Z"
         }
       ],
       "total_tokens_in": 277,
-      "total_tokens_out": 106,
+      "total_tokens_out": 120,
       "total_cost_usd": 0.0,
-      "duration_ms": 1873.8556671887636,
+      "duration_ms": 2889.9980429559946,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_8daa9182ad6a45729fe3ad7f",
+      "span_id": "span_f51606337f5a407390011363",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Account Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1874.6847491711378,
+      "duration_ms": 2890.8431250602007,
       "metadata": {
         "handoffs": [],
         "tools": [
           "verify_identity",
           "reset_password",
           "toggle_2fa"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 690,
+  "total_tokens": 704,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "To enable two-factor authentication (2FA) on your account, you should go to your account's Settings and then navigate to the Security section. From there, you will find the option to enable two-factor authentication.\n\nIf you would like, I can help you enable 2FA directly. For that, I’ll need to verify your identity by sending a verification code to your email. Would you like to proceed with this process? If yes, please provide your account email, and I’ll guide you through the steps."
+    "final_output": "To enable two-factor authentication (2FA) on your account, follow these steps:\n\n1. Go to your account Settings.\n2. Navigate to the Security section.\n3. Find the option for Two-Factor Authentication (2FA) and select \"Enable\".\n4. Follow the on-screen instructions to set up 2FA, which may include providing a phone number or setting up an authenticator app.\n\nIf you’d like, I can assist you in enabling 2FA directly—just provide your email so I can start the verification process for your security. Would you like to proceed?"
   }
 }

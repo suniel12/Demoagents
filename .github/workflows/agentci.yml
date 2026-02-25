@@ -1,4 +1,4 @@
-name: AgentCI — Dev Agent Tests
+name: AgentCI — Demo Agent Tests
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
     paths:
       - 'examples/dev-agent/**'
       - 'examples/rag-agent/**'
+      - 'examples/support-router/**'
       - '.github/workflows/**'
 
 jobs:
@@ -73,4 +74,44 @@ jobs:
         with:
           name: agentci-test-results
           path: examples/dev-agent/agentci-test-results.txt
+          retention-days: 14
+
+  support-router-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: examples/support-router
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install agentci
+        run: |
+          pip install --upgrade pip
+          pip install git+https://github.com/suniel12/AgentCI.git@main
+
+      - name: Install support-router dependencies
+        run: |
+          pip install openai-agents pydantic python-dotenv pytest pyyaml
+
+      - name: Install support-router in editable mode
+        run: pip install -e .
+
+      - name: Run mock tests (no API key needed)
+        run: |
+          pytest tests/ -v --tb=short \
+            2>&1 | tee support-router-test-results.txt
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: support-router-test-results
+          path: examples/support-router/support-router-test-results.txt
           retention-days: 14

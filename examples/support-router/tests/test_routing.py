@@ -141,7 +141,7 @@ GOLDEN_QUERIES = [
 @pytest.mark.parametrize(
     "case",
     GOLDEN_QUERIES,
-    ids=lambda c: f"{c['category']}:{c['query'][:40]}",
+    ids=lambda c: f"{c['category']}",
 )
 def test_routing_correctness(case):
     """Each query should route to the expected specialist agent."""

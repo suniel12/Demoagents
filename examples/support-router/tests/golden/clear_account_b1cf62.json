@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_356c938490af47efa409384b0f6e5b6d",
-  "created_at": "2026-02-25T22:58:13.951140Z",
+  "trace_id": "trace_897c7796243443d4b63b9ec4802aac4f",
+  "created_at": "2026-02-25T23:40:02.162082Z",
   "spans": [
     {
-      "span_id": "span_22db101746d442edbf808206",
-      "parent_span_id": "span_6c323f78f7f54f028f4a1f34",
+      "span_id": "span_45cbfc4995e54f6591f5f7f5",
+      "parent_span_id": "span_4e09f80ec85c4c49b065bf9c",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01449882984161377,
+      "duration_ms": 0.013750046491622925,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_089355dbe7a04298a07ab3af",
-      "parent_span_id": "span_6c323f78f7f54f028f4a1f34",
+      "span_id": "span_45d672473c334fcb943202db",
+      "parent_span_id": "span_4e09f80ec85c4c49b065bf9c",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01621060073375702,
+      "duration_ms": 0.013707205653190613,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_957435f256d54010b115317c",
-      "parent_span_id": "span_6c323f78f7f54f028f4a1f34",
+      "span_id": "span_5ab15e66375445fd84ee0e01",
+      "parent_span_id": "span_4e09f80ec85c4c49b065bf9c",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 732.226625084877,
-          "timestamp": "2026-02-25T22:58:14.684128Z"
+          "duration_ms": 774.6459152549505,
+          "timestamp": "2026-02-25T23:40:02.937442Z"
         }
       ],
       "total_tokens_in": 295,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 732.226625084877,
+      "duration_ms": 774.6459152549505,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_81fdee5d6510448aac1e8776",
-      "parent_span_id": "span_6c323f78f7f54f028f4a1f34",
+      "span_id": "span_a9d07d387fb94a208533223c",
+      "parent_span_id": "span_4e09f80ec85c4c49b065bf9c",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.12966617941856384,
+      "duration_ms": 0.0943746417760849,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Account Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_6c323f78f7f54f028f4a1f34",
+      "span_id": "span_4e09f80ec85c4c49b065bf9c",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 733.3318330347538,
+      "duration_ms": 775.6367921829224,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_357f39025a4c4c4aaa3691bd",
-      "parent_span_id": "span_5490f660f3f248159631b0f9",
+      "span_id": "span_d35eefa6d9c74cccac72a3bd",
+      "parent_span_id": "span_64976bb52c9f402f8e4698f1",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -148,14 +150,14 @@
           "tokens_out": 49,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1144.5729173719883,
-          "timestamp": "2026-02-25T22:58:15.829759Z"
+          "duration_ms": 2183.984875679016,
+          "timestamp": "2026-02-25T23:40:05.122390Z"
         }
       ],
       "total_tokens_in": 278,
       "total_tokens_out": 49,
       "total_cost_usd": 0.0,
-      "duration_ms": 1144.5729173719883,
+      "duration_ms": 2183.984875679016,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_5490f660f3f248159631b0f9",
+      "span_id": "span_64976bb52c9f402f8e4698f1",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Account Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1145.26779204607,
+      "duration_ms": 2186.683291569352,
       "metadata": {
         "handoffs": [],
         "tools": [
           "verify_identity",
           "reset_password",
           "toggle_2fa"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "To help you reset your password, I’ll need to verify your identity for security reasons. Please provide the email address associated with your account. Once you provide it, I will send you a verification code to proceed with the password reset."
+    "final_output": "To help you reset your password, I’ll need to verify your identity first. \n\nPlease provide the email address associated with your account. I’ll send a verification code to that email, and then we can proceed with the password reset."
   }
 }

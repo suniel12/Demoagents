@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_625a230c78c249d0ad9f3eec573b618b",
-  "created_at": "2026-02-25T22:58:20.863108Z",
+  "trace_id": "trace_64aea3ca44d44e57808f5f780f119b30",
+  "created_at": "2026-02-25T23:40:12.856695Z",
   "spans": [
     {
-      "span_id": "span_2b16c3aa178b48298723a472",
-      "parent_span_id": "span_e78cc4b988c74356b9afdfee",
+      "span_id": "span_1557040a5b074c4cb5e5729f",
+      "parent_span_id": "span_dc7396304ba148f7b49eae27",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01920759677886963,
+      "duration_ms": 0.013375654816627502,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_5e20d0c43f7a466f8bf31bb9",
-      "parent_span_id": "span_e78cc4b988c74356b9afdfee",
+      "span_id": "span_de8da9ede18f4a31b7d350de",
+      "parent_span_id": "span_dc7396304ba148f7b49eae27",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.013248994946479797,
+      "duration_ms": 0.012625008821487427,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d0ae42ef774b463e9be7304d",
-      "parent_span_id": "span_e78cc4b988c74356b9afdfee",
+      "span_id": "span_9e4f1719e79f44e09ed3a549",
+      "parent_span_id": "span_dc7396304ba148f7b49eae27",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 702.1369989961386,
-          "timestamp": "2026-02-25T22:58:21.566078Z"
+          "duration_ms": 968.2880826294422,
+          "timestamp": "2026-02-25T23:40:13.825701Z"
         }
       ],
       "total_tokens_in": 294,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 702.1369989961386,
+      "duration_ms": 968.2880826294422,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_266db8f3c04f482cbf596c38",
-      "parent_span_id": "span_e78cc4b988c74356b9afdfee",
+      "span_id": "span_60f38269bb5c4929a43adcc7",
+      "parent_span_id": "span_dc7396304ba148f7b49eae27",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.0921245664358139,
+      "duration_ms": 0.09966455399990082,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "General Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_e78cc4b988c74356b9afdfee",
+      "span_id": "span_dc7396304ba148f7b49eae27",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 703.2894995063543,
+      "duration_ms": 969.3367090076208,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_b171948c85f54fcf809000f4",
-      "parent_span_id": "span_3254966cdcbf4891a7b58da0",
+      "span_id": "span_f19c6e378e964e499259179a",
+      "parent_span_id": "span_f644e43852d54c87939f4dee",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -148,14 +150,14 @@
           "tokens_out": 20,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1227.6540417224169,
-          "timestamp": "2026-02-25T22:58:22.794805Z"
+          "duration_ms": 703.9097491651773,
+          "timestamp": "2026-02-25T23:40:14.530621Z"
         }
       ],
       "total_tokens_in": 211,
       "total_tokens_out": 20,
       "total_cost_usd": 0.0,
-      "duration_ms": 1227.6540417224169,
+      "duration_ms": 703.9097491651773,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,8 +165,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_880f8bc62bfa4f51b596951d",
-      "parent_span_id": "span_3254966cdcbf4891a7b58da0",
+      "span_id": "span_88e65b5718d2425ab734e91d",
+      "parent_span_id": "span_f644e43852d54c87939f4dee",
       "kind": "tool_call",
       "name": "search_knowledge_base",
       "input_data": null,
@@ -179,7 +181,7 @@
           },
           "result": "No knowledge base articles found for 'CloudSync Pro features'. Try different keywords.",
           "error": null,
-          "timestamp": "2026-02-25T22:58:22.795460+00:00",
+          "timestamp": "2026-02-25T23:40:14.531449+00:00",
           "duration_ms": 0.0
         }
       ],
@@ -187,7 +189,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.31841546297073364,
+      "duration_ms": 0.40850043296813965,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -195,8 +197,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_986e22e3cd114c51a0176f48",
-      "parent_span_id": "span_3254966cdcbf4891a7b58da0",
+      "span_id": "span_be25c81d4b9241d9b5a9858f",
+      "parent_span_id": "span_f644e43852d54c87939f4dee",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -214,14 +216,14 @@
           "tokens_out": 43,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1496.8278761953115,
-          "timestamp": "2026-02-25T22:58:24.292699Z"
+          "duration_ms": 1629.3379161506891,
+          "timestamp": "2026-02-25T23:40:16.161458Z"
         }
       ],
       "total_tokens_in": 257,
       "total_tokens_out": 43,
       "total_cost_usd": 0.0,
-      "duration_ms": 1496.8278761953115,
+      "duration_ms": 1629.3379161506891,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -229,7 +231,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_3254966cdcbf4891a7b58da0",
+      "span_id": "span_f644e43852d54c87939f4dee",
       "parent_span_id": null,
       "kind": "agent",
       "name": "General Agent",
@@ -242,12 +244,14 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 2726.2709587812424,
+      "duration_ms": 2335.847709327936,
       "metadata": {
         "handoffs": [],
         "tools": [
           "search_knowledge_base"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -265,6 +269,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "CloudSync Pro includes the following features:\n\n- 100GB of storage\n- Up to 5 integrations\n- Email support\n\nIf you need more details or have specific feature questions, let me know!"
+    "final_output": "CloudSync Pro includes the following features:\n- 100GB storage\n- Up to 5 integrations\n- Email support\n\nIf you need more details or have specific feature questions, please let me know!"
   }
 }

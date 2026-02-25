@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_a791592e63074cec82fcf264cc67e16e",
-  "created_at": "2026-02-25T22:58:24.315922Z",
+  "trace_id": "trace_49cd793c5f794f57a160ae11749c82b2",
+  "created_at": "2026-02-25T23:40:16.196383Z",
   "spans": [
     {
-      "span_id": "span_4deff3533bb64c96b544d1cb",
-      "parent_span_id": "span_650844040d7c449e93de06b4",
+      "span_id": "span_e393018ac89e4889996abbbb",
+      "parent_span_id": "span_3ad0735f706f408a92e14772",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.014584511518478394,
+      "duration_ms": 0.012207776308059692,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_b774a118968e4384bea7c7a0",
-      "parent_span_id": "span_650844040d7c449e93de06b4",
+      "span_id": "span_f8dc46efb5754d98b9fab8cb",
+      "parent_span_id": "span_3ad0735f706f408a92e14772",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01629069447517395,
+      "duration_ms": 0.012332573533058167,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_a4fbb1e829fb47cd8e6c6dd1",
-      "parent_span_id": "span_650844040d7c449e93de06b4",
+      "span_id": "span_50e061d6282d42ac99f7156c",
+      "parent_span_id": "span_3ad0735f706f408a92e14772",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 740.4957506805658,
-          "timestamp": "2026-02-25T22:58:25.057231Z"
+          "duration_ms": 1024.8222071677446,
+          "timestamp": "2026-02-25T23:40:17.221953Z"
         }
       ],
       "total_tokens_in": 297,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 740.4957506805658,
+      "duration_ms": 1024.8222071677446,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_aeee33589cc747c99b2d514d",
-      "parent_span_id": "span_650844040d7c449e93de06b4",
+      "span_id": "span_de56e3426559471da720e430",
+      "parent_span_id": "span_3ad0735f706f408a92e14772",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.161709263920784,
+      "duration_ms": 0.08229166269302368,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "General Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_650844040d7c449e93de06b4",
+      "span_id": "span_3ad0735f706f408a92e14772",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 741.8249994516373,
+      "duration_ms": 1025.7971249520779,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d8b48b2750d64ac8817c3737",
-      "parent_span_id": "span_e2b4de8b1ba64ee58fd772d9",
+      "span_id": "span_79a96095200c477fbeb72736",
+      "parent_span_id": "span_be6cbad87463408ea960ea16",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -148,14 +150,14 @@
           "tokens_out": 66,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1666.49604216218,
-          "timestamp": "2026-02-25T22:58:26.724868Z"
+          "duration_ms": 1726.5164572745562,
+          "timestamp": "2026-02-25T23:40:18.949295Z"
         }
       ],
       "total_tokens_in": 214,
       "total_tokens_out": 66,
       "total_cost_usd": 0.0,
-      "duration_ms": 1666.49604216218,
+      "duration_ms": 1726.5164572745562,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_e2b4de8b1ba64ee58fd772d9",
+      "span_id": "span_be6cbad87463408ea960ea16",
       "parent_span_id": null,
       "kind": "agent",
       "name": "General Agent",
@@ -176,12 +178,14 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1667.1681236475706,
+      "duration_ms": 1727.1603345870972,
       "metadata": {
         "handoffs": [],
         "tools": [
           "search_knowledge_base"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -199,6 +203,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "Thank you for your feedback! I’ll make a note of your request to add dark mode to CloudSync. Feature suggestions like this help us improve our products for all users.\n\nIf you’d like, I can also submit this directly as a formal feature request to our product team. Would you like me to do that?"
+    "final_output": "Thank you for your feedback and suggestion! I’ll make sure to pass your request for dark mode to our product team. While I don’t have information on whether this feature is currently planned, customer input is important to us and helps shape future updates.\n\nIf you have any other suggestions or needs, feel free to share!"
   }
 }

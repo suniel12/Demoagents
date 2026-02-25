@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_e90d25fbc68e40f2b7a7d26446cffe44",
-  "created_at": "2026-02-25T22:58:41.148723Z",
+  "trace_id": "trace_8662a4c5d297436588abe84555aa0141",
+  "created_at": "2026-02-25T23:40:32.595752Z",
   "spans": [
     {
-      "span_id": "span_0bfed188a8984fb593432f46",
-      "parent_span_id": "span_b1c19543ebb742d9b7db1655",
+      "span_id": "span_55e6cd22722a477faa874b67",
+      "parent_span_id": "span_87237598f72a4f1da008a535",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.012042000889778137,
+      "duration_ms": 0.011790543794631958,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_b110ab8df2ff4dfbaa571f84",
-      "parent_span_id": "span_b1c19543ebb742d9b7db1655",
+      "span_id": "span_daf40972a1bc4546ac0e56f7",
+      "parent_span_id": "span_87237598f72a4f1da008a535",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.010168179869651794,
+      "duration_ms": 0.009583309292793274,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_c89bf187a89542859c988e6a",
-      "parent_span_id": "span_b1c19543ebb742d9b7db1655",
+      "span_id": "span_38a5ebd5f1dd4603bda09c01",
+      "parent_span_id": "span_87237598f72a4f1da008a535",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 912.7508755773306,
-          "timestamp": "2026-02-25T22:58:42.062107Z"
+          "duration_ms": 1317.076750099659,
+          "timestamp": "2026-02-25T23:40:33.913504Z"
         }
       ],
       "total_tokens_in": 287,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 912.7508755773306,
+      "duration_ms": 1317.076750099659,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_88581fced60f40548ea54a79",
-      "parent_span_id": "span_b1c19543ebb742d9b7db1655",
+      "span_id": "span_2108d4e6b20f4478b4e21d91",
+      "parent_span_id": "span_87237598f72a4f1da008a535",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.11725164949893951,
+      "duration_ms": 0.11283345520496368,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "General Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_b1c19543ebb742d9b7db1655",
+      "span_id": "span_87237598f72a4f1da008a535",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 914.8113317787647,
+      "duration_ms": 1318.91099922359,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_8fa069c6f3dc466684cb1dcf",
-      "parent_span_id": "span_338f78c5d21a4ef1b1da71f6",
+      "span_id": "span_7b259be71c194e9cafdf294a",
+      "parent_span_id": "span_aac475171a8749abb6e626ac",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 204,
-          "tokens_out": 31,
+          "tokens_out": 30,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 959.8108343780041,
-          "timestamp": "2026-02-25T22:58:43.023975Z"
+          "duration_ms": 948.8612916320562,
+          "timestamp": "2026-02-25T23:40:34.864213Z"
         }
       ],
       "total_tokens_in": 204,
-      "total_tokens_out": 31,
+      "total_tokens_out": 30,
       "total_cost_usd": 0.0,
-      "duration_ms": 959.8108343780041,
+      "duration_ms": 948.8612916320562,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_338f78c5d21a4ef1b1da71f6",
+      "span_id": "span_aac475171a8749abb6e626ac",
       "parent_span_id": null,
       "kind": "agent",
       "name": "General Agent",
@@ -176,12 +178,14 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 960.6298748403788,
+      "duration_ms": 949.6173746883869,
       "metadata": {
         "handoffs": [],
         "tools": [
           "search_knowledge_base"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -190,7 +194,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 535,
+  "total_tokens": 534,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -199,6 +203,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "Hello! How can I help you today? If you have any questions about our products, features, or general information, just let me know."
+    "final_output": "Hello! How can I help you today? If you have questions about our products, features, or anything else, just let me know."
   }
 }

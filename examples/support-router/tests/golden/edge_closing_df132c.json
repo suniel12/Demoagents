@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_74c78001d7494e969af38cedaac665d5",
-  "created_at": "2026-02-25T22:58:43.061293Z",
+  "trace_id": "trace_eb4698bfcefe4795ba8284c770323395",
+  "created_at": "2026-02-25T23:40:34.897366Z",
   "spans": [
     {
-      "span_id": "span_04f1ff3c9af24dfca44d4823",
-      "parent_span_id": "span_a8bf3ce0b8de4a9391673c8f",
+      "span_id": "span_b1df27cd84b84f068bb76013",
+      "parent_span_id": "span_4926dd5f97e44e0eae5dbe3a",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01624971628189087,
+      "duration_ms": 0.012749806046485901,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_ceeca7735efb407f9188042c",
-      "parent_span_id": "span_a8bf3ce0b8de4a9391673c8f",
+      "span_id": "span_7f66beb81b3847dd9b15bca4",
+      "parent_span_id": "span_4926dd5f97e44e0eae5dbe3a",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.012874603271484375,
+      "duration_ms": 0.012040138244628906,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_426905842cb24420b899c2d4",
-      "parent_span_id": "span_a8bf3ce0b8de4a9391673c8f",
+      "span_id": "span_9560fd3da45f46c98e6df75a",
+      "parent_span_id": "span_4926dd5f97e44e0eae5dbe3a",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 969.8127079755068,
-          "timestamp": "2026-02-25T22:58:44.031825Z"
+          "duration_ms": 935.2335408329964,
+          "timestamp": "2026-02-25T23:40:35.833287Z"
         }
       ],
       "total_tokens_in": 292,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 969.8127079755068,
+      "duration_ms": 935.2335408329964,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_6b8cd5fe164b4afd8ef4d15d",
-      "parent_span_id": "span_a8bf3ce0b8de4a9391673c8f",
+      "span_id": "span_a7997ef555834e1282d96b38",
+      "parent_span_id": "span_4926dd5f97e44e0eae5dbe3a",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.08691661059856415,
+      "duration_ms": 0.11537596583366394,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "General Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_a8bf3ce0b8de4a9391673c8f",
+      "span_id": "span_4926dd5f97e44e0eae5dbe3a",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 970.8320833742619,
+      "duration_ms": 936.2808745354414,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_f0dc23dafbd84aa886e7455d",
-      "parent_span_id": "span_78ad4be1faab4d7d8869ecfd",
+      "span_id": "span_098b4aaa01c14ffcbacf4810",
+      "parent_span_id": "span_f1abe13d9bcf4b1c9b9de8ba",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 209,
-          "tokens_out": 25,
+          "tokens_out": 26,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 848.5744185745716,
-          "timestamp": "2026-02-25T22:58:44.881276Z"
+          "duration_ms": 794.3498343229294,
+          "timestamp": "2026-02-25T23:40:36.628730Z"
         }
       ],
       "total_tokens_in": 209,
-      "total_tokens_out": 25,
+      "total_tokens_out": 26,
       "total_cost_usd": 0.0,
-      "duration_ms": 848.5744185745716,
+      "duration_ms": 794.3498343229294,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_78ad4be1faab4d7d8869ecfd",
+      "span_id": "span_f1abe13d9bcf4b1c9b9de8ba",
       "parent_span_id": null,
       "kind": "agent",
       "name": "General Agent",
@@ -176,12 +178,14 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 849.301166832447,
+      "duration_ms": 795.4535000026226,
       "metadata": {
         "handoffs": [],
         "tools": [
           "search_knowledge_base"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -190,7 +194,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 539,
+  "total_tokens": 540,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -199,6 +203,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "You're welcome! If you have any more questions in the future, feel free to ask. Have a great day!"
+    "final_output": "You're welcome! If you have any other questions in the future, feel free to reach out. Have a great day!"
   }
 }

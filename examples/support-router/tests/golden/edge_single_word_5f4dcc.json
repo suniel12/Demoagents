@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_e076ca6bb5ea4f6e931ca25633a4c7fa",
-  "created_at": "2026-02-25T22:58:46.533181Z",
+  "trace_id": "trace_173c2cecd24d47d89b076d48b294105f",
+  "created_at": "2026-02-25T23:40:38.753706Z",
   "spans": [
     {
-      "span_id": "span_b8f33104a4bf44efa5bae528",
-      "parent_span_id": "span_01b61e69672b4c1f8786723a",
+      "span_id": "span_1983ba34930b4363828f3109",
+      "parent_span_id": "span_307dd0367c6c447ebcd51d62",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.012209638953208923,
+      "duration_ms": 0.01241639256477356,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_46bf2e5933b7495689205f76",
-      "parent_span_id": "span_01b61e69672b4c1f8786723a",
+      "span_id": "span_023f7c95722840a78ea9c57e",
+      "parent_span_id": "span_307dd0367c6c447ebcd51d62",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.010125339031219482,
+      "duration_ms": 0.012625008821487427,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_3b04c93d2f0c4362a45aef8c",
-      "parent_span_id": "span_01b61e69672b4c1f8786723a",
+      "span_id": "span_88aec42182274555876a6521",
+      "parent_span_id": "span_307dd0367c6c447ebcd51d62",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 994.392167776823,
-          "timestamp": "2026-02-25T22:58:47.528228Z"
+          "duration_ms": 1207.7864594757557,
+          "timestamp": "2026-02-25T23:40:39.962223Z"
         }
       ],
       "total_tokens_in": 287,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 994.392167776823,
+      "duration_ms": 1207.7864594757557,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_cef20b3231ac48cda0a9515d",
-      "parent_span_id": "span_01b61e69672b4c1f8786723a",
+      "span_id": "span_546eb963c2ee4f77b1c33af2",
+      "parent_span_id": "span_307dd0367c6c447ebcd51d62",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.0910833477973938,
+      "duration_ms": 0.1787077635526657,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Account Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_01b61e69672b4c1f8786723a",
+      "span_id": "span_307dd0367c6c447ebcd51d62",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 995.458709076047,
+      "duration_ms": 1209.3002498149872,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_76d5044b21474c59ad1350a6",
-      "parent_span_id": "span_d6b017c4fadd4205ad1f2f9d",
+      "span_id": "span_eec9623d37a14babaec9cacc",
+      "parent_span_id": "span_ca7c338599804ea4b918805e",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 270,
-          "tokens_out": 51,
+          "tokens_out": 49,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1122.3596669733524,
-          "timestamp": "2026-02-25T22:58:48.651586Z"
+          "duration_ms": 1362.450124695897,
+          "timestamp": "2026-02-25T23:40:41.326311Z"
         }
       ],
       "total_tokens_in": 270,
-      "total_tokens_out": 51,
+      "total_tokens_out": 49,
       "total_cost_usd": 0.0,
-      "duration_ms": 1122.3596669733524,
+      "duration_ms": 1362.450124695897,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d6b017c4fadd4205ad1f2f9d",
+      "span_id": "span_ca7c338599804ea4b918805e",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Account Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1123.021624982357,
+      "duration_ms": 1364.0397917479277,
       "metadata": {
         "handoffs": [],
         "tools": [
           "verify_identity",
           "reset_password",
           "toggle_2fa"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 621,
+  "total_tokens": 619,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "It looks like you want help with your password. For security reasons, I’ll need to verify your identity via your registered email before proceeding with a password reset.\n\nPlease provide your email address associated with your account so I can start the verification process."
+    "final_output": "It looks like you want to reset your password. For security, I’ll need to verify your identity first. Please provide your email address associated with your account, and I’ll send you a verification code to begin the password reset process."
   }
 }

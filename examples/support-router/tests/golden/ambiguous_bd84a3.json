@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_fe13d0e8622c471b9cf0d4e12bd1705b",
-  "created_at": "2026-02-25T22:58:35.430090Z",
+  "trace_id": "trace_8fbe63c5c9f746ce9d10803c27defeca",
+  "created_at": "2026-02-25T23:40:26.889889Z",
   "spans": [
     {
-      "span_id": "span_b521b11dee3b48efabbcd509",
-      "parent_span_id": "span_fbd981f97f8549dc83f0f0f1",
+      "span_id": "span_ced90450c2dd4d97b9d370a6",
+      "parent_span_id": "span_c973d3b071044358955f69ca",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01124851405620575,
+      "duration_ms": 0.01391582190990448,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d4c22ea525514e95a8ec2d09",
-      "parent_span_id": "span_fbd981f97f8549dc83f0f0f1",
+      "span_id": "span_7d3fb7c3617e485daf4ded49",
+      "parent_span_id": "span_c973d3b071044358955f69ca",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01095794141292572,
+      "duration_ms": 0.013459473848342896,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_fa443bccfb284646888e2d2f",
-      "parent_span_id": "span_fbd981f97f8549dc83f0f0f1",
+      "span_id": "span_169eca81483f43bc88b201b8",
+      "parent_span_id": "span_c973d3b071044358955f69ca",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 45,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 896.4149579405785,
-          "timestamp": "2026-02-25T22:58:36.327111Z"
+          "duration_ms": 1019.4222070276737,
+          "timestamp": "2026-02-25T23:40:27.910044Z"
         }
       ],
       "total_tokens_in": 295,
       "total_tokens_out": 45,
       "total_cost_usd": 0.0,
-      "duration_ms": 896.4149579405785,
+      "duration_ms": 1019.4222070276737,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_be2b65e0eeb740a3adc0b33b",
-      "parent_span_id": "span_fbd981f97f8549dc83f0f0f1",
+      "span_id": "span_576d709a9107410ca4b2316a",
+      "parent_span_id": "span_c973d3b071044358955f69ca",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.11024996638298035,
+      "duration_ms": 0.09379163384437561,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Technical Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_fbd981f97f8549dc83f0f0f1",
+      "span_id": "span_c973d3b071044358955f69ca",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 897.4942080676556,
+      "duration_ms": 1020.4368755221367,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_724ebd9ed7b04959bd22db7a",
-      "parent_span_id": "span_6f55346b479f43d68adbf0e3",
+      "span_id": "span_1590960872a34b0cbcfc89e0",
+      "parent_span_id": "span_d9868a19aa304e21b3e2d7f9",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 254,
-          "tokens_out": 107,
+          "tokens_out": 83,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 2207.2685845196247,
-          "timestamp": "2026-02-25T22:58:38.535451Z"
+          "duration_ms": 1418.4962920844555,
+          "timestamp": "2026-02-25T23:40:29.329455Z"
         }
       ],
       "total_tokens_in": 254,
-      "total_tokens_out": 107,
+      "total_tokens_out": 83,
       "total_cost_usd": 0.0,
-      "duration_ms": 2207.2685845196247,
+      "duration_ms": 1418.4962920844555,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_6f55346b479f43d68adbf0e3",
+      "span_id": "span_d9868a19aa304e21b3e2d7f9",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Technical Agent",
@@ -176,13 +178,15 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 2208.067500963807,
+      "duration_ms": 1419.1298335790634,
       "metadata": {
         "handoffs": [],
         "tools": [
           "check_system_status",
           "lookup_error_code"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -191,7 +195,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 701,
+  "total_tokens": 677,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -200,6 +204,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "I'm sorry to hear that your sync isn't working. I’m here to help!\n\nBefore proceeding, could you let me know if you want to cancel the sync feature or your entire account? That way I can guide you through the correct process. Also, if you have an error code or any specific message from the sync problem, please share it so I can quickly look it up and assist with troubleshooting.\n\nLet me know how you’d like to proceed—getting sync fixed, canceling a feature, or closing your account."
+    "final_output": "I'm sorry to hear your sync isn't working. I can help troubleshoot the sync issue or assist with the cancellation process. To better assist you, could you please provide any error codes you're seeing or describe what happens when you try to sync?\n\nIf you'd like to proceed directly with cancellation, please confirm if you want to cancel your entire account or just the sync service. Let me know how you'd like to proceed!"
   }
 }

@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_5d7acc0a101b4c6988bb4baceafd810a",
-  "created_at": "2026-02-25T22:58:26.748571Z",
+  "trace_id": "trace_953801e1cfb64aaa8daedd611c9bdc22",
+  "created_at": "2026-02-25T23:40:18.976097Z",
   "spans": [
     {
-      "span_id": "span_61f3a54a44e14ad59d99dbcd",
-      "parent_span_id": "span_da15e003508e482488841387",
+      "span_id": "span_9085aa7136c64da18e585b5b",
+      "parent_span_id": "span_6ba42605c3fd4c4295792bd0",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.011708587408065796,
+      "duration_ms": 0.014457851648330688,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_b3dadebee2c14f1a80d27c32",
-      "parent_span_id": "span_da15e003508e482488841387",
+      "span_id": "span_f5802dd866b549d4aeaf5b91",
+      "parent_span_id": "span_6ba42605c3fd4c4295792bd0",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01212581992149353,
+      "duration_ms": 0.015417113900184631,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_0778066d5af147118acd8101",
-      "parent_span_id": "span_da15e003508e482488841387",
+      "span_id": "span_82f2c450ba794bc397d305b5",
+      "parent_span_id": "span_6ba42605c3fd4c4295792bd0",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 46,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1426.7149586230516,
-          "timestamp": "2026-02-25T22:58:28.175906Z"
+          "duration_ms": 1125.8345823734999,
+          "timestamp": "2026-02-25T23:40:20.102718Z"
         }
       ],
       "total_tokens_in": 302,
       "total_tokens_out": 46,
       "total_cost_usd": 0.0,
-      "duration_ms": 1426.7149586230516,
+      "duration_ms": 1125.8345823734999,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d89aae2f3bb9402cbea0a105",
-      "parent_span_id": "span_da15e003508e482488841387",
+      "span_id": "span_82463d9cad0c4623ab5ca898",
+      "parent_span_id": "span_6ba42605c3fd4c4295792bd0",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.08012354373931885,
+      "duration_ms": 0.17570704221725464,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Billing Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_da15e003508e482488841387",
+      "span_id": "span_6ba42605c3fd4c4295792bd0",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1427.588541060686,
+      "duration_ms": 1127.0317919552326,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_a5bdc3f8d6404b0296c8e000",
-      "parent_span_id": "span_0e93ac633b554800af4818e5",
+      "span_id": "span_7f9e2e718dfc4527a691df41",
+      "parent_span_id": "span_25b7889d3242486f81d96ed2",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 298,
-          "tokens_out": 82,
+          "tokens_out": 90,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1908.7551645934582,
-          "timestamp": "2026-02-25T22:58:30.085449Z"
+          "duration_ms": 2393.2692501693964,
+          "timestamp": "2026-02-25T23:40:22.497227Z"
         }
       ],
       "total_tokens_in": 298,
-      "total_tokens_out": 82,
+      "total_tokens_out": 90,
       "total_cost_usd": 0.0,
-      "duration_ms": 1908.7551645934582,
+      "duration_ms": 2393.2692501693964,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_0e93ac633b554800af4818e5",
+      "span_id": "span_25b7889d3242486f81d96ed2",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Billing Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1909.998331218958,
+      "duration_ms": 2394.2983765155077,
       "metadata": {
         "handoffs": [],
         "tools": [
           "lookup_invoice",
           "check_plan",
           "process_refund"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 728,
+  "total_tokens": 736,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "I’m sorry to hear about the pricing issue and the crashes you’re experiencing on the Pro plan.\n\nTo help you with the billing concern, could you please provide your account email? I’ll look up your current plan details and recent invoices to clarify the charges.\n\nFor the crashes, I recommend reaching out to our technical support team separately, but I can also note that here for escalation if you'd like."
+    "final_output": "Thanks for reaching out. I’m here to help with your billing concern and the technical issues you're experiencing with CloudSync Pro.\n\nTo look into your plan details and recent charges, could you please provide the email address associated with your account? This will help me check if there are any billing discrepancies and assist you further. \n\nFor the crashing issue, once I confirm your account, I'll guide you on the next steps to resolve it as well."
   }
 }

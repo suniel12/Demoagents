@@ -1,93 +1,161 @@
 ambiguous0:
 - arguments: {}
   tool: transfer_to_billing_agent
-- text: "I\u2019m sorry to hear about the pricing issue and the crashes you\u2019\
-    re experiencing on the Pro plan.\n\nTo help you with the billing concern, could\
-    \ you please provide your account email? I\u2019ll look up your current plan details\
-    \ and recent invoices to clarify the charges.\n\nFor the crashes, I recommend\
-    \ reaching out to our technical support team separately, but I can also note that\
-    \ here for escalation if you'd like."
+- text: "Thanks for reaching out. I\u2019m here to help with your billing concern\
+    \ and the technical issues you're experiencing with CloudSync Pro.\n\nTo look\
+    \ into your plan details and recent charges, could you please provide the email\
+    \ address associated with your account? This will help me check if there are any\
+    \ billing discrepancies and assist you further. \n\nFor the crashing issue, once\
+    \ I confirm your account, I'll guide you on the next steps to resolve it as well."
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: "I\u2019m sorry to hear you\u2019re experiencing issues with your Pro plan\u2019\
+    s pricing and with crashes. I can help with both concerns!\n\nTo check your billing\
+    \ details and help address the crashing problem, could you please provide your\
+    \ email address associated with your account? This will let me look up your recent\
+    \ invoices and your current plan status. \n\nFor the crashes, I can also give\
+    \ you some troubleshooting steps or connect you with technical support once we\
+    \ verify your account."
 ambiguous1:
+- arguments: {}
+  tool: transfer_to_general_agent
+- arguments:
+    query: Difference between CloudSync Pro and CloudSync Business
+  tool: search_knowledge_base
+- text: "Here\u2019s a quick comparison between CloudSync Pro and CloudSync Business:\n\
+    \n- CloudSync Pro ($49/mo): \n  - 100GB storage\n  - Up to 5 integrations\n  -\
+    \ Email support\n\n- CloudSync Business ($199/mo): \n  - 1TB storage\n  - Unlimited\
+    \ integrations\n  - Priority support\n  - Team management features\n\nCloudSync\
+    \ Business offers significantly more storage, unlimited integrations, faster support,\
+    \ and additional team management tools compared to Pro. If you need scalability\
+    \ and advanced features, Business is the better option."
 - arguments: {}
   tool: transfer_to_general_agent
 - arguments:
     query: difference between CloudSync Pro and CloudSync Business
   tool: search_knowledge_base
-- text: "Here\u2019s a summary of the key differences between CloudSync Pro and CloudSync\
-    \ Business:\n\n- Storage: Pro includes 100GB, while Business offers 1TB.\n- Integrations:\
-    \ Pro allows up to 5 integrations; Business supports unlimited integrations.\n\
-    - Support: Pro comes with email support. Business gives you priority support.\n\
-    - Extra Features: Business also has team management features, which Pro does not\
-    \ include.\n\nIf you need more advanced collaboration or larger storage, Business\
-    \ is the better choice. Let me know if you need a detailed comparison or have\
-    \ specific requirements!"
+- text: "Here\u2019s a summary of the differences between CloudSync Pro and CloudSync\
+    \ Business:\n\n- CloudSync Pro ($49/mo): \n  - 100GB storage\n  - 5 integrations\n\
+    \  - Email support\n\n- CloudSync Business ($199/mo): \n  - 1TB storage\n  - Unlimited\
+    \ integrations\n  - Priority support \n  - Team management features\n\nIn short,\
+    \ Business gives you much more storage, unlimited integrations, faster (priority)\
+    \ support, and tools for managing a team, whereas Pro is more limited and suitable\
+    \ for individual users or smaller setups. Let me know if you need more details\
+    \ about a specific feature!"
 ambiguous2:
 - arguments: {}
   tool: transfer_to_technical_agent
-- text: "I'm sorry to hear that your sync isn't working. I\u2019m here to help!\n\n\
-    Before proceeding, could you let me know if you want to cancel the sync feature\
-    \ or your entire account?\u202FThat way I can guide you through the correct process.\
-    \ Also, if you have an error code or any specific message from the sync problem,\
-    \ please share it so I can quickly look it up and assist with troubleshooting.\n\
-    \nLet me know how you\u2019d like to proceed\u2014getting sync fixed, canceling\
-    \ a feature, or closing your account."
+- text: 'I''m sorry to hear your sync isn''t working. I can help troubleshoot the
+    sync issue or assist with the cancellation process. To better assist you, could
+    you please provide any error codes you''re seeing or describe what happens when
+    you try to sync?
+
+
+    If you''d like to proceed directly with cancellation, please confirm if you want
+    to cancel your entire account or just the sync service. Let me know how you''d
+    like to proceed!'
+- arguments: {}
+  tool: transfer_to_technical_agent
+- text: "I'm sorry to hear your sync isn't working\u2014I'm here to help. Could you\
+    \ please provide any error code you see when trying to sync? This will help me\
+    \ diagnose the problem.\n\nRegarding your cancellation request: If you wish to\
+    \ cancel your account or subscription, I can connect you with our account support\
+    \ team to assist with that. Please confirm if you'd like to proceed with cancellation,\
+    \ or let me know if you'd prefer to resolve the sync issue first."
 ambiguous3:
 - arguments: {}
   tool: transfer_to_account_agent
-- text: 'Since you''re unable to log in, I can help you start the account recovery
-    process. To change your billing information, you''ll need to regain account access
-    first for security reasons.
+- text: To help you update your billing information, I'll need to verify your identity
+    since you can't log in right now. Could you please provide the email address associated
+    with your account? I'll send a verification code to that email to get started.
+- arguments: {}
+  tool: transfer_to_account_agent
+- text: 'I can help you update your billing information, but since you can''t log
+    in, we''ll need to verify your identity first for security reasons.
 
 
-    Let''s begin by verifying your identity. Please provide your account email address,
-    and I''ll send a verification code to get you started on resetting your access.'
+    Could you please provide the email address associated with your account? Once
+    I have that, I''ll send you a verification code to continue the process.'
 clear_account0:
 - arguments: {}
   tool: transfer_to_account_agent
-- text: "To help you reset your password, I\u2019ll need to verify your identity for\
-    \ security reasons. Please provide the email address associated with your account.\
-    \ Once you provide it, I will send you a verification code to proceed with the\
-    \ password reset."
+- text: "To help you reset your password, I\u2019ll need to verify your identity first.\
+    \ \n\nPlease provide the email address associated with your account. I\u2019ll\
+    \ send a verification code to that email, and then we can proceed with the password\
+    \ reset."
+- arguments: {}
+  tool: transfer_to_account_agent
+- text: To help you reset your password, I'll need to verify your identity by sending
+    a verification code to your registered email address. Could you please provide
+    the email address associated with your TechCorp account?
 clear_account1:
 - arguments: {}
   tool: transfer_to_account_agent
-- text: "To enable two-factor authentication (2FA) on your account, you should go\
-    \ to your account's Settings and then navigate to the Security section. From there,\
-    \ you will find the option to enable two-factor authentication.\n\nIf you would\
-    \ like, I can help you enable 2FA directly. For that, I\u2019ll need to verify\
-    \ your identity by sending a verification code to your email. Would you like to\
-    \ proceed with this process? If yes, please provide your account email, and I\u2019\
-    ll guide you through the steps."
+- text: "To enable two-factor authentication (2FA) on your account, follow these steps:\n\
+    \n1. Go to your account Settings.\n2. Navigate to the Security section.\n3. Find\
+    \ the option for Two-Factor Authentication (2FA) and select \"Enable\".\n4. Follow\
+    \ the on-screen instructions to set up 2FA, which may include providing a phone\
+    \ number or setting up an authenticator app.\n\nIf you\u2019d like, I can assist\
+    \ you in enabling 2FA directly\u2014just provide your email so I can start the\
+    \ verification process for your security. Would you like to proceed?"
+- arguments: {}
+  tool: transfer_to_account_agent
+- text: "To enable two-factor authentication (2FA) on your account, you need to go\
+    \ to your account\u2019s \"Settings\" and select the \"Security\" section. There,\
+    \ you should see an option to enable or manage two-factor authentication.\n\n\
+    If you\u2019d like, I can assist you with enabling 2FA right now. Please provide\
+    \ your account email, and I\u2019ll guide you through the secure setup process,\
+    \ including a quick identity verification for your protection. Let me know how\
+    \ you\u2019d like to proceed!"
 clear_account2:
 - arguments: {}
   tool: transfer_to_account_agent
-- text: 'To process your account cancellation request, I''ll need to verify your identity
-    for security reasons. Please provide the email address associated with your account
-    so I can send you a verification code. Once your identity is confirmed, I''ll
-    explain the cancellation process, including the 30-day cooling-off period and
-    options to export your data if needed.
-
-
-    Could you please share your account email?'
+- text: "To help you cancel your account, I need to verify your identity first as\
+    \ part of our security procedures. Could you please provide the email address\
+    \ associated with your account? Once verified, I\u2019ll outline the next steps,\
+    \ including the 30-day cooling-off period and any data export options you may\
+    \ need before cancellation."
+- arguments: {}
+  tool: transfer_to_account_agent
+- text: "To proceed with canceling your account, we'll need to verify your identity\
+    \ for security reasons. Please provide the email address associated with your\
+    \ account, so I can send you a verification code. Once your identity is confirmed,\
+    \ I'll explain the next steps and the 30-day cooling-off period for account cancellation.\
+    \ \n\nCould you please provide your email address?"
 clear_billing0:
 - arguments: {}
   tool: transfer_to_billing_agent
-- text: I'm sorry for the inconvenience. I can help you resolve the double charge
-    for your CloudSync Pro subscription. Could you please provide your email address
-    associated with your account so I can look up your recent invoices and assist
-    with a refund if needed?
+- text: I'm sorry to hear that you were charged twice for your CloudSync Pro subscription.
+    To help you quickly, could you please provide the email address associated with
+    your subscription? I'll look into your recent invoices and resolve this for you.
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I'm sorry to hear you were charged twice for your CloudSync Pro subscription.
+    To assist you quickly, could you please provide the email address associated with
+    your account? This will help me look up your recent invoices and resolve the double
+    charge.
 clear_billing1:
 - arguments: {}
   tool: transfer_to_billing_agent
-- text: I'd be happy to help with your refund request! Could you please provide the
-    email address associated with your TechCorp account? This will help me locate
-    your recent invoice and process the refund.
+- text: I'd be happy to help you with your refund request for last month's charge.
+    Could you please provide the email address associated with your account? This
+    will help me look up your recent invoice and process your request quickly.
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I'd be happy to help with your refund request for last month. Could you please
+    provide the email address associated with your TechCorp account? This will help
+    me look up your recent invoice and begin the refund process.
 clear_billing2:
 - arguments: {}
   tool: transfer_to_billing_agent
-- text: I can help you with upgrading from the Pro to the Business plan! Could you
-    please provide your email address associated with your account? This will allow
-    me to look up your current subscription and process the upgrade for you.
+- text: I can help you upgrade from the CloudSync Pro plan to the Business plan. Could
+    you please provide the email address associated with your TechCorp account? This
+    will help me locate your current subscription and process the upgrade smoothly.
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I can assist you with upgrading from the Pro plan to the Business plan. Could
+    you please provide the email address associated with your account? This will help
+    me locate your current subscription and process the upgrade for you.
 clear_general0:
 - arguments: {}
   tool: transfer_to_general_agent
@@ -96,39 +164,73 @@ clear_general0:
   tool: search_knowledge_base
 - text: 'CloudSync Pro includes the following features:
 
-
-    - 100GB of storage
+    - 100GB storage
 
     - Up to 5 integrations
 
     - Email support
 
 
-    If you need more details or have specific feature questions, let me know!'
+    If you need more details or have specific feature questions, please let me know!'
+- arguments: {}
+  tool: transfer_to_general_agent
+- arguments:
+    query: CloudSync Pro features
+  tool: search_knowledge_base
+- text: 'CloudSync Pro includes the following features:
+
+    - 100GB storage
+
+    - Up to 5 integrations
+
+    - Email support
+
+
+    If you need more details or have specific questions about what is included, please
+    let me know!'
 clear_general1:
 - arguments: {}
   tool: transfer_to_general_agent
-- text: "Thank you for your feedback! I\u2019ll make a note of your request to add\
-    \ dark mode to CloudSync. Feature suggestions like this help us improve our products\
-    \ for all users.\n\nIf you\u2019d like, I can also submit this directly as a formal\
-    \ feature request to our product team. Would you like me to do that?"
+- text: "Thank you for your feedback and suggestion! I\u2019ll make sure to pass your\
+    \ request for dark mode to our product team. While I don\u2019t have information\
+    \ on whether this feature is currently planned, customer input is important to\
+    \ us and helps shape future updates.\n\nIf you have any other suggestions or needs,\
+    \ feel free to share!"
+- arguments: {}
+  tool: transfer_to_general_agent
+- text: 'Thank you for your feedback and suggestion! I''ll pass your request for a
+    dark mode feature to our product team. Many users appreciate dark mode for better
+    accessibility and reduced eye strain.
+
+
+    If you have any other ideas or specific preferences about how you''d like dark
+    mode to work, please let me know so I can include those details!'
 clear_technical0:
 - arguments: {}
   tool: transfer_to_technical_agent
-- text: 'I''m sorry you''re experiencing crashes when syncing files with CloudSync.
-    To help you better, could you please provide:
+- text: 'I''m sorry to hear that CloudSync is crashing when you try to sync files.
+    Let''s try to get this resolved quickly.
 
 
-    1. Any error codes or messages you see when the crash occurs.
+    Could you please provide:
 
-    2. The operating system you''re using (Windows, Mac, etc.).
+    1. Any error messages or error codes you see when the crash happens?
 
-    3. If this happens with specific files or all files.
+    2. Details about your operating system (Windows, macOS, etc.) and the CloudSync
+    app version you''re using.
 
 
-    Meanwhile, I can check the current CloudSync system status to rule out any ongoing
-    service issues. If you can share an error code, I can also look up its meaning
-    and solution for you.'
+    Meanwhile, I''ll also check if there are any current system issues with CloudSync
+    that could be affecting you.'
+- arguments: {}
+  tool: transfer_to_technical_agent
+- text: "I'm sorry to hear CloudSync keeps crashing when you try to sync files\u2014\
+    that must be frustrating. To help you better, could you let me know if you see\
+    \ any error messages or error codes when it crashes? Also, do you notice if the\
+    \ crash happens with specific file types or sizes, or does it happen with any\
+    \ file you try to sync?\n\nIn the meantime, I can check the system status to see\
+    \ if there is a known issue, but any additional details you can provide will help\
+    \ me troubleshoot the problem more thoroughly."
 clear_technical1:
 - arguments: {}
   tool: transfer_to_technical_agent
@@ -136,22 +238,48 @@ clear_technical1:
     error_code: E-SYNC-003
   tool: lookup_error_code
 - text: "Error code E-SYNC-003 means \"Upload failed \u2014 file too large.\" This\
-    \ occurs when you try to upload a file larger than 5GB.\n\nResolution:\n- Files\
-    \ over 5GB require a Business or Enterprise plan.\n- To resolve this, either split\
-    \ the file into smaller parts, or consider upgrading your plan.\n\nIf you need\
-    \ help upgrading or splitting files, let me know!"
+    \ happens when you try to upload a file over 5GB in size. \n\nResolution:\n- If\
+    \ your plan is not Business or Enterprise, you'll need to either split the file\
+    \ into smaller parts or consider upgrading your plan to allow larger file uploads.\n\
+    \nLet me know if you need help with upgrading your plan or splitting your files!"
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments:
+    error_code: E-SYNC-003
+  tool: lookup_error_code
+- text: "Error code E-SYNC-003 means \"Upload failed \u2014 file too large.\" This\
+    \ happens when you try to upload a file over 5GB with a plan that doesn't support\
+    \ it. \n\nResolution:\n- Files larger than 5GB require a Business or Enterprise\
+    \ plan.\n- You can either split the file into smaller parts or upgrade your plan\
+    \ to resolve this error.\n\nLet me know if you\u2019d like help with splitting\
+    \ files or upgrading your plan!"
 clear_technical2:
 - arguments: {}
   tool: transfer_to_technical_agent
 - arguments: {}
   tool: check_system_status
-- text: "CloudSync is currently up and running:\n\n- Sync Service: Operational\n-\
-    \ API Gateway: Operational\n- Web Dashboard: Operational\n- Integrations: Operational\n\
-    \nHowever, the Mobile App is experiencing intermittent latency, which may cause\
-    \ delays or slower performance for mobile users.\n\nIf you\u2019re having issues\
-    \ unrelated to the mobile app or still encountering problems, please let me know\
-    \ more details (such as any error codes or your platform) so I can help further!"
+- text: "The CloudSync service is currently operational for most features:\n\n- Sync\
+    \ Service: Operational\n- API Gateway: Operational\n- Web Dashboard: Operational\n\
+    - Integrations: Operational\n- Mobile App: Experiencing intermittent latency (some\
+    \ users may notice slow responses)\n\nIf you're using the mobile app, you might\
+    \ notice occasional slowness, but the other services should be working normally.\
+    \ Let me know if you're having a specific issue\u2014I'm here to help!"
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments: {}
+  tool: check_system_status
+- text: "The CloudSync service is mostly operational right now:\n\n- Sync Service:\
+    \ Operational\n- API Gateway: Operational\n- Web Dashboard: Operational\n- Mobile\
+    \ App: Experiencing intermittent latency (slower than normal)\n- Integrations:\
+    \ Operational\n\nIf you're having issues specifically with the mobile app, you\
+    \ may notice some delays, but the core syncing features are up and running. Let\
+    \ me know if you\u2019re seeing specific errors or need help with a particular\
+    \ part of CloudSync!"
 edge_closing:
+- arguments: {}
+  tool: transfer_to_general_agent
+- text: You're welcome! If you have any other questions in the future, feel free to
+    reach out. Have a great day!
 - arguments: {}
   tool: transfer_to_general_agent
 - text: You're welcome! If you have any more questions in the future, feel free to
@@ -159,17 +287,217 @@ edge_closing:
 edge_greeting:
 - arguments: {}
   tool: transfer_to_general_agent
-- text: Hello! How can I help you today? If you have any questions about our products,
-    features, or general information, just let me know.
+- text: Hello! How can I help you today? If you have questions about our products,
+    features, or anything else, just let me know.
+- arguments: {}
+  tool: transfer_to_general_agent
+- text: Hello! How can I help you today? If you have any questions about our products
+    or need information, just let me know!
 edge_single_word0:
 - arguments: {}
   tool: transfer_to_billing_agent
-- text: Could you please provide your email address? I'll look up your most recent
-    invoices for you.
+- text: "Could you please provide your email address? I\u2019ll look up your most\
+    \ recent invoice for you."
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I'd be happy to help you with your invoice request. Could you please provide
+    your email address associated with your account? This will help me look up your
+    most recent invoices.
 edge_single_word1:
 - arguments: {}
   tool: transfer_to_account_agent
-- text: "It looks like you want help with your password. For security reasons, I\u2019\
-    ll need to verify your identity via your registered email before proceeding with\
-    \ a password reset.\n\nPlease provide your email address associated with your\
-    \ account so I can start the verification process."
+- text: "It looks like you want to reset your password. For security, I\u2019ll need\
+    \ to verify your identity first. Please provide your email address associated\
+    \ with your account, and I\u2019ll send you a verification code to begin the password\
+    \ reset process."
+- arguments: {}
+  tool: transfer_to_account_agent
+- text: "It looks like you'd like assistance with your password. For security reasons,\
+    \ I\u2019ll need to verify your identity first. Could you please provide the email\
+    \ address associated with your TechCorp account? Once I have that, I\u2019ll send\
+    \ a verification code to your email to begin the password reset process."
+test_account_calls_verify_identity:
+- arguments: {}
+  tool: transfer_to_account_agent
+- arguments:
+    customer_email: alice@example.com
+  tool: verify_identity
+- text: I've sent a verification code to your email address (alice@example.com) to
+    confirm your identity. Please check your email and provide the 6-digit code you
+    received so I can proceed with your password reset.
+test_account_tools_not_used_for_billing:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I can assist you with your refund request. To get started, could you please
+    provide the email address associated with your account? This will help me locate
+    your most recent invoice and process your refund quickly.
+test_all_four_agents_reachable:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I'm sorry to hear that you were double-charged. To help you quickly, could
+    you please provide the email address associated with your TechCorp account? I'll
+    look up your recent invoices and resolve this for you.
+- arguments: {}
+  tool: transfer_to_technical_agent
+- text: "I'm sorry you're having trouble with syncing. To help you quickly, could\
+    \ you please provide any error codes or messages you\u2019re seeing? This will\
+    \ allow me to check for specific issues and offer the best solution. If you\u2019\
+    re not seeing an error code, let me know what happens when you try to sync (for\
+    \ example: does it freeze, show a warning, or simply do nothing?).\n\nAlso, have\
+    \ you noticed if this problem just started today, or has it been ongoing for a\
+    \ while? This helps me check if there are any known outages or issues on our side."
+- arguments: {}
+  tool: transfer_to_account_agent
+- text: To help you reset your password, I need to verify your identity first. Please
+    provide the email address associated with your account so I can send you a verification
+    code.
+- arguments: {}
+  tool: transfer_to_general_agent
+- text: 'We offer three main plans:
+
+
+    1. CloudSync Pro ($49/mo): 100GB storage, 5 integrations, email support.
+
+    2. CloudSync Business ($199/mo): 1TB storage, unlimited integrations, priority
+    support, team management.
+
+    3. CloudSync Enterprise ($499/mo): Unlimited storage, dedicated support, custom
+    integrations, and an SLA guarantee.
+
+
+    Let me know if you need more details or help choosing the right plan!'
+test_billing_calls_check_plan:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- arguments:
+    customer_email: alice@example.com
+  tool: check_plan
+- text: Your current plan is CloudSync Pro ($49/month), and it will renew on March
+    15, 2024. If you have any other questions about your subscription or need to make
+    changes, just let me know!
+test_billing_calls_lookup_invoice:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- arguments:
+    customer_email: alice@example.com
+  tool: lookup_invoice
+- text: 'Here are your recent invoices:
+
+
+    - INV-2024-001: $49.00 for CloudSync Pro, dated 2024-01-15 (Paid)
+
+    - INV-2024-002: $49.00 for CloudSync Pro, dated 2024-02-15 (Paid)
+
+
+    If you need details about a specific invoice or wish to request a refund, please
+    let me know!'
+test_billing_tools_not_used_for_technical:
+- arguments: {}
+  tool: transfer_to_technical_agent
+- text: 'I''m sorry that CloudSync keeps crashing when you try to sync files. Let''s
+    work together to get this fixed.
+
+
+    To help diagnose the issue, could you please provide:
+
+    - Any error messages or error codes you see when the crash occurs.
+
+    - The operating system you are using (Windows, macOS, etc.).
+
+    - Whether this happens with all files or specific ones.
+
+
+    Additionally, let me check if there are any current system issues or outages.
+    If you have an error code, please share it so I can look up more details specific
+    to your case.'
+test_garbled_error_code_still_routes_to_technical:
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments:
+    error_code: E-SYNC-003
+  tool: lookup_error_code
+- text: "The error code E-SYNC-003 means \"Upload failed \u2014 file too large.\"\
+    \ This happens when you try to upload a file over 5GB, which is only allowed with\
+    \ a Business or Enterprise plan.\n\nHow to resolve:\n- If you are on a Personal\
+    \ or Basic plan, please either split the file into smaller parts or consider upgrading\
+    \ to a Business or Enterprise plan.\n- If you think this is a mistake and your\
+    \ file is under 5GB, let me know and I can help you further.\n\nIf you need help\
+    \ upgrading, splitting your file, or want to check your current plan, just let\
+    \ me know!"
+test_general_calls_knowledge_base:
+- arguments: {}
+  tool: transfer_to_general_agent
+- arguments:
+    query: CloudSync API availability
+  tool: search_knowledge_base
+- text: Yes, CloudSync provides a REST API, but access is available only on the Business
+    and Enterprise plans. You can find more details and documentation at docs.techcorp.com/api.
+    If you have any other questions or need help getting started, let me know!
+test_invalid_error_code_handled_gracefully:
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments:
+    error_code: ZZZZZ-999
+  tool: lookup_error_code
+- text: It looks like the error code "ZZZZZ-999" isn't recognized in our system. Please
+    double-check the code for any typos, or let me know more about what you were doing
+    when the error appeared. If you can provide a screenshot or more details, I'll
+    do my best to help you resolve the issue!
+test_legitimate_query_passes_guardrails:
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments:
+    error_code: E-SYNC-003
+  tool: lookup_error_code
+- text: "Error E-SYNC-003 means the upload failed because the file you're trying to\
+    \ sync is too large. Files over 5GB can only be uploaded if you\u2019re on a Business\
+    \ or Enterprise plan.\n\nHow to resolve this issue:\n- If you\u2019re on a Free\
+    \ or Basic plan, try splitting your file into smaller parts that are under 5GB\
+    \ each.\n- Alternatively, you can upgrade to a Business or Enterprise plan to\
+    \ upload larger files.\n\nIf you need help splitting files or upgrading your plan,\
+    \ let me know and I can guide you through the process!"
+test_routing_cost_under_budget:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I'm sorry to hear you were charged twice. Could you please provide the email
+    address associated with your account? This will help me look up your recent invoices
+    and resolve the issue quickly.
+test_single_handoff_per_query:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: I'm sorry to hear you were charged twice for your subscription. I can help
+    resolve this quickly. Could you please provide the email address associated with
+    your TechCorp account? This will help me look up your invoices and subscription
+    details.
+test_technical_calls_lookup_error_code:
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments:
+    error_code: E-SYNC-003
+  tool: lookup_error_code
+- text: "Error E-SYNC-003 means that your upload failed because the file is too large.\
+    \ In CloudSync, files over 5GB can only be uploaded if you\u2019re on a Business\
+    \ or Enterprise plan. \n\nTo resolve this error, you have two options:\n- Split\
+    \ your file into smaller parts (each under 5GB), or\n- Upgrade your plan to Business\
+    \ or Enterprise to upload larger files.\n\nLet me know if you need help with splitting\
+    \ files or upgrading your plan!"
+test_technical_calls_system_status:
+- arguments: {}
+  tool: transfer_to_technical_agent
+- arguments: {}
+  tool: check_system_status
+- text: "CloudSync is mostly operational right now:\n\n- Sync Service: Fully operational\n\
+    - API Gateway: Fully operational\n- Web Dashboard: Fully operational\n- Integrations:\
+    \ Fully operational\n- Mobile App: Experiencing intermittent latency (degraded\
+    \ performance)\n\nIf you\u2019re having specific issues, especially on the mobile\
+    \ app, it may be related to this temporary latency. Can you share more details\
+    \ about what\u2019s not working for you?"
+test_triage_does_not_answer_directly:
+- arguments: {}
+  tool: transfer_to_billing_agent
+- text: "Our refund policy varies depending on the specific situation. Generally,\
+    \ we review refund requests on a case-by-case basis\u2014especially if there was\
+    \ an accidental charge, technical issue, or if you haven't used the service. For\
+    \ full details or to request a refund, please provide the email address linked\
+    \ to your account, and I can look up your invoices and assist you further.\n\n\
+    If you have a specific charge or invoice in question, let me know!"

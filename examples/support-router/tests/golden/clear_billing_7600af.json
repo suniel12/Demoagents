@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_df463bb63640409a8471ef05f07f736a",
-  "created_at": "2026-02-25T22:57:58.111524Z",
+  "trace_id": "trace_d1ece3e300fe4ba9ab34e0cd79748ce3",
+  "created_at": "2026-02-25T23:39:42.731930Z",
   "spans": [
     {
-      "span_id": "span_364c6869bb3846f58ec5ed00",
-      "parent_span_id": "span_2ad6e5e240454324a3fe4fe0",
+      "span_id": "span_228d9f9aef9c4691ad1c586e",
+      "parent_span_id": "span_5d2b6f3aae6440409fc1f2dd",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.020833685994148254,
+      "duration_ms": 0.02308376133441925,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_01fb55bdc7fa4fdd8242179d",
-      "parent_span_id": "span_2ad6e5e240454324a3fe4fe0",
+      "span_id": "span_eb948307bc144a7db11682d0",
+      "parent_span_id": "span_5d2b6f3aae6440409fc1f2dd",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.1466255635023117,
+      "duration_ms": 0.014042481780052185,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_9958cca73c594883a1713f42",
-      "parent_span_id": "span_2ad6e5e240454324a3fe4fe0",
+      "span_id": "span_69cb7dc176504a569bfef1aa",
+      "parent_span_id": "span_5d2b6f3aae6440409fc1f2dd",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 14,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1046.2308339774609,
-          "timestamp": "2026-02-25T22:57:59.159109Z"
+          "duration_ms": 892.8358312696218,
+          "timestamp": "2026-02-25T23:39:43.625527Z"
         }
       ],
       "total_tokens_in": 296,
       "total_tokens_out": 14,
       "total_cost_usd": 0.0,
-      "duration_ms": 1046.2308339774609,
+      "duration_ms": 892.8358312696218,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_9872e5302d1e4cd58a4dc9e8",
-      "parent_span_id": "span_2ad6e5e240454324a3fe4fe0",
+      "span_id": "span_5288c381a1bf4a968fc924b8",
+      "parent_span_id": "span_5d2b6f3aae6440409fc1f2dd",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.13716518878936768,
+      "duration_ms": 0.14704279601573944,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Billing Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_2ad6e5e240454324a3fe4fe0",
+      "span_id": "span_5d2b6f3aae6440409fc1f2dd",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1047.733748331666,
+      "duration_ms": 894.1337484866381,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_ba474522da9f4d49bbeb77a0",
-      "parent_span_id": "span_851a407e8b9b46afabad8ee2",
+      "span_id": "span_e82814c2b4ff41a6bcc2274b",
+      "parent_span_id": "span_3769284f52a54bd7a80b1c2a",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 264,
-          "tokens_out": 50,
+          "tokens_out": 47,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1442.6632914692163,
-          "timestamp": "2026-02-25T22:58:00.603437Z"
+          "duration_ms": 1320.4563334584236,
+          "timestamp": "2026-02-25T23:39:44.947419Z"
         }
       ],
       "total_tokens_in": 264,
-      "total_tokens_out": 50,
+      "total_tokens_out": 47,
       "total_cost_usd": 0.0,
-      "duration_ms": 1442.6632914692163,
+      "duration_ms": 1320.4563334584236,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_851a407e8b9b46afabad8ee2",
+      "span_id": "span_3769284f52a54bd7a80b1c2a",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Billing Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1444.0716244280338,
+      "duration_ms": 1321.6613754630089,
       "metadata": {
         "handoffs": [],
         "tools": [
           "lookup_invoice",
           "check_plan",
           "process_refund"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 624,
+  "total_tokens": 621,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "I'm sorry for the inconvenience. I can help you resolve the double charge for your CloudSync Pro subscription. Could you please provide your email address associated with your account so I can look up your recent invoices and assist with a refund if needed?"
+    "final_output": "I'm sorry to hear that you were charged twice for your CloudSync Pro subscription. To help you quickly, could you please provide the email address associated with your subscription? I'll look into your recent invoices and resolve this for you."
   }
 }

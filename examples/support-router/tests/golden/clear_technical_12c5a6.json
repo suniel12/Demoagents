@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_d049608fe34b422b92135e0453dd3f31",
-  "created_at": "2026-02-25T22:58:10.420455Z",
+  "trace_id": "trace_62504508966c4e03b971cee91d7074ac",
+  "created_at": "2026-02-25T23:39:57.668143Z",
   "spans": [
     {
-      "span_id": "span_373798d9b9864136a2e30ac9",
-      "parent_span_id": "span_dea7149a23854013ba495532",
+      "span_id": "span_65ce9c1463e64634a45890d5",
+      "parent_span_id": "span_1e088a82594a4aa795869746",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.013459473848342896,
+      "duration_ms": 0.011332333087921143,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_392047049c9044c1ac921d3e",
-      "parent_span_id": "span_dea7149a23854013ba495532",
+      "span_id": "span_2be53005b8f548f49bf79411",
+      "parent_span_id": "span_1e088a82594a4aa795869746",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01416727900505066,
+      "duration_ms": 0.010581687092781067,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_8678af5d6c9b49a4abe8adbd",
-      "parent_span_id": "span_dea7149a23854013ba495532",
+      "span_id": "span_4426ba8bfe72491fbd4dba9f",
+      "parent_span_id": "span_1e088a82594a4aa795869746",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 14,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1035.091083496809,
-          "timestamp": "2026-02-25T22:58:11.456263Z"
+          "duration_ms": 2095.9202088415623,
+          "timestamp": "2026-02-25T23:39:59.764716Z"
         }
       ],
       "total_tokens_in": 295,
       "total_tokens_out": 14,
       "total_cost_usd": 0.0,
-      "duration_ms": 1035.091083496809,
+      "duration_ms": 2095.9202088415623,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_71c646b6dce94039857e98d0",
-      "parent_span_id": "span_dea7149a23854013ba495532",
+      "span_id": "span_953393b34c5b43a49bbee3ba",
+      "parent_span_id": "span_1e088a82594a4aa795869746",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.1450423151254654,
+      "duration_ms": 0.14258362352848053,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Technical Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_dea7149a23854013ba495532",
+      "span_id": "span_1e088a82594a4aa795869746",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 1036.3687500357628,
+      "duration_ms": 2097.111875191331,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_0f6d0139d3074333b18c0fea",
-      "parent_span_id": "span_eed5d377edb74a2a8f9b9d35",
+      "span_id": "span_abfb787fa3724409bbe67c16",
+      "parent_span_id": "span_b19ab362e7ce4ca0ac5184bd",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -148,14 +150,14 @@
           "tokens_out": 12,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 893.7567919492722,
-          "timestamp": "2026-02-25T22:58:12.351359Z"
+          "duration_ms": 774.0080822259188,
+          "timestamp": "2026-02-25T23:40:00.540067Z"
         }
       ],
       "total_tokens_in": 228,
       "total_tokens_out": 12,
       "total_cost_usd": 0.0,
-      "duration_ms": 893.7567919492722,
+      "duration_ms": 774.0080822259188,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,8 +165,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_9ae7b2123c8543259224f626",
-      "parent_span_id": "span_eed5d377edb74a2a8f9b9d35",
+      "span_id": "span_643f0de93bd548b58d946327",
+      "parent_span_id": "span_b19ab362e7ce4ca0ac5184bd",
       "kind": "tool_call",
       "name": "check_system_status",
       "input_data": null,
@@ -177,7 +179,7 @@
           "arguments": {},
           "result": "CloudSync System Status:\n  - Sync Service: ✅ Operational\n  - API Gateway: ✅ Operational\n  - Web Dashboard: ✅ Operational\n  - Mobile App: ⚠️ Degraded (intermittent latency)\n  - Integrations: ✅ Operational\nLast updated: 2024-02-15T10:30:00Z",
           "error": null,
-          "timestamp": "2026-02-25T22:58:12.351871+00:00",
+          "timestamp": "2026-02-25T23:40:00.541042+00:00",
           "duration_ms": 0.0
         }
       ],
@@ -185,7 +187,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.2653747797012329,
+      "duration_ms": 0.49520842730998993,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -193,8 +195,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_0778fe2be10e41e797c6e7f6",
-      "parent_span_id": "span_eed5d377edb74a2a8f9b9d35",
+      "span_id": "span_7d89fec5967d470da7acc623",
+      "parent_span_id": "span_b19ab362e7ce4ca0ac5184bd",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -209,17 +211,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 319,
-          "tokens_out": 92,
+          "tokens_out": 93,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1568.8383765518665,
-          "timestamp": "2026-02-25T22:58:13.921082Z"
+          "duration_ms": 1585.2427911013365,
+          "timestamp": "2026-02-25T23:40:02.127002Z"
         }
       ],
       "total_tokens_in": 319,
-      "total_tokens_out": 92,
+      "total_tokens_out": 93,
       "total_cost_usd": 0.0,
-      "duration_ms": 1568.8383765518665,
+      "duration_ms": 1585.2427911013365,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -227,7 +229,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_eed5d377edb74a2a8f9b9d35",
+      "span_id": "span_b19ab362e7ce4ca0ac5184bd",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Technical Agent",
@@ -240,13 +242,15 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 2464.329792186618,
+      "duration_ms": 2361.7132920771837,
       "metadata": {
         "handoffs": [],
         "tools": [
           "check_system_status",
           "lookup_error_code"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -255,7 +259,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 960,
+  "total_tokens": 961,
   "total_duration_ms": 0.0,
   "total_llm_calls": 3,
   "total_tool_calls": 1,
@@ -264,6 +268,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "CloudSync is currently up and running:\n\n- Sync Service: Operational\n- API Gateway: Operational\n- Web Dashboard: Operational\n- Integrations: Operational\n\nHowever, the Mobile App is experiencing intermittent latency, which may cause delays or slower performance for mobile users.\n\nIf you’re having issues unrelated to the mobile app or still encountering problems, please let me know more details (such as any error codes or your platform) so I can help further!"
+    "final_output": "The CloudSync service is currently operational for most features:\n\n- Sync Service: Operational\n- API Gateway: Operational\n- Web Dashboard: Operational\n- Integrations: Operational\n- Mobile App: Experiencing intermittent latency (some users may notice slow responses)\n\nIf you're using the mobile app, you might notice occasional slowness, but the other services should be working normally. Let me know if you're having a specific issue—I'm here to help!"
   }
 }

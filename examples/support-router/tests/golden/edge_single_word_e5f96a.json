@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_c542b0fb6d514ca7a70414b839d7f7ea",
-  "created_at": "2026-02-25T22:58:44.910234Z",
+  "trace_id": "trace_0a526372e9114447a5dfe8291508f630",
+  "created_at": "2026-02-25T23:40:36.661537Z",
   "spans": [
     {
-      "span_id": "span_52f9b29cd25a406dbca4bc75",
-      "parent_span_id": "span_14b1f21b4b1a41778d41561a",
+      "span_id": "span_737dbaa3a26d4754a127f24c",
+      "parent_span_id": "span_4d881274ce9c49ba95b16b51",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.014249235391616821,
+      "duration_ms": 0.012207776308059692,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_f0a3f1a5fe614a1d85801d94",
-      "parent_span_id": "span_14b1f21b4b1a41778d41561a",
+      "span_id": "span_04dae02e8441449faee74710",
+      "parent_span_id": "span_4d881274ce9c49ba95b16b51",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.009125098586082458,
+      "duration_ms": 0.009832903742790222,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d59f5b886eef4dde936d4465",
-      "parent_span_id": "span_14b1f21b4b1a41778d41561a",
+      "span_id": "span_86cb1c8760e54dd4a7b647a2",
+      "parent_span_id": "span_4d881274ce9c49ba95b16b51",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 14,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 727.1116673946381,
-          "timestamp": "2026-02-25T22:58:45.637982Z"
+          "duration_ms": 1144.7385009378195,
+          "timestamp": "2026-02-25T23:40:37.806963Z"
         }
       ],
       "total_tokens_in": 287,
       "total_tokens_out": 14,
       "total_cost_usd": 0.0,
-      "duration_ms": 727.1116673946381,
+      "duration_ms": 1144.7385009378195,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_6efc1b6504514aafa3a54803",
-      "parent_span_id": "span_14b1f21b4b1a41778d41561a",
+      "span_id": "span_f5eefb9f6242401bafc7dc5c",
+      "parent_span_id": "span_4d881274ce9c49ba95b16b51",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.10379217565059662,
+      "duration_ms": 0.11024996638298035,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Billing Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_14b1f21b4b1a41778d41561a",
+      "span_id": "span_4d881274ce9c49ba95b16b51",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 728.0767913907766,
+      "duration_ms": 1145.7603331655264,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_f74a5ec1e3004f1faec07b4a",
-      "parent_span_id": "span_92f98d029b3e4c0494dc67d5",
+      "span_id": "span_3c4517ec242a4645baf80ce3",
+      "parent_span_id": "span_601f298cd1994093a46a92ed",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 255,
-          "tokens_out": 20,
+          "tokens_out": 21,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 859.8471656441689,
-          "timestamp": "2026-02-25T22:58:46.498764Z"
+          "duration_ms": 912.703750655055,
+          "timestamp": "2026-02-25T23:40:38.720689Z"
         }
       ],
       "total_tokens_in": 255,
-      "total_tokens_out": 20,
+      "total_tokens_out": 21,
       "total_cost_usd": 0.0,
-      "duration_ms": 859.8471656441689,
+      "duration_ms": 912.703750655055,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_92f98d029b3e4c0494dc67d5",
+      "span_id": "span_601f298cd1994093a46a92ed",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Billing Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 860.6139998883009,
+      "duration_ms": 913.9456655830145,
       "metadata": {
         "handoffs": [],
         "tools": [
           "lookup_invoice",
           "check_plan",
           "process_refund"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 576,
+  "total_tokens": 577,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "Could you please provide your email address? I'll look up your most recent invoices for you."
+    "final_output": "Could you please provide your email address? I’ll look up your most recent invoice for you."
   }
 }

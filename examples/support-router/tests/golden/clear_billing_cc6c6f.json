@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_c9fdc32e45ba4660bce1e33d539c560a",
-  "created_at": "2026-02-25T22:58:02.210480Z",
+  "trace_id": "trace_cdb845e4982141eb9111bfe060e344dd",
+  "created_at": "2026-02-25T23:39:47.877485Z",
   "spans": [
     {
-      "span_id": "span_221a54816dc94568be46ae70",
-      "parent_span_id": "span_cdc35a22a4af4bf99a0bd774",
+      "span_id": "span_387dcfe44b30431b914fcecc",
+      "parent_span_id": "span_c97c445eb5464898bf88bdfd",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.012749806046485901,
+      "duration_ms": 0.01245737075805664,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_928208cd97a64072a9e49020",
-      "parent_span_id": "span_cdc35a22a4af4bf99a0bd774",
+      "span_id": "span_e5c510f6c09f4bac86e9c3bb",
+      "parent_span_id": "span_c97c445eb5464898bf88bdfd",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.012999400496482849,
+      "duration_ms": 0.011457130312919617,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_ad519163e25f4715ba5f4d48",
-      "parent_span_id": "span_cdc35a22a4af4bf99a0bd774",
+      "span_id": "span_cdeb9dfdd6a845d38a1cff29",
+      "parent_span_id": "span_c97c445eb5464898bf88bdfd",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 14,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 770.7356661558151,
-          "timestamp": "2026-02-25T22:58:02.981869Z"
+          "duration_ms": 781.0165826231241,
+          "timestamp": "2026-02-25T23:39:48.659179Z"
         }
       ],
       "total_tokens_in": 295,
       "total_tokens_out": 14,
       "total_cost_usd": 0.0,
-      "duration_ms": 770.7356661558151,
+      "duration_ms": 781.0165826231241,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_ba4ea8031a134439aaacd2e9",
-      "parent_span_id": "span_cdc35a22a4af4bf99a0bd774",
+      "span_id": "span_0b93cc31c51849d1bbe1b1f4",
+      "parent_span_id": "span_c97c445eb5464898bf88bdfd",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.09187497198581696,
+      "duration_ms": 0.11412426829338074,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Billing Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_cdc35a22a4af4bf99a0bd774",
+      "span_id": "span_c97c445eb5464898bf88bdfd",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 771.7039175331593,
+      "duration_ms": 782.092085108161,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_d7ba17798ed34611bd8700b6",
-      "parent_span_id": "span_189b985f553342e78ba2e0b7",
+      "span_id": "span_fb6f0851ab3e416987e9f715",
+      "parent_span_id": "span_1a6fcb9969d144fcb697f36d",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 263,
-          "tokens_out": 45,
+          "tokens_out": 46,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 892.0577093958855,
-          "timestamp": "2026-02-25T22:58:03.874856Z"
+          "duration_ms": 1927.1046668291092,
+          "timestamp": "2026-02-25T23:39:50.587471Z"
         }
       ],
       "total_tokens_in": 263,
-      "total_tokens_out": 45,
+      "total_tokens_out": 46,
       "total_cost_usd": 0.0,
-      "duration_ms": 892.0577093958855,
+      "duration_ms": 1927.1046668291092,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_189b985f553342e78ba2e0b7",
+      "span_id": "span_1a6fcb9969d144fcb697f36d",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Billing Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 892.7720412611961,
+      "duration_ms": 1928.1221255660057,
       "metadata": {
         "handoffs": [],
         "tools": [
           "lookup_invoice",
           "check_plan",
           "process_refund"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 617,
+  "total_tokens": 618,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "I can help you with upgrading from the Pro to the Business plan! Could you please provide your email address associated with your account? This will allow me to look up your current subscription and process the upgrade for you."
+    "final_output": "I can help you upgrade from the CloudSync Pro plan to the Business plan. Could you please provide the email address associated with your TechCorp account? This will help me locate your current subscription and process the upgrade smoothly."
   }
 }

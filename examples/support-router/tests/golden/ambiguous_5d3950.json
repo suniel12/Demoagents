@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_5587b6b5402c4330882c0d40179e6dfd",
-  "created_at": "2026-02-25T22:58:30.112226Z",
+  "trace_id": "trace_545a4bcf609945c0b3942fdf1b75e894",
+  "created_at": "2026-02-25T23:40:22.530784Z",
   "spans": [
     {
-      "span_id": "span_0455cd01c0634d83a988e4a0",
-      "parent_span_id": "span_30c0afb7a5c14f5abf7dcc23",
+      "span_id": "span_7485a6ba8fde45668443c5e4",
+      "parent_span_id": "span_388df0b80e604fd9be10c785",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.011710450053215027,
+      "duration_ms": 0.01270882785320282,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_55b3c37f9e55458a88fca6f0",
-      "parent_span_id": "span_30c0afb7a5c14f5abf7dcc23",
+      "span_id": "span_ff1638588b164a348f1981ec",
+      "parent_span_id": "span_388df0b80e604fd9be10c785",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01154281198978424,
+      "duration_ms": 0.012706965208053589,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_65402cc4545f4b059907cd38",
-      "parent_span_id": "span_30c0afb7a5c14f5abf7dcc23",
+      "span_id": "span_3326146cbc7d4030874c6902",
+      "parent_span_id": "span_388df0b80e604fd9be10c785",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 13,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 832.5526677072048,
-          "timestamp": "2026-02-25T22:58:30.945384Z"
+          "duration_ms": 950.3084570169449,
+          "timestamp": "2026-02-25T23:40:23.481764Z"
         }
       ],
       "total_tokens_in": 294,
       "total_tokens_out": 13,
       "total_cost_usd": 0.0,
-      "duration_ms": 832.5526677072048,
+      "duration_ms": 950.3084570169449,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_cc18293aa9c842dbb7f08874",
-      "parent_span_id": "span_30c0afb7a5c14f5abf7dcc23",
+      "span_id": "span_0e9050f7d66a48e586d5534a",
+      "parent_span_id": "span_388df0b80e604fd9be10c785",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.0806264579296112,
+      "duration_ms": 0.10070949792861938,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "General Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_30c0afb7a5c14f5abf7dcc23",
+      "span_id": "span_388df0b80e604fd9be10c785",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 833.4077503532171,
+      "duration_ms": 951.3909164816141,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_355e14bd8c504d878bb4ec05",
-      "parent_span_id": "span_f2b1e2c3eaa0468198597848",
+      "span_id": "span_521d609b1289487eadffae3d",
+      "parent_span_id": "span_14961df7a8a84beeb5cdd07f",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -148,14 +150,14 @@
           "tokens_out": 25,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 1036.111332476139,
-          "timestamp": "2026-02-25T22:58:31.982323Z"
+          "duration_ms": 1206.1075009405613,
+          "timestamp": "2026-02-25T23:40:24.688964Z"
         }
       ],
       "total_tokens_in": 211,
       "total_tokens_out": 25,
       "total_cost_usd": 0.0,
-      "duration_ms": 1036.111332476139,
+      "duration_ms": 1206.1075009405613,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,8 +165,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_63685bcd5f7a415ea732d1f7",
-      "parent_span_id": "span_f2b1e2c3eaa0468198597848",
+      "span_id": "span_ed9b75b677bb41b1a2ed0a24",
+      "parent_span_id": "span_14961df7a8a84beeb5cdd07f",
       "kind": "tool_call",
       "name": "search_knowledge_base",
       "input_data": null,
@@ -175,11 +177,11 @@
         {
           "tool_name": "search_knowledge_base",
           "arguments": {
-            "query": "difference between CloudSync Pro and CloudSync Business"
+            "query": "Difference between CloudSync Pro and CloudSync Business"
           },
-          "result": "No knowledge base articles found for 'difference between CloudSync Pro and CloudSync Business'. Try different keywords.",
+          "result": "No knowledge base articles found for 'Difference between CloudSync Pro and CloudSync Business'. Try different keywords.",
           "error": null,
-          "timestamp": "2026-02-25T22:58:31.983295+00:00",
+          "timestamp": "2026-02-25T23:40:24.689713+00:00",
           "duration_ms": 0.0
         }
       ],
@@ -187,7 +189,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.6500426679849625,
+      "duration_ms": 0.3516674041748047,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -195,8 +197,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_bb141f8776db436297b914bd",
-      "parent_span_id": "span_f2b1e2c3eaa0468198597848",
+      "span_id": "span_3b9c00c4e77c4c59a354b362",
+      "parent_span_id": "span_14961df7a8a84beeb5cdd07f",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -214,14 +216,14 @@
           "tokens_out": 114,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 3423.113875091076,
-          "timestamp": "2026-02-25T22:58:35.406805Z"
+          "duration_ms": 2164.6416261792183,
+          "timestamp": "2026-02-25T23:40:26.854906Z"
         }
       ],
       "total_tokens_in": 267,
       "total_tokens_out": 114,
       "total_cost_usd": 0.0,
-      "duration_ms": 3423.113875091076,
+      "duration_ms": 2164.6416261792183,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -229,7 +231,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_f2b1e2c3eaa0468198597848",
+      "span_id": "span_14961df7a8a84beeb5cdd07f",
       "parent_span_id": null,
       "kind": "agent",
       "name": "General Agent",
@@ -242,12 +244,14 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 4461.2526670098305,
+      "duration_ms": 3372.794123366475,
       "metadata": {
         "handoffs": [],
         "tools": [
           "search_knowledge_base"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -265,6 +269,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "Here’s a summary of the key differences between CloudSync Pro and CloudSync Business:\n\n- Storage: Pro includes 100GB, while Business offers 1TB.\n- Integrations: Pro allows up to 5 integrations; Business supports unlimited integrations.\n- Support: Pro comes with email support. Business gives you priority support.\n- Extra Features: Business also has team management features, which Pro does not include.\n\nIf you need more advanced collaboration or larger storage, Business is the better choice. Let me know if you need a detailed comparison or have specific requirements!"
+    "final_output": "Here’s a quick comparison between CloudSync Pro and CloudSync Business:\n\n- CloudSync Pro ($49/mo): \n  - 100GB storage\n  - Up to 5 integrations\n  - Email support\n\n- CloudSync Business ($199/mo): \n  - 1TB storage\n  - Unlimited integrations\n  - Priority support\n  - Team management features\n\nCloudSync Business offers significantly more storage, unlimited integrations, faster support, and additional team management tools compared to Pro. If you need scalability and advanced features, Business is the better option."
   }
 }

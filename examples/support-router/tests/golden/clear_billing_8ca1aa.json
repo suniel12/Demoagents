@@ -1,10 +1,10 @@
 {
-  "trace_id": "trace_c146f04a51cf4a7cbefd9c2dc60cac90",
-  "created_at": "2026-02-25T22:58:00.642877Z",
+  "trace_id": "trace_eb0636be79254cee942d4c295d3b5da1",
+  "created_at": "2026-02-25T23:39:44.981913Z",
   "spans": [
     {
-      "span_id": "span_f8103599a4b04843a6ab7f32",
-      "parent_span_id": "span_9bd9884e340c4c76b3433f66",
+      "span_id": "span_9e0d884c14124bd9adf7464a",
+      "parent_span_id": "span_1a3b84b578e74ee6a9136bbc",
       "kind": "guardrail",
       "name": "relevance_check",
       "input_data": null,
@@ -16,7 +16,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.01925043761730194,
+      "duration_ms": 0.011831521987915039,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -24,8 +24,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_557668d21fde412c960b62c5",
-      "parent_span_id": "span_9bd9884e340c4c76b3433f66",
+      "span_id": "span_c459ee906bcb4c0db6884680",
+      "parent_span_id": "span_1a3b84b578e74ee6a9136bbc",
       "kind": "guardrail",
       "name": "pii_check",
       "input_data": null,
@@ -37,7 +37,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.013582408428192139,
+      "duration_ms": 0.01037493348121643,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -45,8 +45,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_192e9a6919634daf9fc3b18a",
-      "parent_span_id": "span_9bd9884e340c4c76b3433f66",
+      "span_id": "span_434fc7b0b44546e1941e721b",
+      "parent_span_id": "span_1a3b84b578e74ee6a9136bbc",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -64,14 +64,14 @@
           "tokens_out": 14,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 723.6287072300911,
-          "timestamp": "2026-02-25T22:58:01.367235Z"
+          "duration_ms": 991.116501390934,
+          "timestamp": "2026-02-25T23:39:45.973682Z"
         }
       ],
       "total_tokens_in": 295,
       "total_tokens_out": 14,
       "total_cost_usd": 0.0,
-      "duration_ms": 723.6287072300911,
+      "duration_ms": 991.116501390934,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -79,8 +79,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_2f0bf51d694b4412a1b56f4a",
-      "parent_span_id": "span_9bd9884e340c4c76b3433f66",
+      "span_id": "span_2c2458f03a9b4a11a2be5499",
+      "parent_span_id": "span_1a3b84b578e74ee6a9136bbc",
       "kind": "handoff",
       "name": "handoff",
       "input_data": null,
@@ -92,7 +92,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 0.07962435483932495,
+      "duration_ms": 0.1472923904657364,
       "metadata": {},
       "from_agent": "Triage Agent",
       "to_agent": "Billing Agent",
@@ -100,7 +100,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_9bd9884e340c4c76b3433f66",
+      "span_id": "span_1a3b84b578e74ee6a9136bbc",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Triage Agent",
@@ -113,7 +113,7 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 724.5123740285635,
+      "duration_ms": 992.30020865798,
       "metadata": {
         "handoffs": [
           "Billing Agent",
@@ -121,7 +121,9 @@
           "Account Agent",
           "General Agent"
         ],
-        "tools": []
+        "tools": [],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -129,8 +131,8 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_98a856a9f1a842ec9491b066",
-      "parent_span_id": "span_4b9e4056c7084b7e91fcb761",
+      "span_id": "span_cfb98279cdaa4f7eae91e9f7",
+      "parent_span_id": "span_290cfc01e5e34f768f31770c",
       "kind": "llm_call",
       "name": "response",
       "input_data": null,
@@ -145,17 +147,17 @@
           "input_messages": [],
           "output_text": "",
           "tokens_in": 263,
-          "tokens_out": 39,
+          "tokens_out": 44,
           "stop_reason": null,
           "cost_usd": 0.0,
-          "duration_ms": 805.5194597691298,
-          "timestamp": "2026-02-25T22:58:02.173474Z"
+          "duration_ms": 1873.1130827218294,
+          "timestamp": "2026-02-25T23:39:47.848148Z"
         }
       ],
       "total_tokens_in": 263,
-      "total_tokens_out": 39,
+      "total_tokens_out": 44,
       "total_cost_usd": 0.0,
-      "duration_ms": 805.5194597691298,
+      "duration_ms": 1873.1130827218294,
       "metadata": {},
       "from_agent": null,
       "to_agent": null,
@@ -163,7 +165,7 @@
       "guardrail_triggered": false
     },
     {
-      "span_id": "span_4b9e4056c7084b7e91fcb761",
+      "span_id": "span_290cfc01e5e34f768f31770c",
       "parent_span_id": null,
       "kind": "agent",
       "name": "Billing Agent",
@@ -176,14 +178,16 @@
       "total_tokens_in": 0,
       "total_tokens_out": 0,
       "total_cost_usd": 0.0,
-      "duration_ms": 806.473707780242,
+      "duration_ms": 1873.982334509492,
       "metadata": {
         "handoffs": [],
         "tools": [
           "lookup_invoice",
           "check_plan",
           "process_refund"
-        ]
+        ],
+        "instructions": "",
+        "handoff_description": ""
       },
       "from_agent": null,
       "to_agent": null,
@@ -192,7 +196,7 @@
     }
   ],
   "total_cost_usd": 0.0,
-  "total_tokens": 611,
+  "total_tokens": 616,
   "total_duration_ms": 0.0,
   "total_llm_calls": 2,
   "total_tool_calls": 0,
@@ -201,6 +205,6 @@
   "framework": "openai_agents",
   "graph_state": {},
   "metadata": {
-    "final_output": "I'd be happy to help with your refund request! Could you please provide the email address associated with your TechCorp account? This will help me locate your recent invoice and process the refund."
+    "final_output": "I'd be happy to help you with your refund request for last month's charge. Could you please provide the email address associated with your account? This will help me look up your recent invoice and process your request quickly."
   }
 }
