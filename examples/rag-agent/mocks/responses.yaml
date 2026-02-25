@@ -95,14 +95,64 @@
 
 - query_pattern: "weather in Austin"
   llm_responses:
-    - role: tool_call
-      tool: retrieve_docs
-      args: {"query": "Austin weather"}
     - role: assistant
       content: "I don't have information about the current weather in Austin."
+  retrieval_results: []
+  cost: 0.0010
+  tokens: {prompt: 100, completion: 25}
+
+- query_pattern: "get money back"
+  llm_responses:
+    - role: tool_call
+      tool: retrieve_docs
+      args: {"query": "get money back"}
+    - role: grade
+      content: '{"binary_score": "no"}'
+    - role: rewrite
+      content: "refund policy return money"
+    - role: tool_call
+      tool: retrieve_docs
+      args: {"query": "refund policy return money"}
+    - role: assistant
+      content: "Enterprise customers are eligible for a full refund within 30 days. Startup plan is 14 days."
   retrieval_results:
-    - doc_id: "company/about-chunk-1"
-      score: 0.60
-      text: "NovaCorp founded 2019. HQ in Austin, TX. 450 employees."
-  cost: 0.0032
-  tokens: {prompt: 650, completion: 30}
+    - doc_id: "policies/refund-policy-chunk-1"
+      score: 0.75
+      text: "Enterprise customers: full refund within 30 days..."
+  cost: 0.0090
+  tokens: {prompt: 1400, completion: 120}
+
+- query_pattern: "CEO's car"
+  llm_responses:
+    - role: tool_call
+      tool: retrieve_docs
+      args: {"query": "CEO car color"}
+    - role: grade
+      content: '{"binary_score": "no"}'
+    - role: rewrite
+      content: "CEO Sarah Chen car color"
+    - role: tool_call
+      tool: retrieve_docs
+      args: {"query": "CEO Sarah Chen car color"}
+    - role: assistant
+      content: "I don't have information about the CEO's car in the knowledge base."
+  retrieval_results:
+    - doc_id: "company/team-chunk-1"
+      score: 0.35
+      text: "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel."
+  cost: 0.0085
+  tokens: {prompt: 1200, completion: 90}
+
+- query_pattern: "AWS load balancer"
+  llm_responses:
+    - role: tool_call
+      tool: retrieve_docs
+      args: {"query": "AWS load balancer enterprise configuration"}
+    - role: assistant
+      content: "I don't have information about configuring AWS load balancers in the provided context."
+  retrieval_results:
+    - doc_id: "products/features-chunk-1"
+      score: 0.30
+      text: "Enterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics."
+  cost: 0.0035
+  tokens: {prompt: 750, completion: 40}

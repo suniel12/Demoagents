@@ -37,14 +37,22 @@ jobs:
       - name: Install devagent in editable mode
         run: pip install -e .
 
-      - name: Run deterministic AgentCI tests (no real API calls)
-        # These always run — they use mocked tools and a mocked LLM client
+      - name: Run deterministic AgentCI tests (dev-agent)
         run: |
           pytest tests/ -v -m "not live" \
             --tb=short \
             2>&1 | tee agentci-test-results.txt
         env:
-          # Mocked key — tests that need a real key will auto-skip
+          ANTHROPIC_API_KEY: sk-ant-dummy-key-for-testing
+
+      - name: Run deterministic AgentCI tests (rag-agent)
+        run: |
+          cd ../rag-agent
+          pytest tests/ -v \
+            --tb=short \
+            2>&1 | tee rag-test-results.txt
+        env:
+          OPENAI_API_KEY: sk-dummy-openai-key
           ANTHROPIC_API_KEY: sk-ant-dummy-key-for-testing
 
       - name: Run LLM-as-judge tests (requires API key secret)

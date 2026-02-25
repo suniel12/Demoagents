@@ -7,8 +7,7 @@ test-live:
 	pytest tests/test_rag.py -v --live
 
 baseline:
-	# Assume the agentci CLI has a baseline save command
-	agentci baseline save --name "rag-v1-gpt4o-mini" --queries tests/golden_queries.json
+	python save_baseline.py
 
 compare:
 	# Run tests specifying the baseline to compare against

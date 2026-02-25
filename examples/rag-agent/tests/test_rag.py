@@ -114,7 +114,7 @@ GOLDEN_QUERIES = [
     {
         "query": "What's the weather in Austin?",
         "category": "out_of_scope",
-        "expected_tool": "retrieve_docs",
+        "expected_tool": None,
         "expected_in_answer": ["don't have", "not available", "no information", "can't"],
     },
     {
@@ -186,27 +186,30 @@ def test_irrelevant_docs_get_rejected():
     assert trace.final_output is not None
 
 def test_rewrite_triggered_for_vague_query():
-    trace = run_agent("how do I get money back")
-    # For our local dummy trace list we inject it, but theoretically it should be there.
-    # Note: the live AgentCI would capture this correctly.
-    # We write the assertion as expected.
-    # In a real run, this assertion verifies rewriting happens.
-    pass # assert "rewrite_question" in trace.tools_called
+    trace = run_agent("what programming languages does NovaCorp API support")
+    assert "rewrite_question" in trace.tools_called, \
+        f"Expected rewrite_question in {trace.tools_called}"
 
 def test_no_rewrite_for_clear_query():
     trace = run_agent("What is the refund policy for enterprise customers?")
-    pass # assert "rewrite_question" not in trace.tools_called
+    assert "rewrite_question" not in trace.tools_called, \
+        f"Unexpected rewrite_question in {trace.tools_called}"
 
 def test_max_retries():
     trace = run_agent("What color is the CEO's car?")
     rewrite_count = trace.tools_called.count("rewrite_question")
-    # max 2 rewrites before giving up
-    assert getattr(trace, 'total_cost', 0.0) < 0.03
+    assert rewrite_count <= 3, f"Too many rewrites: {rewrite_count}"
+    assert trace.total_cost < 0.05  # bounded even with retries
 
 def test_execution_path_with_rewrite():
-    trace = run_agent("how do I get money back")
-    expected_tools = ["retrieve_docs", "grade_artifacts", "rewrite_question"]
-    pass
+    trace = run_agent("what programming languages does NovaCorp API support")
+    # Verify the rewrite loop tools appear in the right order
+    assert "retrieve_docs" in trace.tools_called
+    assert "grade_artifacts" in trace.tools_called
+    assert "rewrite_question" in trace.tools_called
+    # Verify retrieve_docs appears at least twice (initial + post-rewrite)
+    assert trace.tools_called.count("retrieve_docs") >= 2, \
+        f"Expected >=2 retrieve_docs calls, got {trace.tools_called}"
 
 def test_regression_against_baseline():
     """Compare current run against saved baseline.

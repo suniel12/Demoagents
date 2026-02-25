@@ -1,101 +1,4292 @@
 {
   "What is the refund policy for enterprise customers?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "Enterprise customers are eligible for a full refund within 30 days.",
+    "trace_id": "220a82d607ab4ee9",
+    "created_at": "2026-02-25T14:28:53.492657Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "Enterprise customers are eligible for a full refund within 30 days."
+        "span_id": "6120bc3b684f4483",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "What is the refund policy for enterprise customers?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "9711f7fc-a550-4bd2-ba61-6064a2ac3265"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 18,
+                  "prompt_tokens": 55,
+                  "total_tokens": 73,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAfOFvleiRNKlpTxbk4h7ZGouVa",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9533-eb4c-7a11-864c-d9dbc04a6acd-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "refund policy for enterprise customers"
+                  },
+                  "id": "call_DiXMfv8i6AuPCythAzcNoaUB",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 55,
+                "output_tokens": 18,
+                "total_tokens": 73,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "Enterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "149922dc-bc8c-4028-99ad-d8c81e5eab2b",
+              "tool_call_id": "call_DiXMfv8i6AuPCythAzcNoaUB",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "6f3e69c7-2188-421b-a05b-aca05250b9fd",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "The refund policy for enterprise customers is a full refund within 30 days.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 15,
+                  "prompt_tokens": 167,
+                  "total_tokens": 182,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAhaYPGJqM4qIVZANbDNr1VDdHb",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9533-f1f0-7670-b720-ed3061fb97dd-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 167,
+                "output_tokens": 15,
+                "total_tokens": 182,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "refund policy for enterprise customers"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:28:56.303167+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:28:56.303198+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1058.9795000851154,
+            "timestamp": "2026-02-25T14:28:54.768068Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 890.7201662659645,
+            "timestamp": "2026-02-25T14:28:56.299628Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 2595.5619998276234,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "What is the refund policy for enterprise customers?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "9711f7fc-a550-4bd2-ba61-6064a2ac3265"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 18,
+              "prompt_tokens": 55,
+              "total_tokens": 73,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAfOFvleiRNKlpTxbk4h7ZGouVa",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9533-eb4c-7a11-864c-d9dbc04a6acd-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "refund policy for enterprise customers"
+              },
+              "id": "call_DiXMfv8i6AuPCythAzcNoaUB",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 55,
+            "output_tokens": 18,
+            "total_tokens": 73,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "Enterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "149922dc-bc8c-4028-99ad-d8c81e5eab2b",
+          "tool_call_id": "call_DiXMfv8i6AuPCythAzcNoaUB",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "6f3e69c7-2188-421b-a05b-aca05250b9fd",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "The refund policy for enterprise customers is a full refund within 30 days.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 15,
+              "prompt_tokens": 167,
+              "total_tokens": 182,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAhaYPGJqM4qIVZANbDNr1VDdHb",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9533-f1f0-7670-b720-ed3061fb97dd-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 167,
+            "output_tokens": 15,
+            "total_tokens": 182,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "Compare enterprise and business plan features.": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "The Enterprise and Business plans have several key differences in features and pricing:\n\n### Features:\n- **Single Sign-On (SSO)**: Available in the Enterprise plan but not mentioned for the Business plan.\n- **Audit Logs**: Included in the Enterprise plan; not specified for the Business plan.\n- **Support**: Enterprise plan offers dedicated support, while the Business plan provides only email support.\n- **Analytics**: The Business plan includes basic analytics, whereas the Enterprise plan does not specify analytics features, likely indicating more advanced options are available but not explicitly listed.\n\n### Refund Policy:\n- **Enterprise Plan**: Full refund within 30 days.\n- **Business Plan**: No specific refund period mentioned, but it typically aligns with the refund policies of similar plans.\n\n### Pricing:\n- **Enterprise Plan**: $499/month\n- **Business Plan**: $199/month\n\n### Uptime SLA:\n- **Enterprise Plan**: 99.9% uptime SLA\n- **Business Plan**: 99.5% uptime SLA\n- **Free Tier**: No SLA guaranteed\n\nIn summary, the Enterprise plan provides more advanced features, better uptime SLA, and dedicated support compared to the Business plan, making it more suitable for larger organizations or those with greater needs. The Business plan is more affordable but offers limited features and only email support.",
+    "trace_id": "5775b983b49a4630",
+    "created_at": "2026-02-25T14:28:56.303661Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "The Enterprise and Business plans have several key differences in features and pricing:\n\n### Features:\n- **Single Sign-On (SSO)**: Available in the Enterprise plan but not mentioned for the Business plan.\n- **Audit Logs**: Included in the Enterprise plan; not specified for the Business plan.\n- **Support**: Enterprise plan offers dedicated support, while the Business plan provides only email support.\n- **Analytics**: The Business plan includes basic analytics, whereas the Enterprise plan does not specify analytics features, likely indicating more advanced options are available but not explicitly listed.\n\n### Refund Policy:\n- **Enterprise Plan**: Full refund within 30 days.\n- **Business Plan**: No specific refund period mentioned, but it typically aligns with the refund policies of similar plans.\n\n### Pricing:\n- **Enterprise Plan**: $499/month\n- **Business Plan**: $199/month\n\n### Uptime SLA:\n- **Enterprise Plan**: 99.9% uptime SLA\n- **Business Plan**: 99.5% uptime SLA\n- **Free Tier**: No SLA guaranteed\n\nIn summary, the Enterprise plan provides more advanced features, better uptime SLA, and dedicated support compared to the Business plan, making it more suitable for larger organizations or those with greater needs. The Business plan is more affordable but offers limited features and only email support."
+        "span_id": "11c5bd23ff464c1d",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "Compare enterprise and business plan features.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "ea4247ea-ec98-4a61-8ec9-ec18f71aad0b"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 48,
+                  "prompt_tokens": 53,
+                  "total_tokens": 101,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAinvLtkJnQJz00PeWbFxgHfiTe",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9533-f571-7873-9ae9-75c17c7d6158-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "enterprise plan features"
+                  },
+                  "id": "call_1roZv1ym9CUUK4tYiq9bleRh",
+                  "type": "tool_call"
+                },
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "business plan features"
+                  },
+                  "id": "call_ViH8SU7fnOMaBLIYMjrrQVox",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 53,
+                "output_tokens": 48,
+                "total_tokens": 101,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "Enterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "c2a040e3-f213-49c9-b173-51c052175bbe",
+              "tool_call_id": "call_1roZv1ym9CUUK4tYiq9bleRh",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "e1f8f627-1ba1-4761-b2c3-3489df8ae785",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "The Enterprise plan includes features such as SSO (Single Sign-On), audit logs, and dedicated support. In contrast, the Business plan offers email support and basic analytics. \n\nAdditionally, the Enterprise plan provides a 99.9% uptime SLA, while the Business plan has a 99.5% uptime SLA.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 64,
+                  "prompt_tokens": 165,
+                  "total_tokens": 229,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAk5vnsI6w7GtdEVOOIO9g0SETQ",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9533-fc6d-73c0-b057-504fe9f715b1-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 165,
+                "output_tokens": 64,
+                "total_tokens": 229,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "enterprise plan features"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:28:59.981990+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "business plan features"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:28:59.982001+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:28:59.982016+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1214.7432919591665,
+            "timestamp": "2026-02-25T14:28:57.520083Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1885.3449169546366,
+            "timestamp": "2026-02-25T14:28:59.979303Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 3678.2582495361567,
+    "total_llm_calls": 2,
+    "total_tool_calls": 3,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "Compare enterprise and business plan features.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "ea4247ea-ec98-4a61-8ec9-ec18f71aad0b"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 48,
+              "prompt_tokens": 53,
+              "total_tokens": 101,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAinvLtkJnQJz00PeWbFxgHfiTe",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9533-f571-7873-9ae9-75c17c7d6158-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "enterprise plan features"
+              },
+              "id": "call_1roZv1ym9CUUK4tYiq9bleRh",
+              "type": "tool_call"
+            },
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "business plan features"
+              },
+              "id": "call_ViH8SU7fnOMaBLIYMjrrQVox",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 53,
+            "output_tokens": 48,
+            "total_tokens": 101,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "Enterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "c2a040e3-f213-49c9-b173-51c052175bbe",
+          "tool_call_id": "call_1roZv1ym9CUUK4tYiq9bleRh",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "e1f8f627-1ba1-4761-b2c3-3489df8ae785",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "The Enterprise plan includes features such as SSO (Single Sign-On), audit logs, and dedicated support. In contrast, the Business plan offers email support and basic analytics. \n\nAdditionally, the Enterprise plan provides a 99.9% uptime SLA, while the Business plan has a 99.5% uptime SLA.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 64,
+              "prompt_tokens": 165,
+              "total_tokens": 229,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAk5vnsI6w7GtdEVOOIO9g0SETQ",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9533-fc6d-73c0-b057-504fe9f715b1-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 165,
+            "output_tokens": 64,
+            "total_tokens": 229,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "What's the CEO's favorite restaurant?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "The provided context does not include information about the CEO's favorite restaurant. Therefore, I cannot answer that question.",
+    "trace_id": "6134ca0f9d9b4508",
+    "created_at": "2026-02-25T14:28:59.982420Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "The provided context does not include information about the CEO's favorite restaurant. Therefore, I cannot answer that question."
+        "span_id": "e3976cb5eaa6446b",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "What's the CEO's favorite restaurant?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "9adec354-9f00-4087-a5a9-ccf645ecfe11"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 16,
+                  "prompt_tokens": 53,
+                  "total_tokens": 69,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAmRUP6URhzOS2CgYWbdUbodyjY",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-03cf-75d0-9a46-d80234914a4f-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "CEO favorite restaurant"
+                  },
+                  "id": "call_5USZTxGj44y5FAgG8d8nOCqh",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 53,
+                "output_tokens": 16,
+                "total_tokens": 69,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "14f7acc6-3d1a-4e1e-b430-7c18ed91e7b3",
+              "tool_call_id": "call_5USZTxGj44y5FAgG8d8nOCqh",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "b3709348-1d16-4697-aa75-7e22642bf90a",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "8997597c-0e0b-4aae-98b3-3c10ec795318",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "What restaurant does the CEO enjoy the most?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "1104c7ae-cc4a-48de-8f6a-40a4e6ca718d",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "664146ef-7b6d-4246-a4b7-c1c38729bccd",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "0d610435-b114-4153-a033-00ba23a750e2",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "What is the CEO's preferred dining establishment?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "2c943f9b-daf8-46bd-ac2f-53f13992a12c",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "ab683372-e0a2-4c04-b943-41391d843ccd",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "381b1e48-c99b-4482-9393-385cb8175a4a",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "What restaurant does the CEO prefer the most?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "e7ebb455-0706-4b18-835b-6a60a25f3303",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "956e3480-c0ce-4434-ba02-e835b6116110",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "I don't have information about that.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 7,
+                  "prompt_tokens": 148,
+                  "total_tokens": 155,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_324beb61c9",
+                "id": "chatcmpl-DDAArt5W02KXYf194v5xdJus0RAx8",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-17c5-7570-9677-68fed8cdc3ea-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 148,
+                "output_tokens": 7,
+                "total_tokens": 155,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "CEO favorite restaurant"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592551+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592566+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592570+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "What restaurant does the CEO enjoy the most?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592573+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592578+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592581+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "What is the CEO's preferred dining establishment?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592585+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592590+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592593+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "What restaurant does the CEO prefer the most?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592596+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:05.592601+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 815.7607074826956,
+            "timestamp": "2026-02-25T14:29:00.799401Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 489.92500081658363,
+            "timestamp": "2026-02-25T14:29:02.007837Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 475.99358297884464,
+            "timestamp": "2026-02-25T14:29:03.253390Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 565.392792224884,
+            "timestamp": "2026-02-25T14:29:04.515927Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 497.6299162954092,
+            "timestamp": "2026-02-25T14:29:05.591193Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 5610.119333490729,
+    "total_llm_calls": 5,
+    "total_tool_calls": 11,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "What's the CEO's favorite restaurant?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "9adec354-9f00-4087-a5a9-ccf645ecfe11"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 16,
+              "prompt_tokens": 53,
+              "total_tokens": 69,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAmRUP6URhzOS2CgYWbdUbodyjY",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-03cf-75d0-9a46-d80234914a4f-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "CEO favorite restaurant"
+              },
+              "id": "call_5USZTxGj44y5FAgG8d8nOCqh",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 53,
+            "output_tokens": 16,
+            "total_tokens": 69,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "14f7acc6-3d1a-4e1e-b430-7c18ed91e7b3",
+          "tool_call_id": "call_5USZTxGj44y5FAgG8d8nOCqh",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "b3709348-1d16-4697-aa75-7e22642bf90a",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "8997597c-0e0b-4aae-98b3-3c10ec795318",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "What restaurant does the CEO enjoy the most?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "1104c7ae-cc4a-48de-8f6a-40a4e6ca718d",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "664146ef-7b6d-4246-a4b7-c1c38729bccd",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "0d610435-b114-4153-a033-00ba23a750e2",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "What is the CEO's preferred dining establishment?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "2c943f9b-daf8-46bd-ac2f-53f13992a12c",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "ab683372-e0a2-4c04-b943-41391d843ccd",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "381b1e48-c99b-4482-9393-385cb8175a4a",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "What restaurant does the CEO prefer the most?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nNovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "e7ebb455-0706-4b18-835b-6a60a25f3303",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "956e3480-c0ce-4434-ba02-e835b6116110",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "I don't have information about that.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 7,
+              "prompt_tokens": 148,
+              "total_tokens": 155,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_324beb61c9",
+            "id": "chatcmpl-DDAArt5W02KXYf194v5xdJus0RAx8",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-17c5-7570-9677-68fed8cdc3ea-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 148,
+            "output_tokens": 7,
+            "total_tokens": 155,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "Hello!": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "Hello! How can I assist you today?",
+    "trace_id": "eafd90171eda4568",
+    "created_at": "2026-02-25T14:29:05.592965Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "Hello! How can I assist you today?"
+        "span_id": "7bed7e0d180d473c",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "Hello!",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "353c9ffb-513d-4213-9a1b-6628b5a275d4"
+            },
+            {
+              "content": "Hello! How can I assist you today?",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 10,
+                  "prompt_tokens": 48,
+                  "total_tokens": 58,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAArNzniRk9OdqX9pbzt3qauWrx1",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-19ba-7df1-a273-45b9222cf38d-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 48,
+                "output_tokens": 10,
+                "total_tokens": 58,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 598.8497491925955,
+            "timestamp": "2026-02-25T14:29:06.193259Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 600.9432505816221,
+    "total_llm_calls": 1,
+    "total_tool_calls": 0,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "Hello!",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "353c9ffb-513d-4213-9a1b-6628b5a275d4"
+        },
+        {
+          "content": "Hello! How can I assist you today?",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 10,
+              "prompt_tokens": 48,
+              "total_tokens": 58,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAArNzniRk9OdqX9pbzt3qauWrx1",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-19ba-7df1-a273-45b9222cf38d-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 48,
+            "output_tokens": 10,
+            "total_tokens": 58,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "How do I reset my password?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "To reset your password, go to Settings > Security > Reset. Follow the instructions provided there to complete the password reset process.",
+    "trace_id": "90aa9ac6c78646fb",
+    "created_at": "2026-02-25T14:29:06.194093Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "To reset your password, go to Settings > Security > Reset. Follow the instructions provided there to complete the password reset process."
+        "span_id": "794bf175847140c3",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "How do I reset my password?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "f512a9d9-906c-4d25-b7af-69051ee4b731"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 15,
+                  "prompt_tokens": 53,
+                  "total_tokens": 68,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAsENTI0V4b7KaAQswnhAWLziCj",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-1c12-7c11-ae68-215dff4cd610-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "reset password"
+                  },
+                  "id": "call_vp4xdhciAykscIGVHAT1ps0p",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 53,
+                "output_tokens": 15,
+                "total_tokens": 68,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "Password reset: Settings > Security > Reset. Two-factor: Settings > 2FA.\n\nUsers must be 18+. Prohibited: scraping, resale, reverse engineering.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "ac860142-97bc-442d-97a6-f0de5379c92b",
+              "tool_call_id": "call_vp4xdhciAykscIGVHAT1ps0p",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "17469683-d8d7-438d-a74b-0dbf890ea123",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "c90c8baf-9fae-4841-adc8-50d8f730a702",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "How can I change or reset my password?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "Password reset: Settings > Security > Reset. Two-factor: Settings > 2FA.\n\nEmail: support@novacorp.com. Phone: 1-800-NOVA. Hours: 9-5 PT weekdays.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nUsers must be 18+. Prohibited: scraping, resale, reverse engineering.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "4bd312cb-354b-4c06-bceb-39da5f21d117",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "a855c0b2-a7ab-4753-8f77-14d034285a59",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "To reset your password, go to Settings > Security > Reset.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 13,
+                  "prompt_tokens": 156,
+                  "total_tokens": 169,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAvjzL2ZrwHtRdyrZZNpJmmC42Q",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-2786-7b32-b4d9-89a2ca5b2062-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 156,
+                "output_tokens": 13,
+                "total_tokens": 169,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "reset password"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:09.643865+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:09.643878+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:09.643883+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "How can I change or reset my password?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:09.643887+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:09.643895+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 976.494874805212,
+            "timestamp": "2026-02-25T14:29:07.171256Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 443.07758286595345,
+            "timestamp": "2026-02-25T14:29:08.411438Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 516.1783322691917,
+            "timestamp": "2026-02-25T14:29:09.642789Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 3449.7636258602142,
+    "total_llm_calls": 3,
+    "total_tool_calls": 5,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "How do I reset my password?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "f512a9d9-906c-4d25-b7af-69051ee4b731"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 15,
+              "prompt_tokens": 53,
+              "total_tokens": 68,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAsENTI0V4b7KaAQswnhAWLziCj",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-1c12-7c11-ae68-215dff4cd610-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "reset password"
+              },
+              "id": "call_vp4xdhciAykscIGVHAT1ps0p",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 53,
+            "output_tokens": 15,
+            "total_tokens": 68,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "Password reset: Settings > Security > Reset. Two-factor: Settings > 2FA.\n\nUsers must be 18+. Prohibited: scraping, resale, reverse engineering.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "ac860142-97bc-442d-97a6-f0de5379c92b",
+          "tool_call_id": "call_vp4xdhciAykscIGVHAT1ps0p",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "17469683-d8d7-438d-a74b-0dbf890ea123",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "c90c8baf-9fae-4841-adc8-50d8f730a702",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "How can I change or reset my password?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "Password reset: Settings > Security > Reset. Two-factor: Settings > 2FA.\n\nEmail: support@novacorp.com. Phone: 1-800-NOVA. Hours: 9-5 PT weekdays.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nUsers must be 18+. Prohibited: scraping, resale, reverse engineering.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "4bd312cb-354b-4c06-bceb-39da5f21d117",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "a855c0b2-a7ab-4753-8f77-14d034285a59",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "To reset your password, go to Settings > Security > Reset.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 13,
+              "prompt_tokens": 156,
+              "total_tokens": 169,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAvjzL2ZrwHtRdyrZZNpJmmC42Q",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-2786-7b32-b4d9-89a2ca5b2062-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 156,
+            "output_tokens": 13,
+            "total_tokens": 169,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "What's NovaCorp's uptime guarantee for the business plan?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "NovaCorp's uptime guarantee for the Business plan is 99.5%.",
+    "trace_id": "babd5eda800b4627",
+    "created_at": "2026-02-25T14:29:09.644022Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "NovaCorp's uptime guarantee for the Business plan is 99.5%."
+        "span_id": "429f3c8eb71f4663",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "What's NovaCorp's uptime guarantee for the business plan?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "381e9db9-59ea-48c1-8dcf-b17b262d20fe"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 19,
+                  "prompt_tokens": 57,
+                  "total_tokens": 76,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAvsM034qUCkEfxvDIgLZNkGeLb",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-298c-7152-a03f-ca18035da23f-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "NovaCorp uptime guarantee business plan"
+                  },
+                  "id": "call_FjiIaTobDwnYWVMDJMEnSF5J",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 57,
+                "output_tokens": 19,
+                "total_tokens": 76,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nEmail: support@novacorp.com. Phone: 1-800-NOVA. Hours: 9-5 PT weekdays.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "e63a8f6c-7949-4dd2-bf46-d2741d11b4ca",
+              "tool_call_id": "call_FjiIaTobDwnYWVMDJMEnSF5J",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "478fa206-cac5-4161-b2e8-fe1b44caa889",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "NovaCorp's uptime guarantee for the Business plan is 99.5%.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 15,
+                  "prompt_tokens": 170,
+                  "total_tokens": 185,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAxZvlfDAE2z4SDhMELakAGKeuE",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-3039-7291-913f-a47bdd3db685-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 170,
+                "output_tokens": 15,
+                "total_tokens": 185,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "NovaCorp uptime guarantee business plan"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:11.951267+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:11.951281+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 962.030541151762,
+            "timestamp": "2026-02-25T14:29:10.606640Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 596.3149163872004,
+            "timestamp": "2026-02-25T14:29:11.949774Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 2307.231415063143,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "What's NovaCorp's uptime guarantee for the business plan?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "381e9db9-59ea-48c1-8dcf-b17b262d20fe"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 19,
+              "prompt_tokens": 57,
+              "total_tokens": 76,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAvsM034qUCkEfxvDIgLZNkGeLb",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-298c-7152-a03f-ca18035da23f-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "NovaCorp uptime guarantee business plan"
+              },
+              "id": "call_FjiIaTobDwnYWVMDJMEnSF5J",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 57,
+            "output_tokens": 19,
+            "total_tokens": 76,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nEmail: support@novacorp.com. Phone: 1-800-NOVA. Hours: 9-5 PT weekdays.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "e63a8f6c-7949-4dd2-bf46-d2741d11b4ca",
+          "tool_call_id": "call_FjiIaTobDwnYWVMDJMEnSF5J",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "478fa206-cac5-4161-b2e8-fe1b44caa889",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "NovaCorp's uptime guarantee for the Business plan is 99.5%.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 15,
+              "prompt_tokens": 170,
+              "total_tokens": 185,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAxZvlfDAE2z4SDhMELakAGKeuE",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-3039-7291-913f-a47bdd3db685-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 170,
+            "output_tokens": 15,
+            "total_tokens": 185,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "Is NovaCorp SOC 2 compliant?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "Yes, NovaCorp is SOC 2 Type II certified, which indicates that they are compliant with the SOC 2 standards.",
+    "trace_id": "6c435513dbbb4fc5",
+    "created_at": "2026-02-25T14:29:11.951608Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "Yes, NovaCorp is SOC 2 Type II certified, which indicates that they are compliant with the SOC 2 standards."
+        "span_id": "35723547f1c544b1",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "Is NovaCorp SOC 2 compliant?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "4e533109-b93f-4470-a9db-abf124c60abb"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 17,
+                  "prompt_tokens": 54,
+                  "total_tokens": 71,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAAy3GRry3JJ7U5NuKuzfLJnACfa",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-3290-79e1-808c-92ef9e6e3af9-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "SOC 2 compliance"
+                  },
+                  "id": "call_N9U2oRlASRK7u0QZOXEVp4Ri",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 54,
+                "output_tokens": 17,
+                "total_tokens": 71,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "Data stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nCEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "b5a50e47-269e-4f96-a6ef-e1b7ca594c77",
+              "tool_call_id": "call_N9U2oRlASRK7u0QZOXEVp4Ri",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "5260b2ac-2361-4e10-8288-155ca5940f96",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "Yes, NovaCorp is SOC 2 Type II certified.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 12,
+                  "prompt_tokens": 155,
+                  "total_tokens": 167,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_084a28d6e8",
+                "id": "chatcmpl-DDAAzhY6yT4REJRp6ztNtLynhNMlr",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-38ef-7710-9c85-a9b828c4f70c-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 155,
+                "output_tokens": 12,
+                "total_tokens": 167,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "SOC 2 compliance"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:14.109947+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:14.109957+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 855.2199155092239,
+            "timestamp": "2026-02-25T14:29:12.808498Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 524.9444171786308,
+            "timestamp": "2026-02-25T14:29:14.108795Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 2158.2747511565685,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "Is NovaCorp SOC 2 compliant?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "4e533109-b93f-4470-a9db-abf124c60abb"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 17,
+              "prompt_tokens": 54,
+              "total_tokens": 71,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAAy3GRry3JJ7U5NuKuzfLJnACfa",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-3290-79e1-808c-92ef9e6e3af9-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "SOC 2 compliance"
+              },
+              "id": "call_N9U2oRlASRK7u0QZOXEVp4Ri",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 54,
+            "output_tokens": 17,
+            "total_tokens": 71,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "Data stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nCEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "b5a50e47-269e-4f96-a6ef-e1b7ca594c77",
+          "tool_call_id": "call_N9U2oRlASRK7u0QZOXEVp4Ri",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "5260b2ac-2361-4e10-8288-155ca5940f96",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "Yes, NovaCorp is SOC 2 Type II certified.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 12,
+              "prompt_tokens": 155,
+              "total_tokens": 167,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_084a28d6e8",
+            "id": "chatcmpl-DDAAzhY6yT4REJRp6ztNtLynhNMlr",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-38ef-7710-9c85-a9b828c4f70c-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 155,
+            "output_tokens": 12,
+            "total_tokens": 167,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "What's the weather in Austin?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "I'm sorry, but I can't provide real-time weather updates. You might want to check a reliable weather website or app for the current weather in Austin, TX.",
+    "trace_id": "880381e4bea947c9",
+    "created_at": "2026-02-25T14:29:14.110204Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "I'm sorry, but I can't provide real-time weather updates. You might want to check a reliable weather website or app for the current weather in Austin, TX."
+        "span_id": "2c3af0e3f36944bf",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "What's the weather in Austin?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "b08cccaf-37c9-4280-a35a-38bf6590abab"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 17,
+                  "prompt_tokens": 52,
+                  "total_tokens": 69,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAB0l3jWIc93uKRmLgTq44lanKDL",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-3aff-7a62-9cea-12d4a0afddc4-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "current weather in Austin"
+                  },
+                  "id": "call_YiTSQy8LJ99rqayKZNI9XpiF",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 52,
+                "output_tokens": 17,
+                "total_tokens": 69,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nCEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "0a379894-3b65-4f66-8881-b1a2be105f6a",
+              "tool_call_id": "call_YiTSQy8LJ99rqayKZNI9XpiF",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "5ae08480-fe2f-411f-969e-40c141c0354b",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "3eb0a946-d9fc-4da6-84e9-a64eedb07a8c",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "Austin weather forecast."
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "ad279845-aabf-49ea-861a-834b68df80b1",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "57b20c59-056b-418e-8f2c-b730b4311327",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "d690c460-a405-4d67-a4d8-7a8b0b382ce4",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "What is the current weather in Austin, Texas?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nCEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "f3794165-56f4-4a63-9883-592dec49b80a",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "a850f328-33a5-4349-bfcb-78292d273a0b",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "b2460262-d4a9-44bb-a550-9e2287298f11",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "Current weather conditions in Austin, Texas."
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "4f3c08d7-6b6d-4989-899d-466054f74f00",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "07c132cd-02e3-439d-ae20-769e4f5cc3f0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "I don't have information about that.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 7,
+                  "prompt_tokens": 151,
+                  "total_tokens": 158,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAB44dOboEoAb8xFgXJUWCMo80gP",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-4d9e-7583-8ae9-02e604c122fe-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 151,
+                "output_tokens": 7,
+                "total_tokens": 158,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "current weather in Austin"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387538+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387543+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387545+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "Austin weather forecast."
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387547+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387549+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387551+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "What is the current weather in Austin, Texas?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387552+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387554+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387556+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "Current weather conditions in Austin, Texas."
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387557+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:19.387559+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 722.5419599562883,
+            "timestamp": "2026-02-25T14:29:14.834084Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 526.263665407896,
+            "timestamp": "2026-02-25T14:29:16.073282Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 554.7660831362009,
+            "timestamp": "2026-02-25T14:29:17.134900Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 455.63812367618084,
+            "timestamp": "2026-02-25T14:29:18.251987Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 508.2241240888834,
+            "timestamp": "2026-02-25T14:29:19.387024Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 5277.28508412838,
+    "total_llm_calls": 5,
+    "total_tool_calls": 11,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "What's the weather in Austin?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "b08cccaf-37c9-4280-a35a-38bf6590abab"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 17,
+              "prompt_tokens": 52,
+              "total_tokens": 69,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAB0l3jWIc93uKRmLgTq44lanKDL",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-3aff-7a62-9cea-12d4a0afddc4-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "current weather in Austin"
+              },
+              "id": "call_YiTSQy8LJ99rqayKZNI9XpiF",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 52,
+            "output_tokens": 17,
+            "total_tokens": 69,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nCEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "0a379894-3b65-4f66-8881-b1a2be105f6a",
+          "tool_call_id": "call_YiTSQy8LJ99rqayKZNI9XpiF",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "5ae08480-fe2f-411f-969e-40c141c0354b",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "3eb0a946-d9fc-4da6-84e9-a64eedb07a8c",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "Austin weather forecast."
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise customers: full refund within 30 days. Startup plan: 14 days. No refunds after 60 days.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "ad279845-aabf-49ea-861a-834b68df80b1",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "57b20c59-056b-418e-8f2c-b730b4311327",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "d690c460-a405-4d67-a4d8-7a8b0b382ce4",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "What is the current weather in Austin, Texas?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nCEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "f3794165-56f4-4a63-9883-592dec49b80a",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "a850f328-33a5-4349-bfcb-78292d273a0b",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "b2460262-d4a9-44bb-a550-9e2287298f11",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "Current weather conditions in Austin, Texas."
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "NovaCorp founded 2019. HQ in Austin, TX. 450 employees.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.\n\n99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "4f3c08d7-6b6d-4989-899d-466054f74f00",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "07c132cd-02e3-439d-ae20-769e4f5cc3f0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "I don't have information about that.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 7,
+              "prompt_tokens": 151,
+              "total_tokens": 158,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAB44dOboEoAb8xFgXJUWCMo80gP",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-4d9e-7583-8ae9-02e604c122fe-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 151,
+            "output_tokens": 7,
+            "total_tokens": 158,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   },
   "How do I configure the AWS load balancer for the enterprise tier?": {
-    "trace_id": "demo_trace",
-    "total_cost_usd": 0.005,
-    "final_output": "I don't have information about configuring AWS load balancers in the provided context.",
+    "trace_id": "29d407135bad4196",
+    "created_at": "2026-02-25T14:29:19.387701Z",
     "spans": [
       {
-        "name": "generate_answer_api",
-        "output": "I don't have information about configuring AWS load balancers in the provided context."
+        "span_id": "600e95efc2dc4f41",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "run_agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "How do I configure the AWS load balancer for the enterprise tier?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "8a704445-da00-4d9a-8c99-2043ec7492a3"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 20,
+                  "prompt_tokens": 60,
+                  "total_tokens": 80,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDAB5k0f4AMeLAqJ32FI29uVplSUs",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-4f9c-7ac1-b65f-5f8e71b8e0d4-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "AWS load balancer enterprise tier configuration"
+                  },
+                  "id": "call_BFqNatyrGq2QLDwH2JS9tfT9",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 60,
+                "output_tokens": 20,
+                "total_tokens": 80,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "cdd9640c-1756-422c-9301-f48ed6ef5848",
+              "tool_call_id": "call_BFqNatyrGq2QLDwH2JS9tfT9",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "33323048-131f-4549-a18e-9e68b1b4152c",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "f98892c6-4416-43cd-b857-1717a1bf0d22",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "How to set up the AWS load balancer for the enterprise tier configuration?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "59c58134-ba6e-432b-b811-88bf3a31bdac",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "aab4ba9e-2ec6-4972-8cde-b368904b2cda",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "6fa9f29d-699b-4910-b3ad-2b7d9d79f593",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "How to set up AWS load balancer for enterprise tier configuration?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "440905c4-9eab-4c8e-bf84-09ae8c5a1fdd",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "9fa2fa90-344a-4120-9dba-61846150c8c9",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "rewrite_question",
+              "id": "36ad0685-b50b-4d6b-b3c8-8573fa5cd2bb",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "How to set up AWS load balancer for enterprise tier configuration?"
+                  },
+                  "id": "rewrite_tc",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "d29577b3-c1ba-40ee-ad4e-28232ba1d102",
+              "tool_call_id": "rewrite_tc",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"no\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "b75f4ec5-7c32-4b60-97b4-237a9357ae68",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "I don't have information about that.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 7,
+                  "prompt_tokens": 163,
+                  "total_tokens": 170,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_373a14eb6f",
+                "id": "chatcmpl-DDABCp1zqeQo31sr15HHf47qpS4iO",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019c9534-6bcb-7201-bcd2-56fe82bdb1ec-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 163,
+                "output_tokens": 7,
+                "total_tokens": 170,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ]
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "AWS load balancer enterprise tier configuration"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038735+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038756+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038764+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "How to set up the AWS load balancer for the enterprise tier configuration?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038770+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038784+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038790+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "How to set up AWS load balancer for enterprise tier configuration?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038796+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038808+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "rewrite_question",
+            "arguments": {
+              "content": ""
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038814+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "How to set up AWS load balancer for enterprise tier configuration?"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038821+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"no\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-02-25T14:29:27.038833+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 971.5522900223732,
+            "timestamp": "2026-02-25T14:29:20.359920Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 616.6895423084497,
+            "timestamp": "2026-02-25T14:29:21.802588Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 594.9483346194029,
+            "timestamp": "2026-02-25T14:29:23.841805Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1460.1773750036955,
+            "timestamp": "2026-02-25T14:29:26.078316Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 433.1636652350426,
+            "timestamp": "2026-02-25T14:29:27.036798Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {}
       }
-    ]
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 7651.080625131726,
+    "total_llm_calls": 5,
+    "total_tool_calls": 11,
+    "test_name": "",
+    "agent_name": "run_agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "How do I configure the AWS load balancer for the enterprise tier?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "8a704445-da00-4d9a-8c99-2043ec7492a3"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 20,
+              "prompt_tokens": 60,
+              "total_tokens": 80,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDAB5k0f4AMeLAqJ32FI29uVplSUs",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-4f9c-7ac1-b65f-5f8e71b8e0d4-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "AWS load balancer enterprise tier configuration"
+              },
+              "id": "call_BFqNatyrGq2QLDwH2JS9tfT9",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 60,
+            "output_tokens": 20,
+            "total_tokens": 80,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nEnterprise: $499/mo. Business: $199/mo. Starter: $49/mo. Free: $0.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "cdd9640c-1756-422c-9301-f48ed6ef5848",
+          "tool_call_id": "call_BFqNatyrGq2QLDwH2JS9tfT9",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "33323048-131f-4549-a18e-9e68b1b4152c",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "f98892c6-4416-43cd-b857-1717a1bf0d22",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "How to set up the AWS load balancer for the enterprise tier configuration?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "59c58134-ba6e-432b-b811-88bf3a31bdac",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "aab4ba9e-2ec6-4972-8cde-b368904b2cda",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "6fa9f29d-699b-4910-b3ad-2b7d9d79f593",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "How to set up AWS load balancer for enterprise tier configuration?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "440905c4-9eab-4c8e-bf84-09ae8c5a1fdd",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "9fa2fa90-344a-4120-9dba-61846150c8c9",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "rewrite_question",
+          "id": "36ad0685-b50b-4d6b-b3c8-8573fa5cd2bb",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "How to set up AWS load balancer for enterprise tier configuration?"
+              },
+              "id": "rewrite_tc",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "99.9% uptime SLA for Enterprise. 99.5% for Business. No SLA for Free tier.\n\nEnterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics.\n\nData stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified.\n\nPassword reset: Settings > Security > Reset. Two-factor: Settings > 2FA.",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "d29577b3-c1ba-40ee-ad4e-28232ba1d102",
+          "tool_call_id": "rewrite_tc",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"no\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "b75f4ec5-7c32-4b60-97b4-237a9357ae68",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "I don't have information about that.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 7,
+              "prompt_tokens": 163,
+              "total_tokens": 170,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_373a14eb6f",
+            "id": "chatcmpl-DDABCp1zqeQo31sr15HHf47qpS4iO",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019c9534-6bcb-7201-bcd2-56fe82bdb1ec-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 163,
+            "output_tokens": 7,
+            "total_tokens": 170,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ]
+    },
+    "metadata": {}
   }
 }
