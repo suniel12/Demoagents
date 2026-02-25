@@ -7,6 +7,7 @@ import sys
 from dotenv import load_dotenv
 from agents import Runner
 from agents.tracing import set_trace_processors
+from agents.exceptions import InputGuardrailTripwireTriggered
 
 from agentci.adapters.openai_agents import AgentCITraceProcessor
 from .agents.triage import triage_agent
@@ -30,14 +31,22 @@ async def run_agent_async(query: str):
     # for the traces dashboard (we only need it for the LLM calls)
     set_trace_processors([_processor])
     
-    result = await Runner.run(triage_agent, query)
-    trace = _processor.get_last_trace()
-    
-    # Attach the final output text to the trace
-    if trace and result.final_output:
-        trace.metadata["final_output"] = str(result.final_output)
-    
-    return trace
+    try:
+        result = await Runner.run(triage_agent, query)
+        trace = _processor.get_last_trace()
+        
+        # Attach the final output text to the trace
+        if trace and result.final_output:
+            trace.metadata["final_output"] = str(result.final_output)
+        
+        return trace
+    except InputGuardrailTripwireTriggered as e:
+        # Guardrail blocked the query — still return the trace
+        trace = _processor.get_last_trace()
+        if trace:
+            trace.metadata["guardrail_blocked"] = True
+            trace.metadata["guardrail_message"] = str(e)
+        return trace
 
 
 def run_agent(query: str):

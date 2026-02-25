@@ -5,6 +5,7 @@ from .billing import billing_agent
 from .general import general_agent
 from .technical import technical_agent
 from .account import account_agent
+from ..guardrails import relevance_guardrail, pii_guardrail
 
 
 triage_agent = Agent(
@@ -21,4 +22,5 @@ triage_agent = Agent(
         "Do NOT try to answer the question yourself. Always hand off."
     ),
     handoffs=[billing_agent, technical_agent, account_agent, general_agent],
+    input_guardrails=[relevance_guardrail, pii_guardrail],
 )
