@@ -38,3 +38,11 @@ After each implementation step, follow this exact sequence:
 - Always ask user before reverting break demos
 - Learnings must be code, not just notes
 - Update `task.md` after each step
+
+## Ad-hoc Improvements
+
+> **AgentCI improvements don't have to wait for the per-step workflow.**
+> Any time we discover a gap, bug, or improvement opportunity — during testing, demos, conversation, or manual chat.py exploration — apply it immediately:
+> 1. Implement the improvement in AgentCI code
+> 2. Add a test in the demo agent if applicable
+> 3. Commit and push both repos

@@ -112,3 +112,37 @@ def test_account_tools_not_used_for_billing():
     assert not overlap, (
         f"Account tools {overlap} should not be used for billing queries"
     )
+
+
+# ── Malformed / garbled input resilience ───────────────
+
+def test_garbled_error_code_still_routes_to_technical():
+    """Garbled input with an error code should still route to Technical Agent."""
+    trace = run_agent("error E-SYNC-003 jdfksdjf random garbage")
+    assert trace is not None
+
+    handoffs = trace.get_handoffs()
+    assert len(handoffs) >= 1, "Expected at least 1 handoff"
+    assert handoffs[-1].to_agent == "Technical Agent", (
+        f"Expected Technical Agent, got {handoffs[-1].to_agent}"
+    )
+
+    # Should still call lookup_error_code despite the noise
+    tool_names = trace.tool_call_sequence
+    assert "lookup_error_code" in tool_names, (
+        f"Expected 'lookup_error_code' even with noisy input, got: {tool_names}"
+    )
+
+
+def test_invalid_error_code_handled_gracefully():
+    """A completely made-up error code should not crash — tool returns 'Unknown'."""
+    trace = run_agent("I'm getting error ZZZZZ-999, help!")
+    assert trace is not None
+
+    # Should still route to technical
+    handoffs = trace.get_handoffs()
+    assert len(handoffs) >= 1, "Expected at least 1 handoff"
+    assert handoffs[-1].to_agent == "Technical Agent", (
+        f"Expected Technical Agent, got {handoffs[-1].to_agent}"
+    )
+
