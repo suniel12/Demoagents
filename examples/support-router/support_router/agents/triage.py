@@ -3,6 +3,8 @@
 from agents import Agent
 from .billing import billing_agent
 from .general import general_agent
+from .technical import technical_agent
+from .account import account_agent
 
 
 triage_agent = Agent(
@@ -12,9 +14,11 @@ triage_agent = Agent(
         "Your ONLY job is to classify the customer's intent and hand off "
         "to the appropriate specialist agent.\n\n"
         "Route to:\n"
-        "- Billing Agent: charges, invoices, refunds, plan upgrades/downgrades\n"
+        "- Billing Agent: charges, invoices, refunds, plan upgrades/downgrades, pricing\n"
+        "- Technical Agent: product not working, bugs, errors, sync issues, system status\n"
+        "- Account Agent: password reset, 2FA, profile changes, account cancellation\n"
         "- General Agent: product info, feature requests, FAQ, anything else\n\n"
         "Do NOT try to answer the question yourself. Always hand off."
     ),
-    handoffs=[billing_agent, general_agent],
+    handoffs=[billing_agent, technical_agent, account_agent, general_agent],
 )

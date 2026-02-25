@@ -1,15 +1,13 @@
 """
 Routing correctness tests for the TechCorp Support Router.
 
-Step 2 Golden Dataset: 12 queries covering:
+Step 3 Golden Dataset: 20 queries covering 4 agents:
   - Clear billing (3)
+  - Clear technical (3)
+  - Clear account (3)
   - Clear general (3)
-  - Ambiguous / multi-intent (3)
-  - Edge cases (3)
-
-Each query is parametrized and asserts:
-  1. At least 1 handoff occurred
-  2. The final handoff target matches the expected agent
+  - Ambiguous / multi-intent (4)
+  - Edge cases (4)
 """
 
 import pytest
@@ -41,14 +39,43 @@ GOLDEN_QUERIES = [
         "expected_agent": "Billing Agent",
     },
 
+    # ═══ Clear Technical (expect → Technical Agent) ═══
+    {
+        "query": "CloudSync keeps crashing when I try to sync files",
+        "category": "clear_technical",
+        "expected_agent": "Technical Agent",
+    },
+    {
+        "query": "I'm getting error code E-SYNC-003 on every upload",
+        "category": "clear_technical",
+        "expected_agent": "Technical Agent",
+    },
+    {
+        "query": "Is the CloudSync service down right now?",
+        "category": "clear_technical",
+        "expected_agent": "Technical Agent",
+    },
+
+    # ═══ Clear Account (expect → Account Agent) ═══
+    {
+        "query": "I forgot my password and need to reset it",
+        "category": "clear_account",
+        "expected_agent": "Account Agent",
+    },
+    {
+        "query": "How do I enable two-factor authentication?",
+        "category": "clear_account",
+        "expected_agent": "Account Agent",
+    },
+    {
+        "query": "I want to cancel my account",
+        "category": "clear_account",
+        "expected_agent": "Account Agent",
+    },
+
     # ═══ Clear General (expect → General Agent) ═══
     {
         "query": "What features does CloudSync Pro include?",
-        "category": "clear_general",
-        "expected_agent": "General Agent",
-    },
-    {
-        "query": "Is there an API for CloudSync?",
         "category": "clear_general",
         "expected_agent": "General Agent",
     },
@@ -57,25 +84,36 @@ GOLDEN_QUERIES = [
         "category": "clear_general",
         "expected_agent": "General Agent",
     },
+    {
+        "query": "I love CloudSync! Can you add dark mode?",
+        "category": "clear_general",
+        "expected_agent": "General Agent",
+    },
 
     # ═══ Ambiguous / Multi-intent ═══
     {
-        "query": "I'm on the Pro plan but I think the price is wrong and I want to know what Business includes",
+        "query": "I'm on the Pro plan but I think the price is wrong and it keeps crashing",
         "category": "ambiguous",
         "expected_agent": "Billing Agent",
-        "notes": "Price concern is the primary intent even though they ask about Business features",
+        "notes": "Price concern is the primary intent",
     },
     {
-        "query": "What's the difference between Pro and Business? I might upgrade",
+        "query": "What's the difference between Pro and Business?",
         "category": "ambiguous",
         "expected_agent": "General Agent",
-        "notes": "Feature comparison is the primary intent; 'might upgrade' is secondary",
+        "notes": "Feature comparison → General",
     },
     {
-        "query": "I love CloudSync! Can you add dark mode?",
+        "query": "My sync isn't working and I want to cancel",
         "category": "ambiguous",
-        "expected_agent": "General Agent",
-        "notes": "Feature request → General",
+        "expected_agent": "Technical Agent",
+        "notes": "Technical issue is the immediate problem to solve first",
+    },
+    {
+        "query": "I can't log in to change my billing info",
+        "category": "ambiguous",
+        "expected_agent": "Account Agent",
+        "notes": "Login issue is the blocking problem to solve first",
     },
 
     # ═══ Edge Cases ═══
@@ -93,7 +131,11 @@ GOLDEN_QUERIES = [
         "query": "invoice",
         "category": "edge_single_word",
         "expected_agent": "Billing Agent",
-        "notes": "Single word should still trigger correct routing",
+    },
+    {
+        "query": "password",
+        "category": "edge_single_word",
+        "expected_agent": "Account Agent",
     },
 ]
 
@@ -143,6 +185,24 @@ def test_triage_does_not_answer_directly():
     assert len(agents) >= 2, (
         f"Expected at least 2 agents (triage + specialist), got {agents}"
     )
+
+
+def test_all_four_agents_reachable():
+    """Verify each specialist can be reached with a clear query."""
+    queries = {
+        "Billing Agent": "I was double-charged",
+        "Technical Agent": "My sync is broken",
+        "Account Agent": "Reset my password",
+        "General Agent": "What plans do you offer?",
+    }
+    for expected, query in queries.items():
+        trace = run_agent(query)
+        handoffs = trace.get_handoffs()
+        assert len(handoffs) >= 1, f"No handoff for '{query}'"
+        actual = handoffs[-1].to_agent
+        assert actual == expected, (
+            f"'{query}' routed to '{actual}', expected '{expected}'"
+        )
 
 
 # ── Cost guard ─────────────────────────────────────────
