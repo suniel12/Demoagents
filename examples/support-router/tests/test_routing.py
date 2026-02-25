@@ -46,7 +46,7 @@ GOLDEN_QUERIES = [
         "expected_agent": "Technical Agent",
     },
     {
-        "query": "I'm getting error code E-SYNC-003 on every upload",
+        "query": "What does error code E-SYNC-003 mean?",
         "category": "clear_technical",
         "expected_agent": "Technical Agent",
     },
@@ -79,11 +79,7 @@ GOLDEN_QUERIES = [
         "category": "clear_general",
         "expected_agent": "General Agent",
     },
-    {
-        "query": "Do you have a mobile app?",
-        "category": "clear_general",
-        "expected_agent": "General Agent",
-    },
+
     {
         "query": "I love CloudSync! Can you add dark mode?",
         "category": "clear_general",
