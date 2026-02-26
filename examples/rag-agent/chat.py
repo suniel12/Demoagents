@@ -29,9 +29,9 @@ def get_trajectory(state):
 
 def main():
     print("==================================================")
-    print("🤖 Welcome to the NovaCorp RAG Agent CLI! 🤖")
+    print("🤖 AgentCI Documentation Assistant 🤖")
     print("==================================================")
-    print("Ask a question about NovaCorp policies, products, or support.")
+    print("Ask anything about AgentCI — installation, specs, CLI, comparisons, roadmap.")
     print("Watch the agent's 'Trajectory' to see it retrieve, grade, and rewrite queries!")
     print("Type 'exit' or 'quit' to quit.\n")
 

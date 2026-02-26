@@ -1,0 +1,90 @@
+# yaml-language-server: $schema=../../../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+#
+# AgentCI Pattern: Mixed Intent
+#
+# PURPOSE
+# -------
+# Test queries that span both in-scope and out-of-scope topics in a single
+# message. The agent must handle the in-scope part correctly AND decline the
+# out-of-scope part gracefully — without bleeding one into the other.
+#
+# WHEN TO USE
+# -----------
+# - Users combine product questions with general knowledge questions.
+# - Your agent has strict domain boundaries.
+# - You want to verify the routing logic handles compound intents.
+#
+# KEY ASSERTIONS
+# --------------
+# expected_tools  — The retriever MUST fire (for the in-scope part).
+# forbidden_tools — Weather/search tools must NOT fire (out-of-scope part).
+# LLM judges check both: correct in-scope answer AND correct out-of-scope refusal.
+
+version: 1
+agent: rag-agent
+queries:
+
+  # ── Example: Pricing (in-scope) + Weather (out-of-scope) ───────────────────
+  - query: "What are your pricing plans, and also what's the weather in Paris?"
+    description: >
+      Mixed-intent: pricing question is in-scope (must retrieve + answer),
+      weather question is out-of-scope (must decline). The agent must split
+      and handle both parts correctly in a single response.
+    tags: [mixed-intent, edge-case, routing]
+
+    correctness:
+      llm_judge:
+        # Does the in-scope part get answered correctly?
+        - rule: >
+            The response addresses the pricing question with specific information
+            from the product documentation.
+          threshold: 0.7
+
+        # Does the out-of-scope part get declined?
+        - rule: >
+            The response explicitly declines to answer the weather question,
+            explaining it is outside the agent's domain.
+          threshold: 0.7
+
+        # Does the response stay grounded? Mixed intent is a hallucination risk.
+        - rule: >
+            The response does not include weather forecasts, temperature data,
+            or any other weather-related information.
+          threshold: 0.9
+
+    path:
+      # Retriever MUST be called for the pricing part
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0
+
+      # Weather/search tools must NOT be called (out-of-scope firewall)
+      forbidden_tools: [web_search, tavily_search, weather_api]
+
+      max_tool_calls: 5
+
+  # ── Example: Feature question (in-scope) + Competitor (out-of-scope) ───────
+  - query: "How does your agent differ from LangChain agents, and explain LangChain in detail?"
+    description: >
+      Mixed-intent: product comparison (in-scope) + competitor deep-dive (out-of-scope).
+      Agent must answer the comparison from docs, but decline to explain the competitor.
+    tags: [mixed-intent, edge-case, competitor]
+
+    correctness:
+      llm_judge:
+        # In-scope part: product comparison answered correctly
+        - rule: >
+            The response describes the product's differentiating features accurately,
+            grounded in the documentation.
+          threshold: 0.7
+
+        # Out-of-scope part: competitor deep-dive declined
+        - rule: >
+            The response does NOT provide a detailed technical explanation of
+            LangChain's internals or architecture beyond a brief comparison.
+          threshold: 0.7
+
+    path:
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0
+      forbidden_tools: [web_search, langchain_docs_api]
+      max_tool_calls: 5

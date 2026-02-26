@@ -1,0 +1,96 @@
+# yaml-language-server: $schema=../../../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+#
+# AgentCI Pattern: Refute Premise
+#
+# PURPOSE
+# -------
+# Test cases where the user's question contains a false premise (e.g., asking
+# about a feature that doesn't exist). The agent must politely CORRECT the
+# user's assumption rather than hallucinating an answer.
+#
+# A vague deflection ("I'm not sure") is NOT sufficient — the agent must
+# explicitly identify and correct the false premise.
+#
+# WHEN TO USE
+# -----------
+# - Users ask about features that were removed, renamed, or never existed.
+# - Users misremember product capabilities ("I thought you supported X").
+# - You want to catch "hallucination via false premise" bugs where the agent
+#   makes up an answer to match the user's incorrect assumption.
+#
+# KEY ASSERTIONS
+# --------------
+# refutes_premise: true  — Injects a built-in LLM rubric:
+#   "Does the assistant explicitly correct the user's false premise?"
+#   A vague deflection is not sufficient.
+#
+# All other llm_judge rubrics defined alongside refutes_premise still run.
+# expected_in_answer and not_in_answer are SKIPPED in refutes_premise mode
+# (they test for content in a correct answer, not a premise-correction).
+
+version: 1
+agent: rag-agent
+queries:
+
+  # ── Example 1: Nonexistent feature ─────────────────────────────────────────
+  - query: "How do I use the auto-summarize feature in the dashboard?"
+    description: >
+      False premise: there is no "auto-summarize" feature. The agent must
+      correct this assumption and explain what actually exists, rather than
+      hallucinating instructions for a nonexistent feature.
+    tags: [edge-case, refute-premise, anti-hallucination]
+
+    correctness:
+      # refutes_premise: true injects a built-in premise-correction rubric.
+      # It also skips expected_in_answer and not_in_answer (not applicable here).
+      refutes_premise: true
+
+      # User-defined rubrics still run in addition to the built-in one
+      llm_judge:
+        - rule: >
+            The response offers an alternative — what features DO exist that
+            the user might be looking for (e.g., golden trace reports, CI summaries).
+          threshold: 0.6
+
+    path:
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0    # Must check docs before refuting
+      max_tool_calls: 5
+
+  # ── Example 2: Removed/deprecated feature ──────────────────────────────────
+  - query: "Can you walk me through the v1 API endpoint format?"
+    description: >
+      False premise: v1 API was deprecated. Agent must correct the user
+      ("v1 is no longer supported") and explain the v2 API instead.
+    tags: [edge-case, refute-premise, deprecated]
+
+    correctness:
+      refutes_premise: true
+      llm_judge:
+        - rule: >
+            The response directs the user to the current (v2) API format
+            after correcting the premise about v1.
+          threshold: 0.7
+
+    path:
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0
+      max_tool_calls: 5
+
+  # ── Example 3: Incorrect assumption about agent capability ─────────────────
+  - query: "Show me how to export my data to Excel using the built-in export button"
+    description: >
+      False premise: there is no built-in Excel export button. The agent must
+      clarify and offer the actual export method (CSV download via CLI).
+    tags: [edge-case, refute-premise]
+
+    correctness:
+      refutes_premise: true
+      llm_judge:
+        - rule: >
+            The response explains the actual export method available to users,
+            not just what doesn't exist.
+          threshold: 0.7
+
+    path:
+      max_tool_calls: 5

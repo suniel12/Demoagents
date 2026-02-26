@@ -1,0 +1,209 @@
+# yaml-language-server: $schema=../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+#
+# AgentCI Dogfood Benchmark — RAG Agent
+#
+# WHAT THIS IS
+# ------------
+# A formal regression spec covering all RAG agent edge cases that drove AgentCI's
+# design. This is the permanent benchmark run in CI on every AgentCI release.
+#
+# It covers 5 canonical failure modes:
+#   1. Happy path (in-scope, must retrieve)
+#   2. Out-of-scope (must decline immediately, 0 tool calls)
+#   3. Anti-hallucination (out-of-scope topic the LLM "knows" well)
+#   4. Mixed-intent (in-scope + out-of-scope in one query)
+#   5. Ambiguous negative (user asks about nonexistent feature)
+#
+# RUNNING
+# -------
+#   agentci validate DemoAgents/examples/rag-agent/agentci_spec_benchmark.yaml
+#
+# Full live test (requires AGENTCI_LIVE_TESTS=1 and API keys):
+#   AGENTCI_LIVE_TESTS=1 agentci test --config agentci_spec_benchmark.yaml
+#
+# HOW TO USE AS A REGRESSION GATE
+# --------------------------------
+# Add this to your CI to ensure AgentCI releases don't break the RAG agent:
+#   See: .github/workflows/benchmark.yml
+
+version: 1
+agent: rag-agent
+baseline_dir: ./golden
+
+defaults:
+  correctness:
+    # Applied to every query — hallucination guard on all answers
+    hallucination_check:
+      rule: >
+        All factual claims in the response are grounded in the AgentCI
+        documentation or the agent's retrieved context. No facts from the
+        model's pre-training knowledge should be presented as AgentCI-specific.
+      threshold: 0.8
+  cost:
+    max_cost_multiplier: 2.0    # No query should cost > 2× the golden baseline
+
+judge_config:
+  model: claude-sonnet-4-6
+  temperature: 0
+  structured_output: true
+
+queries:
+
+  # ── Benchmark Case 1: Happy Path — In-Scope Install Question ───────────────
+  # The canonical "should retrieve and answer" test. If this fails, the
+  # retriever is broken or the agent is ignoring in-scope queries.
+  - query: "How do I install AgentCI?"
+    description: >
+      BENCHMARK-1: Core in-scope question. Agent must call the retriever and
+      provide clear installation steps.
+    tags: [benchmark, smoke, in-scope, happy-path]
+
+    correctness:
+      # Deterministic check — fast, no API cost
+      expected_in_answer: ["pip install"]
+
+      # Robustness check — survives paraphrasing
+      llm_judge:
+        - rule: >
+            Response provides clear, step-by-step installation instructions
+            including the pip install command for AgentCI.
+          threshold: 0.7
+        - rule: >
+            Response is specific to AgentCI — not generic Python installation advice.
+          threshold: 0.6
+
+    path:
+      # Retriever must be called (router firewall pattern)
+      expected_tools: [retriever_tool]
+      min_tool_recall: 1.0
+      max_tool_calls: 5
+      match_mode: subset
+
+    cost:
+      max_llm_calls: 5
+      max_total_tokens: 3000
+
+  # ── Benchmark Case 2: Out-of-Scope — Weather Query ─────────────────────────
+  # The "infinite loop bug" demo: broken RAG agents called the retriever 11×
+  # before failing. Correct behavior: 0 tool calls, immediate polite decline.
+  - query: "What's the weather in Tokyo?"
+    description: >
+      BENCHMARK-2: Entirely out-of-scope query. Agent must decline immediately
+      with ZERO tool calls. This caught the v1 infinite-loop bug.
+    tags: [benchmark, edge-case, out-of-scope, demo]
+
+    correctness:
+      not_in_answer:
+        - "degrees"
+        - "forecast"
+        - "sunny"
+        - "rain"
+        - "humidity"
+        - "Tokyo weather"
+      llm_judge:
+        - rule: >
+            Agent politely declines to answer the weather question and explains
+            this is outside its AgentCI knowledge domain.
+          threshold: 0.8
+
+    path:
+      max_tool_calls: 0            # Must decline without any tool use
+      forbidden_tools:
+        - tavily_search
+        - web_search
+        - retriever_tool           # Even the retriever should NOT be called
+
+    cost:
+      max_llm_calls: 2             # Should decline in 1–2 LLM calls
+
+  # ── Benchmark Case 3: Anti-Hallucination — AWS Guard ───────────────────────
+  # Tests whether the agent uses pre-trained knowledge to answer out-of-scope
+  # questions. AWS is a topic the LLM knows well, making hallucination tempting.
+  - query: "How do I configure an AWS load balancer?"
+    description: >
+      BENCHMARK-3: Out-of-scope technical question the LLM "knows" well.
+      Agent must NOT provide AWS instructions from pre-trained knowledge.
+    tags: [benchmark, edge-case, out-of-scope, anti-hallucination]
+
+    correctness:
+      not_in_answer:
+        - "ALB"
+        - "target group"
+        - "listener"
+        - "health check"
+        - "security group"
+        - "EC2"
+      llm_judge:
+        - rule: >
+            Agent does NOT provide AWS load balancer configuration steps.
+            It declines and explains it is an AgentCI-focused assistant.
+          threshold: 0.9    # High threshold — hallucination is a critical failure
+
+    path:
+      max_tool_calls: 3
+
+  # ── Benchmark Case 4: Mixed Intent — Pricing + Weather ─────────────────────
+  # User combines an in-scope product question with an out-of-scope query.
+  # Agent must split and handle both correctly in one response.
+  - query: "What are your pricing plans, and also what's the weather in Paris?"
+    description: >
+      BENCHMARK-4: Mixed-intent query. The pricing question is in-scope and
+      requires retrieval. The weather question must be declined. Tests that
+      the agent handles compound intents correctly.
+    tags: [benchmark, edge-case, mixed-intent, routing]
+
+    correctness:
+      # In-scope part: pricing question answered
+      # (No expected_in_answer — pricing details may vary; use judge instead)
+      not_in_answer:
+        - "degrees"
+        - "forecast"
+        - "sunny"
+        - "rain"
+      llm_judge:
+        - rule: >
+            Response includes specific pricing plan information retrieved from
+            the product documentation.
+          threshold: 0.7
+        - rule: >
+            Response explicitly declines to answer the weather question,
+            explaining it is outside the agent's scope.
+          threshold: 0.7
+
+    path:
+      expected_tools: [retriever_tool]
+      min_tool_recall: 1.0          # Retriever must fire for pricing
+      forbidden_tools: [web_search, tavily_search, weather_api]
+      max_tool_calls: 5
+
+  # ── Benchmark Case 5: Ambiguous Negative — Nonexistent Feature ─────────────
+  # User asks about a feature that doesn't exist. Agent must politely correct
+  # the false premise rather than hallucinating an answer.
+  - query: "How do I use the auto-summarize feature to summarize my agent runs?"
+    description: >
+      BENCHMARK-5: User asks about a nonexistent feature. Agent must correct
+      the false premise ("auto-summarize doesn't exist") rather than
+      hallucinating instructions. Tests premise-refusal behavior.
+    tags: [benchmark, edge-case, refute-premise, anti-hallucination]
+
+    correctness:
+      # Agent should NOT provide instructions for a nonexistent feature
+      not_in_answer:
+        - "click the auto-summarize"
+        - "enable auto-summarize"
+        - "auto-summarize button"
+      llm_judge:
+        - rule: >
+            The response explicitly states that an "auto-summarize" feature does
+            not exist in AgentCI, rather than providing instructions for it.
+            A vague "I'm not sure" is NOT sufficient.
+          threshold: 0.8
+        - rule: >
+            The response offers an alternative — what AgentCI features DO exist
+            for reviewing agent runs (e.g., golden traces, CI reports).
+          threshold: 0.6
+
+    path:
+      expected_tools: [retriever_tool]
+      min_tool_recall: 1.0    # Must check docs before refuting the premise
+      max_tool_calls: 5

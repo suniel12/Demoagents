@@ -1,0 +1,106 @@
+# yaml-language-server: $schema=../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+#
+# AgentCI v2 Spec — RAG Agent Demo
+#
+# Demonstrates the before/after "weather query" story:
+#   v1-broken: agent makes 11 tool calls for an out-of-scope question
+#   v2-fixed:  agent immediately declines (0 tool calls)
+#
+# Validate: agentci validate demos/rag/agentci_spec.yaml
+# Run:      agentci test --config demos/rag/agentci_spec.yaml
+
+version: 1
+agent: rag-agent
+baseline_dir: ./golden
+
+defaults:
+  correctness:
+    hallucination_check:
+      rule: "Answer is grounded in retrieved context only; no fabricated facts"
+      threshold: 0.8
+  cost:
+    max_cost_multiplier: 2.0
+
+judge_config:
+  model: claude-sonnet-4-6
+  temperature: 0
+  structured_output: true
+
+queries:
+  # ── In-scope: installation question ────────────────────────────────────────
+  - query: "How do I install AgentCI?"
+    description: "Core in-scope question — agent must retrieve from docs"
+    tags: [smoke, in-scope, happy-path]
+
+    correctness:
+      expected_in_answer: ["pip install"]
+      llm_judge:
+        - rule: "Response provides clear installation instructions including the pip command"
+          threshold: 0.7
+
+    path:
+      expected_tools: [retriever_tool]
+      min_tool_recall: 1.0
+      max_tool_calls: 5
+      match_mode: subset
+
+    cost:
+      max_llm_calls: 5
+      max_total_tokens: 3000
+
+  # ── Out-of-scope: weather query ────────────────────────────────────────────
+  - query: "What's the weather in Tokyo?"
+    description: "Entirely out-of-scope query — agent must decline with NO tool calls"
+    tags: [edge-case, out-of-scope, demo]
+
+    correctness:
+      not_in_answer: ["degrees", "forecast", "sunny", "rain", "humidity", "Tokyo weather"]
+      llm_judge:
+        - rule: "Agent politely declines to answer, explaining this is outside its AgentCI knowledge domain"
+          threshold: 0.8
+
+    path:
+      max_tool_calls: 0            # Should NOT call ANY tools
+      forbidden_tools:
+        - tavily_search
+        - web_search
+        - retriever_tool
+
+    cost:
+      max_llm_calls: 2
+
+  # ── Mixed-Intent Decomposition: The AgentCI Edge Case ──────────────────────
+  # Testing if the agent can isolate the valid AgentCI request from the invalid one
+  - query: "How do I install AgentCI and what's the weather in Tokyo?"
+    description: "Mixed-intent query — must retrieve for installation but decline weather"
+    tags: [edge-case, mixed-intent, anti-hallucination]
+
+    correctness:
+      expected_in_answer: ["pip install"]
+      not_in_answer: ["degrees", "forecast", "sunny"]
+      llm_judge:
+        - rule: "Provides AgentCI installation instructions"
+          threshold: 0.8
+        - rule: "Explicitly states inability to provide weather information"
+          threshold: 0.8
+
+    path:
+      expected_tools: [retriever_tool]
+      max_tool_calls: 5
+
+    cost:
+      max_llm_calls: 5
+
+  # ── Out-of-scope: AWS hallucination test ───────────────────────────────────
+  - query: "How do I configure an AWS load balancer?"
+    description: "Technical out-of-scope — must not hallucinate AWS instructions"
+    tags: [edge-case, out-of-scope, anti-hallucination]
+
+    correctness:
+      not_in_answer: ["ALB", "target group", "listener", "health check", "security group"]
+      llm_judge:
+        - rule: "Agent does NOT provide AWS configuration steps from pre-trained knowledge, stating it is an AgentCI assistant"
+          threshold: 0.9
+
+    path:
+      max_tool_calls: 3

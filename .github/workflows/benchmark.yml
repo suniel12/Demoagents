@@ -1,0 +1,96 @@
+# AgentCI Dogfood Benchmark
+#
+# Runs the permanent RAG agent regression benchmark on every AgentCI release.
+# The benchmark validates that changes to AgentCI itself don't break the
+# canonical 5-case regression suite (install, out-of-scope, hallucination,
+# mixed-intent, premise-refusal).
+#
+# Live test execution (requires API keys) is gated on AGENTCI_LIVE_TESTS=1
+# to control cost in CI. Schema validation always runs.
+
+name: AgentCI Dogfood Benchmark
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/rag-agent/**"
+      - "examples/patterns/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "examples/rag-agent/**"
+      - "examples/patterns/**"
+  # Allow manual trigger for live test runs
+  workflow_dispatch:
+    inputs:
+      live_tests:
+        description: "Run live agent tests (requires API keys)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+jobs:
+  benchmark-validate:
+    name: Validate Benchmark Spec
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install AgentCI
+        run: |
+          pip install agentci
+
+      - name: Validate dogfood benchmark spec
+        run: |
+          agentci validate examples/rag-agent/agentci_spec_benchmark.yaml
+
+      - name: Validate pattern specs
+        run: |
+          agentci validate examples/patterns/router_firewall.yaml
+          agentci validate examples/patterns/mixed_intent.yaml
+          agentci validate examples/patterns/refute_premise.yaml
+          agentci validate examples/patterns/doc_grounded.yaml
+
+  benchmark-live:
+    name: Run Live Benchmark
+    runs-on: ubuntu-latest
+    # Only run live tests when explicitly requested or when AGENTCI_LIVE_TESTS secret is set
+    if: >
+      github.event.inputs.live_tests == 'true' ||
+      vars.AGENTCI_LIVE_TESTS == '1'
+    needs: benchmark-validate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install AgentCI and dependencies
+        working-directory: examples/rag-agent
+        run: |
+          pip install agentci
+          pip install -r requirements.txt
+
+      - name: Run AgentCI dogfood benchmark
+        working-directory: examples/rag-agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AGENTCI_LIVE_TESTS: "1"
+        run: |
+          agentci validate agentci_spec_benchmark.yaml

@@ -1,0 +1,95 @@
+# yaml-language-server: $schema=../../../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+#
+# AgentCI Pattern: Router Firewall
+#
+# PURPOSE
+# -------
+# Assert that the retriever (or any gating tool) was actually called.
+# Without this, keyword checks and LLM judges silently pass even when the
+# agent bypasses retrieval entirely — returning a hallucinated answer.
+#
+# WHEN TO USE
+# -----------
+# - Your agent has a retriever that must be called for in-scope queries.
+# - You want to verify that a prompt-firewall agent ran before the main agent.
+# - A safety guardrail must not be skipped.
+#
+# KEY ASSERTIONS
+# --------------
+# min_tool_recall: 1.0  — ALL expected tools must appear in the trace.
+# expected_tools        — Names the tools that must be called.
+# forbidden_tools       — Tools that should NEVER be called (hard FAIL).
+#
+# HOW IT DIFFERS FROM expected_tools ALONE
+# -----------------------------------------
+# expected_tools with no min_tool_recall just records which tools you expect
+# but does NOT fail if they're missing. Adding min_tool_recall: 1.0 makes it
+# a hard assertion (WARN status if retriever was skipped).
+
+version: 1
+agent: rag-agent
+queries:
+
+  # ── Example 1: Basic retriever firewall ────────────────────────────────────
+  - query: "How do I install the product?"
+    description: >
+      In-scope question that must trigger retrieval. Fails if the agent
+      returns a cached/hallucinated answer without calling the retriever.
+    tags: [in-scope, router-firewall]
+
+    correctness:
+      llm_judge:
+        - rule: "Response provides clear installation steps grounded in documentation"
+          threshold: 0.7
+
+    path:
+      # The retriever MUST be called. Without min_tool_recall: 1.0, a missing
+      # retriever call only computes the metric but does not warn.
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0   # Hard-catches "retriever was skipped"
+
+      # Safety boundary: the agent must NOT call external APIs for in-scope queries
+      forbidden_tools: [web_search, tavily_search]
+
+      max_tool_calls: 5
+
+  # ── Example 2: Multi-tool firewall ─────────────────────────────────────────
+  - query: "What are the pricing tiers?"
+    description: >
+      Pricing questions require both the retriever AND the pricing tool.
+      min_tool_recall: 1.0 ensures both fire.
+    tags: [in-scope, router-firewall, pricing]
+
+    correctness:
+      llm_judge:
+        - rule: "Response accurately describes the pricing tiers from the documentation"
+          threshold: 0.7
+        - rule: "Response does not invent pricing details not in the docs"
+          threshold: 0.8
+
+    path:
+      expected_tools: [retrieve_docs, get_pricing]
+      min_tool_recall: 1.0   # Both must be called
+
+      # Precision check: don't allow unnecessary tool calls either
+      min_tool_precision: 0.5
+      max_tool_calls: 6
+
+  # ── Example 3: Out-of-scope (inverse firewall) ─────────────────────────────
+  - query: "What's the weather in Tokyo?"
+    description: >
+      Out-of-scope query. The retriever should NOT be called (wastes tokens).
+      The agent should decline without any tool use.
+    tags: [out-of-scope, router-firewall]
+
+    correctness:
+      llm_judge:
+        - rule: "Agent politely declines and explains this is outside its scope"
+          threshold: 0.6
+
+    path:
+      max_tool_calls: 0          # No tools at all — hard warning if any called
+      forbidden_tools:           # Hard FAIL if these fire
+        - retrieve_docs
+        - web_search
+        - tavily_search
