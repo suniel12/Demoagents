@@ -13,7 +13,8 @@
 
 version: 1
 agent: support-router
-baseline_dir: ./baselines
+# Directory to store versioned baseline execution traces
+baseline_dir: ./golden
 
 defaults:
   cost:

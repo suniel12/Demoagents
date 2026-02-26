@@ -14,7 +14,8 @@
 
 version: 1
 agent: dev-agent
-baseline_dir: ./baselines
+# Each baseline lives at: <baseline_dir>/<agent>/<version>.json
+baseline_dir: ./golden
 
 defaults:
   cost:

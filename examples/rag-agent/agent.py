@@ -33,7 +33,7 @@ vectorstore = InMemoryVectorStore.from_documents(documents=splits, embedding=Ope
 retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
 
 def retrieve_docs(query: str) -> str:
-    """Retrieve internal Novacorp knowledge base documents."""
+    """Retrieve AgentCI documentation from the knowledge base."""
     docs = retriever.invoke(query)
     return "\n\n".join(doc.page_content for doc in docs)
 
@@ -49,19 +49,30 @@ class GradeOutput(BaseModel):
 def generate_query_or_respond(state: MessagesState):
     """First LLM call to decide if retrieval is needed or answer directly."""
     system = SystemMessage(content=(
-        "You are a NovaCorp customer support assistant. You help users with questions "
-        "about NovaCorp products (NovaChat, NovaCloud, NovaShield), billing, accounts, "
-        "technical support, policies, and company information.\n\n"
+        "You are an AgentCI documentation assistant. You help users with questions about "
+        "AgentCI — the open-source, trace-based regression testing framework for AI agents.\n\n"
+        "You can answer questions about: installation and setup, the agentci_spec.yaml format, "
+        "You can answer questions about: installation and setup, the agentci_spec.yaml format, "
+        "the three-layer evaluation model (Correctness / Path / Cost), CLI commands, "
+        "assertions and metrics, the mock system, CI/CD and GitHub Actions integration, "
+        "golden baselines and the diff engine, demo agents (RAG Agent, Support Router, DevAgent), "
+        "the roadmap, pricing, licensing, open-source status, and how AgentCI compares to other "
+        "tools (DeepEval, promptfoo, LangSmith, Braintrust). Assume any software/SaaS related question "
+        "is intended about AgentCI unless proven otherwise.\n\n"
         "DECISION RULES:\n"
-        "- If the question is about NovaCorp topics, call the retrieve_docs tool to search "
-        "the knowledge base.\n"
-        "- If the question is clearly unrelated to NovaCorp (e.g. weather, sports, cooking, "
-        "general knowledge, other companies), respond directly: 'I'm a NovaCorp support "
-        "assistant and can only help with NovaCorp-related questions.'\n"
-        "- Do NOT call retrieve_docs for out-of-scope questions."
+        "1. If the question is ENTIRELY about AgentCI or AI agent testing, call retrieve_docs "
+        "with the full question.\n"
+        "2. If the question is a MIX — some parts about AgentCI, some unrelated (e.g. 'How do I "
+        "install AgentCI AND what is the weather?') — call retrieve_docs with ONLY the "
+        "AgentCI part (e.g. 'How do I install AgentCI'). The generate step will note the "
+        "unrelated part was out of scope.\n"
+        "3. If the question is ENTIRELY unrelated to AgentCI or AI software (e.g. weather only, sports only, "
+        "cooking), do NOT call retrieve_docs. Reply directly: \"I'm an AgentCI documentation "
+        "assistant and can only help with questions related to AgentCI and testing AI agents.\"\n"
+        "- Never answer from pre-trained knowledge for AgentCI topics — always retrieve first."
     ))
     messages = [system] + state["messages"]
-    llm_with_tools = llm.bind_tools([{"name": "retrieve_docs", "description": "Retrieve internal Novacorp knowledge base documents.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}])
+    llm_with_tools = llm.bind_tools([{"name": "retrieve_docs", "description": "Retrieve AgentCI documentation from the knowledge base.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}])
     response = llm_with_tools.invoke(messages)
     return {"messages": [response]}
 
@@ -77,16 +88,28 @@ def retrieve_docs_node(state: MessagesState):
     return {"messages": []}
 
 def grade_documents(state: MessagesState):
-    """Grade the retrieved documents for relevance to the original question."""
-    # The last message is the tool response containing docs. The first message is the user query.
-    original_query = state["messages"][0].content
+    """Grade the retrieved documents for relevance to the retrieval query (not the raw user input).
+
+    Using the actual query sent to retrieve_docs (extracted from the tool call args) prevents
+    the rewrite loop on mixed queries: if the user asked 'install AgentCI AND weather', the
+    triage sends only 'install AgentCI' to retrieve_docs. Grading against that focused query
+    succeeds on the first try instead of looping because docs don't mention weather.
+    """
     docs_content = state["messages"][-1].content
-    
+
+    # Find the retrieval query from the most recent AIMessage that made a tool call
+    retrieval_query = state["messages"][0].content  # fallback to original
+    for msg in reversed(state["messages"]):
+        if isinstance(msg, AIMessage) and getattr(msg, "tool_calls", None):
+            tc = msg.tool_calls[0]
+            if tc.get("name") == "retrieve_docs":
+                retrieval_query = tc["args"].get("query", retrieval_query)
+                break
+
     grader_llm = llm.with_structured_output(GradeOutput)
-    prompt = f"Grade if the following docs are relevant to the query '{original_query}'. strictly reply 'yes' or 'no'.\n\nDocs:\n{docs_content}"
+    prompt = f"Grade if the following docs are relevant to the query '{retrieval_query}'. Strictly reply 'yes' or 'no'.\n\nDocs:\n{docs_content}"
     result = grader_llm.invoke([HumanMessage(content=prompt)])
-    
-    # Store grading result as a message or state (we use an AI message to trace it easily)
+
     return {"messages": [AIMessage(content=f'{{"binary_score": "{result.binary_score.lower()}"}}', name="grade_artifacts")]}
 
 def generate_answer(state: MessagesState):
@@ -94,10 +117,21 @@ def generate_answer(state: MessagesState):
     # The documents are 2 messages back (before the grade message)
     docs_msg = state["messages"][-2]
     original_query = state["messages"][0].content
-    
+
     messages = [
-        SystemMessage(content="You are a helpful assistant with access to a knowledge base. Answer the user's question based strictly on the provided context. If the context does not contain the answer, you must reply 'I don't have information about that.' Do not use your pre-trained knowledge to answer."),
-        HumanMessage(content=f"Context: {docs_msg.content}\n\nQuestion: {original_query}")
+        SystemMessage(content=(
+            "You are an AgentCI documentation assistant answering from a retrieved knowledge base.\n\n"
+            "RULES:\n"
+            "1. Answer the AgentCI-related parts of the question using ONLY the provided context. "
+            "Do not use pre-trained knowledge.\n"
+            "2. If the user's question also contains parts unrelated to AgentCI (e.g. weather, sports, "
+            "general questions about other software), acknowledge them explicitly: say you can only "
+            "help with AgentCI topics for those parts.\n"
+            "3. If the context does not cover the AgentCI part of the question either, say: "
+            "'I don't have that information in my knowledge base.'\n"
+            "4. Always answer the in-scope part first, then address out-of-scope parts."
+        )),
+        HumanMessage(content=f"Context:\n{docs_msg.content}\n\nQuestion: {original_query}")
     ]
     response = llm.invoke(messages)
     return {"messages": [response]}
