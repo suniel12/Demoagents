@@ -68,3 +68,7 @@ The regression test suite uses `diff_traces()` to compare current runs against g
 - `GUARDRAILS_CHANGED` — different guardrails triggered
 - `COST_SPIKE` — cost increased beyond threshold
 - `AVAILABLE_HANDOFFS_CHANGED` — routing options changed
+
+## For Coding Agents
+
+If you're a coding agent integrating with this project, see the root [`AGENTS.md`](../../AGENTS.md) for structured setup instructions, test patterns, and Make targets.

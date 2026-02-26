@@ -1,5 +1,8 @@
 import os
 import sys
+import warnings
+
+warnings.filterwarnings("ignore", message="Pydantic serializer warnings", category=UserWarning)
 
 # Ensure we can import the agent
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))

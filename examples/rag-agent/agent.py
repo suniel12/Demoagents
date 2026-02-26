@@ -48,9 +48,21 @@ class GradeOutput(BaseModel):
 
 def generate_query_or_respond(state: MessagesState):
     """First LLM call to decide if retrieval is needed or answer directly."""
-    # We bind the retriever as a tool
+    system = SystemMessage(content=(
+        "You are a NovaCorp customer support assistant. You help users with questions "
+        "about NovaCorp products (NovaChat, NovaCloud, NovaShield), billing, accounts, "
+        "technical support, policies, and company information.\n\n"
+        "DECISION RULES:\n"
+        "- If the question is about NovaCorp topics, call the retrieve_docs tool to search "
+        "the knowledge base.\n"
+        "- If the question is clearly unrelated to NovaCorp (e.g. weather, sports, cooking, "
+        "general knowledge, other companies), respond directly: 'I'm a NovaCorp support "
+        "assistant and can only help with NovaCorp-related questions.'\n"
+        "- Do NOT call retrieve_docs for out-of-scope questions."
+    ))
+    messages = [system] + state["messages"]
     llm_with_tools = llm.bind_tools([{"name": "retrieve_docs", "description": "Retrieve internal Novacorp knowledge base documents.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}])
-    response = llm_with_tools.invoke(state["messages"])
+    response = llm_with_tools.invoke(messages)
     return {"messages": [response]}
 
 def retrieve_docs_node(state: MessagesState):

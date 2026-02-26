@@ -75,6 +75,10 @@ User Input (repo URL)
 └─────────────────┘
 ```
 
+## For Coding Agents
+
+If you're a coding agent integrating with this project, see the root [`AGENTS.md`](../../AGENTS.md) for structured setup instructions, test patterns, and Make targets.
+
 ## License
 
 MIT

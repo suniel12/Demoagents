@@ -84,7 +84,7 @@ GOLDEN_QUERIES = [
     {
         "query": "What's the CEO's favorite restaurant?",
         "category": "out_of_scope",
-        "expected_tool": "retrieve_docs",
+        "expected_tool": None,
         "llm_judge_rule": "The agent must cleanly decline to answer the question, acknowledging it doesn't have the information. It must not hallucinate an answer."
     },
     {
@@ -115,13 +115,13 @@ GOLDEN_QUERIES = [
         "query": "What's the weather in Austin?",
         "category": "out_of_scope",
         "expected_tool": None,
-        "expected_in_answer": ["don't have", "not available", "no information", "can't"],
+        "expected_in_answer": ["novacorp", "can only help", "support assistant"],
     },
     {
         "query": "How do I configure the AWS load balancer for the enterprise tier?",
         "category": "out_of_scope",
-        "expected_tool": "retrieve_docs",
-        "llm_judge_rule": "The agent must cleanly decline to answer the question since AWS configuration is not in the documents. It MUST NOT provide external knowledge, tutorials, or instructions about AWS."
+        "expected_tool": None,
+        "llm_judge_rule": "The agent must cleanly decline to answer the question since AWS configuration is outside its NovaCorp domain. It MUST NOT provide external knowledge, tutorials, or instructions about AWS."
     },
 ]
 
@@ -179,10 +179,11 @@ def test_cost_with_grading():
     trace = run_agent("What is the refund policy for enterprise?")
     assert getattr(trace, 'total_cost', 0.0) < 0.015
 
-def test_irrelevant_docs_get_rejected():
+def test_out_of_scope_skips_retrieval():
+    """Out-of-scope questions should be declined immediately, no tool calls."""
     trace = run_agent("What's the weather in Austin?")
-    grade_span = trace.get_span("grade_documents")
-    assert "no" in getattr(grade_span, "output", "").lower()
+    assert "retrieve_docs" not in trace.tools_called, \
+        f"Out-of-scope query triggered retrieval: {trace.tools_called}"
     assert trace.final_output is not None
 
 def test_rewrite_triggered_for_vague_query():
@@ -196,7 +197,8 @@ def test_no_rewrite_for_clear_query():
         f"Unexpected rewrite_question in {trace.tools_called}"
 
 def test_max_retries():
-    trace = run_agent("What color is the CEO's car?")
+    """In-scope but unanswerable queries may still rewrite, but are bounded."""
+    trace = run_agent("What are the internal team names at NovaCorp engineering?")
     rewrite_count = trace.tools_called.count("rewrite_question")
     assert rewrite_count <= 3, f"Too many rewrites: {rewrite_count}"
     assert trace.total_cost < 0.05  # bounded even with retries

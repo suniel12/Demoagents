@@ -67,3 +67,7 @@ make compare MODEL=gpt-4o
 - `save_baseline.py` — Script to re-record golden baselines from live runs.
 - `demo_regression.py` — Standalone demo of AgentCI's regression report.
 - `chat.py` — Interactive CLI to chat with the NovaCorp agent.
+
+## For Coding Agents
+
+If you're a coding agent integrating with this project, see the root [`AGENTS.md`](../../AGENTS.md) for structured setup instructions, test patterns, and Make targets.
