@@ -14,6 +14,7 @@
 
 version: 1
 agent: dev-agent
+runner: "devagent.agent.core:run_agent"
 # Each baseline lives at: <baseline_dir>/<agent>/<version>.json
 baseline_dir: ./golden
 
@@ -32,13 +33,16 @@ queries:
   # HAPPY PATH — Healthy public repository
   # ══════════════════════════════════════════════════════════════════════════
 
-  - query: "Analyze https://github.com/tiangolo/fastapi"
-    tags: [smoke, happy-path]
+  - query: "Analyze tiangolo/fastapi"
+    tags: [smoke, happy-path, v3-context-test]
     description: "Well-maintained open source repo — expects full analysis covering README, license, CI, security"
     correctness:
       llm_judge:
         - rule: "Report covers at least 3 of: README quality, license, CI/CD pipeline, dependency health, and security posture"
           threshold: 0.7
+        - rule: "The agent's answer must strictly align with our custom tech standards."
+          threshold: 0.9
+          context_file: "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/dev-agent/custom_standards.md"
     path:
       expected_tools: [github_fetch_metadata, github_read_file, github_list_dir]
       min_tool_recall: 0.8

@@ -1,10 +1,10 @@
-# Getting Started with AgentCI
+# Installation & Quickstart
 
 ## Installation
 
 Install AgentCI using pip:
 
-```
+```bash
 pip install agentci
 ```
 
@@ -26,12 +26,12 @@ Optional dependencies for specific features:
 ## Quick Start
 
 1. **Install AgentCI:**
-   ```
+   ```bash
    pip install agentci
    ```
 
 2. **Initialize your project:**
-   ```
+   ```bash
    agentci init
    ```
    This generates:
@@ -40,48 +40,24 @@ Optional dependencies for specific features:
    - `.git/hooks/pre-push` — Optional pre-push hook
 
 3. **Write your spec:**
-   Edit `agentci_spec.yaml` to define your agent's expected behavior. See the Spec Format section for details.
+   Edit `agentci_spec.yaml` to define your agent's expected behavior. 
 
 4. **Validate your spec:**
-   ```
+   ```bash
    agentci validate agentci_spec.yaml
    ```
 
 5. **Run tests:**
-   ```
+   ```bash
    agentci test --config agentci_spec.yaml --format console
    ```
 
 6. **Save a golden baseline:**
-   ```
+   ```bash
    agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml
    ```
 
 7. **Diff against baselines:**
-   ```
+   ```bash
    agentci diff --baseline v1 --compare v2 --agent my-agent
    ```
-
-## Integration with pytest
-
-AgentCI also works natively with pytest. You can use the Python API directly:
-
-```python
-from agentci import load_spec, run_spec
-
-spec = load_spec("agentci_spec.yaml")
-results = run_spec(spec, my_agent_function, max_workers=4)
-
-for result in results:
-    assert not result.hard_fail, f"Query '{result.query}' failed correctness"
-```
-
-Or use the pytest plugin with fixtures:
-
-```python
-from agentci.assertions import assert_golden_match
-
-def test_billing_regression():
-    trace = run_your_agent("I was charged twice")
-    assert_golden_match(trace, "golden/billing_flow.json")
-```

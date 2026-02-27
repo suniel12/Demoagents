@@ -29,12 +29,3 @@ AgentCI is currently at version 2.0. The core trace model, three-layer evaluatio
 ## License
 
 AgentCI is open source under the Apache 2.0 License.
-
-## Who It's For
-
-AgentCI is for any team building AI agents who want to:
-- Catch regressions before they hit production
-- Track cost drift across model changes
-- Enforce tool usage patterns and routing rules
-- Get inline GitHub PR annotations when something breaks
-- Run deterministic tests with zero API keys using the mock system

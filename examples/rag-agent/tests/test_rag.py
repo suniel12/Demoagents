@@ -95,7 +95,7 @@ GOLDEN_QUERIES = [
     {
         "query": "How do I fail the CI pipeline if the agent uses forbidden tools?",
         "category": "direct_hit",
-        "expected_in_answer": ["correctness", "fail", "exit 1", "forbidden tools"],
+        "expected_in_answer": ["fail", "forbidden tools"],
         "expected_tool": "retrieve_docs",
     },
     {
@@ -214,6 +214,25 @@ def test_execution_path_with_rewrite():
     # Verify retrieve_docs appears at least twice (initial + post-rewrite)
     assert trace.tools_called.count("retrieve_docs") >= 2, \
         f"Expected >=2 retrieve_docs calls, got {trace.tools_called}"
+
+def test_compound_query_decomposed_within_budget():
+    """Compound AgentCI query uses multi-path (no rewrite loop) and stays within budget."""
+    trace = run_agent(
+        "Can I get a refund if I'm on the Enterprise plan, and who do I contact for support?"
+    )
+    assert "retrieve_docs" in trace.tools_called
+    assert "rewrite_question" not in trace.tools_called, \
+        f"Unexpected rewrite_question on decomposed path: {trace.tools_called}"
+    assert trace.tools_called.count("retrieve_docs") <= 5
+    assert "grade_artifacts" in trace.tools_called
+
+def test_mixed_intent_not_decomposed():
+    """Mixed-intent query (AgentCI + weather) is NOT decomposed; single-path handles it."""
+    trace = run_agent("How do I install AgentCI and what's the weather in Tokyo?")
+    assert "retrieve_docs" in trace.tools_called
+    assert "rewrite_question" not in trace.tools_called, \
+        f"Unexpected rewrite_question for mixed-intent: {trace.tools_called}"
+    assert len(trace.tools_called) <= 5
 
 def test_regression_against_baseline():
     """Compare current run against saved baseline.

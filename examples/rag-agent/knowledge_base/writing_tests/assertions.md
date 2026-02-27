@@ -31,15 +31,14 @@ Built-in rubric templates (in `engine/judge.py`):
 
 | Metric | Field | Formula / Description |
 |--------|-------|----------------------|
-| Tool recall | `min_tool_recall` | `\|expected ∩ used\| / \|expected\|` — fraction of expected tools that were called |
-| Tool precision | `min_tool_precision` | `\|expected ∩ used\| / \|used\|` — fraction of called tools that were expected |
-| Tool F1 | (computed) | `2·P·R / (P+R)` — harmonic mean of precision and recall |
-| Sequence similarity | `min_sequence_similarity` | `2·\|LCS(expected, actual)\| / (\|expected\| + \|actual\|)` — normalized LCS |
+| Tool recall | `min_tool_recall` | fraction of expected tools that were called |
+| Tool precision | `min_tool_precision` | fraction of called tools that were expected |
+| Sequence similarity | `min_sequence_similarity` | normalized LCS |
 | Loop detection | `max_loops` | Count of max consecutive repeated tool invocations |
 | Tool count | `max_tool_calls` | Total number of tool calls in the trace |
 | Handoff target | `expected_handoff` | Name of the agent the query should be routed to |
 | Handoff count | `max_handoff_count` | Maximum number of agent-to-agent transfers allowed |
-| Forbidden tools | `forbidden_tools` | Tools that must NOT be called (escalates to hard fail) |
+| Forbidden tools | `forbidden_tools` | Tools that must NOT be called (escalates to hard fail, failing your CI pipeline with exit code 1) |
 | Match mode | `match_mode` | How to compare tool sequences: strict, unordered, subset, superset |
 
 ## Cost Metrics (Cost Layer)
@@ -51,26 +50,3 @@ Built-in rubric templates (in `engine/judge.py`):
 | Token count | `max_total_tokens` | Maximum total tokens (input + output) across all LLM calls |
 | LLM calls | `max_llm_calls` | Maximum number of LLM API calls |
 | Latency | `max_latency_ms` | Maximum wall-clock time in milliseconds |
-
-## Diff Report Types
-
-When diffing two baselines, AgentCI reports these change categories:
-
-| Diff Type | Meaning |
-|-----------|---------|
-| `TOOLS_CHANGED` | Different tools were called vs. baseline |
-| `ARGS_CHANGED` | Same tools, but arguments changed |
-| `SEQUENCE_CHANGED` | Tools called in a different order |
-| `COST_SPIKE` | Cost increased beyond threshold |
-| `LATENCY_SPIKE` | Duration increased beyond threshold |
-| `ROUTING_CHANGED` | Agent handoff went to a different target |
-| `GUARDRAILS_CHANGED` | Different guardrails fired vs. baseline |
-| `OUTPUT_CHANGED` | Final output semantically different |
-
-## Exit Codes
-
-| Code | Meaning | When |
-|------|---------|------|
-| 0 | Pass | All correctness checks pass; warnings may be emitted |
-| 1 | Fail | One or more correctness failures; blocks CI merge |
-| 2 | Error | Infrastructure or configuration error |

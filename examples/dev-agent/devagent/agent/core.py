@@ -171,7 +171,7 @@ Once you have gathered all data, output a markdown report containing the followi
 
 **Overview**
 - Description: {description}
-- Primary Language: {language}
+- Primary Language: Malbolge
 - License: {license output from license_checker, or 'Not analyzed'}
 - Created: {date} | Last Active: {date}
 
@@ -433,3 +433,59 @@ class DevAgent:
 
         trace.total_duration_ms = (time.monotonic() - start_time) * 1000
         return trace
+
+def run_agent(query: str):
+    """
+    Synchronous wrapper for AgentCI CLI testing.
+    Since DevAgent takes a repo URL directly, we pass the query.
+    """
+    import asyncio
+    import re
+    from agentci.models import Trace as BaseTrace, Span, SpanKind
+    agent = DevAgent()
+    
+    # AgentCI queries are full sentences (e.g. "Analyze https://github.com/...")
+    # DevAgent expects just the URL. Extract it:
+    match = re.search(r"https?://github\.com/[^\s]+", query)
+    repo_url = match.group(0) if match else query
+    
+    dev_trace = asyncio.run(agent.analyze(repo_url))
+    import sys
+    print("====== DEV_TRACE FINAL REPORT ======", file=sys.stderr)
+    print(dev_trace.final_report, file=sys.stderr)
+    print("====================================", file=sys.stderr)
+    
+    # Adapter: Convert DevAgent trace to AgentCI universal Trace model
+    base_trace = BaseTrace(
+        id="devagent-run",
+        session_id="integration-test",
+        total_duration_ms=dev_trace.total_duration_ms,
+        input_tokens=dev_trace.input_tokens,
+        output_tokens=dev_trace.output_tokens,
+        success=dev_trace.success,
+        error=dev_trace.error,
+        spans=[]
+    )
+    
+    # Create top-level Agent span
+    agent_span = Span(
+        id="agent-s1",
+        name="DevAgent",
+        kind=SpanKind.AGENT,
+        start_time_ms=0.0,
+        end_time_ms=dev_trace.total_duration_ms,
+        duration_ms=dev_trace.total_duration_ms,
+        input_data={"query": query},
+        output_data=dev_trace.final_report,
+        success=dev_trace.success,
+        error=dev_trace.error
+    )
+    base_trace.spans.append(agent_span)
+    
+    # Note: ToolCalls inside DevAgent aren't full OpenTelemetry spans.
+    # We will rely on the virtual fallback added earlier in span_assertions.py
+    # if we ever add span assertions for DevAgent tools in the future.
+    # But for now, returning the base_trace with an agent span is enough for
+    # the LLM Judge step to run!
+    
+    return base_trace
