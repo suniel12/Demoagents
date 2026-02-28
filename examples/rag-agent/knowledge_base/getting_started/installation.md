@@ -5,7 +5,7 @@
 Install AgentCI using pip:
 
 ```bash
-pip install agentci
+pip install ciagent
 ```
 
 AgentCI requires Python 3.10 or later.
@@ -27,7 +27,7 @@ Optional dependencies for specific features:
 
 1. **Install AgentCI:**
    ```bash
-   pip install agentci
+   pip install ciagent
    ```
 
 2. **Initialize your project:**

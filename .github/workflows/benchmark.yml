@@ -49,7 +49,7 @@ jobs:
 
       - name: Install AgentCI
         run: |
-          pip install agentci
+          pip install ciagent
 
       - name: Validate dogfood benchmark spec
         run: |
@@ -83,7 +83,7 @@ jobs:
       - name: Install AgentCI and dependencies
         working-directory: examples/rag-agent
         run: |
-          pip install agentci
+          pip install ciagent
           pip install -r requirements.txt
 
       - name: Run AgentCI dogfood benchmark
