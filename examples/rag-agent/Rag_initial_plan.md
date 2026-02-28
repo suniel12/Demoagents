@@ -17,7 +17,7 @@ The template you're forking is the official [LangGraph Agentic RAG tutorial](htt
 
 ## The Knowledge Base (Static, Ships With The Example)
 
-Before any agent code, you need a small, controlled corpus. This is NOT the LangGraph tutorial's default (Lilian Weng blog posts) — those require web fetching and are uncontrolled. Instead, create 10-15 short markdown files for a fictional company called **"NovaCorp"**:
+Before any agent code, you need a small, controlled corpus. This is NOT the LangGraph tutorial's default (Lilian Weng blog posts) — those require web fetching and are uncontrolled. Instead, create 10-15 short markdown files for a fictional company called **"AgentCI"**:
 
 | File | Content | Purpose |
 |------|---------|---------|
@@ -27,7 +27,7 @@ Before any agent code, you need a small, controlled corpus. This is NOT the Lang
 | `products/features.md` | "Enterprise includes: SSO, audit logs, dedicated support. Business: email support, basic analytics." | Comparison queries |
 | `support/faq.md` | "Password reset: Settings > Security > Reset. Two-factor: Settings > 2FA." | Procedural instruction |
 | `support/contact.md` | "Email: support@novacorp.com. Phone: 1-800-NOVA. Hours: 9-5 PT weekdays." | Factual lookup |
-| `company/about.md` | "NovaCorp founded 2019. HQ in Austin, TX. 450 employees." | Background retrieval |
+| `company/about.md` | "AgentCI founded 2019. HQ in Austin, TX. 450 employees." | Background retrieval |
 | `company/team.md` | "CEO: Sarah Chen. CTO: Marcus Williams. VP Eng: Priya Patel." | Proper noun retrieval |
 | `legal/privacy.md` | "Data stored in US-WEST-2. GDPR compliant. SOC 2 Type II certified." | Compliance queries |
 | `legal/tos.md` | "Users must be 18+. Prohibited: scraping, resale, reverse engineering." | Restriction queries |
@@ -43,7 +43,7 @@ A project structure. No agent logic yet.
 
 ```
 examples/rag-agent/
-├── knowledge_base/           # The 10-15 NovaCorp markdown files
+├── knowledge_base/           # The 10-15 AgentCI markdown files
 │   ├── policies/
 │   ├── products/
 │   ├── support/
@@ -65,7 +65,7 @@ Nothing yet. But you set up `conftest.py` with the AgentCI fixtures you already 
 How the example project structure should look for other developers. This becomes the `agentci init --template rag` scaffold later.
 
 ### Commit message
-`feat(examples): scaffold RAG agent project structure with NovaCorp knowledge base`
+`feat(examples): scaffold RAG agent project structure with AgentCI knowledge base`
 
 ---
 
@@ -73,7 +73,7 @@ How the example project structure should look for other developers. This becomes
 
 ### What you build
 The absolute minimum from the LangGraph tutorial:
-- Load the NovaCorp markdown files
+- Load the AgentCI markdown files
 - Split them into chunks (RecursiveCharacterTextSplitter)
 - Index into InMemoryVectorStore with OpenAI embeddings
 - Create a `retrieve_docs` tool
@@ -179,14 +179,14 @@ GOLDEN_QUERIES = [
         "expected_tool": "retrieve_docs",
     },
     {
-        "query": "What's NovaCorp's uptime guarantee for the business plan?",
+        "query": "What's AgentCI's uptime guarantee for the business plan?",
         "category": "direct_hit",
         "expected_in_answer": ["99.5"],
         "not_in_answer": ["99.9"],  # that's enterprise, not business
         "expected_tool": "retrieve_docs",
     },
     {
-        "query": "Is NovaCorp SOC 2 compliant?",
+        "query": "Is AgentCI SOC 2 compliant?",
         "category": "direct_hit",
         "expected_in_answer": ["SOC 2", "certified"],
         "expected_tool": "retrieve_docs",

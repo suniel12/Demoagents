@@ -1,0 +1,99 @@
+# yaml-language-server: $schema=../../../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+#
+# AgentCI Pattern: Document-Grounded Judging
+#
+# PURPOSE
+# -------
+# Evaluate the agent's answer ONLY against a specific reference document.
+# The LLM judge is instructed to ignore prior training knowledge and assess
+# solely based on the provided ground-truth text.
+#
+# This catches "plausible but wrong" hallucinations that pass without a
+# reference — where the agent's answer sounds correct but contradicts the
+# actual documentation.
+#
+# WHEN TO USE
+# -----------
+# - You have an authoritative reference document (SLA, pricing page, ToS, FAQ).
+# - You want to verify the answer matches the document exactly, not "roughly".
+# - Your agent's RAG retriever might retrieve partial or outdated chunks.
+#
+# KEY ASSERTIONS
+# --------------
+# context_file: ./path/to/reference.md  — The judge loads this file and
+#   evaluates the answer ONLY against its contents, ignoring prior training
+#   knowledge. Path is resolved relative to the spec file location.
+
+version: 1
+agent: rag-agent
+queries:
+
+  # ── Example 1: SLA terms must match reference document ─────────────────────
+  - query: "What is the guaranteed uptime in the SLA?"
+    description: >
+      The answer must match the SLA document exactly. The judge evaluates
+      ONLY against the reference document — not general knowledge about SLAs.
+    tags: [doc-grounded, policy, sla]
+
+    correctness:
+      llm_judge:
+        # context_file causes the judge to evaluate against ONLY this document.
+        # The judge prompt explicitly says: "Do NOT use prior training knowledge."
+        - rule: >
+            The response accurately states the uptime percentage and SLA terms
+            exactly as written in the reference document.
+          threshold: 0.8
+          context_file: ./knowledge_base/policies/sla-terms.md
+
+    path:
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0
+      max_tool_calls: 5
+
+  # ── Example 2: Pricing must match pricing document ──────────────────────────
+  - query: "What is the price of the Pro plan?"
+    description: >
+      Pricing details must match the pricing document exactly. Even minor
+      discrepancies (wrong currency, wrong tier) should fail.
+    tags: [doc-grounded, pricing]
+
+    correctness:
+      llm_judge:
+        - rule: >
+            The response states the Pro plan price exactly as documented.
+            Any discrepancy in price, currency, billing period, or included
+            features compared to the reference document should score 1.
+          threshold: 0.9    # High threshold — pricing errors are critical
+          context_file: ./knowledge_base/products/pricing.md
+
+        - rule: >
+            The response does not mention pricing for plans other than Pro,
+            unless explicitly asked.
+          threshold: 0.7
+          # No context_file here — this is a structural check, not doc-grounded
+
+    path:
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0
+      max_tool_calls: 5
+
+  # ── Example 3: Refund policy must match policy document ────────────────────
+  - query: "What is your refund policy for annual subscriptions?"
+    description: >
+      Refund policy details must be grounded in the refund policy document.
+      The judge must not accept general knowledge about refund policies.
+    tags: [doc-grounded, policy, refund]
+
+    correctness:
+      llm_judge:
+        - rule: >
+            The response accurately describes the refund policy for annual
+            subscriptions as stated in the reference document, including any
+            time limits, conditions, or exceptions.
+          threshold: 0.8
+          context_file: ./knowledge_base/policies/refund-policy.md
+
+    path:
+      expected_tools: [retrieve_docs]
+      min_tool_recall: 1.0
+      max_tool_calls: 5

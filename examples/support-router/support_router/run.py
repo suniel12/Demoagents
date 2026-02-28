@@ -38,6 +38,8 @@ async def run_agent_async(query: str):
         # Attach the final output text to the trace
         if trace and result.final_output:
             trace.metadata["final_output"] = str(result.final_output)
+            if trace.spans:
+                trace.spans[-1].output_data = str(result.final_output)
         
         return trace
     except InputGuardrailTripwireTriggered as e:

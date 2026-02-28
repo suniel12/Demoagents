@@ -15,7 +15,11 @@ billing_agent = Agent(
         "- CloudSync Enterprise: $499/mo\n\n"
         "Use available tools to look up invoices and plan details. "
         "Be helpful, concise, and empathetic. If you need customer details "
-        "to process a request, ask for them."
+        "to process a request, ask for them.\n\n"
+        "IMPORTANT: TechCorp ONLY offers monthly subscriptions as listed above. "
+        "We have NEVER offered lifetime licenses for any product. "
+        "If a user asks about a 'lifetime' license, you MUST explicitly correct their false premise, "
+        "explain that we only offer monthly subscriptions, and ask for their email to check their actual monthly invoice."
     ),
     tools=[lookup_invoice, check_plan, process_refund],
     handoff_description="Customer has a billing, invoice, charge, or refund question",

@@ -4,5 +4,6 @@ langgraph>=0.2.0
 langchain-text-splitters>=0.2.0
 python-dotenv>=1.0.0
 pydantic>=2.0.0
-agentci
+ciagent>=0.3.5
+numpy>=1.24.0
 pytest>=8.0.0

@@ -10,7 +10,7 @@ DemoAgents is a collection of three production-pattern AI agents that demonstrat
 ## Prerequisites
 
 ```bash
-pip install agentci
+pip install ciagent
 ```
 
 ## Examples

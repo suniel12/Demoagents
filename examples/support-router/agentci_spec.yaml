@@ -1,0 +1,241 @@
+# AgentCI v2 spec for the TechCorp Support Router demo agent.
+#
+# Ports all 20 golden queries from tests/test_routing.py into declarative
+# YAML format with three-tier assertions:
+#
+#   Correctness — LLM judge for ambiguous routing decisions
+#   Path        — expected_handoff, max_handoff_count, forbidden_tools
+#   Cost        — max_cost_usd: $0.01 per route (triage + 1 specialist call)
+#
+# Usage:
+#   agentci validate agentci_spec.yaml
+#   agentci test --config agentci_spec.yaml --workers 4
+
+version: 1
+agent: support-router
+# Directory to store versioned baseline execution traces
+baseline_dir: ./golden
+
+# Runner hook for CLI execution
+runner: "support_router.run:run_agent"
+
+defaults:
+  cost:
+    max_cost_usd: 0.01
+    max_cost_multiplier: 3.0
+    max_llm_calls: 4        # triage + specialist = 2 LLM calls typical; budget 4×
+
+judge_config:
+  model: claude-sonnet-4-5-20250929
+  temperature: 0
+  threshold: 0.75
+
+queries:
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CLEAR BILLING → Billing Agent
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "I was charged twice for my CloudSync Pro subscription"
+    tags: [billing, clear-intent, smoke]
+    path:
+      expected_handoff: "Billing Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "Can I get a refund for last month?"
+    tags: [billing, clear-intent]
+    path:
+      expected_handoff: "Billing Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "I want to upgrade from Pro to Business plan"
+    tags: [billing, clear-intent]
+    path:
+      expected_handoff: "Billing Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CLEAR TECHNICAL → Technical Agent
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "CloudSync keeps crashing when I try to sync files"
+    tags: [technical, clear-intent, smoke]
+    path:
+      expected_handoff: "Technical Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "What does error code E-SYNC-003 mean?"
+    tags: [technical, clear-intent]
+    path:
+      expected_handoff: "Technical Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "Is the CloudSync service down right now?"
+    tags: [technical, clear-intent]
+    path:
+      expected_handoff: "Technical Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CLEAR ACCOUNT → Account Agent
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "I forgot my password and need to reset it"
+    tags: [account, clear-intent, smoke]
+    path:
+      expected_handoff: "Account Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "How do I enable two-factor authentication?"
+    tags: [account, clear-intent]
+    path:
+      expected_handoff: "Account Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "I want to cancel my account"
+    tags: [account, clear-intent]
+    path:
+      expected_handoff: "Account Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # CLEAR GENERAL → General Agent
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "What features does CloudSync Pro include?"
+    tags: [general, clear-intent, smoke]
+    path:
+      expected_handoff: "General Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "I love CloudSync! Can you add dark mode?"
+    tags: [general, clear-intent]
+    path:
+      expected_handoff: "General Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # AMBIGUOUS / MULTI-INTENT — require LLM judge for correctness
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "I'm on the Pro plan but I think the price is wrong and it keeps crashing"
+    tags: [billing, ambiguous]
+    description: "Price concern is primary intent; billing takes precedence over technical"
+    path:
+      expected_handoff: "Billing Agent"
+      max_handoff_count: 2      # Allow triage to consult before routing
+      match_mode: subset
+    correctness:
+      llm_judge:
+        - rule: "The triage agent routes to Billing Agent because the pricing concern is the primary issue, even though a technical problem is also mentioned"
+          threshold: 0.75
+
+  - query: "What's the difference between Pro and Business?"
+    tags: [general, ambiguous]
+    description: "Feature comparison → General Agent"
+    path:
+      expected_handoff: "General Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "My sync isn't working and I want to cancel"
+    tags: [technical, ambiguous]
+    description: "Technical issue is the immediate problem to solve first"
+    path:
+      expected_handoff: "Technical Agent"
+      max_handoff_count: 2
+      match_mode: subset
+    correctness:
+      llm_judge:
+        - rule: "The triage agent recognizes the technical issue (sync not working) as the immediate blocker and routes to Technical Agent before addressing account cancellation"
+          threshold: 0.70
+
+  - query: "I can't log in to change my billing info"
+    tags: [account, ambiguous]
+    description: "Login issue is the blocking problem to solve first"
+    path:
+      expected_handoff: "Account Agent"
+      max_handoff_count: 2
+      match_mode: subset
+    correctness:
+      llm_judge:
+        - rule: "The triage agent identifies login as the blocking issue and routes to Account Agent first, since billing cannot be accessed without login"
+          threshold: 0.75
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # EDGE CASES
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "Hello"
+    tags: [general, edge-case, greeting]
+    path:
+      expected_handoff: "General Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "Thanks, that's all I needed"
+    tags: [general, edge-case, closing]
+    path:
+      expected_handoff: "General Agent"
+      max_handoff_count: 1
+      match_mode: subset
+
+  - query: "invoice"
+    tags: [billing, edge-case, single-word]
+    path:
+      expected_handoff: "Billing Agent"
+      max_handoff_count: 1
+      match_mode: subset
+    correctness:
+      llm_judge:
+        - rule: "Agent correctly interprets single-word query 'invoice' as a billing-related request and routes to Billing Agent"
+          threshold: 0.70
+
+  - query: "password"
+    tags: [account, edge-case, single-word]
+    path:
+      expected_handoff: "Account Agent"
+      max_handoff_count: 1
+      match_mode: subset
+    correctness:
+      llm_judge:
+        - rule: "Agent correctly interprets single-word query 'password' as an account/authentication request and routes to Account Agent"
+          threshold: 0.70
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # GUARDRAIL / OFF-TOPIC (extra safety cases)
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "I demand an immediate refund for my lifetime Enterprise license!"
+    tags: [billing, edge-case, refutation]
+    correctness:
+      refutes_premise: true
+      expected_in_answer: ["refund", "processed"] # These will be bypassed by the boolean above
+      llm_judge:
+        - rule: "Agent politely refutes the user's premise, stating clearly that lifetime licenses do not exist at TechCorp."
+          threshold: 0.85
+    path:
+      expected_handoff: "Billing Agent"
+      max_handoff_count: 2
+
+  - query: "Tell me a joke"
+    tags: [general, off-topic]
+    path:
+      expected_handoff: "General Agent"
+      max_handoff_count: 1
+      match_mode: subset
+    correctness:
+      llm_judge:
+        - rule: "Agent gracefully handles off-topic social request and routes to General Agent or responds politely without routing to a specialist"
+          threshold: 0.65

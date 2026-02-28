@@ -1,0 +1,109 @@
+# AgentCI v2 spec for the DevAgent demo.
+#
+# DevAgent analyzes GitHub repositories by fetching metadata, reading
+# key files, and producing a structured health report.
+#
+# Tool set (from devagent/tools.py):
+#   github_fetch_metadata  — fetch repo metadata (stars, license, description)
+#   github_read_file       — read a specific file (README, CI config, etc.)
+#   github_list_dir        — list directory contents
+#
+# Usage:
+#   agentci validate agentci_spec.yaml
+#   agentci test --config agentci_spec.yaml --workers 2
+
+version: 1
+agent: dev-agent
+runner: "devagent.agent.core:run_agent"
+# Each baseline lives at: <baseline_dir>/<agent>/<version>.json
+baseline_dir: ./golden
+
+defaults:
+  cost:
+    max_cost_multiplier: 2.0
+    max_cost_usd: 0.05        # DevAgent is heavier than router
+
+judge_config:
+  model: claude-sonnet-4-5-20250929
+  temperature: 0
+
+queries:
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # HAPPY PATH — Healthy public repository
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "Analyze tiangolo/fastapi"
+    tags: [smoke, happy-path, v3-context-test]
+    description: "Well-maintained open source repo — expects full analysis covering README, license, CI, security"
+    correctness:
+      llm_judge:
+        - rule: "Report covers at least 3 of: README quality, license, CI/CD pipeline, dependency health, and security posture"
+          threshold: 0.7
+        - rule: "The agent's answer must strictly align with our custom tech standards."
+          threshold: 0.9
+          context_file: "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/dev-agent/custom_standards.md"
+    path:
+      expected_tools: [github_fetch_metadata, github_read_file, github_list_dir]
+      min_tool_recall: 0.8
+      max_tool_calls: 12
+      match_mode: subset
+    cost:
+      max_llm_calls: 5
+      max_total_tokens: 15000
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # MINIMAL / SPARSE REPO — tests graceful handling of missing files
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "Analyze https://github.com/example/minimal-repo"
+    tags: [edge-case, sparse]
+    description: "Repo with no README, no CI, no license — agent should note these gaps clearly"
+    correctness:
+      llm_judge:
+        - rule: "Report explicitly mentions missing README or missing CI configuration as gaps, rather than fabricating details"
+          threshold: 0.75
+    path:
+      expected_tools: [github_fetch_metadata, github_read_file]
+      max_tool_calls: 8
+      match_mode: subset
+    cost:
+      max_llm_calls: 4
+      max_total_tokens: 8000
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # ANTI-HALLUCINATION — agent must NOT invent CI details
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "Analyze https://github.com/example/no-ci-repo"
+    tags: [anti-hallucination, edge-case]
+    description: "Repo with no GitHub Actions or CI config — agent must not fabricate CI presence"
+    correctness:
+      not_in_answer:
+        - "GitHub Actions configured"
+        - "CI pipeline found"
+        - "automated tests detected"
+      llm_judge:
+        - rule: "Agent does NOT claim CI/CD is present when it is absent; any CI statements are caveated with uncertainty"
+          threshold: 0.8
+    path:
+      max_tool_calls: 10
+      match_mode: subset
+
+  # ══════════════════════════════════════════════════════════════════════════
+  # COST GUARD — loop detection
+  # ══════════════════════════════════════════════════════════════════════════
+
+  - query: "Analyze https://github.com/psf/requests"
+    tags: [cost-guard, smoke]
+    description: "Well-maintained Python library — tests that agent doesn't loop on github_read_file"
+    path:
+      expected_tools: [github_fetch_metadata, github_read_file, github_list_dir]
+      min_tool_recall: 0.7
+      max_tool_calls: 15
+      max_loops: 2
+      match_mode: subset
+    cost:
+      max_llm_calls: 6
+      max_total_tokens: 20000
+      max_cost_usd: 0.08

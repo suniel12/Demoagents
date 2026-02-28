@@ -1,0 +1,83 @@
+/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/pydantic/main.py:464: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `none` - serialized value may not be as expected [field_name='parsed', input_value=GradeOutput(binary_score='yes'), input_type=GradeOutput])
+  return self.__pydantic_serializer__.to_python(
+Generating baseline traces...
+Captured: How do I install AgentCI?
+Traceback (most recent call last):
+  File "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/rag-agent/save_golden.py", line 22, in <module>
+    main()
+  File "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/rag-agent/save_golden.py", line 11, in main
+    trace = run_agent(query)
+  File "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/rag-agent/tests/test_rag.py", line 47, in wrapper
+    output, state = func(*args, **kwargs)
+  File "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/rag-agent/tests/test_rag.py", line 55, in run_agent
+    return generate_answer_api(question)
+  File "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/rag-agent/agent.py", line 193, in generate_answer_api
+    result = graph.invoke({"messages": [HumanMessage(content=query)]})
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langgraph/pregel/main.py", line 3071, in invoke
+    for chunk in self.stream(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langgraph/pregel/main.py", line 2646, in stream
+    for _ in runner.tick(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langgraph/pregel/_runner.py", line 167, in tick
+    run_with_retry(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langgraph/pregel/_retry.py", line 42, in run_with_retry
+    return task.proc.invoke(task.input, config)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langgraph/_internal/_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langgraph/_internal/_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+  File "/Users/sunilpandey/startup/github/Agents/DemoAgents/examples/rag-agent/agent.py", line 134, in generate_answer
+    response = llm.invoke(messages)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 402, in invoke
+    self.generate_prompt(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1121, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 931, in generate
+    self._generate_with_cache(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langchain_core/language_models/chat_models.py", line 1233, in _generate_with_cache
+    result = self._generate(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/langchain_openai/chat_models/base.py", line 1468, in _generate
+    raw_response = self.client.with_raw_response.create(**payload)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/openai/_legacy_response.py", line 364, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+  File "/Users/sunilpandey/startup/github/Agents/AgentCI/src/agentci/capture.py", line 97, in patched_create
+    response = original_create(self_client, *args, **kwargs)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/openai/_utils/_utils.py", line 286, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1192, in create
+    return self._post(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/openai/_base_client.py", line 1005, in request
+    response = self._client.send(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 136, in handle_request
+    raise exc
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/ssl.py", line 1292, in recv
+    return self.read(buflen)
+  File "/opt/anaconda3/envs/agentci/lib/python3.10/ssl.py", line 1165, in read
+    return self._sslobj.read(len)
+KeyboardInterrupt

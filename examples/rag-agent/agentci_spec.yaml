@@ -1,0 +1,177 @@
+version: 1
+agent: rag-agent
+baseline_dir: ./golden
+runner: demo_runner:run_for_agentci
+defaults:
+  cost:
+    max_cost_multiplier: 2.0
+judge_config:
+  model: claude-sonnet-4-6
+  temperature: 0
+  structured_output: true
+queries:
+- query: How do I install AgentCI?
+  description: "Core in-scope question \u2014 agent must retrieve from docs"
+  tags:
+  - smoke
+  - in-scope
+  - happy-path
+  correctness:
+    expected_in_answer:
+    - pip install
+  path:
+    expected_tools:
+    - retrieve_docs
+    min_tool_recall: 1.0
+    max_tool_calls: 5
+    match_mode: subset
+  cost:
+    max_llm_calls: 5
+    max_total_tokens: 3000
+- query: What are the three evaluation layers in AgentCI?
+  description: Core in-scope multi-chunk retrieval
+  tags:
+  - in-scope
+  correctness:
+    expected_in_answer:
+    - correctness
+    - path
+    - cost
+  path:
+    expected_tools:
+    - retrieve_docs
+- query: What's the CEO's favorite restaurant?
+  description: Out of scope question
+  tags:
+  - out-of-scope
+  path:
+    max_tool_calls: 0
+- query: Hello!
+  description: Greeting
+  tags:
+  - greeting
+  path:
+    max_tool_calls: 0
+- query: Hello, how are you?
+  description: Greeting 2
+  tags:
+  - greeting
+  path:
+    max_tool_calls: 0
+- query: How do I fail the CI pipeline if the agent uses forbidden tools?
+  description: Core in-scope technical
+  tags:
+  - in-scope
+  correctness:
+    expected_in_answer:
+    - fail
+    - forbidden tools
+  path:
+    expected_tools:
+    - retrieve_docs
+- query: Does AgentCI support Anthropic models for testing?
+  description: Core in-scope technical 2
+  tags:
+  - in-scope
+  correctness:
+    expected_in_answer:
+    - AnthropicMocker
+    not_in_answer:
+    - Bedrock
+  path:
+    expected_tools:
+    - retrieve_docs
+- query: Is AgentCI free to use?
+  description: Core in-scope licensing
+  tags:
+  - in-scope
+  correctness:
+    expected_in_answer:
+    - open source
+    - Apache 2.0
+  path:
+    expected_tools:
+    - retrieve_docs
+- query: What's the weather in Austin?
+  description: Out of scope specific
+  tags:
+  - out-of-scope
+  correctness:
+    expected_in_answer:
+    - documentation assistant
+  path:
+    max_tool_calls: 0
+- query: What's the weather in Tokyo?
+  description: Out of scope original
+  tags:
+  - out-of-scope
+  - demo
+  path:
+    max_tool_calls: 0
+    forbidden_tools:
+    - tavily_search
+    - web_search
+    - retrieve_docs
+- query: How do I configure an AWS load balancer for the enterprise tier?
+  description: "Technical out-of-scope \u2014 agent must decline, no tools used"
+  tags:
+  - edge-case
+  - out-of-scope
+  path:
+    max_tool_calls: 0
+- query: How do I install AgentCI and what's the weather in Tokyo?
+  description: "Mixed-intent query \u2014 must retrieve for installation but decline\
+    \ weather"
+  tags:
+  - edge-case
+  - mixed-intent
+  correctness:
+    expected_in_answer:
+    - pip install
+    not_in_answer:
+    - degrees
+    - forecast
+    - sunny
+  path:
+    expected_tools:
+    - retrieve_docs
+    max_tool_calls: 5
+- query: What is the exact release date for AgentCI version 4.0?
+  description: Unanswerable query that triggers rewrite_question
+  tags:
+  - rewrite-loop
+  path:
+    expected_tools:
+    - rewrite_question
+- query: What is the name of the top contributor to the AgentCI codebase who lives
+    in California?
+  description: Unanswerable query that tests max retries bounds
+  tags:
+  - rewrite-loop
+  - max-retries
+  path:
+    expected_tools:
+    - rewrite_question
+- query: Can I get a refund if I'm on the Enterprise plan, and who do I contact for
+    support?
+  description: "Decomposed path \u2014 2 parallel retrievals, no rewrite loop"
+  tags:
+  - regression
+  - loop-detection
+  - anti-hallucination
+  - decomposed
+  correctness:
+    llm_judge:
+    - rule: The answer is grounded only in the reference document; if the topic is
+        not covered the agent must say so and must not fabricate a refund policy or
+        support contact from memory
+      context_file: knowledge_base/faq/faq.md
+      threshold: 0.7
+  path:
+    expected_tools:
+    - retrieve_docs
+    forbidden_tools:
+    - rewrite_question
+    max_tool_calls: 5
+  cost:
+    max_llm_calls: 5
