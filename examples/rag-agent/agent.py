@@ -29,10 +29,10 @@ def load_knowledge_base() -> List[Document]:
     return docs
 
 docs = load_knowledge_base()
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 splits = text_splitter.split_documents(docs)
 vectorstore = InMemoryVectorStore.from_documents(documents=splits, embedding=OpenAIEmbeddings())
-retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+retriever = vectorstore.as_retriever(search_kwargs={"k": 6})
 
 def retrieve_docs(query: str) -> str:
     """Retrieve AgentCI documentation from the knowledge base."""
@@ -112,8 +112,9 @@ def generate_query_or_respond(state: RAGState):
         "2. If the question is a MIX — some parts about AgentCI, some unrelated (e.g. 'How do I "
         "install AgentCI AND what is the weather?') — strip out the unrelated parts and only pass the relevant query to retrieve_docs.\n"
         "3. If the question is ENTIRELY unrelated to AgentCI or AI software (e.g. weather only, sports only, "
-        "cooking), do NOT call retrieve_docs. Reply directly: \"I'm an AgentCI documentation "
-        "assistant and can only help with questions related to AgentCI and testing AI agents.\"\n"
+        "cooking), do NOT call retrieve_docs. Reply with a friendly, brief response. For greetings, "
+        "greet back warmly and offer to help with AgentCI questions. For off-topic questions, briefly "
+        "say you specialize in AgentCI and offer to help with that instead.\n"
         "- Never answer from pre-trained knowledge for AgentCI topics — always retrieve first."
     ))
     messages = [system] + state["messages"]
@@ -219,12 +220,17 @@ def generate_answer(state: RAGState):
             "RULES:\n"
             "1. Answer the AgentCI-related parts of the question using ONLY the provided context. "
             "Do not use pre-trained knowledge.\n"
-            "2. If the user's question also contains parts unrelated to AgentCI (e.g. weather, sports, "
-            "general questions about other software), acknowledge them explicitly: say you can only "
-            "help with AgentCI topics for those parts.\n"
-            "3. If the context does not cover the AgentCI part of the question either, say: "
+            "2. If the context does not cover the AgentCI part of the question, say: "
             "'I don't have that information in my knowledge base.'\n"
-            "4. Always answer the in-scope part first, then address out-of-scope parts."
+            "3. If the user's question contains parts clearly unrelated to AgentCI "
+            "(e.g. weather, sports, recipes), simply ignore those parts. "
+            "Do NOT add disclaimers like 'I can only help with AgentCI topics' — "
+            "just answer the in-scope parts naturally.\n"
+            "4. Keep responses helpful and natural. Do not end responses with scope disclaimers.\n"
+            "5. When counting or listing items, always name each item with key details from the context.\n"
+            "6. Be thorough — include all relevant details from the context, especially unique features, "
+            "differentiators, and specific technical capabilities. Do not omit information that directly "
+            "answers the question just because other sections already partially address it."
         )),
         HumanMessage(content=f"Context:\n{docs_msg.content}\n\nQuestion: {original_query}")
     ]
