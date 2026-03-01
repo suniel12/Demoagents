@@ -1,177 +1,296 @@
-version: 1
-agent: rag-agent
-baseline_dir: ./golden
+agent: my-agent
 runner: demo_runner:run_for_agentci
-defaults:
-  cost:
-    max_cost_multiplier: 2.0
+version: 1.0
 judge_config:
   model: claude-sonnet-4-6
   temperature: 0
-  structured_output: true
+baseline_dir: ./baselines
 queries:
-- query: How do I install AgentCI?
-  description: "Core in-scope question \u2014 agent must retrieve from docs"
+- query: What frameworks does AgentCI support out of the box?
+  description: Tests that the agent retrieves and accurately summarizes supported
+    agent frameworks from the knowledge base.
   tags:
   - smoke
   - in-scope
   - happy-path
-  correctness:
-    expected_in_answer:
-    - pip install
   path:
     expected_tools:
     - retrieve_docs
-    min_tool_recall: 1.0
-    max_tool_calls: 5
-    match_mode: subset
+  correctness:
+    any_expected_in_answer:
+    - LangGraph
+    - OpenAI Agents SDK
+    - Anthropic
+    llm_judge:
+    - rule: The agent should accurately describe the frameworks AgentCI supports based
+        on retrieved documentation. The answer should be informative and helpful,
+        covering at least the major supported frameworks. If the KB mentions specific
+        integration details, the agent should reflect them accurately.
+      threshold: 0.6
   cost:
-    max_llm_calls: 5
-    max_total_tokens: 3000
-- query: What are the three evaluation layers in AgentCI?
-  description: Core in-scope multi-chunk retrieval
-  tags:
-  - in-scope
-  correctness:
-    expected_in_answer:
-    - correctness
-    - path
-    - cost
-  path:
-    expected_tools:
-    - retrieve_docs
-- query: What's the CEO's favorite restaurant?
-  description: Out of scope question
+    max_llm_calls: 8
+- query: What is the best recipe for chicken tikka masala?
+  description: Tests that the agent cleanly declines a fully out-of-scope cooking
+    question without hallucinating or providing a recipe.
   tags:
   - out-of-scope
+  - decline
   path:
     max_tool_calls: 0
-- query: Hello!
-  description: Greeting
-  tags:
-  - greeting
-  path:
-    max_tool_calls: 0
-- query: Hello, how are you?
-  description: Greeting 2
-  tags:
-  - greeting
-  path:
-    max_tool_calls: 0
-- query: How do I fail the CI pipeline if the agent uses forbidden tools?
-  description: Core in-scope technical
-  tags:
-  - in-scope
   correctness:
-    expected_in_answer:
-    - fail
-    - forbidden tools
-  path:
-    expected_tools:
-    - retrieve_docs
-- query: Does AgentCI support Anthropic models for testing?
-  description: Core in-scope technical 2
-  tags:
-  - in-scope
-  correctness:
-    expected_in_answer:
-    - AnthropicMocker
-    not_in_answer:
-    - Bedrock
-  path:
-    expected_tools:
-    - retrieve_docs
-- query: Is AgentCI free to use?
-  description: Core in-scope licensing
-  tags:
-  - in-scope
-  correctness:
-    expected_in_answer:
-    - open source
-    - Apache 2.0
-  path:
-    expected_tools:
-    - retrieve_docs
-- query: What's the weather in Austin?
-  description: Out of scope specific
-  tags:
-  - out-of-scope
-  correctness:
-    expected_in_answer:
-    - documentation assistant
-  path:
-    max_tool_calls: 0
-- query: What's the weather in Tokyo?
-  description: Out of scope original
-  tags:
-  - out-of-scope
-  - demo
-  path:
-    max_tool_calls: 0
-    forbidden_tools:
-    - tavily_search
-    - web_search
-    - retrieve_docs
-- query: How do I configure an AWS load balancer for the enterprise tier?
-  description: "Technical out-of-scope \u2014 agent must decline, no tools used"
+    llm_judge:
+    - rule: The agent should decline to answer the cooking question since it is outside
+        its AgentCI domain. It should not provide a recipe or any cooking instructions.
+        It should briefly acknowledge it specializes in AgentCI and offer to help
+        with that instead. The decline should be friendly, not abrupt.
+      threshold: 0.8
+  cost:
+    max_llm_calls: 4
+- query: Hi there!
+  description: Tests that the agent responds warmly to a greeting without invoking
+    retrieval or fabricating AgentCI facts unprompted.
   tags:
   - edge-case
-  - out-of-scope
+  - greeting
+  - no-retrieval
   path:
     max_tool_calls: 0
-- query: How do I install AgentCI and what's the weather in Tokyo?
-  description: "Mixed-intent query \u2014 must retrieve for installation but decline\
-    \ weather"
+  correctness:
+    llm_judge:
+    - rule: The agent should respond with a friendly greeting and indicate readiness
+        to help with AgentCI questions. It should not fabricate any AgentCI facts
+        unprompted or launch into an unsolicited product pitch. A warm, brief, welcoming
+        response is ideal.
+      threshold: 0.7
+  cost:
+    max_llm_calls: 4
+- query: What Python version does AgentCI require?
+  description: Tests retrieval and accurate answer for a simple factual installation
+    question covered directly in the KB.
+  tags:
+  - smoke
+  - in-scope
+  - happy-path
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    expected_in_answer:
+    - '3.10'
+  cost:
+    max_llm_calls: 8
+- query: What CLI commands does AgentCI provide?
+  description: Tests retrieval and enumeration of CLI commands documented in the KB
+    (validate, test, diff, save, baselines, init).
+  tags:
+  - smoke
+  - in-scope
+  - happy-path
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    any_expected_in_answer:
+    - validate
+    - test
+    - diff
+    - save
+    - init
+  cost:
+    max_llm_calls: 8
+- query: How does AgentCI compare to LangSmith and DeepEval?
+  description: Tests retrieval and a comparison answer for a competitive-positioning
+    question mentioned in the KB.
+  tags:
+  - in-scope
+  - happy-path
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    llm_judge:
+    - rule: The agent should highlight differentiators of AgentCI based on retrieved
+        documentation, such as the three-layer evaluation model, GitHub PR annotations,
+        or trajectory metrics. It should not fabricate benchmarks or pricing comparisons
+        that are not in the documentation.
+      threshold: 0.6
+      context_file: knowledge_base/faq/faq.md
+  cost:
+    max_llm_calls: 8
+- query: Does AgentCI work with CrewAI or AutoGen?
+  description: Tests retrieval of framework support information for non-natively-supported
+    frameworks mentioned in the KB.
+  tags:
+  - in-scope
+  - happy-path
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    any_expected_in_answer:
+    - Trace
+    - Span
+    - manual
+    - custom
+    llm_judge:
+    - rule: The agent should accurately convey that CrewAI and AutoGen require manual
+        Trace and Span construction, based on retrieved documentation. The answer
+        should be helpful and accurate without overstating native support.
+      threshold: 0.6
+  cost:
+    max_llm_calls: 8
+- query: How do I save a golden baseline and then diff it against a new run?
+  description: Tests a compound but fully in-scope question covering two related AgentCI
+    workflow steps documented in the KB.
+  tags:
+  - in-scope
+  - happy-path
+  - compound
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    any_expected_in_answer:
+    - agentci save
+    - agentci diff
+    - baseline
+    - golden
+  cost:
+    max_llm_calls: 8
+- query: Can I use AgentCI without any API keys?
+  description: Tests retrieval of the mock system information and accurate answer
+    about zero-cost testing.
+  tags:
+  - in-scope
+  - happy-path
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    any_expected_in_answer:
+    - OpenAIMocker
+    - AnthropicMocker
+    - mock
+    llm_judge:
+    - rule: The agent should clearly convey that AgentCI can run tests without API
+        keys using its mock system. The answer should be accurate to the documentation
+        and not imply any hidden requirements.
+      threshold: 0.6
+  cost:
+    max_llm_calls: 8
+- query: What is the best recipe for chocolate chip cookies?
+  description: Tests that a completely off-topic culinary question triggers no retrieval
+    and a polite decline.
+  tags:
+  - out-of-scope
+  - boundary
+  path:
+    max_tool_calls: 0
+  correctness:
+    llm_judge:
+    - rule: The agent should politely decline to answer, indicating it specializes
+        in AgentCI documentation. It should not provide a cookie recipe or any unrelated
+        content, and should offer to help with AgentCI questions instead.
+      threshold: 0.8
+  cost:
+    max_llm_calls: 4
+- query: Hi there!
+  description: Tests that a simple greeting produces a warm response with no retrieval
+    attempted.
+  tags:
+  - out-of-scope
+  - boundary
+  - greeting
+  path:
+    max_tool_calls: 0
+  correctness:
+    llm_judge:
+    - rule: The agent should respond with a friendly greeting and offer to help with
+        AgentCI questions. It should not fabricate any AgentCI facts unprompted.
+      threshold: 0.7
+  cost:
+    max_llm_calls: 4
+- query: How do I install AgentCI and what is the population of Tokyo?
+  description: Tests mixed-intent handling where one part is in-scope and one is entirely
+    off-topic; agent should answer the AgentCI part only.
   tags:
   - edge-case
   - mixed-intent
+  path:
+    expected_tools:
+    - retrieve_docs
+  correctness:
+    any_expected_in_answer:
+    - pip install ciagent
+    - pip install
+    - install
+    llm_judge:
+    - rule: The agent should answer the AgentCI installation question accurately based
+        on retrieved documentation. It should either skip or honestly decline the
+        Tokyo population question without fabricating an answer, and should not penalize
+        itself for being honest about knowledge gaps.
+      threshold: 0.6
+  cost:
+    max_llm_calls: 8
+- query: What is the Trace data model in AgentCI and how does the LLM judge work?
+  description: Tests decomposition and parallel retrieval for two distinct in-scope
+    sub-questions both covered in the KB.
+  tags:
+  - in-scope
+  - compound
+  - edge-case
+  path:
+    expected_tools:
+    - retrieve_docs
   correctness:
     expected_in_answer:
-    - pip install
-    not_in_answer:
-    - degrees
-    - forecast
-    - sunny
-  path:
-    expected_tools:
-    - retrieve_docs
-    max_tool_calls: 5
-- query: What is the exact release date for AgentCI version 4.0?
-  description: Unanswerable query that triggers rewrite_question
+    - Trace
+    - judge
+    llm_judge:
+    - rule: The agent should accurately describe the Trace data model and the LLM
+        judge mechanism based on retrieved documentation. If one sub-question is covered
+        more thoroughly in the KB than the other, it is acceptable for the agent to
+        provide more detail on that part while being honest about any gaps.
+      threshold: 0.6
+  cost:
+    max_llm_calls: 8
+- query: Who won the Super Bowl last year?
+  description: Tests that a sports question triggers no retrieval and a polite redirect
+    to AgentCI topics.
   tags:
-  - rewrite-loop
+  - out-of-scope
+  - boundary
   path:
-    expected_tools:
-    - rewrite_question
-- query: What is the name of the top contributor to the AgentCI codebase who lives
-    in California?
-  description: Unanswerable query that tests max retries bounds
-  tags:
-  - rewrite-loop
-  - max-retries
-  path:
-    expected_tools:
-    - rewrite_question
-- query: Can I get a refund if I'm on the Enterprise plan, and who do I contact for
-    support?
-  description: "Decomposed path \u2014 2 parallel retrievals, no rewrite loop"
-  tags:
-  - regression
-  - loop-detection
-  - anti-hallucination
-  - decomposed
+    max_tool_calls: 0
   correctness:
     llm_judge:
-    - rule: The answer is grounded only in the reference document; if the topic is
-        not covered the agent must say so and must not fabricate a refund policy or
-        support contact from memory
-      context_file: knowledge_base/faq/faq.md
-      threshold: 0.7
+    - rule: The agent should decline to answer the sports question and redirect the
+        user to AgentCI-related topics. It must not hallucinate a Super Bowl result
+        or provide sports commentary.
+      threshold: 0.8
+  cost:
+    max_llm_calls: 4
+- query: What are the optional pip dependencies for AgentCI and how do I set up GitHub
+    Actions for it?
+  description: Tests a compound in-scope query requiring retrieval across two distinct
+    KB sections (installation and CI/CD integration).
+  tags:
+  - in-scope
+  - compound
+  - edge-case
   path:
     expected_tools:
     - retrieve_docs
-    forbidden_tools:
-    - rewrite_question
-    max_tool_calls: 5
+  correctness:
+    any_expected_in_answer:
+    - anthropic
+    - openai
+    - pip
+    llm_judge:
+    - rule: The agent should accurately cover optional dependencies and GitHub Actions
+        setup based on retrieved documentation. It is acceptable for the agent to
+        note if one sub-topic has less detail in the KB, as long as it answers accurately
+        from what it retrieved.
+      threshold: 0.5
   cost:
-    max_llm_calls: 5
+    max_llm_calls: 8
