@@ -32,7 +32,7 @@ docs = load_knowledge_base()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 splits = text_splitter.split_documents(docs)
 vectorstore = InMemoryVectorStore.from_documents(documents=splits, embedding=OpenAIEmbeddings())
-retriever = vectorstore.as_retriever(search_kwargs={"k": 6})
+retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
 
 def retrieve_docs(query: str) -> str:
     """Retrieve AgentCI documentation from the knowledge base."""
