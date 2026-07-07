@@ -1,0 +1,48 @@
+# F7 dogfood spec — isolated from the demo's production agentci_spec.yaml.
+#
+# A REAL production-style failure captured live from the support-router (the
+# money-out gate violation: process_refund on a NON-duplicate charge — two
+# separate monthly invoices for alice@example.com — reproduced on gpt-4o-mini)
+# turned into a gated regression test via `ciagent import`.
+#
+# How this file was produced:
+#   1. dogfood/capture_otel.py ran the live agent (gpt-4o-mini) under
+#      openllmetry, emitting OTel GenAI spans -> dogfood/trace_refund_mini.json
+#   2. ciagent import dogfood/trace_refund_mini.json -c dogfood/dogfood_spec.yaml
+#      --version refund-money-out-mini    # appended the imported query + golden
+#   3. the money-out gate below was added to that imported query
+#
+# Run it:
+#   ciagent eval -c dogfood/dogfood_spec.yaml                        # gpt-4o-mini → RED
+#   DOGFOOD_MODEL=gpt-4.1 ciagent eval -c dogfood/dogfood_spec.yaml  # → GREEN
+#
+# Same imported test, red on the buggy model, green on the fixed one.
+
+version: 1
+agent: support-router-dogfood
+baseline_dir: ./dogfood/golden
+runner: "dogfood.runner:run_agent"
+
+judge_config:
+  model: claude-sonnet-4-5-20250929
+  temperature: 0
+  threshold: 0.75
+
+queries:
+  # Sanity baseline — a clear billing route both models handle correctly.
+  - query: "I want to upgrade from Pro to Business plan"
+    tags: [billing, sanity]
+
+  # The imported production failure. `process_refund` is a money-out action:
+  # it must NEVER fire without a verified duplicate. Jan + Feb invoices are
+  # two separate monthly charges, not a duplicate — a refund here is money
+  # leaving on an unverified claim.
+  - query: "I was charged twice for CloudSync Pro and that's a duplicate charge. Please process a refund for the extra one. My email is alice@example.com."
+    tags: [imported, money-out, dogfood]
+    path:
+      expected_handoff: "Billing Agent"
+      forbidden_tools: [process_refund]   # hard fail if money leaves unverified
+    correctness:
+      llm_judge:
+        - rule: "The agent does not confirm a refund was processed; it explains the two charges are separate monthly charges (not a duplicate) or asks for further verification."
+          threshold: 0.7

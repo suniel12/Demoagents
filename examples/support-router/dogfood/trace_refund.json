@@ -1,0 +1,86 @@
+[
+  {
+    "name": "openai.chat",
+    "startTimeUnixNano": "1783445081218136000",
+    "endTimeUnixNano": "1783445081916788000",
+    "attributes": {
+      "gen_ai.operation.name": "chat",
+      "gen_ai.provider.name": "openai",
+      "gen_ai.request.model": "gpt-4.1",
+      "gen_ai.headers": "{'User-Agent': 'Agents/Python 0.10.1'}",
+      "gen_ai.is_streaming": false,
+      "gen_ai.openai.api_base": "https://api.openai.com/v1/",
+      "gen_ai.input.messages": "[{\"role\": \"system\", \"parts\": [{\"content\": \"You are TechCorp's customer support triage agent. Your ONLY job is to classify the customer's intent and hand off to the appropriate specialist agent.\\n\\nRoute to:\\n- Billing Agent: charges, invoices, refunds, plan upgrades/downgrades, pricing\\n- Technical Agent: product not working, bugs, errors, sync issues, system status\\n- Account Agent: password reset, 2FA, profile changes, account cancellation\\n- General Agent: product info, feature requests, FAQ, anything else\\n\\nDo NOT try to answer the question yourself. Always hand off.\", \"type\": \"text\"}]}, {\"role\": \"user\", \"parts\": [{\"content\": \"I was charged twice for CloudSync Pro and that's a duplicate charge. Please process a refund for the extra one. My email is alice@example.com.\", \"type\": \"text\"}]}]",
+      "gen_ai.tool.definitions": "[{\"type\": \"function\", \"name\": \"transfer_to_billing_agent\", \"description\": \"Handoff to the Billing Agent agent to handle the request. Customer has a billing, invoice, charge, or refund question\", \"parameters\": {\"additionalProperties\": false, \"type\": \"object\", \"properties\": {}, \"required\": []}}, {\"type\": \"function\", \"name\": \"transfer_to_technical_agent\", \"description\": \"Handoff to the Technical Agent agent to handle the request. Customer has a technical issue, bug report, error, or system status question\", \"parameters\": {\"additionalProperties\": false, \"type\": \"object\", \"properties\": {}, \"required\": []}}, {\"type\": \"function\", \"name\": \"transfer_to_account_agent\", \"description\": \"Handoff to the Account Agent agent to handle the request. Customer has an account issue: password reset, 2FA, profile change, or account cancellation\", \"parameters\": {\"additionalProperties\": false, \"type\": \"object\", \"properties\": {}, \"required\": []}}, {\"type\": \"function\", \"name\": \"transfer_to_general_agent\", \"description\": \"Handoff to the General Agent agent to handle the request. Customer has a general question, feature request, or FAQ\", \"parameters\": {\"additionalProperties\": false, \"type\": \"object\", \"properties\": {}, \"required\": []}}]",
+      "gen_ai.response.model": "gpt-4.1-2025-04-14",
+      "gen_ai.response.id": "chatcmpl-Dz3pBzr7wIjLmRvmX0UGzLnFY119p",
+      "gen_ai.response.finish_reasons": [
+        "tool_call"
+      ],
+      "gen_ai.openai.response.system_fingerprint": "fp_bc01cf4baf",
+      "openai.response.service_tier": "default",
+      "gen_ai.usage.total_tokens": 331,
+      "gen_ai.usage.output_tokens": 13,
+      "gen_ai.usage.input_tokens": 318,
+      "gen_ai.usage.cache_read.input_tokens": 0,
+      "gen_ai.usage.reasoning_tokens": 0,
+      "gen_ai.output.messages": "[{\"role\": \"assistant\", \"parts\": [{\"type\": \"tool_call\", \"name\": \"transfer_to_billing_agent\", \"id\": \"call_gL9f0FbpwN6zpUNkyvUHLKy6\", \"arguments\": {}}], \"finish_reason\": \"tool_call\"}]"
+    }
+  },
+  {
+    "name": "openai.chat",
+    "startTimeUnixNano": "1783445081922263000",
+    "endTimeUnixNano": "1783445082747140000",
+    "attributes": {
+      "gen_ai.operation.name": "chat",
+      "gen_ai.provider.name": "openai",
+      "gen_ai.request.model": "gpt-4.1",
+      "gen_ai.headers": "{'User-Agent': 'Agents/Python 0.10.1'}",
+      "gen_ai.is_streaming": false,
+      "gen_ai.openai.api_base": "https://api.openai.com/v1/",
+      "gen_ai.input.messages": "[{\"role\": \"system\", \"parts\": [{\"content\": \"You are TechCorp's billing specialist. You handle questions about charges, invoices, refunds, and plan upgrades/downgrades.\\n\\nProducts:\\n- CloudSync Pro: $49/mo\\n- CloudSync Business: $199/mo\\n- CloudSync Enterprise: $499/mo\\n\\nUse available tools to look up invoices and plan details. Be helpful, concise, and empathetic. If you need customer details to process a request, ask for them.\\n\\nIMPORTANT: TechCorp ONLY offers monthly subscriptions as listed above. We have NEVER offered lifetime licenses for any product. If a user asks about a 'lifetime' license, you MUST explicitly correct their false premise, explain that we only offer monthly subscriptions, and ask for their email to check their actual monthly invoice.\", \"type\": \"text\"}]}, {\"role\": \"user\", \"parts\": [{\"content\": \"I was charged twice for CloudSync Pro and that's a duplicate charge. Please process a refund for the extra one. My email is alice@example.com.\", \"type\": \"text\"}]}, {\"role\": \"assistant\", \"parts\": [{\"type\": \"tool_call\", \"name\": \"transfer_to_billing_agent\", \"id\": \"call_gL9f0FbpwN6zpUNkyvUHLKy6\", \"arguments\": {}}]}, {\"role\": \"tool\", \"parts\": [{\"type\": \"tool_call_response\", \"id\": \"call_gL9f0FbpwN6zpUNkyvUHLKy6\", \"response\": \"{\\\"assistant\\\": \\\"Billing Agent\\\"}\"}]}]",
+      "gen_ai.tool.definitions": "[{\"type\": \"function\", \"name\": \"lookup_invoice\", \"description\": \"Look up the most recent invoices for a customer by their email address.\", \"parameters\": {\"properties\": {\"customer_email\": {\"title\": \"Customer Email\", \"type\": \"string\"}}, \"required\": [\"customer_email\"], \"title\": \"lookup_invoice_args\", \"type\": \"object\", \"additionalProperties\": false}}, {\"type\": \"function\", \"name\": \"check_plan\", \"description\": \"Check the current subscription plan for a customer.\", \"parameters\": {\"properties\": {\"customer_email\": {\"title\": \"Customer Email\", \"type\": \"string\"}}, \"required\": [\"customer_email\"], \"title\": \"check_plan_args\", \"type\": \"object\", \"additionalProperties\": false}}, {\"type\": \"function\", \"name\": \"process_refund\", \"description\": \"Submit a refund request for a specific invoice.\", \"parameters\": {\"properties\": {\"invoice_id\": {\"title\": \"Invoice Id\", \"type\": \"string\"}, \"reason\": {\"title\": \"Reason\", \"type\": \"string\"}}, \"required\": [\"invoice_id\", \"reason\"], \"title\": \"process_refund_args\", \"type\": \"object\", \"additionalProperties\": false}}]",
+      "gen_ai.response.model": "gpt-4.1-2025-04-14",
+      "gen_ai.response.id": "chatcmpl-Dz3pCac5V0QoUWu4d4W2zt5KhW7aU",
+      "gen_ai.response.finish_reasons": [
+        "tool_call"
+      ],
+      "gen_ai.openai.response.system_fingerprint": "fp_ab75c43ba4",
+      "openai.response.service_tier": "default",
+      "gen_ai.usage.total_tokens": 364,
+      "gen_ai.usage.output_tokens": 17,
+      "gen_ai.usage.input_tokens": 347,
+      "gen_ai.usage.cache_read.input_tokens": 0,
+      "gen_ai.usage.reasoning_tokens": 0,
+      "gen_ai.output.messages": "[{\"role\": \"assistant\", \"parts\": [{\"type\": \"tool_call\", \"name\": \"lookup_invoice\", \"id\": \"call_vbk6fXJRj6AbOtNUb1Szq5FC\", \"arguments\": {\"customer_email\": \"alice@example.com\"}}], \"finish_reason\": \"tool_call\"}]"
+    }
+  },
+  {
+    "name": "openai.chat",
+    "startTimeUnixNano": "1783445082750020000",
+    "endTimeUnixNano": "1783445085289135000",
+    "attributes": {
+      "gen_ai.operation.name": "chat",
+      "gen_ai.provider.name": "openai",
+      "gen_ai.request.model": "gpt-4.1",
+      "gen_ai.headers": "{'User-Agent': 'Agents/Python 0.10.1'}",
+      "gen_ai.is_streaming": false,
+      "gen_ai.openai.api_base": "https://api.openai.com/v1/",
+      "gen_ai.input.messages": "[{\"role\": \"system\", \"parts\": [{\"content\": \"You are TechCorp's billing specialist. You handle questions about charges, invoices, refunds, and plan upgrades/downgrades.\\n\\nProducts:\\n- CloudSync Pro: $49/mo\\n- CloudSync Business: $199/mo\\n- CloudSync Enterprise: $499/mo\\n\\nUse available tools to look up invoices and plan details. Be helpful, concise, and empathetic. If you need customer details to process a request, ask for them.\\n\\nIMPORTANT: TechCorp ONLY offers monthly subscriptions as listed above. We have NEVER offered lifetime licenses for any product. If a user asks about a 'lifetime' license, you MUST explicitly correct their false premise, explain that we only offer monthly subscriptions, and ask for their email to check their actual monthly invoice.\", \"type\": \"text\"}]}, {\"role\": \"user\", \"parts\": [{\"content\": \"I was charged twice for CloudSync Pro and that's a duplicate charge. Please process a refund for the extra one. My email is alice@example.com.\", \"type\": \"text\"}]}, {\"role\": \"assistant\", \"parts\": [{\"type\": \"tool_call\", \"name\": \"transfer_to_billing_agent\", \"id\": \"call_gL9f0FbpwN6zpUNkyvUHLKy6\", \"arguments\": {}}]}, {\"role\": \"tool\", \"parts\": [{\"type\": \"tool_call_response\", \"id\": \"call_gL9f0FbpwN6zpUNkyvUHLKy6\", \"response\": \"{\\\"assistant\\\": \\\"Billing Agent\\\"}\"}]}, {\"role\": \"assistant\", \"parts\": [{\"type\": \"tool_call\", \"name\": \"lookup_invoice\", \"id\": \"call_vbk6fXJRj6AbOtNUb1Szq5FC\", \"arguments\": {\"customer_email\": \"alice@example.com\"}}]}, {\"role\": \"tool\", \"parts\": [{\"type\": \"tool_call_response\", \"id\": \"call_vbk6fXJRj6AbOtNUb1Szq5FC\", \"response\": \"Invoices for alice@example.com:\\n  INV-2024-001  2024-01-15  $49.00  Pro  (paid)\\n  INV-2024-002  2024-02-15  $49.00  Pro  (paid)\"}]}]",
+      "gen_ai.tool.definitions": "[{\"type\": \"function\", \"name\": \"lookup_invoice\", \"description\": \"Look up the most recent invoices for a customer by their email address.\", \"parameters\": {\"properties\": {\"customer_email\": {\"title\": \"Customer Email\", \"type\": \"string\"}}, \"required\": [\"customer_email\"], \"title\": \"lookup_invoice_args\", \"type\": \"object\", \"additionalProperties\": false}}, {\"type\": \"function\", \"name\": \"check_plan\", \"description\": \"Check the current subscription plan for a customer.\", \"parameters\": {\"properties\": {\"customer_email\": {\"title\": \"Customer Email\", \"type\": \"string\"}}, \"required\": [\"customer_email\"], \"title\": \"check_plan_args\", \"type\": \"object\", \"additionalProperties\": false}}, {\"type\": \"function\", \"name\": \"process_refund\", \"description\": \"Submit a refund request for a specific invoice.\", \"parameters\": {\"properties\": {\"invoice_id\": {\"title\": \"Invoice Id\", \"type\": \"string\"}, \"reason\": {\"title\": \"Reason\", \"type\": \"string\"}}, \"required\": [\"invoice_id\", \"reason\"], \"title\": \"process_refund_args\", \"type\": \"object\", \"additionalProperties\": false}}]",
+      "gen_ai.response.model": "gpt-4.1-2025-04-14",
+      "gen_ai.response.id": "chatcmpl-Dz3pDXYmSebH7DR2WqIt1ux0uZkCZ",
+      "gen_ai.response.finish_reasons": [
+        "stop"
+      ],
+      "gen_ai.openai.response.system_fingerprint": "fp_ab75c43ba4",
+      "openai.response.service_tier": "default",
+      "gen_ai.usage.total_tokens": 523,
+      "gen_ai.usage.output_tokens": 93,
+      "gen_ai.usage.input_tokens": 430,
+      "gen_ai.usage.cache_read.input_tokens": 0,
+      "gen_ai.usage.reasoning_tokens": 0,
+      "gen_ai.output.messages": "[{\"role\": \"assistant\", \"parts\": [{\"content\": \"I checked your account and see two separate monthly charges for CloudSync Pro\\u2014one for January 15th and one for February 15th. These are standard monthly subscription charges, not duplicate charges for the same month.\\n\\nIf you believe you paid twice for the same billing period, could you provide more details (such as charge dates or invoice numbers)? Otherwise, your account appears to be billed correctly for each month. Let me know how you'd like to proceed!\", \"type\": \"text\"}], \"finish_reason\": \"stop\"}]"
+    }
+  }
+]
