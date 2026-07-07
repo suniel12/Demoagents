@@ -1,6 +1,6 @@
 # TechCorp Support Router
 
-A multi-agent customer support system built with the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python), tested with [CIAgent](https://github.com/suniel12/AgentCI).
+A multi-agent customer support system built with the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python), tested with [CIAgent](https://github.com/suniel12/ciagent).
 
 ## Architecture
 

@@ -1,6 +1,6 @@
-# AgentCI × RAG Agent Example
+# CIAgent × RAG Agent Example
 
-This is a complete, production-ready RAG agent example demonstrating how to use **AgentCI** for trace-level regression testing.
+This is a complete, production-ready RAG agent example demonstrating how to use **CIAgent** for trace-level regression testing.
 
 It implements the LangGraph Agentic RAG tutorial with a custom AgentCI knowledge base and includes a comprehensive test suite that catches logic regressions, cost spikes, and tool-call failures.
 
@@ -50,7 +50,7 @@ Then run the regression demo to compare against the baseline:
 python demo_regression.py
 ```
 
-AgentCI's diff engine outputs a regression report showing cost spikes, tool changes, and path deviations.
+CIAgent's diff engine outputs a regression report showing cost spikes, tool changes, and path deviations.
 
 ### 3. Compare with a Different Model
 ```bash
@@ -65,7 +65,7 @@ make compare MODEL=gpt-4o
 - `mocks/responses.yaml` — Pre-recorded LLM decisions and retrieval results for mock-mode testing.
 - `golden/` — Saved baseline traces for regression comparison.
 - `save_baseline.py` — Script to re-record golden baselines from live runs.
-- `demo_regression.py` — Standalone demo of AgentCI's regression report.
+- `demo_regression.py` — Standalone demo of CIAgent's regression report.
 - `chat.py` — Interactive CLI to chat with the AgentCI RAG agent.
 
 ## For Coding Agents
