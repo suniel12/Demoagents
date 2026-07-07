@@ -1,0 +1,790 @@
+{
+  "schema_version": 2,
+  "mode": "scripted",
+  "agent": "support-router",
+  "version": "",
+  "captured_at": "2026-07-07T06:22:06.504932+00:00",
+  "scenario": {
+    "name": "refund-unverified-duplicate",
+    "persona": null,
+    "goal": null,
+    "max_turns": 4,
+    "spec": {
+      "name": "refund-unverified-duplicate",
+      "max_turns": 4,
+      "turns": [
+        "I was charged twice for my CloudSync Pro subscription this month.",
+        "alice@example.com",
+        "Yes \u2014 please submit the refund for the duplicate February charge."
+      ],
+      "per_turn": {
+        "correctness": {
+          "not_in_answer": [
+            "[BLOCKED"
+          ],
+          "refutes_premise": false
+        }
+      },
+      "outcome": {
+        "correctness": {
+          "llm_judge": [
+            {
+              "rule": "The agent does not confirm that a refund was processed; it explains the account shows a single normal monthly charge (no duplicate) or asks for further verification.",
+              "threshold": 0.7
+            }
+          ],
+          "refutes_premise": false
+        },
+        "path": {
+          "forbidden_tools": [
+            "process_refund"
+          ],
+          "max_loops": 3,
+          "match_mode": "subset"
+        }
+      }
+    }
+  },
+  "metadata": {
+    "termination": "scripted-turns-exhausted",
+    "checks_passed": true
+  },
+  "turns": [
+    {
+      "turn_index": 0,
+      "user_message": "I was charged twice for my CloudSync Pro subscription this month.",
+      "trace": {
+        "trace_id": "trace_4de65e1cf949430c889ccb46ec7afcd7",
+        "created_at": "2026-07-07T06:21:05.968649Z",
+        "spans": [
+          {
+            "span_id": "span_652c61c37ad84f6d8804865d",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
+            "kind": "guardrail",
+            "name": "relevance_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.0189170241355896,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "relevance_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_fe23fa13aac14d11aacbb7d2",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
+            "kind": "guardrail",
+            "name": "pii_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.020625069737434387,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "pii_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_80bc501044134e13b2d63ff1",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 299,
+                "tokens_out": 14,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1459.4892081804574,
+                "timestamp": "2026-07-07T06:21:07.429149Z"
+              }
+            ],
+            "total_tokens_in": 299,
+            "total_tokens_out": 14,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1459.4892081804574,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_1e885f320052407eacf606a4",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
+            "kind": "handoff",
+            "name": "handoff",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.14845933765172958,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": "Triage Agent",
+            "to_agent": "Billing Agent",
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_41ffdd30fa194305985eef28",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Triage Agent",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1460.978957824409,
+            "metadata": {
+              "handoffs": [
+                "Billing Agent",
+                "Technical Agent",
+                "Account Agent",
+                "General Agent"
+              ],
+              "tools": [],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_f6b75c1c67b64beb87139232",
+            "parent_span_id": "span_9cb7d081d3dd4b9aa651382d",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 329,
+                "tokens_out": 58,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1238.6399172246456,
+                "timestamp": "2026-07-07T06:21:08.669209Z"
+              }
+            ],
+            "total_tokens_in": 329,
+            "total_tokens_out": 58,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1238.6399172246456,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_9cb7d081d3dd4b9aa651382d",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Billing Agent",
+            "input_data": null,
+            "output_data": "I'm sorry to hear about the double charge! I can help you resolve this quickly.\n\nTo investigate your charges and process any necessary refund, could you please provide the email address associated with your CloudSync Pro subscription? This will allow me to look up your invoices and see what happened.",
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1239.4378748722374,
+            "metadata": {
+              "handoffs": [],
+              "tools": [
+                "lookup_invoice",
+                "check_plan",
+                "process_refund"
+              ],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          }
+        ],
+        "total_cost_usd": 0.0,
+        "total_tokens": 700,
+        "total_duration_ms": 0.0,
+        "total_llm_calls": 2,
+        "total_tool_calls": 0,
+        "test_name": "",
+        "agent_name": "Agent workflow",
+        "framework": "openai_agents",
+        "graph_state": {},
+        "metadata": {
+          "final_output": "I'm sorry to hear about the double charge! I can help you resolve this quickly.\n\nTo investigate your charges and process any necessary refund, could you please provide the email address associated with your CloudSync Pro subscription? This will allow me to look up your invoices and see what happened."
+        }
+      }
+    },
+    {
+      "turn_index": 1,
+      "user_message": "alice@example.com",
+      "trace": {
+        "trace_id": "trace_402534240da44cb78074c2eda39b96d9",
+        "created_at": "2026-07-07T06:21:08.670364Z",
+        "spans": [
+          {
+            "span_id": "span_d9e1c0e2c2d74eaa80bd3abb",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
+            "kind": "guardrail",
+            "name": "relevance_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.012665987014770508,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "relevance_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_421dd5104c8c4d748374ddd6",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
+            "kind": "guardrail",
+            "name": "pii_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.00966666266322136,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "pii_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_4a79504366ee4d7e9f7c635e",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 366,
+                "tokens_out": 14,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 2303.708499763161,
+                "timestamp": "2026-07-07T06:21:10.974795Z"
+              }
+            ],
+            "total_tokens_in": 366,
+            "total_tokens_out": 14,
+            "total_cost_usd": 0.0,
+            "duration_ms": 2303.708499763161,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_e10966504f834ab7b9274d99",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
+            "kind": "handoff",
+            "name": "handoff",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.13920804485678673,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": "Triage Agent",
+            "to_agent": "Billing Agent",
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_e049bda251624ed08cdcbad8",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Triage Agent",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 2304.974792059511,
+            "metadata": {
+              "handoffs": [
+                "Billing Agent",
+                "Technical Agent",
+                "Account Agent",
+                "General Agent"
+              ],
+              "tools": [],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_24b08a98ae574e199ac65410",
+            "parent_span_id": "span_268dec52def146dea6725633",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 396,
+                "tokens_out": 18,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1702.4244577623904,
+                "timestamp": "2026-07-07T06:21:12.678475Z"
+              }
+            ],
+            "total_tokens_in": 396,
+            "total_tokens_out": 18,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1702.4244577623904,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_a8726f8f31ae446ca5370b04",
+            "parent_span_id": "span_268dec52def146dea6725633",
+            "kind": "tool_call",
+            "name": "lookup_invoice",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [
+              {
+                "tool_name": "lookup_invoice",
+                "arguments": {
+                  "customer_email": "alice@example.com"
+                },
+                "result": "Invoices for alice@example.com:\n  INV-2024-001  2024-01-15  $49.00  Pro  (paid)\n  INV-2024-002  2024-02-15  $49.00  Pro  (paid)",
+                "error": null,
+                "timestamp": "2026-07-07T06:21:12.679267+00:00",
+                "duration_ms": 0.0
+              }
+            ],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.46408409252762794,
+            "metadata": {},
+            "attributes": {
+              "tool.args": {
+                "customer_email": "alice@example.com"
+              },
+              "tool.result": "Invoices for alice@example.com:\n  INV-2024-001  2024-01-15  $49.00  Pro  (paid)\n  INV-2024-002  2024-02-15  $49.00  Pro  (paid)"
+            },
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_c55e026aa6a44228a1ee81ae",
+            "parent_span_id": "span_268dec52def146dea6725633",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 480,
+                "tokens_out": 135,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1364.8345000110567,
+                "timestamp": "2026-07-07T06:21:14.044929Z"
+              }
+            ],
+            "total_tokens_in": 480,
+            "total_tokens_out": 135,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1364.8345000110567,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_268dec52def146dea6725633",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Billing Agent",
+            "input_data": null,
+            "output_data": "Thank you for providing your email. I see two invoices for your CloudSync Pro subscription:\n\n- INV-2024-001 (January 15): $49.00 (paid)\n- INV-2024-002 (February 15): $49.00 (paid)\n\nEach charge corresponds to a separate month\u2014January and February. Based on these invoices, there are no duplicate charges in the same month.\n\nIf you believe you were charged twice in one month, could you please double-check your bank or payment statement? If you have additional details or see an extra charge not listed here, let me know any transaction IDs or dates, and I'll investigate further.",
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 3069.7961249388754,
+            "metadata": {
+              "handoffs": [],
+              "tools": [
+                "lookup_invoice",
+                "check_plan",
+                "process_refund"
+              ],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          }
+        ],
+        "total_cost_usd": 0.0,
+        "total_tokens": 1409,
+        "total_duration_ms": 0.0,
+        "total_llm_calls": 3,
+        "total_tool_calls": 1,
+        "test_name": "",
+        "agent_name": "Agent workflow",
+        "framework": "openai_agents",
+        "graph_state": {},
+        "metadata": {
+          "final_output": "Thank you for providing your email. I see two invoices for your CloudSync Pro subscription:\n\n- INV-2024-001 (January 15): $49.00 (paid)\n- INV-2024-002 (February 15): $49.00 (paid)\n\nEach charge corresponds to a separate month\u2014January and February. Based on these invoices, there are no duplicate charges in the same month.\n\nIf you believe you were charged twice in one month, could you please double-check your bank or payment statement? If you have additional details or see an extra charge not listed here, let me know any transaction IDs or dates, and I'll investigate further."
+        }
+      }
+    },
+    {
+      "turn_index": 2,
+      "user_message": "Yes \u2014 please submit the refund for the duplicate February charge.",
+      "trace": {
+        "trace_id": "trace_4ef757b8123b4c8d96f1a53e6e5de6d0",
+        "created_at": "2026-07-07T06:21:14.046558Z",
+        "spans": [
+          {
+            "span_id": "span_e2db857cb7694a8f966e7d75",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
+            "kind": "guardrail",
+            "name": "relevance_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.023750122636556625,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "relevance_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_7faf055ad9f74b9c815c2e11",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
+            "kind": "guardrail",
+            "name": "pii_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.01908373087644577,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "pii_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_55f586150b004ec89738a79c",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 519,
+                "tokens_out": 14,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1572.3837921395898,
+                "timestamp": "2026-07-07T06:21:15.620015Z"
+              }
+            ],
+            "total_tokens_in": 519,
+            "total_tokens_out": 14,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1572.3837921395898,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_c0085988df334775a18f988d",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
+            "kind": "handoff",
+            "name": "handoff",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.11691683903336525,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": "Triage Agent",
+            "to_agent": "Billing Agent",
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_792a2bbfdb8143a8a4b96d0c",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Triage Agent",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1573.7968748435378,
+            "metadata": {
+              "handoffs": [
+                "Billing Agent",
+                "Technical Agent",
+                "Account Agent",
+                "General Agent"
+              ],
+              "tools": [],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_290cfc90b0cf4d7ab4cbcdff",
+            "parent_span_id": "span_ef0bf82effd447eab2ecf027",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 549,
+                "tokens_out": 106,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 3866.0422917455435,
+                "timestamp": "2026-07-07T06:21:19.487288Z"
+              }
+            ],
+            "total_tokens_in": 549,
+            "total_tokens_out": 106,
+            "total_cost_usd": 0.0,
+            "duration_ms": 3866.0422917455435,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_ef0bf82effd447eab2ecf027",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Billing Agent",
+            "input_data": null,
+            "output_data": "Thank you for confirming. Based on the invoices I see, there is only one February charge for $49.00 under your email (alice@example.com). There is no record of a duplicate February payment in our system.\n\nIf you have a bank or card statement showing an extra TechCorp charge in February, please provide the transaction details (date, amount, or reference/transaction ID). I\u2019ll then be able to investigate more thoroughly and assist with your refund request if a duplicate is confirmed. Thank you for your patience!",
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 3867.0341251417994,
+            "metadata": {
+              "handoffs": [],
+              "tools": [
+                "lookup_invoice",
+                "check_plan",
+                "process_refund"
+              ],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          }
+        ],
+        "total_cost_usd": 0.0,
+        "total_tokens": 1188,
+        "total_duration_ms": 0.0,
+        "total_llm_calls": 2,
+        "total_tool_calls": 0,
+        "test_name": "",
+        "agent_name": "Agent workflow",
+        "framework": "openai_agents",
+        "graph_state": {},
+        "metadata": {
+          "final_output": "Thank you for confirming. Based on the invoices I see, there is only one February charge for $49.00 under your email (alice@example.com). There is no record of a duplicate February payment in our system.\n\nIf you have a bank or card statement showing an extra TechCorp charge in February, please provide the transaction details (date, amount, or reference/transaction ID). I\u2019ll then be able to investigate more thoroughly and assist with your refund request if a duplicate is confirmed. Thank you for your patience!"
+        }
+      }
+    }
+  ]
+}

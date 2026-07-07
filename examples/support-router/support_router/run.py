@@ -9,7 +9,7 @@ from agents import Runner
 from agents.tracing import set_trace_processors
 from agents.exceptions import InputGuardrailTripwireTriggered
 
-from agentci.adapters.openai_agents import AgentCITraceProcessor
+from ciagent.adapters.openai_agents import AgentCITraceProcessor
 from .agents.triage import triage_agent
 
 
@@ -54,6 +54,42 @@ async def run_agent_async(query: str):
 def run_agent(query: str):
     """Synchronous wrapper for run_agent_async."""
     return asyncio.run(run_agent_async(query))
+
+
+async def respond_async(messages: list[dict]):
+    """Multi-turn entry point: full conversation history in, Trace out.
+
+    The history (user + assistant turns) is passed to the triage agent as
+    the run input — the same shape a production multi-turn deployment would
+    use, so input guardrails see the whole transcript, exactly as they
+    would live.
+    """
+    set_trace_processors([_processor])
+
+    try:
+        result = await Runner.run(triage_agent, list(messages))
+        trace = _processor.get_last_trace()
+        if trace and result.final_output:
+            trace.metadata["final_output"] = str(result.final_output)
+            if trace.spans:
+                trace.spans[-1].output_data = str(result.final_output)
+        return trace
+    except InputGuardrailTripwireTriggered as e:
+        # Guardrail blocked the turn — surface what the customer experiences
+        # so scenario checks can assert on it.
+        trace = _processor.get_last_trace()
+        blocked_msg = f"[BLOCKED by input guardrail] {e}"
+        if trace:
+            trace.metadata["guardrail_blocked"] = True
+            trace.metadata["guardrail_message"] = str(e)
+            trace.metadata["final_output"] = blocked_msg
+            return trace
+        return blocked_msg
+
+
+def respond(messages: list[dict]):
+    """Synchronous conversation runner for `ciagent simulate`."""
+    return asyncio.run(respond_async(messages))
 
 
 def main():
