@@ -1,6 +1,6 @@
 # .github/workflows/agentci.yml
 #
-# This workflow runs the full AgentCI test suite on every push and PR.
+# This workflow runs the full CIAgent test suite on every push and PR.
 # It's the "full circle" demo: an AI agent tested by an AI agent
 # testing framework, running in CI, on every commit.
 #
@@ -8,7 +8,7 @@
 #   ANTHROPIC_API_KEY — for the LLM calls in tests
 #   GITHUB_TOKEN — automatically provided by GitHub Actions
 
-name: AgentCI Tests
+name: CIAgent Tests
 
 on:
   push:
@@ -85,4 +85,4 @@ jobs:
             exit 1
           fi
 
-          echo "✅ All AgentCI tests passed"
+          echo "✅ All CIAgent tests passed"

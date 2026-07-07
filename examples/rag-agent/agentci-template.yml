@@ -1,4 +1,4 @@
-name: AgentCI RAG Example
+name: CIAgent RAG Example
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
         pip install ciagent
         
-    - name: Run AgentCI tests in Mock Mode
+    - name: Run CIAgent tests in Mock Mode
       run: |
         make test
       # Optionally, run comparisons against baseline

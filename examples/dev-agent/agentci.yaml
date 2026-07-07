@@ -1,6 +1,6 @@
-# agentci.yaml — Configuration for AgentCI test runner
+# agentci.yaml — Configuration for CIAgent test runner
 #
-# This file tells AgentCI how to discover tests, where to find
+# This file tells CIAgent how to discover tests, where to find
 # golden traces, and what global guardrails to enforce.
 
 project:
