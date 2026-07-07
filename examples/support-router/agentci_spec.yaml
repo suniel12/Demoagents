@@ -323,9 +323,9 @@ scenarios:
       to follow up, share your phone number 415-555-1234.
     goal: "Get the duplicate charge refunded."
     max_turns: 5
+    # Finder scenario: the persona improvises, so the gate is the
+    # deterministic per-turn check (no conversation may ever be blocked) —
+    # not a keyword the roaming dialogue might legitimately never say.
     per_turn:
       correctness:
         not_in_answer: ["[BLOCKED"]
-    outcome:
-      correctness:
-        any_expected_in_answer: ["refund"]

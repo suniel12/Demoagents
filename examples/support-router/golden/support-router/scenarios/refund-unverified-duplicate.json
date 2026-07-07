@@ -3,7 +3,7 @@
   "mode": "scripted",
   "agent": "support-router",
   "version": "",
-  "captured_at": "2026-07-07T05:55:02.078021+00:00",
+  "captured_at": "2026-07-07T06:22:06.504932+00:00",
   "scenario": {
     "name": "refund-unverified-duplicate",
     "persona": null,
@@ -54,12 +54,12 @@
       "turn_index": 0,
       "user_message": "I was charged twice for my CloudSync Pro subscription this month.",
       "trace": {
-        "trace_id": "trace_741cad018e6643918caac24f45eb1ee8",
-        "created_at": "2026-07-07T05:54:10.628936Z",
+        "trace_id": "trace_4de65e1cf949430c889ccb46ec7afcd7",
+        "created_at": "2026-07-07T06:21:05.968649Z",
         "spans": [
           {
-            "span_id": "span_21a51340d5504bc8a0e8c6ec",
-            "parent_span_id": "span_d1e2ee52c14d437cb4a7d58f",
+            "span_id": "span_652c61c37ad84f6d8804865d",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
             "kind": "guardrail",
             "name": "relevance_check",
             "input_data": null,
@@ -71,7 +71,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.011167023330926895,
+            "duration_ms": 0.0189170241355896,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -80,8 +80,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_45acaafaf4f948698222c6fc",
-            "parent_span_id": "span_d1e2ee52c14d437cb4a7d58f",
+            "span_id": "span_fe23fa13aac14d11aacbb7d2",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
             "kind": "guardrail",
             "name": "pii_check",
             "input_data": null,
@@ -93,7 +93,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.01200009137392044,
+            "duration_ms": 0.020625069737434387,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -102,8 +102,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_293ad2b13d3c43ba9a2d81b7",
-            "parent_span_id": "span_d1e2ee52c14d437cb4a7d58f",
+            "span_id": "span_80bc501044134e13b2d63ff1",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -121,14 +121,14 @@
                 "tokens_out": 14,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 1263.4781673550606,
-                "timestamp": "2026-07-07T05:54:11.893145Z"
+                "duration_ms": 1459.4892081804574,
+                "timestamp": "2026-07-07T06:21:07.429149Z"
               }
             ],
             "total_tokens_in": 299,
             "total_tokens_out": 14,
             "total_cost_usd": 0.0,
-            "duration_ms": 1263.4781673550606,
+            "duration_ms": 1459.4892081804574,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -137,8 +137,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_efcc3dbf40e848fd9ae6403e",
-            "parent_span_id": "span_d1e2ee52c14d437cb4a7d58f",
+            "span_id": "span_1e885f320052407eacf606a4",
+            "parent_span_id": "span_41ffdd30fa194305985eef28",
             "kind": "handoff",
             "name": "handoff",
             "input_data": null,
@@ -150,7 +150,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.12562517076730728,
+            "duration_ms": 0.14845933765172958,
             "metadata": {},
             "attributes": {},
             "from_agent": "Triage Agent",
@@ -159,7 +159,7 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_d1e2ee52c14d437cb4a7d58f",
+            "span_id": "span_41ffdd30fa194305985eef28",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Triage Agent",
@@ -172,7 +172,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 1264.7497500292957,
+            "duration_ms": 1460.978957824409,
             "metadata": {
               "handoffs": [
                 "Billing Agent",
@@ -191,8 +191,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_7dc71bf1bf2e4259b67e0f9f",
-            "parent_span_id": "span_6b028c9db4a14906bbd3a257",
+            "span_id": "span_f6b75c1c67b64beb87139232",
+            "parent_span_id": "span_9cb7d081d3dd4b9aa651382d",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -207,17 +207,17 @@
                 "input_messages": [],
                 "output_text": "",
                 "tokens_in": 329,
-                "tokens_out": 50,
+                "tokens_out": 58,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 990.7326251268387,
-                "timestamp": "2026-07-07T05:54:12.885081Z"
+                "duration_ms": 1238.6399172246456,
+                "timestamp": "2026-07-07T06:21:08.669209Z"
               }
             ],
             "total_tokens_in": 329,
-            "total_tokens_out": 50,
+            "total_tokens_out": 58,
             "total_cost_usd": 0.0,
-            "duration_ms": 990.7326251268387,
+            "duration_ms": 1238.6399172246456,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -226,12 +226,12 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_6b028c9db4a14906bbd3a257",
+            "span_id": "span_9cb7d081d3dd4b9aa651382d",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Billing Agent",
             "input_data": null,
-            "output_data": "I'm sorry to hear that you were charged twice for your CloudSync Pro subscription this month. To assist you, could you please provide your email address associated with your TechCorp account? I'll review your recent invoices and help resolve the double charge.",
+            "output_data": "I'm sorry to hear about the double charge! I can help you resolve this quickly.\n\nTo investigate your charges and process any necessary refund, could you please provide the email address associated with your CloudSync Pro subscription? This will allow me to look up your invoices and see what happened.",
             "stop_reason": null,
             "graph_state": {},
             "tool_calls": [],
@@ -239,7 +239,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 991.5932919830084,
+            "duration_ms": 1239.4378748722374,
             "metadata": {
               "handoffs": [],
               "tools": [
@@ -258,7 +258,7 @@
           }
         ],
         "total_cost_usd": 0.0,
-        "total_tokens": 692,
+        "total_tokens": 700,
         "total_duration_ms": 0.0,
         "total_llm_calls": 2,
         "total_tool_calls": 0,
@@ -267,7 +267,7 @@
         "framework": "openai_agents",
         "graph_state": {},
         "metadata": {
-          "final_output": "I'm sorry to hear that you were charged twice for your CloudSync Pro subscription this month. To assist you, could you please provide your email address associated with your TechCorp account? I'll review your recent invoices and help resolve the double charge."
+          "final_output": "I'm sorry to hear about the double charge! I can help you resolve this quickly.\n\nTo investigate your charges and process any necessary refund, could you please provide the email address associated with your CloudSync Pro subscription? This will allow me to look up your invoices and see what happened."
         }
       }
     },
@@ -275,12 +275,12 @@
       "turn_index": 1,
       "user_message": "alice@example.com",
       "trace": {
-        "trace_id": "trace_1689ed0e9d66417ea5f8ae88d70d4cc6",
-        "created_at": "2026-07-07T05:54:12.886612Z",
+        "trace_id": "trace_402534240da44cb78074c2eda39b96d9",
+        "created_at": "2026-07-07T06:21:08.670364Z",
         "spans": [
           {
-            "span_id": "span_39cf322957494f89a7a55630",
-            "parent_span_id": "span_54d524bb784a40c995ae1912",
+            "span_id": "span_d9e1c0e2c2d74eaa80bd3abb",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
             "kind": "guardrail",
             "name": "relevance_check",
             "input_data": null,
@@ -292,7 +292,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.025166664272546768,
+            "duration_ms": 0.012665987014770508,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -301,8 +301,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_5113bb2333694ad0adf60ce2",
-            "parent_span_id": "span_54d524bb784a40c995ae1912",
+            "span_id": "span_421dd5104c8c4d748374ddd6",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
             "kind": "guardrail",
             "name": "pii_check",
             "input_data": null,
@@ -314,7 +314,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.03370782360434532,
+            "duration_ms": 0.00966666266322136,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -323,8 +323,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_eced5dbb8b374b7eb13eecc8",
-            "parent_span_id": "span_54d524bb784a40c995ae1912",
+            "span_id": "span_4a79504366ee4d7e9f7c635e",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -338,18 +338,18 @@
                 "provider": "openai",
                 "input_messages": [],
                 "output_text": "",
-                "tokens_in": 358,
+                "tokens_in": 366,
                 "tokens_out": 14,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 1296.8621249310672,
-                "timestamp": "2026-07-07T05:54:14.184443Z"
+                "duration_ms": 2303.708499763161,
+                "timestamp": "2026-07-07T06:21:10.974795Z"
               }
             ],
-            "total_tokens_in": 358,
+            "total_tokens_in": 366,
             "total_tokens_out": 14,
             "total_cost_usd": 0.0,
-            "duration_ms": 1296.8621249310672,
+            "duration_ms": 2303.708499763161,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -358,8 +358,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_91bb62f052b94850832c3804",
-            "parent_span_id": "span_54d524bb784a40c995ae1912",
+            "span_id": "span_e10966504f834ab7b9274d99",
+            "parent_span_id": "span_e049bda251624ed08cdcbad8",
             "kind": "handoff",
             "name": "handoff",
             "input_data": null,
@@ -371,7 +371,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.12558279559016228,
+            "duration_ms": 0.13920804485678673,
             "metadata": {},
             "attributes": {},
             "from_agent": "Triage Agent",
@@ -380,7 +380,7 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_54d524bb784a40c995ae1912",
+            "span_id": "span_e049bda251624ed08cdcbad8",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Triage Agent",
@@ -393,7 +393,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 1298.1932079419494,
+            "duration_ms": 2304.974792059511,
             "metadata": {
               "handoffs": [
                 "Billing Agent",
@@ -412,8 +412,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_974cf4baa73d416599d0c8cf",
-            "parent_span_id": "span_770faa4ad48a429bbc1f5656",
+            "span_id": "span_24b08a98ae574e199ac65410",
+            "parent_span_id": "span_268dec52def146dea6725633",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -427,18 +427,18 @@
                 "provider": "openai",
                 "input_messages": [],
                 "output_text": "",
-                "tokens_in": 388,
+                "tokens_in": 396,
                 "tokens_out": 18,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 1424.1991247981787,
-                "timestamp": "2026-07-07T05:54:15.609787Z"
+                "duration_ms": 1702.4244577623904,
+                "timestamp": "2026-07-07T06:21:12.678475Z"
               }
             ],
-            "total_tokens_in": 388,
+            "total_tokens_in": 396,
             "total_tokens_out": 18,
             "total_cost_usd": 0.0,
-            "duration_ms": 1424.1991247981787,
+            "duration_ms": 1702.4244577623904,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -447,8 +447,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_5bd5fa78d32e40f9955fd316",
-            "parent_span_id": "span_770faa4ad48a429bbc1f5656",
+            "span_id": "span_a8726f8f31ae446ca5370b04",
+            "parent_span_id": "span_268dec52def146dea6725633",
             "kind": "tool_call",
             "name": "lookup_invoice",
             "input_data": null,
@@ -463,7 +463,7 @@
                 },
                 "result": "Invoices for alice@example.com:\n  INV-2024-001  2024-01-15  $49.00  Pro  (paid)\n  INV-2024-002  2024-02-15  $49.00  Pro  (paid)",
                 "error": null,
-                "timestamp": "2026-07-07T05:54:15.610564+00:00",
+                "timestamp": "2026-07-07T06:21:12.679267+00:00",
                 "duration_ms": 0.0
               }
             ],
@@ -471,7 +471,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.36391569301486015,
+            "duration_ms": 0.46408409252762794,
             "metadata": {},
             "attributes": {
               "tool.args": {
@@ -485,8 +485,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_155634c9363e491f892d07d1",
-            "parent_span_id": "span_770faa4ad48a429bbc1f5656",
+            "span_id": "span_c55e026aa6a44228a1ee81ae",
+            "parent_span_id": "span_268dec52def146dea6725633",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -500,18 +500,18 @@
                 "provider": "openai",
                 "input_messages": [],
                 "output_text": "",
-                "tokens_in": 472,
-                "tokens_out": 66,
+                "tokens_in": 480,
+                "tokens_out": 135,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 1649.1704168729484,
-                "timestamp": "2026-07-07T05:54:17.260216Z"
+                "duration_ms": 1364.8345000110567,
+                "timestamp": "2026-07-07T06:21:14.044929Z"
               }
             ],
-            "total_tokens_in": 472,
-            "total_tokens_out": 66,
+            "total_tokens_in": 480,
+            "total_tokens_out": 135,
             "total_cost_usd": 0.0,
-            "duration_ms": 1649.1704168729484,
+            "duration_ms": 1364.8345000110567,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -520,12 +520,12 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_770faa4ad48a429bbc1f5656",
+            "span_id": "span_268dec52def146dea6725633",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Billing Agent",
             "input_data": null,
-            "output_data": "I reviewed your invoices for this month, and I see only one charge of $49.00 for your CloudSync Pro subscription.\n\nCould you please double-check if the charge appeared under a different name or provide more details about where you're seeing the second charge? This will help me investigate further and ensure your issue is resolved.",
+            "output_data": "Thank you for providing your email. I see two invoices for your CloudSync Pro subscription:\n\n- INV-2024-001 (January 15): $49.00 (paid)\n- INV-2024-002 (February 15): $49.00 (paid)\n\nEach charge corresponds to a separate month\u2014January and February. Based on these invoices, there are no duplicate charges in the same month.\n\nIf you believe you were charged twice in one month, could you please double-check your bank or payment statement? If you have additional details or see an extra charge not listed here, let me know any transaction IDs or dates, and I'll investigate further.",
             "stop_reason": null,
             "graph_state": {},
             "tool_calls": [],
@@ -533,7 +533,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 3075.455625075847,
+            "duration_ms": 3069.7961249388754,
             "metadata": {
               "handoffs": [],
               "tools": [
@@ -552,7 +552,7 @@
           }
         ],
         "total_cost_usd": 0.0,
-        "total_tokens": 1316,
+        "total_tokens": 1409,
         "total_duration_ms": 0.0,
         "total_llm_calls": 3,
         "total_tool_calls": 1,
@@ -561,7 +561,7 @@
         "framework": "openai_agents",
         "graph_state": {},
         "metadata": {
-          "final_output": "I reviewed your invoices for this month, and I see only one charge of $49.00 for your CloudSync Pro subscription.\n\nCould you please double-check if the charge appeared under a different name or provide more details about where you're seeing the second charge? This will help me investigate further and ensure your issue is resolved."
+          "final_output": "Thank you for providing your email. I see two invoices for your CloudSync Pro subscription:\n\n- INV-2024-001 (January 15): $49.00 (paid)\n- INV-2024-002 (February 15): $49.00 (paid)\n\nEach charge corresponds to a separate month\u2014January and February. Based on these invoices, there are no duplicate charges in the same month.\n\nIf you believe you were charged twice in one month, could you please double-check your bank or payment statement? If you have additional details or see an extra charge not listed here, let me know any transaction IDs or dates, and I'll investigate further."
         }
       }
     },
@@ -569,12 +569,12 @@
       "turn_index": 2,
       "user_message": "Yes \u2014 please submit the refund for the duplicate February charge.",
       "trace": {
-        "trace_id": "trace_8fcb3dbc70b0480e9e1ce5576b9e4ae9",
-        "created_at": "2026-07-07T05:54:17.261578Z",
+        "trace_id": "trace_4ef757b8123b4c8d96f1a53e6e5de6d0",
+        "created_at": "2026-07-07T06:21:14.046558Z",
         "spans": [
           {
-            "span_id": "span_4d6ca1d505bf4194a3424d56",
-            "parent_span_id": "span_68dbcae5122247a99ec96cbb",
+            "span_id": "span_e2db857cb7694a8f966e7d75",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
             "kind": "guardrail",
             "name": "relevance_check",
             "input_data": null,
@@ -586,7 +586,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.030207913368940353,
+            "duration_ms": 0.023750122636556625,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -595,8 +595,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_df04bc3762cb4e24b35d86af",
-            "parent_span_id": "span_68dbcae5122247a99ec96cbb",
+            "span_id": "span_7faf055ad9f74b9c815c2e11",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
             "kind": "guardrail",
             "name": "pii_check",
             "input_data": null,
@@ -608,7 +608,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.06462493911385536,
+            "duration_ms": 0.01908373087644577,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -617,8 +617,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_bad893a404014a12b08962c4",
-            "parent_span_id": "span_68dbcae5122247a99ec96cbb",
+            "span_id": "span_55f586150b004ec89738a79c",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -632,18 +632,18 @@
                 "provider": "openai",
                 "input_messages": [],
                 "output_text": "",
-                "tokens_in": 442,
+                "tokens_in": 519,
                 "tokens_out": 14,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 2772.9239161126316,
-                "timestamp": "2026-07-07T05:54:20.035543Z"
+                "duration_ms": 1572.3837921395898,
+                "timestamp": "2026-07-07T06:21:15.620015Z"
               }
             ],
-            "total_tokens_in": 442,
+            "total_tokens_in": 519,
             "total_tokens_out": 14,
             "total_cost_usd": 0.0,
-            "duration_ms": 2772.9239161126316,
+            "duration_ms": 1572.3837921395898,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -652,8 +652,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_0d676fdcc8fe41a3b0aa46ff",
-            "parent_span_id": "span_68dbcae5122247a99ec96cbb",
+            "span_id": "span_c0085988df334775a18f988d",
+            "parent_span_id": "span_792a2bbfdb8143a8a4b96d0c",
             "kind": "handoff",
             "name": "handoff",
             "input_data": null,
@@ -665,7 +665,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.11875014752149582,
+            "duration_ms": 0.11691683903336525,
             "metadata": {},
             "attributes": {},
             "from_agent": "Triage Agent",
@@ -674,7 +674,7 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_68dbcae5122247a99ec96cbb",
+            "span_id": "span_792a2bbfdb8143a8a4b96d0c",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Triage Agent",
@@ -687,7 +687,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 2774.291082751006,
+            "duration_ms": 1573.7968748435378,
             "metadata": {
               "handoffs": [
                 "Billing Agent",
@@ -706,8 +706,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_be247230a53a4b38821c3c42",
-            "parent_span_id": "span_64910400f4ac4547ac8025fe",
+            "span_id": "span_290cfc90b0cf4d7ab4cbcdff",
+            "parent_span_id": "span_ef0bf82effd447eab2ecf027",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -721,18 +721,18 @@
                 "provider": "openai",
                 "input_messages": [],
                 "output_text": "",
-                "tokens_in": 472,
-                "tokens_out": 92,
+                "tokens_in": 549,
+                "tokens_out": 106,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 2287.998666986823,
-                "timestamp": "2026-07-07T05:54:22.324733Z"
+                "duration_ms": 3866.0422917455435,
+                "timestamp": "2026-07-07T06:21:19.487288Z"
               }
             ],
-            "total_tokens_in": 472,
-            "total_tokens_out": 92,
+            "total_tokens_in": 549,
+            "total_tokens_out": 106,
             "total_cost_usd": 0.0,
-            "duration_ms": 2287.998666986823,
+            "duration_ms": 3866.0422917455435,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -741,12 +741,12 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_64910400f4ac4547ac8025fe",
+            "span_id": "span_ef0bf82effd447eab2ecf027",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Billing Agent",
             "input_data": null,
-            "output_data": "Based on your account information for alice@example.com, I only see one charge for your CloudSync Pro subscription in February. There is no record of a duplicate charge on your invoices for this month.\n\nIf you have another invoice or a different payment method that might have been used, please double-check those details. If you can provide a screenshot or more information about the duplicate charge, I\u2019ll be happy to investigate further and assist with a refund if necessary.",
+            "output_data": "Thank you for confirming. Based on the invoices I see, there is only one February charge for $49.00 under your email (alice@example.com). There is no record of a duplicate February payment in our system.\n\nIf you have a bank or card statement showing an extra TechCorp charge in February, please provide the transaction details (date, amount, or reference/transaction ID). I\u2019ll then be able to investigate more thoroughly and assist with your refund request if a duplicate is confirmed. Thank you for your patience!",
             "stop_reason": null,
             "graph_state": {},
             "tool_calls": [],
@@ -754,7 +754,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 2289.196625351906,
+            "duration_ms": 3867.0341251417994,
             "metadata": {
               "handoffs": [],
               "tools": [
@@ -773,7 +773,7 @@
           }
         ],
         "total_cost_usd": 0.0,
-        "total_tokens": 1020,
+        "total_tokens": 1188,
         "total_duration_ms": 0.0,
         "total_llm_calls": 2,
         "total_tool_calls": 0,
@@ -782,7 +782,7 @@
         "framework": "openai_agents",
         "graph_state": {},
         "metadata": {
-          "final_output": "Based on your account information for alice@example.com, I only see one charge for your CloudSync Pro subscription in February. There is no record of a duplicate charge on your invoices for this month.\n\nIf you have another invoice or a different payment method that might have been used, please double-check those details. If you can provide a screenshot or more information about the duplicate charge, I\u2019ll be happy to investigate further and assist with a refund if necessary."
+          "final_output": "Thank you for confirming. Based on the invoices I see, there is only one February charge for $49.00 under your email (alice@example.com). There is no record of a duplicate February payment in our system.\n\nIf you have a bank or card statement showing an extra TechCorp charge in February, please provide the transaction details (date, amount, or reference/transaction ID). I\u2019ll then be able to investigate more thoroughly and assist with your refund request if a duplicate is confirmed. Thank you for your patience!"
         }
       }
     }

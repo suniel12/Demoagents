@@ -3,7 +3,7 @@
   "mode": "scripted",
   "agent": "support-router",
   "version": "",
-  "captured_at": "2026-07-07T05:55:02.079213+00:00",
+  "captured_at": "2026-07-07T06:22:06.506169+00:00",
   "scenario": {
     "name": "billing-then-technical-switch",
     "persona": null,
@@ -39,19 +39,19 @@
   },
   "metadata": {
     "termination": "scripted-turns-exhausted",
-    "checks_passed": false
+    "checks_passed": true
   },
   "turns": [
     {
       "turn_index": 0,
       "user_message": "What plan am I currently on? My email is bob@techcorp-client.com.",
       "trace": {
-        "trace_id": "trace_d6dbfcbcbc7d49be8ad69dc487795c36",
-        "created_at": "2026-07-07T05:54:25.718091Z",
+        "trace_id": "trace_810a9aa72be04e03ba13ff661d4dcea1",
+        "created_at": "2026-07-07T06:21:22.890661Z",
         "spans": [
           {
-            "span_id": "span_74481bdf105c4e0e9382b690",
-            "parent_span_id": "span_772e791b023a4f62a4df7f70",
+            "span_id": "span_64b36949a2e24e05a762b3f9",
+            "parent_span_id": "span_a6d9f90868c34976b0726871",
             "kind": "guardrail",
             "name": "relevance_check",
             "input_data": null,
@@ -63,7 +63,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.021167099475860596,
+            "duration_ms": 0.019249971956014633,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -72,8 +72,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_bfcc666ec6714ae89f7e4297",
-            "parent_span_id": "span_772e791b023a4f62a4df7f70",
+            "span_id": "span_ec409dae323047f5adfb5a2e",
+            "parent_span_id": "span_a6d9f90868c34976b0726871",
             "kind": "guardrail",
             "name": "pii_check",
             "input_data": null,
@@ -85,7 +85,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.020041130483150482,
+            "duration_ms": 0.0149579718708992,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -94,8 +94,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_1dc5825b35e04a7baa8356ba",
-            "parent_span_id": "span_772e791b023a4f62a4df7f70",
+            "span_id": "span_db2eb624de054558b5defec1",
+            "parent_span_id": "span_a6d9f90868c34976b0726871",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -113,14 +113,14 @@
                 "tokens_out": 13,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 2135.4955406859517,
-                "timestamp": "2026-07-07T05:54:27.854758Z"
+                "duration_ms": 1220.6266662105918,
+                "timestamp": "2026-07-07T06:21:24.112458Z"
               }
             ],
             "total_tokens_in": 303,
             "total_tokens_out": 13,
             "total_cost_usd": 0.0,
-            "duration_ms": 2135.4955406859517,
+            "duration_ms": 1220.6266662105918,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -129,8 +129,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_67d6fbf85f8642c9811f5b2e",
-            "parent_span_id": "span_772e791b023a4f62a4df7f70",
+            "span_id": "span_1a39767152674052987cbc4e",
+            "parent_span_id": "span_a6d9f90868c34976b0726871",
             "kind": "handoff",
             "name": "handoff",
             "input_data": null,
@@ -142,16 +142,16 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 0.19200006499886513,
+            "duration_ms": 0.1310422085225582,
             "metadata": {},
             "attributes": {},
             "from_agent": "Triage Agent",
-            "to_agent": "Account Agent",
+            "to_agent": "General Agent",
             "guardrail_name": null,
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_772e791b023a4f62a4df7f70",
+            "span_id": "span_a6d9f90868c34976b0726871",
             "parent_span_id": null,
             "kind": "agent",
             "name": "Triage Agent",
@@ -164,7 +164,7 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 2137.4732083640993,
+            "duration_ms": 1222.1552501432598,
             "metadata": {
               "handoffs": [
                 "Billing Agent",
@@ -183,8 +183,8 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_9ea1a78b13784e37b438c97e",
-            "parent_span_id": "span_7279f53bea394383bea5ff76",
+            "span_id": "span_533a2e3523b44f86b154078f",
+            "parent_span_id": "span_69f77b363482421c99ced6b7",
             "kind": "llm_call",
             "name": "response",
             "input_data": null,
@@ -198,18 +198,18 @@
                 "provider": "openai",
                 "input_messages": [],
                 "output_text": "",
-                "tokens_in": 286,
-                "tokens_out": 55,
+                "tokens_in": 220,
+                "tokens_out": 71,
                 "stop_reason": null,
                 "cost_usd": 0.0,
-                "duration_ms": 1132.5130411423743,
-                "timestamp": "2026-07-07T05:54:28.989217Z"
+                "duration_ms": 2835.20016586408,
+                "timestamp": "2026-07-07T06:21:26.948866Z"
               }
             ],
-            "total_tokens_in": 286,
-            "total_tokens_out": 55,
+            "total_tokens_in": 220,
+            "total_tokens_out": 71,
             "total_cost_usd": 0.0,
-            "duration_ms": 1132.5130411423743,
+            "duration_ms": 2835.20016586408,
             "metadata": {},
             "attributes": {},
             "from_agent": null,
@@ -218,12 +218,12 @@
             "guardrail_triggered": false
           },
           {
-            "span_id": "span_7279f53bea394383bea5ff76",
+            "span_id": "span_69f77b363482421c99ced6b7",
             "parent_span_id": null,
             "kind": "agent",
-            "name": "Account Agent",
+            "name": "General Agent",
             "input_data": null,
-            "output_data": "I'm unable to directly access your plan information. For details about your current plan, please check your account dashboard or contact our billing or account management team directly through official TechCorp channels. If you need assistance with account settings or security, feel free to let me know!",
+            "output_data": "I'm unable to access personal account details, including which plan you're currently subscribed to, based on your email address. For information about your subscription or plan, please log in to your account dashboard or contact the account or billing support team directly for assistance. If you need details about the available plans or features, let me know\u2014I'm happy to help!",
             "stop_reason": null,
             "graph_state": {},
             "tool_calls": [],
@@ -231,7 +231,226 @@
             "total_tokens_in": 0,
             "total_tokens_out": 0,
             "total_cost_usd": 0.0,
-            "duration_ms": 1133.5932090878487,
+            "duration_ms": 2836.0135830007493,
+            "metadata": {
+              "handoffs": [],
+              "tools": [
+                "search_knowledge_base"
+              ],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          }
+        ],
+        "total_cost_usd": 0.0,
+        "total_tokens": 607,
+        "total_duration_ms": 0.0,
+        "total_llm_calls": 2,
+        "total_tool_calls": 0,
+        "test_name": "",
+        "agent_name": "Agent workflow",
+        "framework": "openai_agents",
+        "graph_state": {},
+        "metadata": {
+          "final_output": "I'm unable to access personal account details, including which plan you're currently subscribed to, based on your email address. For information about your subscription or plan, please log in to your account dashboard or contact the account or billing support team directly for assistance. If you need details about the available plans or features, let me know\u2014I'm happy to help!"
+        }
+      }
+    },
+    {
+      "turn_index": 1,
+      "user_message": "Thanks. Separately \u2014 CloudSync desktop sync has been failing all morning with error E-1123. Is there an outage?",
+      "trace": {
+        "trace_id": "trace_a5c35450cfca4739a51e1a563ba0fdef",
+        "created_at": "2026-07-07T06:21:26.950292Z",
+        "spans": [
+          {
+            "span_id": "span_b2728e9d53944b8bb03faf3f",
+            "parent_span_id": "span_afc78c1708f84eed8fcb2106",
+            "kind": "guardrail",
+            "name": "relevance_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.01837499439716339,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "relevance_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_a88d60f2dbbf4bc8bfed53f0",
+            "parent_span_id": "span_afc78c1708f84eed8fcb2106",
+            "kind": "guardrail",
+            "name": "pii_check",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.020417384803295135,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": "pii_check",
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_4338aadfd9544929bc06f85b",
+            "parent_span_id": "span_afc78c1708f84eed8fcb2106",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 406,
+                "tokens_out": 45,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1525.5426671355963,
+                "timestamp": "2026-07-07T06:21:28.476720Z"
+              }
+            ],
+            "total_tokens_in": 406,
+            "total_tokens_out": 45,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1525.5426671355963,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_c725400788a04061a135d3c4",
+            "parent_span_id": "span_afc78c1708f84eed8fcb2106",
+            "kind": "handoff",
+            "name": "handoff",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 0.2349582500755787,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": "Triage Agent",
+            "to_agent": "Account Agent",
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_afc78c1708f84eed8fcb2106",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Triage Agent",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1527.3363748565316,
+            "metadata": {
+              "handoffs": [
+                "Billing Agent",
+                "Technical Agent",
+                "Account Agent",
+                "General Agent"
+              ],
+              "tools": [],
+              "instructions": "",
+              "handoff_description": ""
+            },
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_a64aef9860cc4c64874710e9",
+            "parent_span_id": "span_de1bfe52d1ed402baa977ee1",
+            "kind": "llm_call",
+            "name": "response",
+            "input_data": null,
+            "output_data": null,
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [
+              {
+                "model": "gpt-4.1-2025-04-14",
+                "provider": "openai",
+                "input_messages": [],
+                "output_text": "",
+                "tokens_in": 417,
+                "tokens_out": 114,
+                "stop_reason": null,
+                "cost_usd": 0.0,
+                "duration_ms": 1475.5768333561718,
+                "timestamp": "2026-07-07T06:21:29.953946Z"
+              }
+            ],
+            "total_tokens_in": 417,
+            "total_tokens_out": 114,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1475.5768333561718,
+            "metadata": {},
+            "attributes": {},
+            "from_agent": null,
+            "to_agent": null,
+            "guardrail_name": null,
+            "guardrail_triggered": false
+          },
+          {
+            "span_id": "span_de1bfe52d1ed402baa977ee1",
+            "parent_span_id": null,
+            "kind": "agent",
+            "name": "Account Agent",
+            "input_data": null,
+            "output_data": "I'm here to help with account-related issues, but I don't have direct access to live system status or technical outage information. For the CloudSync error (E-1123) you're experiencing, I recommend checking the official TechCorp status page or support portal for real-time outage updates. \n\nIf the issue persists and there are no known outages, try restarting the CloudSync app or reinstalling it. For technical support with this error, please reach out to TechCorp's technical support team directly.\n\nIf you need help with your account or settings, let me know!",
+            "stop_reason": null,
+            "graph_state": {},
+            "tool_calls": [],
+            "llm_calls": [],
+            "total_tokens_in": 0,
+            "total_tokens_out": 0,
+            "total_cost_usd": 0.0,
+            "duration_ms": 1476.482958998531,
             "metadata": {
               "handoffs": [],
               "tools": [
@@ -250,7 +469,7 @@
           }
         ],
         "total_cost_usd": 0.0,
-        "total_tokens": 657,
+        "total_tokens": 982,
         "total_duration_ms": 0.0,
         "total_llm_calls": 2,
         "total_tool_calls": 0,
@@ -259,228 +478,7 @@
         "framework": "openai_agents",
         "graph_state": {},
         "metadata": {
-          "final_output": "I'm unable to directly access your plan information. For details about your current plan, please check your account dashboard or contact our billing or account management team directly through official TechCorp channels. If you need assistance with account settings or security, feel free to let me know!"
-        }
-      }
-    },
-    {
-      "turn_index": 1,
-      "user_message": "Thanks. Separately \u2014 CloudSync desktop sync has been failing all morning with error E-1123. Is there an outage?",
-      "trace": {
-        "trace_id": "trace_ed2e3216a3364b94a74a054147552688",
-        "created_at": "2026-07-07T05:54:28.990841Z",
-        "spans": [
-          {
-            "span_id": "span_ea1d845a10e548b9ba55fabc",
-            "parent_span_id": "span_de279b8ac3fa4ceda03bfb9c",
-            "kind": "guardrail",
-            "name": "relevance_check",
-            "input_data": null,
-            "output_data": null,
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [],
-            "total_tokens_in": 0,
-            "total_tokens_out": 0,
-            "total_cost_usd": 0.0,
-            "duration_ms": 0.03454089164733887,
-            "metadata": {},
-            "attributes": {},
-            "from_agent": null,
-            "to_agent": null,
-            "guardrail_name": "relevance_check",
-            "guardrail_triggered": false
-          },
-          {
-            "span_id": "span_0f669f2d6a0b4443ab5eddae",
-            "parent_span_id": "span_de279b8ac3fa4ceda03bfb9c",
-            "kind": "guardrail",
-            "name": "pii_check",
-            "input_data": null,
-            "output_data": null,
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [],
-            "total_tokens_in": 0,
-            "total_tokens_out": 0,
-            "total_cost_usd": 0.0,
-            "duration_ms": 0.07512513548135757,
-            "metadata": {},
-            "attributes": {},
-            "from_agent": null,
-            "to_agent": null,
-            "guardrail_name": "pii_check",
-            "guardrail_triggered": false
-          },
-          {
-            "span_id": "span_87aca61a6a9649a0b6944e0f",
-            "parent_span_id": "span_de279b8ac3fa4ceda03bfb9c",
-            "kind": "llm_call",
-            "name": "response",
-            "input_data": null,
-            "output_data": null,
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [
-              {
-                "model": "gpt-4.1-2025-04-14",
-                "provider": "openai",
-                "input_messages": [],
-                "output_text": "",
-                "tokens_in": 390,
-                "tokens_out": 46,
-                "stop_reason": null,
-                "cost_usd": 0.0,
-                "duration_ms": 1352.9566670767963,
-                "timestamp": "2026-07-07T05:54:30.344912Z"
-              }
-            ],
-            "total_tokens_in": 390,
-            "total_tokens_out": 46,
-            "total_cost_usd": 0.0,
-            "duration_ms": 1352.9566670767963,
-            "metadata": {},
-            "attributes": {},
-            "from_agent": null,
-            "to_agent": null,
-            "guardrail_name": null,
-            "guardrail_triggered": false
-          },
-          {
-            "span_id": "span_1cbb23b393404d0187b4da4a",
-            "parent_span_id": "span_de279b8ac3fa4ceda03bfb9c",
-            "kind": "handoff",
-            "name": "handoff",
-            "input_data": null,
-            "output_data": null,
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [],
-            "total_tokens_in": 0,
-            "total_tokens_out": 0,
-            "total_cost_usd": 0.0,
-            "duration_ms": 0.19512511789798737,
-            "metadata": {},
-            "attributes": {},
-            "from_agent": "Triage Agent",
-            "to_agent": "Billing Agent",
-            "guardrail_name": null,
-            "guardrail_triggered": false
-          },
-          {
-            "span_id": "span_de279b8ac3fa4ceda03bfb9c",
-            "parent_span_id": null,
-            "kind": "agent",
-            "name": "Triage Agent",
-            "input_data": null,
-            "output_data": null,
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [],
-            "total_tokens_in": 0,
-            "total_tokens_out": 0,
-            "total_cost_usd": 0.0,
-            "duration_ms": 1354.9357503652573,
-            "metadata": {
-              "handoffs": [
-                "Billing Agent",
-                "Technical Agent",
-                "Account Agent",
-                "General Agent"
-              ],
-              "tools": [],
-              "instructions": "",
-              "handoff_description": ""
-            },
-            "attributes": {},
-            "from_agent": null,
-            "to_agent": null,
-            "guardrail_name": null,
-            "guardrail_triggered": false
-          },
-          {
-            "span_id": "span_dfdb9a1e593d463b9e164f29",
-            "parent_span_id": "span_a0519b71ffc04491b53adaec",
-            "kind": "llm_call",
-            "name": "response",
-            "input_data": null,
-            "output_data": null,
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [
-              {
-                "model": "gpt-4.1-2025-04-14",
-                "provider": "openai",
-                "input_messages": [],
-                "output_text": "",
-                "tokens_in": 448,
-                "tokens_out": 84,
-                "stop_reason": null,
-                "cost_usd": 0.0,
-                "duration_ms": 1708.463208284229,
-                "timestamp": "2026-07-07T05:54:32.055040Z"
-              }
-            ],
-            "total_tokens_in": 448,
-            "total_tokens_out": 84,
-            "total_cost_usd": 0.0,
-            "duration_ms": 1708.463208284229,
-            "metadata": {},
-            "attributes": {},
-            "from_agent": null,
-            "to_agent": null,
-            "guardrail_name": null,
-            "guardrail_triggered": false
-          },
-          {
-            "span_id": "span_a0519b71ffc04491b53adaec",
-            "parent_span_id": null,
-            "kind": "agent",
-            "name": "Billing Agent",
-            "input_data": null,
-            "output_data": "I'm here to assist with billing questions, so I don't have direct information about technical outages. \n\nFor your specific error (E-1123) with CloudSync's desktop sync, I recommend checking TechCorp's official status page or reaching out to our technical support team for the latest updates on outages or troubleshooting steps.\n\nIf you have any billing concerns or need help with invoices or subscriptions, please let me know!",
-            "stop_reason": null,
-            "graph_state": {},
-            "tool_calls": [],
-            "llm_calls": [],
-            "total_tokens_in": 0,
-            "total_tokens_out": 0,
-            "total_cost_usd": 0.0,
-            "duration_ms": 1709.5226249657571,
-            "metadata": {
-              "handoffs": [],
-              "tools": [
-                "lookup_invoice",
-                "check_plan",
-                "process_refund"
-              ],
-              "instructions": "",
-              "handoff_description": ""
-            },
-            "attributes": {},
-            "from_agent": null,
-            "to_agent": null,
-            "guardrail_name": null,
-            "guardrail_triggered": false
-          }
-        ],
-        "total_cost_usd": 0.0,
-        "total_tokens": 968,
-        "total_duration_ms": 0.0,
-        "total_llm_calls": 2,
-        "total_tool_calls": 0,
-        "test_name": "",
-        "agent_name": "Agent workflow",
-        "framework": "openai_agents",
-        "graph_state": {},
-        "metadata": {
-          "final_output": "I'm here to assist with billing questions, so I don't have direct information about technical outages. \n\nFor your specific error (E-1123) with CloudSync's desktop sync, I recommend checking TechCorp's official status page or reaching out to our technical support team for the latest updates on outages or troubleshooting steps.\n\nIf you have any billing concerns or need help with invoices or subscriptions, please let me know!"
+          "final_output": "I'm here to help with account-related issues, but I don't have direct access to live system status or technical outage information. For the CloudSync error (E-1123) you're experiencing, I recommend checking the official TechCorp status page or support portal for real-time outage updates. \n\nIf the issue persists and there are no known outages, try restarting the CloudSync app or reinstalling it. For technical support with this error, please reach out to TechCorp's technical support team directly.\n\nIf you need help with your account or settings, let me know!"
         }
       }
     }
