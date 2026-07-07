@@ -20,11 +20,13 @@ load_dotenv()
 
 from support_router.run import run_agent_async, get_processor
 from agents.tracing import set_trace_processors
+from agents.tracing.processor_interface import TracingProcessor
 
 
 async def main():
     processor = get_processor()
-    set_trace_processors([processor])
+    processors: list[TracingProcessor] = [processor]
+    set_trace_processors(processors)
 
     print()
     print("🏢  TechCorp Support Router")

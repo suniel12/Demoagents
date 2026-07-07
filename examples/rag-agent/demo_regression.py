@@ -9,14 +9,14 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-import agentci
+import ciagent
 from agent import generate_answer_api
-import agentci.capture
+import ciagent.capture
 
 
 def run_traced(query: str):
     """Run a query with tracing and return the Trace object."""
-    with agentci.capture.TraceContext(agent_name="rag-agent") as ctx:
+    with ciagent.capture.TraceContext(agent_name="rag-agent") as ctx:
         output, state = generate_answer_api(query)
         ctx.attach_langgraph_state(state)
     return ctx.trace
@@ -25,7 +25,7 @@ def run_traced(query: str):
 def main():
     # 1. Load the baseline
     try:
-        baseline = agentci.load_baseline("rag-v1-gpt4o-mini")
+        baseline = ciagent.load_baseline("rag-v1-gpt4o-mini")
     except FileNotFoundError:
         print("❌ Baseline not found. Run 'make baseline' first to save golden traces.")
         return
@@ -51,7 +51,7 @@ def main():
                 continue
 
             current_trace = run_traced(q)
-            diff_obj = agentci.diff(golden_trace, current_trace)
+            diff_obj = ciagent.diff(golden_trace, current_trace)
 
             print(f"Query: \"{q}\"")
             if diff_obj.has_regression:

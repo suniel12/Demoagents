@@ -14,3 +14,4 @@ record_demo*.sh
 
 # Claude context
 .claude/
+.DS_Store

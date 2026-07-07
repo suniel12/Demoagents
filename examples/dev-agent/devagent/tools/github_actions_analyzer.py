@@ -15,9 +15,9 @@ class ActionsAnalyzerInput(BaseModel):
 
 class ActionsAnalyzerOutput(BaseModel):
     has_workflows: bool = Field(..., description="Whether GitHub Actions workflows were found")
-    workflow_count: int = Field(0, description="Number of workflow files found")
+    workflow_count: int = Field(default=0, description="Number of workflow files found")
     workflow_triggers: list[str] = Field(default_factory=list, description="Common triggers found (e.g., push, pull_request)")
-    notes: str = Field("", description="Additional notes or findings")
+    notes: str = Field(default="", description="Additional notes or findings")
 
 
 async def analyze_actions(owner: str, repo: str) -> dict[str, Any]:

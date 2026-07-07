@@ -38,8 +38,8 @@ def assert_trace_matches_golden(
     cost_tolerance: float = 0.5,
 ) -> None:
     """Compare a live trace against a golden trace using AgentCI diff engine."""
-    from agentci.models import Trace as AgentCITrace, Span, ToolCall as AgentCIToolCall
-    from agentci.diff_engine import diff
+    from ciagent.models import Trace as AgentCITrace, Span, ToolCall as AgentCIToolCall
+    from ciagent.diff_engine import diff
 
     # 1. Convert DevAgent Trace to AgentCI Trace
     agentci_live = AgentCITrace(

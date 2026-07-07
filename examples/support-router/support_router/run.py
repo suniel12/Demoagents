@@ -3,10 +3,12 @@
 import asyncio
 import os
 import sys
+from typing import Any, cast
 
 from dotenv import load_dotenv
 from agents import Runner
 from agents.tracing import set_trace_processors
+from agents.tracing.processor_interface import TracingProcessor
 from agents.exceptions import InputGuardrailTripwireTriggered
 
 from ciagent.adapters.openai_agents import AgentCITraceProcessor
@@ -29,7 +31,8 @@ async def run_agent_async(query: str):
     """Run the support router and return the AgentCI Trace."""
     # Replace default processors so we don't need an OpenAI API key 
     # for the traces dashboard (we only need it for the LLM calls)
-    set_trace_processors([_processor])
+    processors: list[TracingProcessor] = [_processor]
+    set_trace_processors(processors)
     
     try:
         result = await Runner.run(triage_agent, query)
@@ -64,10 +67,11 @@ async def respond_async(messages: list[dict]):
     use, so input guardrails see the whole transcript, exactly as they
     would live.
     """
-    set_trace_processors([_processor])
+    processors: list[TracingProcessor] = [_processor]
+    set_trace_processors(processors)
 
     try:
-        result = await Runner.run(triage_agent, list(messages))
+        result = await Runner.run(triage_agent, cast(Any, list(messages)))
         trace = _processor.get_last_trace()
         if trace and result.final_output:
             trace.metadata["final_output"] = str(result.final_output)
