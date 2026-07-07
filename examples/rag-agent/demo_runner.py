@@ -1,4 +1,4 @@
-from agentci.capture import langgraph_trace
+from ciagent.capture import langgraph_trace
 from agent import generate_answer_api
 
 def run_for_agentci(query: str):

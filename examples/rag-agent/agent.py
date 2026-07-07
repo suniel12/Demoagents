@@ -1,5 +1,5 @@
 import os
-from typing import Literal, List, TypedDict, Annotated, Optional
+from typing import Literal, List, TypedDict, Annotated, Optional, Any, cast
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
@@ -85,7 +85,7 @@ def decompose_query(state: RAGState) -> dict:
         "- 'Hello!' → [] (greeting)\n\n"
         f"Query: {original_query}"
     )
-    result = decompose_llm.invoke([HumanMessage(content=prompt)])
+    result = cast(Any, decompose_llm.invoke([HumanMessage(content=prompt)]))
     sub_questions = result.sub_questions
     if len(sub_questions) >= 2:
         return {"sub_questions": sub_questions, "is_decomposed": True}
@@ -205,7 +205,7 @@ def grade_documents(state: RAGState):
                     break
         prompt = f"Do these docs contain enough information to answer the following question, even if it requires inference? Question: '{retrieval_query}'. Reply 'yes' or 'no'.\n\nDocs:\n{docs_content}"
 
-    result = grader_llm.invoke([HumanMessage(content=prompt)])
+    result = cast(Any, grader_llm.invoke([HumanMessage(content=prompt)]))
     return {"messages": [AIMessage(content=f'{{"binary_score": "{result.binary_score.lower()}"}}', name="grade_artifacts")]}
 
 def generate_answer(state: RAGState):
@@ -269,7 +269,7 @@ def route_after_grade(state: RAGState) -> Literal["generate_answer", "rewrite_qu
         return "generate_answer"
 
     last_msg = state["messages"][-1]
-    if "yes" in last_msg.content.lower():
+    if "yes" in str(last_msg.content).lower():
         return "generate_answer"
 
     # Check for recursion limit: Count how many times we've rewritten
@@ -303,5 +303,5 @@ graph = builder.compile()
 
 # Our original generate_answer wrapper for backwards compat with tests
 def generate_answer_api(query: str):
-    result = graph.invoke({"messages": [HumanMessage(content=query)]})
+    result = graph.invoke(cast(Any, {"messages": [HumanMessage(content=query)]}))
     return result["messages"][-1].content, result

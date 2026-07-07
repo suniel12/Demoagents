@@ -146,6 +146,7 @@ GOLDEN_QUERIES = [
 def test_routing_correctness(case):
     """Each query should route to the expected specialist agent."""
     trace = run_agent(case["query"])
+    assert trace is not None, "run_agent returned no trace"
     assert trace is not None, "Trace was not captured"
 
     handoffs = trace.get_handoffs()
@@ -167,6 +168,7 @@ def test_routing_correctness(case):
 def test_single_handoff_per_query():
     """Triage should route exactly once, not bounce between agents."""
     trace = run_agent("I was charged twice for my subscription")
+    assert trace is not None, "run_agent returned no trace"
     handoffs = trace.get_handoffs()
     assert len(handoffs) == 1, (
         f"Expected 1 handoff, got {len(handoffs)}: "
@@ -177,6 +179,7 @@ def test_single_handoff_per_query():
 def test_triage_does_not_answer_directly():
     """Triage agent should never be the final agent — it should always hand off."""
     trace = run_agent("What is your refund policy?")
+    assert trace is not None, "run_agent returned no trace"
     agents = trace.agents_involved
     assert len(agents) >= 2, (
         f"Expected at least 2 agents (triage + specialist), got {agents}"
@@ -193,6 +196,7 @@ def test_all_four_agents_reachable():
     }
     for expected, query in queries.items():
         trace = run_agent(query)
+        assert trace is not None, "run_agent returned no trace"
         handoffs = trace.get_handoffs()
         assert len(handoffs) >= 1, f"No handoff for '{query}'"
         actual = handoffs[-1].to_agent
@@ -206,6 +210,7 @@ def test_all_four_agents_reachable():
 def test_routing_cost_under_budget():
     """A simple route (triage → specialist) should cost under $0.01."""
     trace = run_agent("I was charged twice")
+    assert trace is not None, "run_agent returned no trace"
     assert trace.total_cost_usd < 0.01, (
         f"Routing cost ${trace.total_cost_usd:.4f} exceeds $0.01 budget"
     )

@@ -9,8 +9,8 @@ for span in trace.spans:
         print(f"   ToolCall: {tc.tool_name}")
         print(f"      Args: {tc.arguments}")
 
-from agentci.loader import load_spec
-from agentci.engine.runner import evaluate_query
+from ciagent.loader import load_spec
+from ciagent.engine.runner import evaluate_query
 import json
 
 spec = load_spec("agentci_spec.yaml")

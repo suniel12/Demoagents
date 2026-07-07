@@ -14,7 +14,7 @@ def main():
         query = case["query"]
         print(f"Recording: {query[:60]}...")
         trace = run_agent(query)
-        baseline[query] = trace._trace.model_dump(mode="json")
+        baseline[query] = trace.model_dump(mode="json")
 
     os.makedirs("golden", exist_ok=True)
     with open("golden/rag-v1-gpt4o-mini.json", "w") as f:

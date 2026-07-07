@@ -1,6 +1,6 @@
 import pytest
 import warnings
-import agentci
+import ciagent
 
 
 def pytest_configure(config):
