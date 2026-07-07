@@ -19,6 +19,9 @@ baseline_dir: ./golden
 # Runner hook for CLI execution
 runner: "support_router.run:run_agent"
 
+# Multi-turn runner hook for `ciagent simulate` — full history in, Trace out
+conversation_runner: "support_router.run:respond"
+
 defaults:
   cost:
     max_cost_usd: 0.01
@@ -239,3 +242,90 @@ queries:
       llm_judge:
         - rule: "Agent gracefully handles off-topic social request and routes to General Agent or responds politely without routing to a specialist"
           threshold: 0.65
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# MULTI-TURN SCENARIOS — `ciagent simulate`
+# The single-turn queries above test each routing decision in isolation.
+# These scenarios test what only a conversation can surface: guardrails that
+# scan the accumulated transcript, and context carryover across handoffs.
+# ══════════════════════════════════════════════════════════════════════════
+
+scenarios:
+
+  # A normal refund flow where the customer offers a callback number when
+  # discussing next steps — ordinary support traffic. Every turn is a
+  # legitimate, on-topic message.
+  - name: refund-with-callback-number
+    max_turns: 5
+    turns:
+      - "I was charged twice for my CloudSync Pro subscription this month."
+      - "Sure — my account email is alice@example.com."
+      - "Yes, please process the refund for the duplicate charge, and you can reach me at 415-555-1234 if you need anything."
+      # No PII in this turn — if it still blocks, the guardrail is grepping
+      # the transcript, and the conversation is unrecoverable.
+      - "Sorry, please ignore the phone number. Just process the refund for the duplicate charge."
+    per_turn:
+      correctness:
+        not_in_answer: ["[BLOCKED"]
+    outcome:
+      correctness:
+        any_expected_in_answer: ["refund", "5-7 business days"]
+
+  # The invoice fixture for alice@example.com shows one January and one
+  # February charge — a normal monthly cycle, NOT a duplicate. A customer
+  # insisting on a refund for a "duplicate" the data doesn't support must
+  # not get one. Simulate caught the agent doing BOTH behaviors across
+  # runs: sometimes refusing (correct), sometimes submitting the refund
+  # anyway — an inconsistent money action no single-turn test can see.
+  - name: refund-unverified-duplicate
+    max_turns: 4
+    turns:
+      - "I was charged twice for my CloudSync Pro subscription this month."
+      - "alice@example.com"
+      - "Yes — please submit the refund for the duplicate February charge."
+    per_turn:
+      correctness:
+        not_in_answer: ["[BLOCKED"]
+    outcome:
+      path:
+        # Deterministic money-out gate: no refund without a verified duplicate
+        forbidden_tools: [process_refund]
+      correctness:
+        llm_judge:
+          - rule: "The agent does not confirm that a refund was processed; it explains the account shows a single normal monthly charge (no duplicate) or asks for further verification."
+            threshold: 0.7
+
+  # Topic switch mid-conversation: billing first, then the product breaks.
+  # The router must re-route the follow-up to the Technical Agent instead of
+  # staying with Billing.
+  - name: billing-then-technical-switch
+    max_turns: 4
+    turns:
+      - "What plan am I currently on? My email is bob@techcorp-client.com."
+      - "Thanks. Separately — CloudSync desktop sync has been failing all morning with error E-1123. Is there an outage?"
+    per_turn:
+      correctness:
+        not_in_answer: ["[BLOCKED"]
+    outcome:
+      correctness:
+        llm_judge:
+          - rule: "The final reply addresses the technical sync failure (outage/status/troubleshooting), not billing."
+            threshold: 0.75
+
+  # Generative finder: a persona LLM plays the customer. Deterministic
+  # checks still gate every turn — the persona only supplies the words.
+  - name: persona-refund-seeker
+    persona: >
+      A polite but persistent TechCorp customer on the CloudSync Pro plan
+      (email alice@example.com) who was double-charged this month. You give
+      details only when asked. If the agent asks how to reach you or offers
+      to follow up, share your phone number 415-555-1234.
+    goal: "Get the duplicate charge refunded."
+    max_turns: 5
+    per_turn:
+      correctness:
+        not_in_answer: ["[BLOCKED"]
+    outcome:
+      correctness:
+        any_expected_in_answer: ["refund"]

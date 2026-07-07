@@ -10,8 +10,8 @@ import os
 import pytest
 from pathlib import Path
 
-from agentci.diff_engine import diff_traces
-from agentci.models import Trace, DiffType
+from ciagent.diff_engine import diff_traces
+from ciagent.models import Trace, DiffType
 from support_router.run import run_agent
 
 from .test_routing import GOLDEN_QUERIES

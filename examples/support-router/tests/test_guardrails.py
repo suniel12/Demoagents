@@ -12,7 +12,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from support_router.run import run_agent
-from agentci.models import SpanKind
+from ciagent.models import SpanKind
 
 
 def test_relevance_guardrail_blocks_off_topic():
