@@ -1,9 +1,11 @@
 """Billing tools — lookup invoices, check plan, process refund requests."""
 
 from agents import function_tool
+from ciagent.world import world_tool
 
 
 @function_tool
+@world_tool
 def lookup_invoice(customer_email: str) -> str:
     """Look up the most recent invoices for a customer by their email address."""
     # Simulated data
@@ -26,6 +28,7 @@ def lookup_invoice(customer_email: str) -> str:
 
 
 @function_tool
+@world_tool
 def check_plan(customer_email: str) -> str:
     """Check the current subscription plan for a customer."""
     plans = {
@@ -40,6 +43,7 @@ def check_plan(customer_email: str) -> str:
 
 
 @function_tool
+@world_tool
 def process_refund(invoice_id: str, reason: str) -> str:
     """Submit a refund request for a specific invoice."""
     return f"Refund request submitted for {invoice_id}. Reason: {reason}. Expected processing: 5-7 business days."
