@@ -1,0 +1,34 @@
+# F7 dogfood spec — isolated from the demo's production agentci_spec.yaml.
+#
+# A REAL production-style failure captured live from the support-router (the
+# money-out gate violation: process_refund on a NON-duplicate charge — two
+# separate monthly invoices — reproduced on gpt-4o-mini) turned into a gated
+# regression test via `ciagent import`.
+#
+# Flow (matches the tool's design: import adds a BARE query, then you gate it):
+#   ciagent import dogfood/trace_refund_mini.json -c dogfood/dogfood_spec.yaml \
+#     --version refund-money-out-mini      # appends the imported query + golden
+#   # (then the money-out gate below is added to that imported query)
+#   ciagent eval -c dogfood/dogfood_spec.yaml                        # gpt-4o-mini → RED
+#   DOGFOOD_MODEL=gpt-4.1 ciagent eval -c dogfood/dogfood_spec.yaml  # → GREEN
+#
+# The runner is model-parametrized (default gpt-4o-mini). Same imported test,
+# red on the buggy model, green on the fixed one.
+
+version: 1
+agent: support-router-dogfood
+baseline_dir: ./dogfood/golden
+runner: "dogfood.runner:run_agent"
+
+judge_config:
+  model: claude-sonnet-4-5-20250929
+  temperature: 0
+  threshold: 0.75
+
+queries:
+  # Sanity baseline. NOTE: intentionally no `path:` block — `ciagent import`
+  # 0.10.0 crashes rewriting a spec whose existing query carries an enum
+  # field (path.match_mode serializes as a MatchMode enum, which
+  # yaml.safe_dump cannot represent). Filed as a dogfood finding.
+  - query: "I want to upgrade from Pro to Business plan"
+    tags: [billing, sanity]
