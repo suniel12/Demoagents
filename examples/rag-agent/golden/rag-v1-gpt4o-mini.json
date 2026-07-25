@@ -1082,11 +1082,11 @@
     }
   },
   "How do I fail the CI pipeline if the agent uses forbidden tools?": {
-    "trace_id": "9cff82c184d1498d",
-    "created_at": "2026-07-07T15:39:15.536505Z",
+    "trace_id": "25d3b0a844644f3f",
+    "created_at": "2026-07-09T20:59:34.880552Z",
     "spans": [
       {
-        "span_id": "f5a2a0e815144784",
+        "span_id": "750dc07c95264bd2",
         "parent_span_id": null,
         "kind": "agent",
         "name": "rag-agent",
@@ -1101,7 +1101,7 @@
               "response_metadata": {},
               "type": "human",
               "name": null,
-              "id": "8b7c6ca6-fe25-4f46-af9d-9999c130aa11"
+              "id": "add2b90f-27cb-4206-8e8f-a46e85623d45"
             },
             {
               "content": "",
@@ -1110,9 +1110,9 @@
               },
               "response_metadata": {
                 "token_usage": {
-                  "completion_tokens": 27,
+                  "completion_tokens": 29,
                   "prompt_tokens": 400,
-                  "total_tokens": 427,
+                  "total_tokens": 429,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -1127,29 +1127,29 @@
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
                 "system_fingerprint": "fp_b4abb0dc92",
-                "id": "chatcmpl-Dz2BAK7YWOXSbyHzYZju7ECj8xLFv",
+                "id": "chatcmpl-Dzq8GAU0Rcnf8t7ix3LtvWQePkB3Y",
                 "service_tier": "default",
                 "finish_reason": "tool_calls",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019f3d3b-c93c-7263-a4d0-b60e178be5ae-0",
+              "id": "lc_run--019f48ad-c5ea-7021-a22b-7d537d8d5262-0",
               "tool_calls": [
                 {
                   "name": "retrieve_docs",
                   "args": {
-                    "query": "How do I fail the CI pipeline if the agent uses forbidden tools?"
+                    "query": "How to fail the CI pipeline if the agent uses forbidden tools in AgentCI?"
                   },
-                  "id": "call_Ri9625cx1ZznELjD0KYHK0j9",
+                  "id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
                   "type": "tool_call"
                 }
               ],
               "invalid_tool_calls": [],
               "usage_metadata": {
                 "input_tokens": 400,
-                "output_tokens": 27,
-                "total_tokens": 427,
+                "output_tokens": 29,
+                "total_tokens": 429,
                 "input_token_details": {
                   "audio": 0,
                   "cache_read": 0
@@ -1161,163 +1161,37 @@
               }
             },
             {
-              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
+              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n- A model swap changes routing decisions (billing queries go to the wrong agent)\n- A prompt edit silently skips a tool call (vector search stops firing)\n- A new model costs 6x more per query (surprise invoice at month-end)\n- A RAG retriever returns irrelevant docs (hallucinated answers in production)\n- A guardrail stops firing after a refactor (PII leaks through)\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## CI/CD\n\n### Does AgentCI integrate with GitHub Actions?\nYes. Run `agentci init` to generate a `.github/workflows/agentci.yml`. When correctness checks fail, they appear as `::error` annotations directly in the PR \"Files Changed\" tab. Path and cost warnings appear as `::warning` annotations. This is first-in-class among agent testing tools.\n\n### What are the exit codes?\n- 0 \u2014 All correctness checks pass (warnings may be printed)\n- 1 \u2014 One or more correctness failures (blocks the merge)\n- 2 \u2014 Infrastructure or runtime error\n\n## Comparisons\n\n### How does AgentCI compare to promptfoo?\npromptfoo is a prompt evaluation tool focused on LLM output quality with a web UI. AgentCI is a CI/CD-native agent testing framework focused on multi-step agent behavior (tool sequences, routing, handoffs, cost tracking). AgentCI's three-layer severity model, GitHub annotations, trajectory metrics, and baseline versioning are not available in promptfoo.\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior. \n\n4. **Validate your spec:**\n   ```bash\n   agentci validate agentci_spec.yaml\n   ```\n\n5. **Run tests:**\n   ```bash\n   agentci test --config agentci_spec.yaml --format console\n   ```\n\n6. **Save a golden baseline:**\n   ```bash\n   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml\n   ```\n\n7. **Diff against baselines:**\n   ```bash\n   agentci diff --baseline v1 --compare v2 --agent my-agent\n   ```\n\n### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.\n\n## Automated Example Agents\n\nAgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.\n\n### RAG Agent (LangGraph)\n**Directory:** `DemoAgents/examples/rag-agent/`\n**Architecture:** Retrieval \u2192 Grade \u2192 Rewrite/Generate pipeline\n\n### Support Router (OpenAI Agents SDK)\n**Directory:** `DemoAgents/examples/support-router/`\n**Architecture:** Triage \u2192 Specialist multi-agent handoff with guardrails\n\n### DevAgent (Anthropic SDK)\n**Directory:** `DemoAgents/examples/dev-agent/`\n**Architecture:** Sequential 8-tool GitHub repository analyzer\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version",
               "additional_kwargs": {},
               "response_metadata": {},
               "type": "tool",
               "name": "retrieve_docs",
-              "id": "54574feb-1eb8-436c-96b9-7ad12e359926",
-              "tool_call_id": "call_Ri9625cx1ZznELjD0KYHK0j9",
+              "id": "fe6f135a-faa2-4d94-b973-ed28bbb7a437",
+              "tool_call_id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
               "artifact": null,
               "status": "success"
             },
             {
-              "content": "{\"binary_score\": \"no\"}",
+              "content": "{\"binary_score\": \"yes\"}",
               "additional_kwargs": {},
               "response_metadata": {},
               "type": "ai",
               "name": "grade_artifacts",
-              "id": "d37e8e61-fe33-4cb4-bb7d-d32a0b00a8ce",
+              "id": "d2c575d8-3306-4c4e-8974-22c84983322f",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": null
             },
             {
-              "content": "",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "rewrite_question",
-              "id": "c1197af7-d141-4c31-9e97-0e8988118d8c",
-              "tool_calls": [
-                {
-                  "name": "retrieve_docs",
-                  "args": {
-                    "query": "\"How to configure a CI pipeline to fail when forbidden tools are used by the agent?\""
-                  },
-                  "id": "rewrite_tc",
-                  "type": "tool_call"
-                }
-              ],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "tool",
-              "name": "retrieve_docs",
-              "id": "3775f5ed-6ce9-481a-85bc-d3bef9b39daf",
-              "tool_call_id": "rewrite_tc",
-              "artifact": null,
-              "status": "success"
-            },
-            {
-              "content": "{\"binary_score\": \"no\"}",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "grade_artifacts",
-              "id": "c1307d23-bf47-4ca5-91ac-d4210acc5f02",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "rewrite_question",
-              "id": "8e416ffe-5011-4104-9ea7-87fb2bcad8f4",
-              "tool_calls": [
-                {
-                  "name": "retrieve_docs",
-                  "args": {
-                    "query": "What methods can I use to fail a CI pipeline if forbidden tools are detected in the agent?"
-                  },
-                  "id": "rewrite_tc",
-                  "type": "tool_call"
-                }
-              ],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "tool",
-              "name": "retrieve_docs",
-              "id": "019ef203-1ba6-4b74-b2cd-67e4d486b0ff",
-              "tool_call_id": "rewrite_tc",
-              "artifact": null,
-              "status": "success"
-            },
-            {
-              "content": "{\"binary_score\": \"no\"}",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "grade_artifacts",
-              "id": "1240c337-5c42-4db0-a217-a13d58213348",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "rewrite_question",
-              "id": "9ee48987-052d-4223-a806-410fad962870",
-              "tool_calls": [
-                {
-                  "name": "retrieve_docs",
-                  "args": {
-                    "query": "How can I configure the CI pipeline to fail when forbidden tools are detected on the agent?"
-                  },
-                  "id": "rewrite_tc",
-                  "type": "tool_call"
-                }
-              ],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "tool",
-              "name": "retrieve_docs",
-              "id": "d8d33372-6ea6-4c04-9e4e-7f4dda5f7351",
-              "tool_call_id": "rewrite_tc",
-              "artifact": null,
-              "status": "success"
-            },
-            {
-              "content": "{\"binary_score\": \"no\"}",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "grade_artifacts",
-              "id": "5e05abc2-c55b-45ce-bb0c-feb364f1139c",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "To fail the CI pipeline if the agent uses forbidden tools, you would utilize the **three-layer severity model** that AgentCI implements. You can set the severity of violations, such as using forbidden tools, to **Correctness (hard fail)**, which will ensure that the CI pipeline fails when such a violation occurs. \n\nAdditionally, you could use features like **multi-agent routing assertions**, specifically `expected_handoff`, to manage how agents interact, potentially blocking any that use forbidden tools from passing through this check. \n\nBy defining these conditions in your test specifications, you can effectively enforce the use of allowed tools only.",
+              "content": "To fail the CI pipeline if the agent uses forbidden tools, you should define your agent's expected behavior in the `agentci_spec.yaml` file, including assertions that specify which tools are forbidden. When you run tests with AgentCI, if the agent uses any of these forbidden tools, the correctness checks will fail, triggering the following exit code:\n\n- **1** \u2014 One or more correctness failures (blocks the merge).\n\nThis exit code will ensure that the CI pipeline fails, preventing the merge of any code that violates the defined constraints.",
               "additional_kwargs": {
                 "refusal": null
               },
               "response_metadata": {
                 "token_usage": {
-                  "completion_tokens": 124,
-                  "prompt_tokens": 381,
-                  "total_tokens": 505,
+                  "completion_tokens": 107,
+                  "prompt_tokens": 1625,
+                  "total_tokens": 1732,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -1326,29 +1200,29 @@
                   },
                   "prompt_tokens_details": {
                     "audio_tokens": 0,
-                    "cached_tokens": 0
+                    "cached_tokens": 1536
                   }
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_39589d11a4",
-                "id": "chatcmpl-Dz2BJs079ECKiB8KRzagyekzAbbOU",
+                "system_fingerprint": "fp_a151a364ab",
+                "id": "chatcmpl-Dzq8IL9WD8kcMKazkur2OV6C4VyPS",
                 "service_tier": "default",
                 "finish_reason": "stop",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019f3d3b-ea05-7d82-bd19-56e02b01e0c4-0",
+              "id": "lc_run--019f48ad-cee7-7fc0-a500-1961aad88ee1-0",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 381,
-                "output_tokens": 124,
-                "total_tokens": 505,
+                "input_tokens": 1625,
+                "output_tokens": 107,
+                "total_tokens": 1732,
                 "input_token_details": {
                   "audio": 0,
-                  "cache_read": 0
+                  "cache_read": 1536
                 },
                 "output_token_details": {
                   "audio": 0,
@@ -1364,111 +1238,21 @@
           {
             "tool_name": "retrieve_docs",
             "arguments": {
-              "query": "How do I fail the CI pipeline if the agent uses forbidden tools?"
+              "query": "How to fail the CI pipeline if the agent uses forbidden tools in AgentCI?"
             },
-            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
+            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n- A model swap changes routing decisions (billing queries go to the wrong agent)\n- A prompt edit silently skips a tool call (vector search stops firing)\n- A new model costs 6x more per query (surprise invoice at month-end)\n- A RAG retriever returns irrelevant docs (hallucinated answers in production)\n- A guardrail stops firing after a refactor (PII leaks through)\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## CI/CD\n\n### Does AgentCI integrate with GitHub Actions?\nYes. Run `agentci init` to generate a `.github/workflows/agentci.yml`. When correctness checks fail, they appear as `::error` annotations directly in the PR \"Files Changed\" tab. Path and cost warnings appear as `::warning` annotations. This is first-in-class among agent testing tools.\n\n### What are the exit codes?\n- 0 \u2014 All correctness checks pass (warnings may be printed)\n- 1 \u2014 One or more correctness failures (blocks the merge)\n- 2 \u2014 Infrastructure or runtime error\n\n## Comparisons\n\n### How does AgentCI compare to promptfoo?\npromptfoo is a prompt evaluation tool focused on LLM output quality with a web UI. AgentCI is a CI/CD-native agent testing framework focused on multi-step agent behavior (tool sequences, routing, handoffs, cost tracking). AgentCI's three-layer severity model, GitHub annotations, trajectory metrics, and baseline versioning are not available in promptfoo.\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior. \n\n4. **Validate your spec:**\n   ```bash\n   agentci validate agentci_spec.yaml\n   ```\n\n5. **Run tests:**\n   ```bash\n   agentci test --config agentci_spec.yaml --format console\n   ```\n\n6. **Save a golden baseline:**\n   ```bash\n   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml\n   ```\n\n7. **Diff against baselines:**\n   ```bash\n   agentci diff --baseline v1 --compare v2 --agent my-agent\n   ```\n\n### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.\n\n## Automated Example Agents\n\nAgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.\n\n### RAG Agent (LangGraph)\n**Directory:** `DemoAgents/examples/rag-agent/`\n**Architecture:** Retrieval \u2192 Grade \u2192 Rewrite/Generate pipeline\n\n### Support Router (OpenAI Agents SDK)\n**Directory:** `DemoAgents/examples/support-router/`\n**Architecture:** Triage \u2192 Specialist multi-agent handoff with guardrails\n\n### DevAgent (Anthropic SDK)\n**Directory:** `DemoAgents/examples/dev-agent/`\n**Architecture:** Sequential 8-tool GitHub repository analyzer\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version",
             "error": null,
-            "timestamp": "2026-07-07T15:39:26.313585+00:00",
+            "timestamp": "2026-07-09T20:59:39.728058+00:00",
             "duration_ms": 0.0
           },
           {
             "tool_name": "grade_artifacts",
             "arguments": {
-              "content": "{\"binary_score\": \"no\"}"
+              "content": "{\"binary_score\": \"yes\"}"
             },
             "result": null,
             "error": null,
-            "timestamp": "2026-07-07T15:39:26.313594+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "rewrite_question",
-            "arguments": {
-              "content": ""
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313596+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "retrieve_docs",
-            "arguments": {
-              "query": "\"How to configure a CI pipeline to fail when forbidden tools are used by the agent?\""
-            },
-            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313599+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "grade_artifacts",
-            "arguments": {
-              "content": "{\"binary_score\": \"no\"}"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313603+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "rewrite_question",
-            "arguments": {
-              "content": ""
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313605+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "retrieve_docs",
-            "arguments": {
-              "query": "What methods can I use to fail a CI pipeline if forbidden tools are detected in the agent?"
-            },
-            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313607+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "grade_artifacts",
-            "arguments": {
-              "content": "{\"binary_score\": \"no\"}"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313610+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "rewrite_question",
-            "arguments": {
-              "content": ""
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313611+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "retrieve_docs",
-            "arguments": {
-              "query": "How can I configure the CI pipeline to fail when forbidden tools are detected on the agent?"
-            },
-            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313614+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "grade_artifacts",
-            "arguments": {
-              "content": "{\"binary_score\": \"no\"}"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-07-07T15:39:26.313617+00:00",
+            "timestamp": "2026-07-09T20:59:39.728075+00:00",
             "duration_ms": 0.0
           }
         ],
@@ -1482,8 +1266,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 841.6560827754438,
-            "timestamp": "2026-07-07T15:39:16.998509Z"
+            "duration_ms": 1172.798375133425,
+            "timestamp": "2026-07-09T20:59:36.959999Z"
           },
           {
             "model": "gpt-4o-mini",
@@ -1494,44 +1278,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 967.6365000195801,
-            "timestamp": "2026-07-07T15:39:19.089584Z"
-          },
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 1020.4827501438558,
-            "timestamp": "2026-07-07T15:39:21.191339Z"
-          },
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 1011.1526669934392,
-            "timestamp": "2026-07-07T15:39:23.449307Z"
-          },
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 1762.1397078037262,
-            "timestamp": "2026-07-07T15:39:26.311737Z"
+            "duration_ms": 1635.1436250843108,
+            "timestamp": "2026-07-09T20:59:39.723755Z"
           }
         ],
         "total_tokens_in": 0,
@@ -1548,9 +1296,9 @@
     ],
     "total_cost_usd": 0.0,
     "total_tokens": 0,
-    "total_duration_ms": 10777.11091702804,
-    "total_llm_calls": 5,
-    "total_tool_calls": 11,
+    "total_duration_ms": 4696.307041682303,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
     "test_name": "",
     "agent_name": "rag-agent",
     "framework": "",
@@ -1562,7 +1310,7 @@
           "response_metadata": {},
           "type": "human",
           "name": null,
-          "id": "8b7c6ca6-fe25-4f46-af9d-9999c130aa11"
+          "id": "add2b90f-27cb-4206-8e8f-a46e85623d45"
         },
         {
           "content": "",
@@ -1571,9 +1319,9 @@
           },
           "response_metadata": {
             "token_usage": {
-              "completion_tokens": 27,
+              "completion_tokens": 29,
               "prompt_tokens": 400,
-              "total_tokens": 427,
+              "total_tokens": 429,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -1588,29 +1336,29 @@
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
             "system_fingerprint": "fp_b4abb0dc92",
-            "id": "chatcmpl-Dz2BAK7YWOXSbyHzYZju7ECj8xLFv",
+            "id": "chatcmpl-Dzq8GAU0Rcnf8t7ix3LtvWQePkB3Y",
             "service_tier": "default",
             "finish_reason": "tool_calls",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019f3d3b-c93c-7263-a4d0-b60e178be5ae-0",
+          "id": "lc_run--019f48ad-c5ea-7021-a22b-7d537d8d5262-0",
           "tool_calls": [
             {
               "name": "retrieve_docs",
               "args": {
-                "query": "How do I fail the CI pipeline if the agent uses forbidden tools?"
+                "query": "How to fail the CI pipeline if the agent uses forbidden tools in AgentCI?"
               },
-              "id": "call_Ri9625cx1ZznELjD0KYHK0j9",
+              "id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
               "type": "tool_call"
             }
           ],
           "invalid_tool_calls": [],
           "usage_metadata": {
             "input_tokens": 400,
-            "output_tokens": 27,
-            "total_tokens": 427,
+            "output_tokens": 29,
+            "total_tokens": 429,
             "input_token_details": {
               "audio": 0,
               "cache_read": 0
@@ -1622,163 +1370,37 @@
           }
         },
         {
-          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
+          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n- A model swap changes routing decisions (billing queries go to the wrong agent)\n- A prompt edit silently skips a tool call (vector search stops firing)\n- A new model costs 6x more per query (surprise invoice at month-end)\n- A RAG retriever returns irrelevant docs (hallucinated answers in production)\n- A guardrail stops firing after a refactor (PII leaks through)\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## CI/CD\n\n### Does AgentCI integrate with GitHub Actions?\nYes. Run `agentci init` to generate a `.github/workflows/agentci.yml`. When correctness checks fail, they appear as `::error` annotations directly in the PR \"Files Changed\" tab. Path and cost warnings appear as `::warning` annotations. This is first-in-class among agent testing tools.\n\n### What are the exit codes?\n- 0 \u2014 All correctness checks pass (warnings may be printed)\n- 1 \u2014 One or more correctness failures (blocks the merge)\n- 2 \u2014 Infrastructure or runtime error\n\n## Comparisons\n\n### How does AgentCI compare to promptfoo?\npromptfoo is a prompt evaluation tool focused on LLM output quality with a web UI. AgentCI is a CI/CD-native agent testing framework focused on multi-step agent behavior (tool sequences, routing, handoffs, cost tracking). AgentCI's three-layer severity model, GitHub annotations, trajectory metrics, and baseline versioning are not available in promptfoo.\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior. \n\n4. **Validate your spec:**\n   ```bash\n   agentci validate agentci_spec.yaml\n   ```\n\n5. **Run tests:**\n   ```bash\n   agentci test --config agentci_spec.yaml --format console\n   ```\n\n6. **Save a golden baseline:**\n   ```bash\n   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml\n   ```\n\n7. **Diff against baselines:**\n   ```bash\n   agentci diff --baseline v1 --compare v2 --agent my-agent\n   ```\n\n### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.\n\n## Automated Example Agents\n\nAgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.\n\n### RAG Agent (LangGraph)\n**Directory:** `DemoAgents/examples/rag-agent/`\n**Architecture:** Retrieval \u2192 Grade \u2192 Rewrite/Generate pipeline\n\n### Support Router (OpenAI Agents SDK)\n**Directory:** `DemoAgents/examples/support-router/`\n**Architecture:** Triage \u2192 Specialist multi-agent handoff with guardrails\n\n### DevAgent (Anthropic SDK)\n**Directory:** `DemoAgents/examples/dev-agent/`\n**Architecture:** Sequential 8-tool GitHub repository analyzer\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version",
           "additional_kwargs": {},
           "response_metadata": {},
           "type": "tool",
           "name": "retrieve_docs",
-          "id": "54574feb-1eb8-436c-96b9-7ad12e359926",
-          "tool_call_id": "call_Ri9625cx1ZznELjD0KYHK0j9",
+          "id": "fe6f135a-faa2-4d94-b973-ed28bbb7a437",
+          "tool_call_id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
           "artifact": null,
           "status": "success"
         },
         {
-          "content": "{\"binary_score\": \"no\"}",
+          "content": "{\"binary_score\": \"yes\"}",
           "additional_kwargs": {},
           "response_metadata": {},
           "type": "ai",
           "name": "grade_artifacts",
-          "id": "d37e8e61-fe33-4cb4-bb7d-d32a0b00a8ce",
+          "id": "d2c575d8-3306-4c4e-8974-22c84983322f",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": null
         },
         {
-          "content": "",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "rewrite_question",
-          "id": "c1197af7-d141-4c31-9e97-0e8988118d8c",
-          "tool_calls": [
-            {
-              "name": "retrieve_docs",
-              "args": {
-                "query": "\"How to configure a CI pipeline to fail when forbidden tools are used by the agent?\""
-              },
-              "id": "rewrite_tc",
-              "type": "tool_call"
-            }
-          ],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "tool",
-          "name": "retrieve_docs",
-          "id": "3775f5ed-6ce9-481a-85bc-d3bef9b39daf",
-          "tool_call_id": "rewrite_tc",
-          "artifact": null,
-          "status": "success"
-        },
-        {
-          "content": "{\"binary_score\": \"no\"}",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "grade_artifacts",
-          "id": "c1307d23-bf47-4ca5-91ac-d4210acc5f02",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "rewrite_question",
-          "id": "8e416ffe-5011-4104-9ea7-87fb2bcad8f4",
-          "tool_calls": [
-            {
-              "name": "retrieve_docs",
-              "args": {
-                "query": "What methods can I use to fail a CI pipeline if forbidden tools are detected in the agent?"
-              },
-              "id": "rewrite_tc",
-              "type": "tool_call"
-            }
-          ],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "tool",
-          "name": "retrieve_docs",
-          "id": "019ef203-1ba6-4b74-b2cd-67e4d486b0ff",
-          "tool_call_id": "rewrite_tc",
-          "artifact": null,
-          "status": "success"
-        },
-        {
-          "content": "{\"binary_score\": \"no\"}",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "grade_artifacts",
-          "id": "1240c337-5c42-4db0-a217-a13d58213348",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "rewrite_question",
-          "id": "9ee48987-052d-4223-a806-410fad962870",
-          "tool_calls": [
-            {
-              "name": "retrieve_docs",
-              "args": {
-                "query": "How can I configure the CI pipeline to fail when forbidden tools are detected on the agent?"
-              },
-              "id": "rewrite_tc",
-              "type": "tool_call"
-            }
-          ],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "tool",
-          "name": "retrieve_docs",
-          "id": "d8d33372-6ea6-4c04-9e4e-7f4dda5f7351",
-          "tool_call_id": "rewrite_tc",
-          "artifact": null,
-          "status": "success"
-        },
-        {
-          "content": "{\"binary_score\": \"no\"}",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "grade_artifacts",
-          "id": "5e05abc2-c55b-45ce-bb0c-feb364f1139c",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "To fail the CI pipeline if the agent uses forbidden tools, you would utilize the **three-layer severity model** that AgentCI implements. You can set the severity of violations, such as using forbidden tools, to **Correctness (hard fail)**, which will ensure that the CI pipeline fails when such a violation occurs. \n\nAdditionally, you could use features like **multi-agent routing assertions**, specifically `expected_handoff`, to manage how agents interact, potentially blocking any that use forbidden tools from passing through this check. \n\nBy defining these conditions in your test specifications, you can effectively enforce the use of allowed tools only.",
+          "content": "To fail the CI pipeline if the agent uses forbidden tools, you should define your agent's expected behavior in the `agentci_spec.yaml` file, including assertions that specify which tools are forbidden. When you run tests with AgentCI, if the agent uses any of these forbidden tools, the correctness checks will fail, triggering the following exit code:\n\n- **1** \u2014 One or more correctness failures (blocks the merge).\n\nThis exit code will ensure that the CI pipeline fails, preventing the merge of any code that violates the defined constraints.",
           "additional_kwargs": {
             "refusal": null
           },
           "response_metadata": {
             "token_usage": {
-              "completion_tokens": 124,
-              "prompt_tokens": 381,
-              "total_tokens": 505,
+              "completion_tokens": 107,
+              "prompt_tokens": 1625,
+              "total_tokens": 1732,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -1787,29 +1409,29 @@
               },
               "prompt_tokens_details": {
                 "audio_tokens": 0,
-                "cached_tokens": 0
+                "cached_tokens": 1536
               }
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_39589d11a4",
-            "id": "chatcmpl-Dz2BJs079ECKiB8KRzagyekzAbbOU",
+            "system_fingerprint": "fp_a151a364ab",
+            "id": "chatcmpl-Dzq8IL9WD8kcMKazkur2OV6C4VyPS",
             "service_tier": "default",
             "finish_reason": "stop",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019f3d3b-ea05-7d82-bd19-56e02b01e0c4-0",
+          "id": "lc_run--019f48ad-cee7-7fc0-a500-1961aad88ee1-0",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 381,
-            "output_tokens": 124,
-            "total_tokens": 505,
+            "input_tokens": 1625,
+            "output_tokens": 107,
+            "total_tokens": 1732,
             "input_token_details": {
               "audio": 0,
-              "cache_read": 0
+              "cache_read": 1536
             },
             "output_token_details": {
               "audio": 0,
@@ -1822,7 +1444,7 @@
       "is_decomposed": false
     },
     "metadata": {
-      "final_output": "To fail the CI pipeline if the agent uses forbidden tools, you would utilize the **three-layer severity model** that AgentCI implements. You can set the severity of violations, such as using forbidden tools, to **Correctness (hard fail)**, which will ensure that the CI pipeline fails when such a violation occurs. \n\nAdditionally, you could use features like **multi-agent routing assertions**, specifically `expected_handoff`, to manage how agents interact, potentially blocking any that use forbidden tools from passing through this check. \n\nBy defining these conditions in your test specifications, you can effectively enforce the use of allowed tools only."
+      "final_output": "To fail the CI pipeline if the agent uses forbidden tools, you should define your agent's expected behavior in the `agentci_spec.yaml` file, including assertions that specify which tools are forbidden. When you run tests with AgentCI, if the agent uses any of these forbidden tools, the correctness checks will fail, triggering the following exit code:\n\n- **1** \u2014 One or more correctness failures (blocks the merge).\n\nThis exit code will ensure that the CI pipeline fails, preventing the merge of any code that violates the defined constraints."
     }
   },
   "Does AgentCI support Anthropic models for testing?": {
