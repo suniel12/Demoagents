@@ -1,5 +1,5 @@
 agent: my-agent
-runner: demo_runner:run_for_agentci
+runner: demo_runner:run_for_ciagent
 version: 1.0
 judge_config:
   model: claude-sonnet-4-6

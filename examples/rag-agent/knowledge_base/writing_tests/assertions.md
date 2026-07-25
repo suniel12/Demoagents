@@ -1,4 +1,4 @@
-# AgentCI Assertions & Metrics Reference
+# CIAgent Assertions & Metrics Reference
 
 ## Deterministic Assertions (Correctness Layer)
 
