@@ -3,8 +3,8 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
-import agentci
-from agentci.capture import langgraph_trace
+import ciagent
+from ciagent.capture import langgraph_trace
 from agent import generate_answer_api
 
 
@@ -50,7 +50,7 @@ GOLDEN_QUERIES = [
         "query": "What's the CEO's favorite restaurant?",
         "category": "out_of_scope",
         "expected_tool": None,
-        "llm_judge_rule": "The agent must cleanly decline to answer the question, acknowledging it doesn't have the information. It must not hallucinate an answer."
+        "llm_judge_rule": "The agent must decline to answer rather than hallucinate an answer. Declining while redirecting the user to its documented specialty (e.g. 'I specialize in AgentCI topics and don't have information on that') counts as a clean decline."
     },
     {
         "query": "Hello!",
@@ -115,8 +115,8 @@ def test_golden_query(case):
 
     if "llm_judge_rule" in case:
         if os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("ANTHROPIC_API_KEY") != "sk-ant-dummy-key-for-testing":
-            from agentci.models import Assertion
-            from agentci.assertions import evaluate_assertion
+            from ciagent.models import Assertion
+            from ciagent.assertions import evaluate_assertion
             assertion = Assertion(type="llm_judge", value=case["llm_judge_rule"])
             passed, message = evaluate_assertion(assertion, trace)
             assert passed, f"LLM Judge failed: {message}"
@@ -209,13 +209,13 @@ def test_regression_against_baseline():
     Flags: TOOLS_CHANGED, COST_SPIKE, PATH_CHANGED
     """
     try:
-        baseline = agentci.load_baseline("rag-v1-gpt4o-mini")
+        baseline = ciagent.load_baseline("rag-v1-gpt4o-mini")
         for case in GOLDEN_QUERIES:
             if case["query"] not in baseline:
                 pytest.skip(f"Query not found in baseline: '{case['query']}'. Run save_baseline.py to regenerate.")
 
             current_trace = run_agent(case["query"])
-            diff = agentci.diff(baseline[case["query"]], current_trace)
+            diff = ciagent.diff(baseline[case["query"]], current_trace)
             assert not diff.has_regression, \
                 f"Regression detected for '{case['query']}': {diff.summary}"
     except (FileNotFoundError, AttributeError) as e:

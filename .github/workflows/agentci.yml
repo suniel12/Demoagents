@@ -1,4 +1,4 @@
-name: AgentCI — Demo Agent Tests
+name: CIAgent — Demo Agent Tests
 
 on:
   push:
@@ -25,11 +25,11 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install agentci
+      - name: Install ciagent
         run: |
           pip install --upgrade pip
-          # Install the latest agentci directly from GitHub
-          pip install git+https://github.com/suniel12/AgentCI.git@main
+          # Install the latest ciagent directly from GitHub
+          pip install git+https://github.com/suniel12/ciagent.git@main
 
       - name: Install devagent dependencies
         run: |
@@ -38,15 +38,15 @@ jobs:
       - name: Install devagent in editable mode
         run: pip install -e .
 
-      - name: Run deterministic AgentCI tests (dev-agent)
+      - name: Run deterministic CIAgent tests (dev-agent)
         run: |
           pytest tests/ -v -m "not live" \
             --tb=short \
-            2>&1 | tee agentci-test-results.txt
+            2>&1 | tee ciagent-test-results.txt
         env:
           ANTHROPIC_API_KEY: sk-ant-dummy-key-for-testing
 
-      - name: Run deterministic AgentCI tests (rag-agent)
+      - name: Run deterministic CIAgent tests (rag-agent)
         run: |
           cd ../rag-agent
           pytest tests/ -v \
@@ -72,8 +72,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: agentci-test-results
-          path: examples/dev-agent/agentci-test-results.txt
+          name: ciagent-test-results
+          path: examples/dev-agent/ciagent-test-results.txt
           retention-days: 14
 
   support-router-tests:
@@ -91,10 +91,10 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install agentci
+      - name: Install ciagent
         run: |
           pip install --upgrade pip
-          pip install git+https://github.com/suniel12/AgentCI.git@main
+          pip install git+https://github.com/suniel12/ciagent.git@main
 
       - name: Install support-router dependencies
         run: |

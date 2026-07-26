@@ -5,7 +5,7 @@
 
 ## Overview
 
-DemoAgents is a collection of three production-pattern AI agents that demonstrate AgentCI trace-based regression testing. Each example is a standalone project with its own tests, mocks, and golden baselines.
+DemoAgents is a collection of three production-pattern AI agents that demonstrate CIAgent trace-based regression testing. Each example is a standalone project with its own tests, mocks, and golden baselines.
 
 ## Prerequisites
 
@@ -104,7 +104,7 @@ make record-golden
 - `tests/test_conditional_execution.py` — Conditional execution tests
 - `tests/test_golden_traces.py` — Golden trace regression tests
 - `tests/test_output_quality.py` — Output quality tests
-- `tests/conftest.py` — AgentCI fixtures, Anthropic mock setup
+- `tests/conftest.py` — CIAgent fixtures, Anthropic mock setup
 
 **Key imports:**
 ```python
@@ -187,7 +187,7 @@ Follow the existing patterns in each example:
 1. **Create test file** in `tests/` directory
 2. **Import fixtures** from `conftest.py` (mocks are auto-applied)
 3. **Run the agent** and capture a trace
-4. **Assert against the trace** using AgentCI assertions
+4. **Assert against the trace** using CIAgent assertions
 5. **Record golden baseline** if regression testing is needed
 
 Example test pattern (support-router):
@@ -203,12 +203,12 @@ async def test_billing_routes_correctly(mock_openai):
     assert result.final_output is not None
 ```
 
-## AgentCI Integration
+## CIAgent Integration
 
-All three examples integrate with AgentCI for:
+All three examples integrate with CIAgent for:
 - **Trace capture** — Every test run produces a `Trace` object
 - **Mock responses** — Zero-cost testing without API keys
 - **Golden baselines** — Regression detection via trace diffing
 - **Assertions** — Tool calls, routing, cost, output quality
 
-See [AgentCI AGENTS.md](https://github.com/agentci-org/agentci/blob/main/AGENTS.md) for the full AgentCI API reference.
+See [CIAgent AGENTS.md](https://github.com/suniel12/ciagent/blob/main/AGENTS.md) for the full CIAgent API reference.

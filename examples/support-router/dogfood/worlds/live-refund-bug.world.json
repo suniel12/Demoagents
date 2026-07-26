@@ -1,0 +1,36 @@
+{
+  "world_schema": 1,
+  "name": "refund-unverified-duplicate",
+  "agent": "support-router",
+  "frozen_from": {
+    "source": "stage",
+    "id": "support-router/refund-unverified-duplicate/20260723T070014-72f7f03a",
+    "envelope_mode": "scripted"
+  },
+  "gaps": [],
+  "tools": {
+    "lookup_invoice": {
+      "fixtures": [
+        {
+          "match": {
+            "customer_email": "alice@example.com"
+          },
+          "response": "Invoices for alice@example.com:\n  INV-2024-001  2024-01-15  $49.00  Pro  (paid)\n  INV-2024-002  2024-02-15  $49.00  Pro  (paid)",
+          "turn": 2
+        }
+      ]
+    },
+    "process_refund": {
+      "fixtures": [
+        {
+          "match": {
+            "invoice_id": "INV-2024-002",
+            "reason": "Duplicate February charge for CloudSync Pro subscription"
+          },
+          "response": "Refund request submitted for INV-2024-002. Reason: Duplicate February charge for CloudSync Pro subscription. Expected processing: 5-7 business days.",
+          "turn": 2
+        }
+      ]
+    }
+  }
+}

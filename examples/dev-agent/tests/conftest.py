@@ -53,7 +53,7 @@ from tests.fixtures import (
 def make_mock_github_tool(mock_response: dict | Exception | Any) -> ToolDefinition:
     """Create a mock version of the github_repo_metadata tool."""
     async def mock_handler(owner: str, repo: str) -> dict:
-        resp = mock_response(owner, repo) if callable(mock_response) else mock_response
+        resp: Any = mock_response(owner, repo) if callable(mock_response) else mock_response
         if isinstance(resp, Exception):
             raise resp
 
@@ -96,7 +96,7 @@ def make_mock_list_files_tool(mock_response: dict | Exception | Any) -> ToolDefi
     from devagent.tools.github_list_files import github_list_files_tool, ListFilesOutput
     
     async def mock_handler(owner: str, repo: str, tree_sha: str = "HEAD", recursive: bool = True) -> dict:
-        resp = mock_response(owner, repo, tree_sha, recursive) if callable(mock_response) else mock_response
+        resp: Any = mock_response(owner, repo, tree_sha, recursive) if callable(mock_response) else mock_response
         if isinstance(resp, Exception):
             raise resp
         return ListFilesOutput(**resp).model_dump()
@@ -145,7 +145,7 @@ def make_mock_dependency_analyzer(mock_responses: dict[str, dict | Exception]) -
     
     async def mock_handler(manifest_content: str, manifest_type: str) -> dict:
         # Simple lookup fallback
-        response = mock_responses.get(manifest_type, mock_responses.get("default"))
+        response: Any = mock_responses.get(manifest_type, mock_responses.get("default"))
         if isinstance(response, Exception):
             raise response
         return DependencyAnalyzerOutput(**response).model_dump()
@@ -251,7 +251,7 @@ def make_mock_registry(
 
 def mock_anthropic_client(fixture_name: str):
     """Creates a mock Anthropic client that generates deterministic tool calls using AgentCI."""
-    from agentci.mocks import AnthropicMocker
+    from ciagent.mocks import AnthropicMocker
     
     # Determine input based on fixture type
     if fixture_name == "healthy":

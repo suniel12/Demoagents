@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=../../../../AgentCI/src/agentci/schema/agentci_spec.schema.json
 #
-# AgentCI Pattern: Router Firewall
+# CIAgent Pattern: Router Firewall
 #
 # PURPOSE
 # -------

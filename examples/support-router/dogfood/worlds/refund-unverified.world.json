@@ -1,0 +1,24 @@
+{
+  "world_schema": 1,
+  "name": "refund-unverified-duplicate",
+  "agent": "support-router",
+  "frozen_from": {
+    "source": "golden",
+    "id": "golden/support-router/scenarios/refund-unverified-duplicate.json",
+    "envelope_mode": "scripted"
+  },
+  "gaps": [],
+  "tools": {
+    "lookup_invoice": {
+      "fixtures": [
+        {
+          "match": {
+            "customer_email": "alice@example.com"
+          },
+          "response": "Invoices for alice@example.com:\n  INV-2024-001  2024-01-15  $49.00  Pro  (paid)\n  INV-2024-002  2024-02-15  $49.00  Pro  (paid)",
+          "turn": 1
+        }
+      ]
+    }
+  }
+}

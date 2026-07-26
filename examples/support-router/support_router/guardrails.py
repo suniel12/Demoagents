@@ -50,11 +50,13 @@ def relevance_guardrail(
 
 # ── PII detection guardrail ──────────────────────────
 
-# Simple regex patterns for common PII
+# Simple regex patterns for PII that must never enter the transcript.
+# Deliberately NOT included: phone numbers. A callback number is ordinary
+# support traffic — blocking it killed live refund conversations (found by
+# `ciagent simulate`, scenario refund-with-callback-number).
 PII_PATTERNS = {
     "SSN": r"\b\d{3}-\d{2}-\d{4}\b",
     "credit_card": r"\b(?:\d{4}[-\s]?){3}\d{4}\b",
-    "phone_US": r"\b\d{3}[-.\s]?\d{3}[-.\s]?\d{4}\b",
 }
 
 
@@ -87,16 +89,31 @@ def pii_guardrail(
 # ── Helper ────────────────────────────────────────────
 
 def _extract_text(input: str | list[TResponseInputItem]) -> str:
-    """Extract plain text from the guardrail input."""
+    """Extract the text of the NEWEST user message from the guardrail input.
+
+    In a multi-turn run the input is the full conversation history. Each
+    user message is checked exactly once — when it is the newest turn.
+    Scanning the whole transcript instead poisons conversations forever:
+    one flagged message (or even the agent's own earlier reply) re-trips
+    the guardrail on every subsequent, innocent turn. Found live by
+    `ciagent simulate` (scenario refund-with-callback-number).
+    """
     if isinstance(input, str):
         return input
-    # For list inputs, concatenate all text content
-    parts = []
-    for item in input:
+    for item in reversed(input):
         if isinstance(item, dict):
+            if item.get("role") != "user":
+                continue
             content = item.get("content", "")
             if isinstance(content, str):
-                parts.append(content)
-        elif isinstance(item, str):
-            parts.append(item)
-    return " ".join(parts)
+                return content
+            if isinstance(content, list):
+                # input_text-style content parts
+                return " ".join(
+                    p.get("text", "") for p in content if isinstance(p, dict)
+                )
+            return ""
+        if isinstance(item, str):
+            # Bare-string item: treat as the user text
+            return item
+    return ""

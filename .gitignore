@@ -3,3 +3,15 @@ __pycache__/
 .pytest_cache/
 *.pyc
 .env
+
+# Demo recordings & scripts
+*.cast
+record_demo*.sh
+
+# Scratch/alternate specs
+*_demo.yaml
+*_golden.yaml
+
+# Claude context
+.claude/
+.DS_Store

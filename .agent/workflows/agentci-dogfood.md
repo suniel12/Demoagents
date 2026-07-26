@@ -1,10 +1,10 @@
 ---
-description: Standard per-step workflow for all AgentCI demo agent projects
+description: Standard per-step workflow for all CIAgent demo agent projects
 ---
 
-# AgentCI Dogfooding Workflow
+# CIAgent Dogfooding Workflow
 
-> **🎯 AgentCI is the product.** Demo agents are dogfooding vehicles. Every step exists to improve AgentCI.
+> **🎯 CIAgent is the product.** Demo agents are dogfooding vehicles. Every step exists to improve CIAgent.
 
 ## Per-Step Workflow
 
@@ -21,15 +21,15 @@ After each implementation step, follow this exact sequence:
 - Run `python chat.py` for manual interactive testing
 - **⏸️ Ask the user to verify the break before reverting**
 
-### 3. 🔄 Apply Learnings to AgentCI
-- Ask: "What did we learn about AgentCI? What's missing, broken, or awkward?"
-- If there are learnings, **implement them in the AgentCI codebase** (not just note them)
+### 3. 🔄 Apply Learnings to CIAgent
+- Ask: "What did we learn about CIAgent? What's missing, broken, or awkward?"
+- If there are learnings, **implement them in the CIAgent codebase** (not just note them)
 - Examples: new assertions, model fields, adapter fixes, diff engine improvements
 - If no learnings, explicitly note "no learnings" and move on
 
 ### 4. Revert → Commit → Push
 - Revert the intentional break
-- Commit both repos (AgentCI + DemoAgents)
+- Commit both repos (CIAgent + DemoAgents)
 - Push to GitHub
 - Verify the push landed
 
@@ -41,8 +41,8 @@ After each implementation step, follow this exact sequence:
 
 ## Ad-hoc Improvements
 
-> **AgentCI improvements don't have to wait for the per-step workflow.**
+> **CIAgent improvements don't have to wait for the per-step workflow.**
 > Any time we discover a gap, bug, or improvement opportunity — during testing, demos, conversation, or manual chat.py exploration — apply it immediately:
-> 1. Implement the improvement in AgentCI code
+> 1. Implement the improvement in CIAgent code
 > 2. Add a test in the demo agent if applicable
 > 3. Commit and push both repos

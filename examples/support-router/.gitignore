@@ -1,0 +1,4 @@
+.venv-dogfood/
+
+# CIAgent auto-staged failing conversations (may contain raw text)
+.ciagent/staged/

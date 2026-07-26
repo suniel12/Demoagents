@@ -33,7 +33,7 @@ import re
 import time
 import asyncio
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, cast
 
 import anthropic
 import httpx
@@ -303,7 +303,7 @@ class DevAgent:
             owner, repo = parse_github_url(repo_url)
 
             # Build initial messages
-            messages = [
+            messages: list[dict[str, Any]] = [
                 {
                     "role": "user",
                     "content": (
@@ -322,8 +322,8 @@ class DevAgent:
                     model=self.model,
                     max_tokens=self.max_tokens,
                     system=SYSTEM_PROMPT,
-                    tools=self.registry.to_anthropic_format(),
-                    messages=messages,
+                    tools=cast(Any, self.registry.to_anthropic_format()),
+                    messages=cast(Any, messages),
                 )
 
                 # Track token usage
@@ -372,6 +372,7 @@ class DevAgent:
 
                     tool_start = time.monotonic()
                     max_retries = 2
+                    result: Any = {"error": "tool execution did not run"}
                     for attempt in range(max_retries + 1):
                         try:
                             result = await self.registry.execute(
@@ -441,7 +442,8 @@ def run_agent(query: str):
     """
     import asyncio
     import re
-    from agentci.models import Trace as BaseTrace, Span, SpanKind
+    from ciagent.models import LLMCall, Span, SpanKind, Trace as BaseTrace
+    from ciagent.models import ToolCall as CIToolCall
     agent = DevAgent()
     
     # AgentCI queries are full sentences (e.g. "Analyze https://github.com/...")
@@ -455,32 +457,48 @@ def run_agent(query: str):
     print(dev_trace.final_report, file=sys.stderr)
     print("====================================", file=sys.stderr)
     
-    # Adapter: Convert DevAgent trace to AgentCI universal Trace model
+    # Adapter: Convert DevAgent trace to AgentCI universal Trace model.
+    # Field names must match ciagent.models — pydantic silently DROPS unknown
+    # kwargs, which previously zeroed token counts and lost success/error.
     base_trace = BaseTrace(
-        id="devagent-run",
-        session_id="integration-test",
+        test_name=query,
+        agent_name="DevAgent",
         total_duration_ms=dev_trace.total_duration_ms,
-        input_tokens=dev_trace.input_tokens,
-        output_tokens=dev_trace.output_tokens,
-        success=dev_trace.success,
-        error=dev_trace.error,
-        spans=[]
+        metadata={
+            "final_output": dev_trace.final_report,
+            "session_id": "integration-test",
+            "success": dev_trace.success,
+            **({"error": dev_trace.error} if dev_trace.error else {}),
+        },
     )
-    
-    # Create top-level Agent span
+
+    # Top-level Agent span; token usage rides an LLMCall so compute_metrics
+    # rolls it up into the trace totals.
     agent_span = Span(
-        id="agent-s1",
         name="DevAgent",
         kind=SpanKind.AGENT,
-        start_time_ms=0.0,
-        end_time_ms=dev_trace.total_duration_ms,
         duration_ms=dev_trace.total_duration_ms,
         input_data={"query": query},
         output_data=dev_trace.final_report,
-        success=dev_trace.success,
-        error=dev_trace.error
+        llm_calls=[LLMCall(
+            model=agent.model,
+            provider="anthropic",
+            tokens_in=dev_trace.input_tokens,
+            tokens_out=dev_trace.output_tokens,
+        )],
+        tool_calls=[
+            CIToolCall(
+                tool_name=tc.tool_name,
+                arguments=tc.tool_input or {},
+                result=tc.tool_output,
+                error=tc.error,
+                duration_ms=tc.duration_ms,
+            )
+            for tc in dev_trace.tool_calls
+        ],
     )
     base_trace.spans.append(agent_span)
+    base_trace.compute_metrics()
     
     # Note: ToolCalls inside DevAgent aren't full OpenTelemetry spans.
     # We will rely on the virtual fallback added earlier in span_assertions.py

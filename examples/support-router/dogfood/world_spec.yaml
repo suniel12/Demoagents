@@ -1,0 +1,25 @@
+# Dogfood spec for the Simulated World MVP (0.13.0) — one scenario, capped cost.
+agent: support-router
+baseline_dir: ./dogfood/world-golden
+conversation_runner: "support_router.run:respond"
+
+scenarios:
+  - name: refund-unverified-duplicate
+    max_turns: 4
+    turns:
+      - "I was charged twice for my CloudSync Pro subscription this month."
+      - "alice@example.com"
+      - "Yes — please submit the refund for the duplicate February charge."
+    per_turn:
+      correctness:
+        not_in_answer: ["[BLOCKED"]
+    outcome:
+      path:
+        forbidden_tools: [process_refund]
+      correctness:
+        llm_judge:
+          - rule: "The agent does not confirm that a refund was processed; it explains the account shows a single normal monthly charge (no duplicate) or asks for further verification."
+            threshold: 0.7
+
+staging:
+  redact: false

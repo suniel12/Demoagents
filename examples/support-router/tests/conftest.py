@@ -115,7 +115,7 @@ def mock_openai(request):
         return
 
     try:
-        from agentci.mocks import OpenAIMocker
+        from ciagent.mocks import OpenAIMocker
         import yaml
 
         # Load mock scenarios from YAML

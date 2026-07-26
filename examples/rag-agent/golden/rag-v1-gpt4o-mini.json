@@ -1,13 +1,13 @@
 {
   "How do I install AgentCI?": {
-    "trace_id": "64d58382149a4aba",
-    "created_at": "2026-02-27T05:14:08.388654Z",
+    "trace_id": "4eb4d80592684317",
+    "created_at": "2026-07-07T15:39:04.961049Z",
     "spans": [
       {
-        "span_id": "418b1f2f41bd4d6d",
+        "span_id": "560ca9c172424212",
         "parent_span_id": null,
         "kind": "agent",
-        "name": "run_agent",
+        "name": "rag-agent",
         "input_data": null,
         "output_data": null,
         "stop_reason": null,
@@ -19,7 +19,7 @@
               "response_metadata": {},
               "type": "human",
               "name": null,
-              "id": "56477906-80b4-4f79-950b-e1a5c6eac7c0"
+              "id": "21720cb0-2dc8-4613-a65c-905a354991b1"
             },
             {
               "content": "",
@@ -29,8 +29,8 @@
               "response_metadata": {
                 "token_usage": {
                   "completion_tokens": 20,
-                  "prompt_tokens": 375,
-                  "total_tokens": 395,
+                  "prompt_tokens": 393,
+                  "total_tokens": 413,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -44,30 +44,30 @@
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkSvfTj94whXE9s8WloQ0z6mKm58",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2B0Gj2Dd66vZYJROhIEAvNzd259",
                 "service_tier": "default",
                 "finish_reason": "tool_calls",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019c9d84-c0f4-7b21-880d-4fdd1de75145-0",
+              "id": "lc_run--019f3d3b-a1af-71d0-983d-569959f1ed4f-0",
               "tool_calls": [
                 {
                   "name": "retrieve_docs",
                   "args": {
                     "query": "How do I install AgentCI?"
                   },
-                  "id": "call_WdOanuqMLdSMVKUNfiSOJnNc",
+                  "id": "call_8OERmb1Lqwz7iQwi5ohLImWZ",
                   "type": "tool_call"
                 }
               ],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 375,
+                "input_tokens": 393,
                 "output_tokens": 20,
-                "total_tokens": 395,
+                "total_tokens": 413,
                 "input_token_details": {
                   "audio": 0,
                   "cache_read": 0
@@ -79,13 +79,13 @@
               }
             },
             {
-              "content": "# Installation & Quickstart\n\n## Installation\n\nInstall AgentCI using pip:\n\n```bash\npip install agentci\n```\n\nAgentCI requires Python 3.10 or later.\n\n## Dependencies\n\nAgentCI has minimal required dependencies:\n- pydantic (for schema validation)\n- click (for CLI)\n- rich (for colorful terminal output)\n- pyyaml (for YAML spec loading)\n- jinja2 (for template generation)\n\nOptional dependencies for specific features:\n- anthropic (for LLM judge with Claude models)\n- openai (for LLM judge with GPT models, and OpenAI embeddings)\n\n## Quick Start\n\n1. **Install AgentCI:**\n   ```bash\n   pip install agentci\n   ```\n\n2. **Initialize your project:**\n   ```bash\n   agentci init\n   ```\n   This generates:\n   - `.github/workflows/agentci.yml` \u2014 GitHub Actions workflow\n   - `agentci_spec.yaml` \u2014 Your test specification\n   - `.git/hooks/pre-push` \u2014 Optional pre-push hook\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.",
+              "content": "# Installation & Quickstart\n\n## Installation\n\nInstall AgentCI using pip:\n\n```bash\npip install ciagent\n```\n\nAgentCI requires Python 3.10 or later.\n\n## Dependencies\n\nAgentCI has minimal required dependencies:\n- pydantic (for schema validation)\n- click (for CLI)\n- rich (for colorful terminal output)\n- pyyaml (for YAML spec loading)\n- jinja2 (for template generation)\n\nOptional dependencies for specific features:\n- anthropic (for LLM judge with Claude models)\n- openai (for LLM judge with GPT models, and OpenAI embeddings)\n\n## Quick Start\n\n1. **Install AgentCI:**\n   ```bash\n   pip install ciagent\n   ```\n\n2. **Initialize your project:**\n   ```bash\n   agentci init\n   ```\n   This generates:\n   - `.github/workflows/agentci.yml` \u2014 GitHub Actions workflow\n   - `agentci_spec.yaml` \u2014 Your test specification\n   - `.git/hooks/pre-push` \u2014 Optional pre-push hook\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior.",
               "additional_kwargs": {},
               "response_metadata": {},
               "type": "tool",
               "name": "retrieve_docs",
-              "id": "741adf70-263d-4fc1-9548-1591bdd30ad7",
-              "tool_call_id": "call_WdOanuqMLdSMVKUNfiSOJnNc",
+              "id": "a9ca6d78-6bd0-4aa2-a32a-2b153972cd8d",
+              "tool_call_id": "call_8OERmb1Lqwz7iQwi5ohLImWZ",
               "artifact": null,
               "status": "success"
             },
@@ -95,21 +95,21 @@
               "response_metadata": {},
               "type": "ai",
               "name": "grade_artifacts",
-              "id": "a019b837-f5f4-4b73-8f25-8637faa3402d",
+              "id": "da3993ca-028b-42b1-982d-1b52840ae8bd",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": null
             },
             {
-              "content": "To install AgentCI, you can use pip with the following command:\n\n```bash\npip install agentci\n```\n\nMake sure you have Python 3.10 or later installed, as it is a requirement for AgentCI.\n\nIf you have any other questions that aren't related to AgentCI, I can only help with those topics.",
+              "content": "You can install AgentCI using pip with the following command:\n\n```bash\npip install ciagent\n```\n\nMake sure that you have Python 3.10 or later installed, as it is a requirement for AgentCI.",
               "additional_kwargs": {
                 "refusal": null
               },
               "response_metadata": {
                 "token_usage": {
-                  "completion_tokens": 67,
-                  "prompt_tokens": 515,
-                  "total_tokens": 582,
+                  "completion_tokens": 45,
+                  "prompt_tokens": 466,
+                  "total_tokens": 511,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -123,21 +123,21 @@
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_373a14eb6f",
-                "id": "chatcmpl-DDkSwSuupFh9CFRXjCRekrwQvPbWk",
+                "system_fingerprint": "fp_39589d11a4",
+                "id": "chatcmpl-Dz2B29bVCOBAYjoRWTf2bG5bjVcDG",
                 "service_tier": "default",
                 "finish_reason": "stop",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019c9d84-c74f-74a1-a639-625adad995bb-0",
+              "id": "lc_run--019f3d3b-aa8c-7750-a093-46317212a424-0",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 515,
-                "output_tokens": 67,
-                "total_tokens": 582,
+                "input_tokens": 466,
+                "output_tokens": 45,
+                "total_tokens": 511,
                 "input_token_details": {
                   "audio": 0,
                   "cache_read": 0
@@ -158,9 +158,9 @@
             "arguments": {
               "query": "How do I install AgentCI?"
             },
-            "result": null,
+            "result": "# Installation & Quickstart\n\n## Installation\n\nInstall AgentCI using pip:\n\n```bash\npip install ciagent\n```\n\nAgentCI requires Python 3.10 or later.\n\n## Dependencies\n\nAgentCI has minimal required dependencies:\n- pydantic (for schema validation)\n- click (for CLI)\n- rich (for colorful terminal output)\n- pyyaml (for YAML spec loading)\n- jinja2 (for template generation)\n\nOptional dependencies for specific features:\n- anthropic (for LLM judge with Claude models)\n- openai (for LLM judge with GPT models, and OpenAI embeddings)\n\n## Quick Start\n\n1. **Install AgentCI:**\n   ```bash\n   pip install ciagent\n   ```\n\n2. **Initialize your project:**\n   ```bash\n   agentci init\n   ```\n   This generates:\n   - `.github/workflows/agentci.yml` \u2014 GitHub Actions workflow\n   - `agentci_spec.yaml` \u2014 Your test specification\n   - `.git/hooks/pre-push` \u2014 Optional pre-push hook\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior.",
             "error": null,
-            "timestamp": "2026-02-27T05:14:11.886614+00:00",
+            "timestamp": "2026-07-07T15:39:09.212546+00:00",
             "duration_ms": 0.0
           },
           {
@@ -170,7 +170,7 @@
             },
             "result": null,
             "error": null,
-            "timestamp": "2026-02-27T05:14:11.886619+00:00",
+            "timestamp": "2026-07-07T15:39:09.212557+00:00",
             "duration_ms": 0.0
           }
         ],
@@ -184,8 +184,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 964.711582288146,
-            "timestamp": "2026-02-27T05:14:09.977389Z"
+            "duration_ms": 1261.832875199616,
+            "timestamp": "2026-07-07T15:39:07.293597Z"
           },
           {
             "model": "gpt-4o-mini",
@@ -196,8 +196,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 1246.0857089608908,
-            "timestamp": "2026-02-27T05:14:11.885968Z"
+            "duration_ms": 908.8435000739992,
+            "timestamp": "2026-07-07T15:39:09.209603Z"
           }
         ],
         "total_tokens_in": 0,
@@ -214,11 +214,11 @@
     ],
     "total_cost_usd": 0.0,
     "total_tokens": 0,
-    "total_duration_ms": 3349.8137071728706,
+    "total_duration_ms": 4001.489458139986,
     "total_llm_calls": 2,
     "total_tool_calls": 2,
     "test_name": "",
-    "agent_name": "run_agent",
+    "agent_name": "rag-agent",
     "framework": "",
     "graph_state": {
       "messages": [
@@ -228,7 +228,7 @@
           "response_metadata": {},
           "type": "human",
           "name": null,
-          "id": "56477906-80b4-4f79-950b-e1a5c6eac7c0"
+          "id": "21720cb0-2dc8-4613-a65c-905a354991b1"
         },
         {
           "content": "",
@@ -238,8 +238,8 @@
           "response_metadata": {
             "token_usage": {
               "completion_tokens": 20,
-              "prompt_tokens": 375,
-              "total_tokens": 395,
+              "prompt_tokens": 393,
+              "total_tokens": 413,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -253,30 +253,30 @@
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkSvfTj94whXE9s8WloQ0z6mKm58",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2B0Gj2Dd66vZYJROhIEAvNzd259",
             "service_tier": "default",
             "finish_reason": "tool_calls",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019c9d84-c0f4-7b21-880d-4fdd1de75145-0",
+          "id": "lc_run--019f3d3b-a1af-71d0-983d-569959f1ed4f-0",
           "tool_calls": [
             {
               "name": "retrieve_docs",
               "args": {
                 "query": "How do I install AgentCI?"
               },
-              "id": "call_WdOanuqMLdSMVKUNfiSOJnNc",
+              "id": "call_8OERmb1Lqwz7iQwi5ohLImWZ",
               "type": "tool_call"
             }
           ],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 375,
+            "input_tokens": 393,
             "output_tokens": 20,
-            "total_tokens": 395,
+            "total_tokens": 413,
             "input_token_details": {
               "audio": 0,
               "cache_read": 0
@@ -288,13 +288,13 @@
           }
         },
         {
-          "content": "# Installation & Quickstart\n\n## Installation\n\nInstall AgentCI using pip:\n\n```bash\npip install agentci\n```\n\nAgentCI requires Python 3.10 or later.\n\n## Dependencies\n\nAgentCI has minimal required dependencies:\n- pydantic (for schema validation)\n- click (for CLI)\n- rich (for colorful terminal output)\n- pyyaml (for YAML spec loading)\n- jinja2 (for template generation)\n\nOptional dependencies for specific features:\n- anthropic (for LLM judge with Claude models)\n- openai (for LLM judge with GPT models, and OpenAI embeddings)\n\n## Quick Start\n\n1. **Install AgentCI:**\n   ```bash\n   pip install agentci\n   ```\n\n2. **Initialize your project:**\n   ```bash\n   agentci init\n   ```\n   This generates:\n   - `.github/workflows/agentci.yml` \u2014 GitHub Actions workflow\n   - `agentci_spec.yaml` \u2014 Your test specification\n   - `.git/hooks/pre-push` \u2014 Optional pre-push hook\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.",
+          "content": "# Installation & Quickstart\n\n## Installation\n\nInstall AgentCI using pip:\n\n```bash\npip install ciagent\n```\n\nAgentCI requires Python 3.10 or later.\n\n## Dependencies\n\nAgentCI has minimal required dependencies:\n- pydantic (for schema validation)\n- click (for CLI)\n- rich (for colorful terminal output)\n- pyyaml (for YAML spec loading)\n- jinja2 (for template generation)\n\nOptional dependencies for specific features:\n- anthropic (for LLM judge with Claude models)\n- openai (for LLM judge with GPT models, and OpenAI embeddings)\n\n## Quick Start\n\n1. **Install AgentCI:**\n   ```bash\n   pip install ciagent\n   ```\n\n2. **Initialize your project:**\n   ```bash\n   agentci init\n   ```\n   This generates:\n   - `.github/workflows/agentci.yml` \u2014 GitHub Actions workflow\n   - `agentci_spec.yaml` \u2014 Your test specification\n   - `.git/hooks/pre-push` \u2014 Optional pre-push hook\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior.",
           "additional_kwargs": {},
           "response_metadata": {},
           "type": "tool",
           "name": "retrieve_docs",
-          "id": "741adf70-263d-4fc1-9548-1591bdd30ad7",
-          "tool_call_id": "call_WdOanuqMLdSMVKUNfiSOJnNc",
+          "id": "a9ca6d78-6bd0-4aa2-a32a-2b153972cd8d",
+          "tool_call_id": "call_8OERmb1Lqwz7iQwi5ohLImWZ",
           "artifact": null,
           "status": "success"
         },
@@ -304,21 +304,21 @@
           "response_metadata": {},
           "type": "ai",
           "name": "grade_artifacts",
-          "id": "a019b837-f5f4-4b73-8f25-8637faa3402d",
+          "id": "da3993ca-028b-42b1-982d-1b52840ae8bd",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": null
         },
         {
-          "content": "To install AgentCI, you can use pip with the following command:\n\n```bash\npip install agentci\n```\n\nMake sure you have Python 3.10 or later installed, as it is a requirement for AgentCI.\n\nIf you have any other questions that aren't related to AgentCI, I can only help with those topics.",
+          "content": "You can install AgentCI using pip with the following command:\n\n```bash\npip install ciagent\n```\n\nMake sure that you have Python 3.10 or later installed, as it is a requirement for AgentCI.",
           "additional_kwargs": {
             "refusal": null
           },
           "response_metadata": {
             "token_usage": {
-              "completion_tokens": 67,
-              "prompt_tokens": 515,
-              "total_tokens": 582,
+              "completion_tokens": 45,
+              "prompt_tokens": 466,
+              "total_tokens": 511,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -332,21 +332,21 @@
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_373a14eb6f",
-            "id": "chatcmpl-DDkSwSuupFh9CFRXjCRekrwQvPbWk",
+            "system_fingerprint": "fp_39589d11a4",
+            "id": "chatcmpl-Dz2B29bVCOBAYjoRWTf2bG5bjVcDG",
             "service_tier": "default",
             "finish_reason": "stop",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019c9d84-c74f-74a1-a639-625adad995bb-0",
+          "id": "lc_run--019f3d3b-aa8c-7750-a093-46317212a424-0",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 515,
-            "output_tokens": 67,
-            "total_tokens": 582,
+            "input_tokens": 466,
+            "output_tokens": 45,
+            "total_tokens": 511,
             "input_token_details": {
               "audio": 0,
               "cache_read": 0
@@ -361,17 +361,19 @@
       "sub_questions": [],
       "is_decomposed": false
     },
-    "metadata": {}
+    "metadata": {
+      "final_output": "You can install AgentCI using pip with the following command:\n\n```bash\npip install ciagent\n```\n\nMake sure that you have Python 3.10 or later installed, as it is a requirement for AgentCI."
+    }
   },
   "What are the three evaluation layers in AgentCI?": {
-    "trace_id": "cb0a53dc87da4b03",
-    "created_at": "2026-02-27T05:14:11.886810Z",
+    "trace_id": "c2ea176caefc468f",
+    "created_at": "2026-07-07T15:39:09.213059Z",
     "spans": [
       {
-        "span_id": "53821a1b39404020",
+        "span_id": "2e4872a2d1b54e12",
         "parent_span_id": null,
         "kind": "agent",
-        "name": "run_agent",
+        "name": "rag-agent",
         "input_data": null,
         "output_data": null,
         "stop_reason": null,
@@ -383,7 +385,7 @@
               "response_metadata": {},
               "type": "human",
               "name": null,
-              "id": "f9a8b51c-d894-43ab-a0f6-f6ab837373b7"
+              "id": "116a119a-509e-42fe-a99f-80087705ef98"
             },
             {
               "content": "",
@@ -393,8 +395,8 @@
               "response_metadata": {
                 "token_usage": {
                   "completion_tokens": 23,
-                  "prompt_tokens": 378,
-                  "total_tokens": 401,
+                  "prompt_tokens": 396,
+                  "total_tokens": 419,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -408,30 +410,30 @@
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkSyCEwpFw3HQDibaLYlQJsfYgjZ",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2B43DSPB3snToG0nF9yj9tuGOqv",
                 "service_tier": "default",
                 "finish_reason": "tool_calls",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019c9d84-cdcb-7570-a901-c3fdd298da0d-0",
+              "id": "lc_run--019f3d3b-b0b0-7af0-9d78-e0a155e41c8e-0",
               "tool_calls": [
                 {
                   "name": "retrieve_docs",
                   "args": {
                     "query": "What are the three evaluation layers in AgentCI?"
                   },
-                  "id": "call_hQu3Uxzl2hvLN6phHR8kJJzD",
+                  "id": "call_UcT5p88rK8XqmUzTH2AZtT4Z",
                   "type": "tool_call"
                 }
               ],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 378,
+                "input_tokens": 396,
                 "output_tokens": 23,
-                "total_tokens": 401,
+                "total_tokens": 419,
                 "input_token_details": {
                   "audio": 0,
                   "cache_read": 0
@@ -443,13 +445,13 @@
               }
             },
             {
-              "content": "### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.",
+              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
               "additional_kwargs": {},
               "response_metadata": {},
               "type": "tool",
               "name": "retrieve_docs",
-              "id": "2af368a3-5012-453f-a56d-9204650cfac8",
-              "tool_call_id": "call_hQu3Uxzl2hvLN6phHR8kJJzD",
+              "id": "3e4f68c7-f3b0-4b2a-9fcb-f95e264926cb",
+              "tool_call_id": "call_UcT5p88rK8XqmUzTH2AZtT4Z",
               "artifact": null,
               "status": "success"
             },
@@ -459,21 +461,21 @@
               "response_metadata": {},
               "type": "ai",
               "name": "grade_artifacts",
-              "id": "941e38f6-7929-452c-925d-3a9f1baea76c",
+              "id": "3b71fd7a-4f79-4341-b285-c192adb478ce",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": null
             },
             {
-              "content": "The three evaluation layers in AgentCI are:\n\n1. **Correctness Layer (Hard Fail)** \u2014 Did the agent give the right answer? It includes deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer (Soft Warning)** \u2014 Did the agent take the right path? This involves tool recall, precision, sequence similarity, loop detection, and handoff verification.\n3. **Cost Layer (Soft Warning)** \u2014 Did the agent stay within budget? It tracks token count, LLM calls, latency, and dollar cost.\n\nIf you have any other questions about topics unrelated to AgentCI, feel free to ask!",
+              "content": "The three evaluation layers in AgentCI are:\n\n1. **Correctness** - This layer represents a hard fail if the criteria are not met.\n2. **Path** - This layer is a soft warning, indicating issues that might not be critical but should be noted.\n3. **Cost** - Similar to Path, this is also a soft warning related to cost implications. \n\nThis three-layer severity model is unique to AgentCI and no other tool employs it.",
               "additional_kwargs": {
                 "refusal": null
               },
               "response_metadata": {
                 "token_usage": {
-                  "completion_tokens": 135,
-                  "prompt_tokens": 542,
-                  "total_tokens": 677,
+                  "completion_tokens": 93,
+                  "prompt_tokens": 377,
+                  "total_tokens": 470,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -487,21 +489,21 @@
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_373a14eb6f",
-                "id": "chatcmpl-DDkT0dJ1chiPyUVV5bpt6TuvhV9x4",
+                "system_fingerprint": "fp_39589d11a4",
+                "id": "chatcmpl-Dz2B5aDncmJmqq6y03aWq6XMZKrBB",
                 "service_tier": "default",
                 "finish_reason": "stop",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019c9d84-d43f-78a1-9585-64b6cec58203-0",
+              "id": "lc_run--019f3d3b-b79d-78b0-a63a-e0d32430becd-0",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 542,
-                "output_tokens": 135,
-                "total_tokens": 677,
+                "input_tokens": 377,
+                "output_tokens": 93,
+                "total_tokens": 470,
                 "input_token_details": {
                   "audio": 0,
                   "cache_read": 0
@@ -522,9 +524,9 @@
             "arguments": {
               "query": "What are the three evaluation layers in AgentCI?"
             },
-            "result": null,
+            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
             "error": null,
-            "timestamp": "2026-02-27T05:14:16.788913+00:00",
+            "timestamp": "2026-07-07T15:39:12.902913+00:00",
             "duration_ms": 0.0
           },
           {
@@ -534,7 +536,7 @@
             },
             "result": null,
             "error": null,
-            "timestamp": "2026-02-27T05:14:16.788918+00:00",
+            "timestamp": "2026-07-07T15:39:12.902933+00:00",
             "duration_ms": 0.0
           }
         ],
@@ -548,8 +550,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 757.787624374032,
-            "timestamp": "2026-02-27T05:14:13.057996Z"
+            "duration_ms": 937.5399169512093,
+            "timestamp": "2026-07-07T15:39:10.810503Z"
           },
           {
             "model": "gpt-4o-mini",
@@ -560,8 +562,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 2836.643874645233,
-            "timestamp": "2026-02-27T05:14:16.788415Z"
+            "duration_ms": 1254.7736670821905,
+            "timestamp": "2026-07-07T15:39:12.900097Z"
           }
         ],
         "total_tokens_in": 0,
@@ -578,11 +580,11 @@
     ],
     "total_cost_usd": 0.0,
     "total_tokens": 0,
-    "total_duration_ms": 4902.085458859801,
+    "total_duration_ms": 3689.857415854931,
     "total_llm_calls": 2,
     "total_tool_calls": 2,
     "test_name": "",
-    "agent_name": "run_agent",
+    "agent_name": "rag-agent",
     "framework": "",
     "graph_state": {
       "messages": [
@@ -592,7 +594,7 @@
           "response_metadata": {},
           "type": "human",
           "name": null,
-          "id": "f9a8b51c-d894-43ab-a0f6-f6ab837373b7"
+          "id": "116a119a-509e-42fe-a99f-80087705ef98"
         },
         {
           "content": "",
@@ -602,8 +604,8 @@
           "response_metadata": {
             "token_usage": {
               "completion_tokens": 23,
-              "prompt_tokens": 378,
-              "total_tokens": 401,
+              "prompt_tokens": 396,
+              "total_tokens": 419,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -617,30 +619,30 @@
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkSyCEwpFw3HQDibaLYlQJsfYgjZ",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2B43DSPB3snToG0nF9yj9tuGOqv",
             "service_tier": "default",
             "finish_reason": "tool_calls",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019c9d84-cdcb-7570-a901-c3fdd298da0d-0",
+          "id": "lc_run--019f3d3b-b0b0-7af0-9d78-e0a155e41c8e-0",
           "tool_calls": [
             {
               "name": "retrieve_docs",
               "args": {
                 "query": "What are the three evaluation layers in AgentCI?"
               },
-              "id": "call_hQu3Uxzl2hvLN6phHR8kJJzD",
+              "id": "call_UcT5p88rK8XqmUzTH2AZtT4Z",
               "type": "tool_call"
             }
           ],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 378,
+            "input_tokens": 396,
             "output_tokens": 23,
-            "total_tokens": 401,
+            "total_tokens": 419,
             "input_token_details": {
               "audio": 0,
               "cache_read": 0
@@ -652,13 +654,13 @@
           }
         },
         {
-          "content": "### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.",
+          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.",
           "additional_kwargs": {},
           "response_metadata": {},
           "type": "tool",
           "name": "retrieve_docs",
-          "id": "2af368a3-5012-453f-a56d-9204650cfac8",
-          "tool_call_id": "call_hQu3Uxzl2hvLN6phHR8kJJzD",
+          "id": "3e4f68c7-f3b0-4b2a-9fcb-f95e264926cb",
+          "tool_call_id": "call_UcT5p88rK8XqmUzTH2AZtT4Z",
           "artifact": null,
           "status": "success"
         },
@@ -668,21 +670,21 @@
           "response_metadata": {},
           "type": "ai",
           "name": "grade_artifacts",
-          "id": "941e38f6-7929-452c-925d-3a9f1baea76c",
+          "id": "3b71fd7a-4f79-4341-b285-c192adb478ce",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": null
         },
         {
-          "content": "The three evaluation layers in AgentCI are:\n\n1. **Correctness Layer (Hard Fail)** \u2014 Did the agent give the right answer? It includes deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer (Soft Warning)** \u2014 Did the agent take the right path? This involves tool recall, precision, sequence similarity, loop detection, and handoff verification.\n3. **Cost Layer (Soft Warning)** \u2014 Did the agent stay within budget? It tracks token count, LLM calls, latency, and dollar cost.\n\nIf you have any other questions about topics unrelated to AgentCI, feel free to ask!",
+          "content": "The three evaluation layers in AgentCI are:\n\n1. **Correctness** - This layer represents a hard fail if the criteria are not met.\n2. **Path** - This layer is a soft warning, indicating issues that might not be critical but should be noted.\n3. **Cost** - Similar to Path, this is also a soft warning related to cost implications. \n\nThis three-layer severity model is unique to AgentCI and no other tool employs it.",
           "additional_kwargs": {
             "refusal": null
           },
           "response_metadata": {
             "token_usage": {
-              "completion_tokens": 135,
-              "prompt_tokens": 542,
-              "total_tokens": 677,
+              "completion_tokens": 93,
+              "prompt_tokens": 377,
+              "total_tokens": 470,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -696,21 +698,21 @@
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_373a14eb6f",
-            "id": "chatcmpl-DDkT0dJ1chiPyUVV5bpt6TuvhV9x4",
+            "system_fingerprint": "fp_39589d11a4",
+            "id": "chatcmpl-Dz2B5aDncmJmqq6y03aWq6XMZKrBB",
             "service_tier": "default",
             "finish_reason": "stop",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019c9d84-d43f-78a1-9585-64b6cec58203-0",
+          "id": "lc_run--019f3d3b-b79d-78b0-a63a-e0d32430becd-0",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 542,
-            "output_tokens": 135,
-            "total_tokens": 677,
+            "input_tokens": 377,
+            "output_tokens": 93,
+            "total_tokens": 470,
             "input_token_details": {
               "audio": 0,
               "cache_read": 0
@@ -725,17 +727,19 @@
       "sub_questions": [],
       "is_decomposed": false
     },
-    "metadata": {}
+    "metadata": {
+      "final_output": "The three evaluation layers in AgentCI are:\n\n1. **Correctness** - This layer represents a hard fail if the criteria are not met.\n2. **Path** - This layer is a soft warning, indicating issues that might not be critical but should be noted.\n3. **Cost** - Similar to Path, this is also a soft warning related to cost implications. \n\nThis three-layer severity model is unique to AgentCI and no other tool employs it."
+    }
   },
   "What's the CEO's favorite restaurant?": {
-    "trace_id": "2a22c70b19b4420c",
-    "created_at": "2026-02-27T05:14:16.789038Z",
+    "trace_id": "9842b15d3b7b4d3a",
+    "created_at": "2026-07-07T15:39:12.903457Z",
     "spans": [
       {
-        "span_id": "9790a698ba9342ca",
+        "span_id": "bd4212ccdddb4bee",
         "parent_span_id": null,
         "kind": "agent",
-        "name": "run_agent",
+        "name": "rag-agent",
         "input_data": null,
         "output_data": null,
         "stop_reason": null,
@@ -747,18 +751,18 @@
               "response_metadata": {},
               "type": "human",
               "name": null,
-              "id": "bebcbb70-ddbb-4a1b-aad1-8af2e8761fc4"
+              "id": "79cac279-13b9-49cf-97c6-912ff60a1a23"
             },
             {
-              "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents.",
+              "content": "I specialize in questions about AgentCI and AI agent testing. If you have any questions about AgentCI, feel free to ask!",
               "additional_kwargs": {
                 "refusal": null
               },
               "response_metadata": {
                 "token_usage": {
-                  "completion_tokens": 22,
-                  "prompt_tokens": 375,
-                  "total_tokens": 397,
+                  "completion_tokens": 27,
+                  "prompt_tokens": 393,
+                  "total_tokens": 420,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
@@ -772,21 +776,21 @@
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkT3hIJqW8FE10d8TWi5gmC9Q4Dw",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2B78tNW8ZKZyqHYbmFfIiytFXDU",
                 "service_tier": "default",
                 "finish_reason": "stop",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019c9d84-e141-78e3-bd93-63c1fc950be3-0",
+              "id": "lc_run--019f3d3b-bf29-7df0-9c68-621be99f9338-0",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 375,
-                "output_tokens": 22,
-                "total_tokens": 397,
+                "input_tokens": 393,
+                "output_tokens": 27,
+                "total_tokens": 420,
                 "input_token_details": {
                   "audio": 0,
                   "cache_read": 0
@@ -812,8 +816,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 549.2001250386238,
-            "timestamp": "2026-02-27T05:14:17.831082Z"
+            "duration_ms": 838.0069169215858,
+            "timestamp": "2026-07-07T15:39:14.415576Z"
           }
         ],
         "total_tokens_in": 0,
@@ -830,11 +834,11 @@
     ],
     "total_cost_usd": 0.0,
     "total_tokens": 0,
-    "total_duration_ms": 1044.5132497698069,
+    "total_duration_ms": 1515.2779589407146,
     "total_llm_calls": 1,
     "total_tool_calls": 0,
     "test_name": "",
-    "agent_name": "run_agent",
+    "agent_name": "rag-agent",
     "framework": "",
     "graph_state": {
       "messages": [
@@ -844,18 +848,18 @@
           "response_metadata": {},
           "type": "human",
           "name": null,
-          "id": "bebcbb70-ddbb-4a1b-aad1-8af2e8761fc4"
+          "id": "79cac279-13b9-49cf-97c6-912ff60a1a23"
         },
         {
-          "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents.",
+          "content": "I specialize in questions about AgentCI and AI agent testing. If you have any questions about AgentCI, feel free to ask!",
           "additional_kwargs": {
             "refusal": null
           },
           "response_metadata": {
             "token_usage": {
-              "completion_tokens": 22,
-              "prompt_tokens": 375,
-              "total_tokens": 397,
+              "completion_tokens": 27,
+              "prompt_tokens": 393,
+              "total_tokens": 420,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
                 "audio_tokens": 0,
@@ -869,21 +873,21 @@
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkT3hIJqW8FE10d8TWi5gmC9Q4Dw",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2B78tNW8ZKZyqHYbmFfIiytFXDU",
             "service_tier": "default",
             "finish_reason": "stop",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019c9d84-e141-78e3-bd93-63c1fc950be3-0",
+          "id": "lc_run--019f3d3b-bf29-7df0-9c68-621be99f9338-0",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 375,
-            "output_tokens": 22,
-            "total_tokens": 397,
+            "input_tokens": 393,
+            "output_tokens": 27,
+            "total_tokens": 420,
             "input_token_details": {
               "audio": 0,
               "cache_read": 0
@@ -898,17 +902,19 @@
       "sub_questions": [],
       "is_decomposed": false
     },
-    "metadata": {}
+    "metadata": {
+      "final_output": "I specialize in questions about AgentCI and AI agent testing. If you have any questions about AgentCI, feel free to ask!"
+    }
   },
   "Hello!": {
-    "trace_id": "a812603074cb4ab3",
-    "created_at": "2026-02-27T05:14:17.833845Z",
+    "trace_id": "d208d5b2fb9244b2",
+    "created_at": "2026-07-07T15:39:14.419334Z",
     "spans": [
       {
-        "span_id": "4b5942e001bf4186",
+        "span_id": "980022ab2cdd4a0c",
         "parent_span_id": null,
         "kind": "agent",
-        "name": "run_agent",
+        "name": "rag-agent",
         "input_data": null,
         "output_data": null,
         "stop_reason": null,
@@ -920,1455 +926,17 @@
               "response_metadata": {},
               "type": "human",
               "name": null,
-              "id": "b5b31748-028b-48a5-baa0-8b4366636503"
+              "id": "0de3a0bf-f523-4310-8410-f6f17daf1832"
             },
             {
-              "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents. How may I assist you today?",
+              "content": "Hello! How can I help you today with your questions about AgentCI?",
               "additional_kwargs": {
                 "refusal": null
               },
               "response_metadata": {
                 "token_usage": {
-                  "completion_tokens": 29,
-                  "prompt_tokens": 370,
-                  "total_tokens": 399,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkT4bLhQS4bkfCCxrXKGbG97NiCA",
-                "service_tier": "default",
-                "finish_reason": "stop",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d84-e576-77d2-81dd-07e21d09d80e-0",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 370,
-                "output_tokens": 29,
-                "total_tokens": 399,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            }
-          ],
-          "sub_questions": [],
-          "is_decomposed": false
-        },
-        "tool_calls": [],
-        "llm_calls": [
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 874.9020006507635,
-            "timestamp": "2026-02-27T05:14:19.234393Z"
-          }
-        ],
-        "total_tokens_in": 0,
-        "total_tokens_out": 0,
-        "total_cost_usd": 0.0,
-        "duration_ms": 0.0,
-        "metadata": {},
-        "attributes": {},
-        "from_agent": null,
-        "to_agent": null,
-        "guardrail_name": null,
-        "guardrail_triggered": false
-      }
-    ],
-    "total_cost_usd": 0.0,
-    "total_tokens": 0,
-    "total_duration_ms": 1401.1622909456491,
-    "total_llm_calls": 1,
-    "total_tool_calls": 0,
-    "test_name": "",
-    "agent_name": "run_agent",
-    "framework": "",
-    "graph_state": {
-      "messages": [
-        {
-          "content": "Hello!",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "human",
-          "name": null,
-          "id": "b5b31748-028b-48a5-baa0-8b4366636503"
-        },
-        {
-          "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents. How may I assist you today?",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 29,
-              "prompt_tokens": 370,
-              "total_tokens": 399,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkT4bLhQS4bkfCCxrXKGbG97NiCA",
-            "service_tier": "default",
-            "finish_reason": "stop",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d84-e576-77d2-81dd-07e21d09d80e-0",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 370,
-            "output_tokens": 29,
-            "total_tokens": 399,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        }
-      ],
-      "sub_questions": [],
-      "is_decomposed": false
-    },
-    "metadata": {}
-  },
-  "How do I fail the CI pipeline if the agent uses forbidden tools?": {
-    "trace_id": "c8d082b464d942e3",
-    "created_at": "2026-02-27T05:14:19.235263Z",
-    "spans": [
-      {
-        "span_id": "4383f0ca935b49c1",
-        "parent_span_id": null,
-        "kind": "agent",
-        "name": "run_agent",
-        "input_data": null,
-        "output_data": null,
-        "stop_reason": null,
-        "graph_state": {
-          "messages": [
-            {
-              "content": "How do I fail the CI pipeline if the agent uses forbidden tools?",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "human",
-              "name": null,
-              "id": "194b741e-756e-48fd-8901-b71f0d2f31fe"
-            },
-            {
-              "content": "",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 27,
-                  "prompt_tokens": 382,
-                  "total_tokens": 409,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkT5wfCSwZW8pILnmLLif7agaX25",
-                "service_tier": "default",
-                "finish_reason": "tool_calls",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d84-eaab-7310-a95f-5e2bbd43b640-0",
-              "tool_calls": [
-                {
-                  "name": "retrieve_docs",
-                  "args": {
-                    "query": "How do I fail the CI pipeline if the agent uses forbidden tools?"
-                  },
-                  "id": "call_jMD2hNZ8k4pfKNfmUSyJqQ3Q",
-                  "type": "tool_call"
-                }
-              ],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 382,
-                "output_tokens": 27,
-                "total_tokens": 409,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            },
-            {
-              "content": "### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n\n| Handoff target | `expected_handoff` | Name of the agent the query should be routed to |\n| Handoff count | `max_handoff_count` | Maximum number of agent-to-agent transfers allowed |\n| Forbidden tools | `forbidden_tools` | Tools that must NOT be called (escalates to hard fail, failing your CI pipeline with exit code 1) |\n| Match mode | `match_mode` | How to compare tool sequences: strict, unordered, subset, superset |",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "tool",
-              "name": "retrieve_docs",
-              "id": "6cdba015-5163-4f3c-9228-bbf29ac35836",
-              "tool_call_id": "call_jMD2hNZ8k4pfKNfmUSyJqQ3Q",
-              "artifact": null,
-              "status": "success"
-            },
-            {
-              "content": "{\"binary_score\": \"yes\"}",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "grade_artifacts",
-              "id": "2a82d3bc-8992-43bb-9dc8-d46440a50cf5",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "To fail the CI pipeline if the agent uses forbidden tools, you can specify the `forbidden_tools` parameter in your YAML spec. If any of the forbidden tools are called, this will escalate to a hard fail, causing your CI pipeline to fail with exit code 1. \n\nFor parts of your question unrelated to AgentCI, such as general queries or software not mentioned, I can only help with AgentCI topics.",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 85,
-                  "prompt_tokens": 514,
-                  "total_tokens": 599,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_373a14eb6f",
-                "id": "chatcmpl-DDkT7vJFXKWQvw6KeMBmfpOpvvSzx",
-                "service_tier": "default",
-                "finish_reason": "stop",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d84-efd1-75b0-a0f9-a50f26c1264a-0",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 514,
-                "output_tokens": 85,
-                "total_tokens": 599,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            }
-          ],
-          "sub_questions": [],
-          "is_decomposed": false
-        },
-        "tool_calls": [
-          {
-            "tool_name": "retrieve_docs",
-            "arguments": {
-              "query": "How do I fail the CI pipeline if the agent uses forbidden tools?"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-02-27T05:14:22.588899+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "grade_artifacts",
-            "arguments": {
-              "content": "{\"binary_score\": \"yes\"}"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-02-27T05:14:22.588904+00:00",
-            "duration_ms": 0.0
-          }
-        ],
-        "llm_calls": [
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 626.8654596060514,
-            "timestamp": "2026-02-27T05:14:20.318928Z"
-          },
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 1578.9676681160927,
-            "timestamp": "2026-02-27T05:14:22.588393Z"
-          }
-        ],
-        "total_tokens_in": 0,
-        "total_tokens_out": 0,
-        "total_cost_usd": 0.0,
-        "duration_ms": 0.0,
-        "metadata": {},
-        "attributes": {},
-        "from_agent": null,
-        "to_agent": null,
-        "guardrail_name": null,
-        "guardrail_triggered": false
-      }
-    ],
-    "total_cost_usd": 0.0,
-    "total_tokens": 0,
-    "total_duration_ms": 3353.605791926384,
-    "total_llm_calls": 2,
-    "total_tool_calls": 2,
-    "test_name": "",
-    "agent_name": "run_agent",
-    "framework": "",
-    "graph_state": {
-      "messages": [
-        {
-          "content": "How do I fail the CI pipeline if the agent uses forbidden tools?",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "human",
-          "name": null,
-          "id": "194b741e-756e-48fd-8901-b71f0d2f31fe"
-        },
-        {
-          "content": "",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 27,
-              "prompt_tokens": 382,
-              "total_tokens": 409,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkT5wfCSwZW8pILnmLLif7agaX25",
-            "service_tier": "default",
-            "finish_reason": "tool_calls",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d84-eaab-7310-a95f-5e2bbd43b640-0",
-          "tool_calls": [
-            {
-              "name": "retrieve_docs",
-              "args": {
-                "query": "How do I fail the CI pipeline if the agent uses forbidden tools?"
-              },
-              "id": "call_jMD2hNZ8k4pfKNfmUSyJqQ3Q",
-              "type": "tool_call"
-            }
-          ],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 382,
-            "output_tokens": 27,
-            "total_tokens": 409,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        },
-        {
-          "content": "### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n\n| Handoff target | `expected_handoff` | Name of the agent the query should be routed to |\n| Handoff count | `max_handoff_count` | Maximum number of agent-to-agent transfers allowed |\n| Forbidden tools | `forbidden_tools` | Tools that must NOT be called (escalates to hard fail, failing your CI pipeline with exit code 1) |\n| Match mode | `match_mode` | How to compare tool sequences: strict, unordered, subset, superset |",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "tool",
-          "name": "retrieve_docs",
-          "id": "6cdba015-5163-4f3c-9228-bbf29ac35836",
-          "tool_call_id": "call_jMD2hNZ8k4pfKNfmUSyJqQ3Q",
-          "artifact": null,
-          "status": "success"
-        },
-        {
-          "content": "{\"binary_score\": \"yes\"}",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "grade_artifacts",
-          "id": "2a82d3bc-8992-43bb-9dc8-d46440a50cf5",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "To fail the CI pipeline if the agent uses forbidden tools, you can specify the `forbidden_tools` parameter in your YAML spec. If any of the forbidden tools are called, this will escalate to a hard fail, causing your CI pipeline to fail with exit code 1. \n\nFor parts of your question unrelated to AgentCI, such as general queries or software not mentioned, I can only help with AgentCI topics.",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 85,
-              "prompt_tokens": 514,
-              "total_tokens": 599,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_373a14eb6f",
-            "id": "chatcmpl-DDkT7vJFXKWQvw6KeMBmfpOpvvSzx",
-            "service_tier": "default",
-            "finish_reason": "stop",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d84-efd1-75b0-a0f9-a50f26c1264a-0",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 514,
-            "output_tokens": 85,
-            "total_tokens": 599,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        }
-      ],
-      "sub_questions": [],
-      "is_decomposed": false
-    },
-    "metadata": {}
-  },
-  "Does AgentCI support Anthropic models for testing?": {
-    "trace_id": "982dc325b20b43cd",
-    "created_at": "2026-02-27T05:14:22.589012Z",
-    "spans": [
-      {
-        "span_id": "55fec3bd4fdb46f0",
-        "parent_span_id": null,
-        "kind": "agent",
-        "name": "run_agent",
-        "input_data": null,
-        "output_data": null,
-        "stop_reason": null,
-        "graph_state": {
-          "messages": [
-            {
-              "content": "Does AgentCI support Anthropic models for testing?",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "human",
-              "name": null,
-              "id": "7e88dad3-f718-42e5-b90b-99487bed41a4"
-            },
-            {
-              "content": "",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 23,
-                  "prompt_tokens": 378,
-                  "total_tokens": 401,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkT9UhCw4XKkHVlNbBpKZoh10qND",
-                "service_tier": "default",
-                "finish_reason": "tool_calls",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d84-f776-7770-b48b-e8211aef267d-0",
-              "tool_calls": [
-                {
-                  "name": "retrieve_docs",
-                  "args": {
-                    "query": "Does AgentCI support Anthropic models for testing?"
-                  },
-                  "id": "call_I21260T1vjc3PNEdEosS5omX",
-                  "type": "tool_call"
-                }
-              ],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 378,
-                "output_tokens": 23,
-                "total_tokens": 401,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            },
-            {
-              "content": "# Supported Agent Frameworks\n\nAgentCI works seamlessly with the following AI agent frameworks out of the box:\n\n- **OpenAI Agents SDK** \u2014 Native AgentCITraceProcessor (2 lines to enable)\n- **LangGraph / LangChain** \u2014 Captures conditional edges and tool calls via state attachment\n- **Anthropic (raw)** \u2014 AnthropicMocker for zero-cost replay; native tool_use capture\n- **Any Python agent** \u2014 Manual Trace/Span construction for custom frameworks\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "tool",
-              "name": "retrieve_docs",
-              "id": "5be0d777-2761-4c80-bd3e-119982fe972d",
-              "tool_call_id": "call_I21260T1vjc3PNEdEosS5omX",
-              "artifact": null,
-              "status": "success"
-            },
-            {
-              "content": "{\"binary_score\": \"yes\"}",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "grade_artifacts",
-              "id": "abea1fd4-6391-4cae-b0f0-ec094b8d1a1e",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "Yes, AgentCI does support Anthropic models for testing. It provides the AnthropicMocker for zero-cost replay and native tool_use capture. \n\nFor any further questions unrelated to AgentCI, please specify them, and I will do my best to assist.",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 52,
-                  "prompt_tokens": 508,
-                  "total_tokens": 560,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_373a14eb6f",
-                "id": "chatcmpl-DDkTAiZrEZVvKudxCTr9WceCtVCDd",
-                "service_tier": "default",
-                "finish_reason": "stop",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d84-fbd0-77b2-8d1e-ba6607fbc897-0",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 508,
-                "output_tokens": 52,
-                "total_tokens": 560,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            }
-          ],
-          "sub_questions": [],
-          "is_decomposed": false
-        },
-        "tool_calls": [
-          {
-            "tool_name": "retrieve_docs",
-            "arguments": {
-              "query": "Does AgentCI support Anthropic models for testing?"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-02-27T05:14:25.379066+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "grade_artifacts",
-            "arguments": {
-              "content": "{\"binary_score\": \"yes\"}"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-02-27T05:14:25.379073+00:00",
-            "duration_ms": 0.0
-          }
-        ],
-        "llm_calls": [
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 577.4717908352613,
-            "timestamp": "2026-02-27T05:14:23.544343Z"
-          },
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 1296.4011654257774,
-            "timestamp": "2026-02-27T05:14:25.376918Z"
-          }
-        ],
-        "total_tokens_in": 0,
-        "total_tokens_out": 0,
-        "total_cost_usd": 0.0,
-        "duration_ms": 0.0,
-        "metadata": {},
-        "attributes": {},
-        "from_agent": null,
-        "to_agent": null,
-        "guardrail_name": null,
-        "guardrail_triggered": false
-      }
-    ],
-    "total_cost_usd": 0.0,
-    "total_tokens": 0,
-    "total_duration_ms": 2790.0471668690443,
-    "total_llm_calls": 2,
-    "total_tool_calls": 2,
-    "test_name": "",
-    "agent_name": "run_agent",
-    "framework": "",
-    "graph_state": {
-      "messages": [
-        {
-          "content": "Does AgentCI support Anthropic models for testing?",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "human",
-          "name": null,
-          "id": "7e88dad3-f718-42e5-b90b-99487bed41a4"
-        },
-        {
-          "content": "",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 23,
-              "prompt_tokens": 378,
-              "total_tokens": 401,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkT9UhCw4XKkHVlNbBpKZoh10qND",
-            "service_tier": "default",
-            "finish_reason": "tool_calls",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d84-f776-7770-b48b-e8211aef267d-0",
-          "tool_calls": [
-            {
-              "name": "retrieve_docs",
-              "args": {
-                "query": "Does AgentCI support Anthropic models for testing?"
-              },
-              "id": "call_I21260T1vjc3PNEdEosS5omX",
-              "type": "tool_call"
-            }
-          ],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 378,
-            "output_tokens": 23,
-            "total_tokens": 401,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        },
-        {
-          "content": "# Supported Agent Frameworks\n\nAgentCI works seamlessly with the following AI agent frameworks out of the box:\n\n- **OpenAI Agents SDK** \u2014 Native AgentCITraceProcessor (2 lines to enable)\n- **LangGraph / LangChain** \u2014 Captures conditional edges and tool calls via state attachment\n- **Anthropic (raw)** \u2014 AnthropicMocker for zero-cost replay; native tool_use capture\n- **Any Python agent** \u2014 Manual Trace/Span construction for custom frameworks\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "tool",
-          "name": "retrieve_docs",
-          "id": "5be0d777-2761-4c80-bd3e-119982fe972d",
-          "tool_call_id": "call_I21260T1vjc3PNEdEosS5omX",
-          "artifact": null,
-          "status": "success"
-        },
-        {
-          "content": "{\"binary_score\": \"yes\"}",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "grade_artifacts",
-          "id": "abea1fd4-6391-4cae-b0f0-ec094b8d1a1e",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "Yes, AgentCI does support Anthropic models for testing. It provides the AnthropicMocker for zero-cost replay and native tool_use capture. \n\nFor any further questions unrelated to AgentCI, please specify them, and I will do my best to assist.",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 52,
-              "prompt_tokens": 508,
-              "total_tokens": 560,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_373a14eb6f",
-            "id": "chatcmpl-DDkTAiZrEZVvKudxCTr9WceCtVCDd",
-            "service_tier": "default",
-            "finish_reason": "stop",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d84-fbd0-77b2-8d1e-ba6607fbc897-0",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 508,
-            "output_tokens": 52,
-            "total_tokens": 560,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        }
-      ],
-      "sub_questions": [],
-      "is_decomposed": false
-    },
-    "metadata": {}
-  },
-  "Is AgentCI free to use?": {
-    "trace_id": "6dd577574a454be7",
-    "created_at": "2026-02-27T05:14:25.379190Z",
-    "spans": [
-      {
-        "span_id": "77119c71f6e34f4e",
-        "parent_span_id": null,
-        "kind": "agent",
-        "name": "run_agent",
-        "input_data": null,
-        "output_data": null,
-        "stop_reason": null,
-        "graph_state": {
-          "messages": [
-            {
-              "content": "Is AgentCI free to use?",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "human",
-              "name": null,
-              "id": "ffdfb4ef-91f7-485f-a8a2-5f289dd750fc"
-            },
-            {
-              "content": "",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 20,
-                  "prompt_tokens": 375,
-                  "total_tokens": 395,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkTBhNR0jiTDmcpP2emDsuyIqwiT",
-                "service_tier": "default",
-                "finish_reason": "tool_calls",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d85-0268-7ac3-b1f8-db7eac0d2d03-0",
-              "tool_calls": [
-                {
-                  "name": "retrieve_docs",
-                  "args": {
-                    "query": "Is AgentCI free to use?"
-                  },
-                  "id": "call_QgDF9ZRx526at9RQzV6yjhuP",
-                  "type": "tool_call"
-                }
-              ],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 375,
-                "output_tokens": 20,
-                "total_tokens": 395,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            },
-            {
-              "content": "### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "tool",
-              "name": "retrieve_docs",
-              "id": "c5a8c5da-fbfe-4910-9ff1-0c719874fe37",
-              "tool_call_id": "call_QgDF9ZRx526at9RQzV6yjhuP",
-              "artifact": null,
-              "status": "success"
-            },
-            {
-              "content": "{\"binary_score\": \"yes\"}",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "ai",
-              "name": "grade_artifacts",
-              "id": "660b9f99-c012-47c4-9b65-4b236fd24273",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": null
-            },
-            {
-              "content": "Yes, AgentCI is free to use. It is open source under the Apache 2.0 License, and you can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry. \n\nIf you have questions related to other topics, feel free to ask!",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 66,
-                  "prompt_tokens": 452,
-                  "total_tokens": 518,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_373a14eb6f",
-                "id": "chatcmpl-DDkTDVaLzFAfkC8NPKf2w8kQAx6C0",
-                "service_tier": "default",
-                "finish_reason": "stop",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d85-07d5-7b73-8c6a-41d693a4ea3d-0",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 452,
-                "output_tokens": 66,
-                "total_tokens": 518,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            }
-          ],
-          "sub_questions": [],
-          "is_decomposed": false
-        },
-        "tool_calls": [
-          {
-            "tool_name": "retrieve_docs",
-            "arguments": {
-              "query": "Is AgentCI free to use?"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-02-27T05:14:28.777027+00:00",
-            "duration_ms": 0.0
-          },
-          {
-            "tool_name": "grade_artifacts",
-            "arguments": {
-              "content": "{\"binary_score\": \"yes\"}"
-            },
-            "result": null,
-            "error": null,
-            "timestamp": "2026-02-27T05:14:28.777037+00:00",
-            "duration_ms": 0.0
-          }
-        ],
-        "llm_calls": [
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 553.0006252229214,
-            "timestamp": "2026-02-27T05:14:26.321759Z"
-          },
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 1618.7201663851738,
-            "timestamp": "2026-02-27T05:14:28.776432Z"
-          }
-        ],
-        "total_tokens_in": 0,
-        "total_tokens_out": 0,
-        "total_cost_usd": 0.0,
-        "duration_ms": 0.0,
-        "metadata": {},
-        "attributes": {},
-        "from_agent": null,
-        "to_agent": null,
-        "guardrail_name": null,
-        "guardrail_triggered": false
-      }
-    ],
-    "total_cost_usd": 0.0,
-    "total_tokens": 0,
-    "total_duration_ms": 3397.8309147059917,
-    "total_llm_calls": 2,
-    "total_tool_calls": 2,
-    "test_name": "",
-    "agent_name": "run_agent",
-    "framework": "",
-    "graph_state": {
-      "messages": [
-        {
-          "content": "Is AgentCI free to use?",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "human",
-          "name": null,
-          "id": "ffdfb4ef-91f7-485f-a8a2-5f289dd750fc"
-        },
-        {
-          "content": "",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 20,
-              "prompt_tokens": 375,
-              "total_tokens": 395,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkTBhNR0jiTDmcpP2emDsuyIqwiT",
-            "service_tier": "default",
-            "finish_reason": "tool_calls",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d85-0268-7ac3-b1f8-db7eac0d2d03-0",
-          "tool_calls": [
-            {
-              "name": "retrieve_docs",
-              "args": {
-                "query": "Is AgentCI free to use?"
-              },
-              "id": "call_QgDF9ZRx526at9RQzV6yjhuP",
-              "type": "tool_call"
-            }
-          ],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 375,
-            "output_tokens": 20,
-            "total_tokens": 395,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        },
-        {
-          "content": "### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "tool",
-          "name": "retrieve_docs",
-          "id": "c5a8c5da-fbfe-4910-9ff1-0c719874fe37",
-          "tool_call_id": "call_QgDF9ZRx526at9RQzV6yjhuP",
-          "artifact": null,
-          "status": "success"
-        },
-        {
-          "content": "{\"binary_score\": \"yes\"}",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "ai",
-          "name": "grade_artifacts",
-          "id": "660b9f99-c012-47c4-9b65-4b236fd24273",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": null
-        },
-        {
-          "content": "Yes, AgentCI is free to use. It is open source under the Apache 2.0 License, and you can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry. \n\nIf you have questions related to other topics, feel free to ask!",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 66,
-              "prompt_tokens": 452,
-              "total_tokens": 518,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_373a14eb6f",
-            "id": "chatcmpl-DDkTDVaLzFAfkC8NPKf2w8kQAx6C0",
-            "service_tier": "default",
-            "finish_reason": "stop",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d85-07d5-7b73-8c6a-41d693a4ea3d-0",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 452,
-            "output_tokens": 66,
-            "total_tokens": 518,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        }
-      ],
-      "sub_questions": [],
-      "is_decomposed": false
-    },
-    "metadata": {}
-  },
-  "What's the weather in Austin?": {
-    "trace_id": "6cd5361ae2e64307",
-    "created_at": "2026-02-27T05:14:28.777162Z",
-    "spans": [
-      {
-        "span_id": "6ca64c4b91fe4fa1",
-        "parent_span_id": null,
-        "kind": "agent",
-        "name": "run_agent",
-        "input_data": null,
-        "output_data": null,
-        "stop_reason": null,
-        "graph_state": {
-          "messages": [
-            {
-              "content": "What's the weather in Austin?",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "human",
-              "name": null,
-              "id": "9760c7b4-671c-49a9-85b1-9c3c33ba6509"
-            },
-            {
-              "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents.",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 22,
-                  "prompt_tokens": 374,
-                  "total_tokens": 396,
-                  "completion_tokens_details": {
-                    "accepted_prediction_tokens": 0,
-                    "audio_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "rejected_prediction_tokens": 0
-                  },
-                  "prompt_tokens_details": {
-                    "audio_tokens": 0,
-                    "cached_tokens": 0
-                  }
-                },
-                "model_provider": "openai",
-                "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkTFEVjKHNr9kylMEJ7VoHY4eXRB",
-                "service_tier": "default",
-                "finish_reason": "stop",
-                "logprobs": null
-              },
-              "type": "ai",
-              "name": null,
-              "id": "lc_run--019c9d85-0f87-7263-80da-8b39ba6777ae-0",
-              "tool_calls": [],
-              "invalid_tool_calls": [],
-              "usage_metadata": {
-                "input_tokens": 374,
-                "output_tokens": 22,
-                "total_tokens": 396,
-                "input_token_details": {
-                  "audio": 0,
-                  "cache_read": 0
-                },
-                "output_token_details": {
-                  "audio": 0,
-                  "reasoning": 0
-                }
-              }
-            }
-          ],
-          "sub_questions": [],
-          "is_decomposed": false
-        },
-        "tool_calls": [],
-        "llm_calls": [
-          {
-            "model": "gpt-4o-mini",
-            "provider": "openai",
-            "input_messages": [],
-            "output_text": "",
-            "tokens_in": 0,
-            "tokens_out": 0,
-            "stop_reason": null,
-            "cost_usd": 0.0,
-            "duration_ms": 683.8675402104855,
-            "timestamp": "2026-02-27T05:14:29.811088Z"
-          }
-        ],
-        "total_tokens_in": 0,
-        "total_tokens_out": 0,
-        "total_cost_usd": 0.0,
-        "duration_ms": 0.0,
-        "metadata": {},
-        "attributes": {},
-        "from_agent": null,
-        "to_agent": null,
-        "guardrail_name": null,
-        "guardrail_triggered": false
-      }
-    ],
-    "total_cost_usd": 0.0,
-    "total_tokens": 0,
-    "total_duration_ms": 1036.192124709487,
-    "total_llm_calls": 1,
-    "total_tool_calls": 0,
-    "test_name": "",
-    "agent_name": "run_agent",
-    "framework": "",
-    "graph_state": {
-      "messages": [
-        {
-          "content": "What's the weather in Austin?",
-          "additional_kwargs": {},
-          "response_metadata": {},
-          "type": "human",
-          "name": null,
-          "id": "9760c7b4-671c-49a9-85b1-9c3c33ba6509"
-        },
-        {
-          "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents.",
-          "additional_kwargs": {
-            "refusal": null
-          },
-          "response_metadata": {
-            "token_usage": {
-              "completion_tokens": 22,
-              "prompt_tokens": 374,
-              "total_tokens": 396,
-              "completion_tokens_details": {
-                "accepted_prediction_tokens": 0,
-                "audio_tokens": 0,
-                "reasoning_tokens": 0,
-                "rejected_prediction_tokens": 0
-              },
-              "prompt_tokens_details": {
-                "audio_tokens": 0,
-                "cached_tokens": 0
-              }
-            },
-            "model_provider": "openai",
-            "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkTFEVjKHNr9kylMEJ7VoHY4eXRB",
-            "service_tier": "default",
-            "finish_reason": "stop",
-            "logprobs": null
-          },
-          "type": "ai",
-          "name": null,
-          "id": "lc_run--019c9d85-0f87-7263-80da-8b39ba6777ae-0",
-          "tool_calls": [],
-          "invalid_tool_calls": [],
-          "usage_metadata": {
-            "input_tokens": 374,
-            "output_tokens": 22,
-            "total_tokens": 396,
-            "input_token_details": {
-              "audio": 0,
-              "cache_read": 0
-            },
-            "output_token_details": {
-              "audio": 0,
-              "reasoning": 0
-            }
-          }
-        }
-      ],
-      "sub_questions": [],
-      "is_decomposed": false
-    },
-    "metadata": {}
-  },
-  "How do I configure an AWS load balancer for the enterprise tier?": {
-    "trace_id": "105e7263dc3146fd",
-    "created_at": "2026-02-27T05:14:29.813622Z",
-    "spans": [
-      {
-        "span_id": "4bf0a37e27cb4172",
-        "parent_span_id": null,
-        "kind": "agent",
-        "name": "run_agent",
-        "input_data": null,
-        "output_data": null,
-        "stop_reason": null,
-        "graph_state": {
-          "messages": [
-            {
-              "content": "How do I configure an AWS load balancer for the enterprise tier?",
-              "additional_kwargs": {},
-              "response_metadata": {},
-              "type": "human",
-              "name": null,
-              "id": "a66e3f56-a34b-47b3-9d07-971193799156"
-            },
-            {
-              "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents.",
-              "additional_kwargs": {
-                "refusal": null
-              },
-              "response_metadata": {
-                "token_usage": {
-                  "completion_tokens": 22,
-                  "prompt_tokens": 382,
+                  "completion_tokens": 16,
+                  "prompt_tokens": 388,
                   "total_tokens": 404,
                   "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
@@ -2383,20 +951,20 @@
                 },
                 "model_provider": "openai",
                 "model_name": "gpt-4o-mini-2024-07-18",
-                "system_fingerprint": "fp_b4f1283ee2",
-                "id": "chatcmpl-DDkTGBI6sRnWUkDLiBFdbuay5Rjrw",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2B9PPaYOHDxgA1vsh1n9BJA4DI9",
                 "service_tier": "default",
                 "finish_reason": "stop",
                 "logprobs": null
               },
               "type": "ai",
               "name": null,
-              "id": "lc_run--019c9d85-1436-78f0-b201-19f42271465e-0",
+              "id": "lc_run--019f3d3b-c450-7fa0-afb4-f76166c0b520-0",
               "tool_calls": [],
               "invalid_tool_calls": [],
               "usage_metadata": {
-                "input_tokens": 382,
-                "output_tokens": 22,
+                "input_tokens": 388,
+                "output_tokens": 16,
                 "total_tokens": 404,
                 "input_token_details": {
                   "audio": 0,
@@ -2423,8 +991,8 @@
             "tokens_out": 0,
             "stop_reason": null,
             "cost_usd": 0.0,
-            "duration_ms": 540.4603332281113,
-            "timestamp": "2026-02-27T05:14:30.866950Z"
+            "duration_ms": 638.8494172133505,
+            "timestamp": "2026-07-07T15:39:15.535378Z"
           }
         ],
         "total_tokens_in": 0,
@@ -2441,31 +1009,31 @@
     ],
     "total_cost_usd": 0.0,
     "total_tokens": 0,
-    "total_duration_ms": 1054.507164284587,
+    "total_duration_ms": 1116.9104580767453,
     "total_llm_calls": 1,
     "total_tool_calls": 0,
     "test_name": "",
-    "agent_name": "run_agent",
+    "agent_name": "rag-agent",
     "framework": "",
     "graph_state": {
       "messages": [
         {
-          "content": "How do I configure an AWS load balancer for the enterprise tier?",
+          "content": "Hello!",
           "additional_kwargs": {},
           "response_metadata": {},
           "type": "human",
           "name": null,
-          "id": "a66e3f56-a34b-47b3-9d07-971193799156"
+          "id": "0de3a0bf-f523-4310-8410-f6f17daf1832"
         },
         {
-          "content": "I'm an AgentCI documentation assistant and can only help with questions related to AgentCI and testing AI agents.",
+          "content": "Hello! How can I help you today with your questions about AgentCI?",
           "additional_kwargs": {
             "refusal": null
           },
           "response_metadata": {
             "token_usage": {
-              "completion_tokens": 22,
-              "prompt_tokens": 382,
+              "completion_tokens": 16,
+              "prompt_tokens": 388,
               "total_tokens": 404,
               "completion_tokens_details": {
                 "accepted_prediction_tokens": 0,
@@ -2480,20 +1048,20 @@
             },
             "model_provider": "openai",
             "model_name": "gpt-4o-mini-2024-07-18",
-            "system_fingerprint": "fp_b4f1283ee2",
-            "id": "chatcmpl-DDkTGBI6sRnWUkDLiBFdbuay5Rjrw",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2B9PPaYOHDxgA1vsh1n9BJA4DI9",
             "service_tier": "default",
             "finish_reason": "stop",
             "logprobs": null
           },
           "type": "ai",
           "name": null,
-          "id": "lc_run--019c9d85-1436-78f0-b201-19f42271465e-0",
+          "id": "lc_run--019f3d3b-c450-7fa0-afb4-f76166c0b520-0",
           "tool_calls": [],
           "invalid_tool_calls": [],
           "usage_metadata": {
-            "input_tokens": 382,
-            "output_tokens": 22,
+            "input_tokens": 388,
+            "output_tokens": 16,
             "total_tokens": 404,
             "input_token_details": {
               "audio": 0,
@@ -2509,6 +1077,1456 @@
       "sub_questions": [],
       "is_decomposed": false
     },
-    "metadata": {}
+    "metadata": {
+      "final_output": "Hello! How can I help you today with your questions about AgentCI?"
+    }
+  },
+  "How do I fail the CI pipeline if the agent uses forbidden tools?": {
+    "trace_id": "25d3b0a844644f3f",
+    "created_at": "2026-07-09T20:59:34.880552Z",
+    "spans": [
+      {
+        "span_id": "750dc07c95264bd2",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "rag-agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "How do I fail the CI pipeline if the agent uses forbidden tools?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "add2b90f-27cb-4206-8e8f-a46e85623d45"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 29,
+                  "prompt_tokens": 400,
+                  "total_tokens": 429,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dzq8GAU0Rcnf8t7ix3LtvWQePkB3Y",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f48ad-c5ea-7021-a22b-7d537d8d5262-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "How to fail the CI pipeline if the agent uses forbidden tools in AgentCI?"
+                  },
+                  "id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 400,
+                "output_tokens": 29,
+                "total_tokens": 429,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n- A model swap changes routing decisions (billing queries go to the wrong agent)\n- A prompt edit silently skips a tool call (vector search stops firing)\n- A new model costs 6x more per query (surprise invoice at month-end)\n- A RAG retriever returns irrelevant docs (hallucinated answers in production)\n- A guardrail stops firing after a refactor (PII leaks through)\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## CI/CD\n\n### Does AgentCI integrate with GitHub Actions?\nYes. Run `agentci init` to generate a `.github/workflows/agentci.yml`. When correctness checks fail, they appear as `::error` annotations directly in the PR \"Files Changed\" tab. Path and cost warnings appear as `::warning` annotations. This is first-in-class among agent testing tools.\n\n### What are the exit codes?\n- 0 \u2014 All correctness checks pass (warnings may be printed)\n- 1 \u2014 One or more correctness failures (blocks the merge)\n- 2 \u2014 Infrastructure or runtime error\n\n## Comparisons\n\n### How does AgentCI compare to promptfoo?\npromptfoo is a prompt evaluation tool focused on LLM output quality with a web UI. AgentCI is a CI/CD-native agent testing framework focused on multi-step agent behavior (tool sequences, routing, handoffs, cost tracking). AgentCI's three-layer severity model, GitHub annotations, trajectory metrics, and baseline versioning are not available in promptfoo.\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior. \n\n4. **Validate your spec:**\n   ```bash\n   agentci validate agentci_spec.yaml\n   ```\n\n5. **Run tests:**\n   ```bash\n   agentci test --config agentci_spec.yaml --format console\n   ```\n\n6. **Save a golden baseline:**\n   ```bash\n   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml\n   ```\n\n7. **Diff against baselines:**\n   ```bash\n   agentci diff --baseline v1 --compare v2 --agent my-agent\n   ```\n\n### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.\n\n## Automated Example Agents\n\nAgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.\n\n### RAG Agent (LangGraph)\n**Directory:** `DemoAgents/examples/rag-agent/`\n**Architecture:** Retrieval \u2192 Grade \u2192 Rewrite/Generate pipeline\n\n### Support Router (OpenAI Agents SDK)\n**Directory:** `DemoAgents/examples/support-router/`\n**Architecture:** Triage \u2192 Specialist multi-agent handoff with guardrails\n\n### DevAgent (Anthropic SDK)\n**Directory:** `DemoAgents/examples/dev-agent/`\n**Architecture:** Sequential 8-tool GitHub repository analyzer\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "fe6f135a-faa2-4d94-b973-ed28bbb7a437",
+              "tool_call_id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "d2c575d8-3306-4c4e-8974-22c84983322f",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "To fail the CI pipeline if the agent uses forbidden tools, you should define your agent's expected behavior in the `agentci_spec.yaml` file, including assertions that specify which tools are forbidden. When you run tests with AgentCI, if the agent uses any of these forbidden tools, the correctness checks will fail, triggering the following exit code:\n\n- **1** \u2014 One or more correctness failures (blocks the merge).\n\nThis exit code will ensure that the CI pipeline fails, preventing the merge of any code that violates the defined constraints.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 107,
+                  "prompt_tokens": 1625,
+                  "total_tokens": 1732,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 1536
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_a151a364ab",
+                "id": "chatcmpl-Dzq8IL9WD8kcMKazkur2OV6C4VyPS",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f48ad-cee7-7fc0-a500-1961aad88ee1-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 1625,
+                "output_tokens": 107,
+                "total_tokens": 1732,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 1536
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ],
+          "sub_questions": [],
+          "is_decomposed": false
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "How to fail the CI pipeline if the agent uses forbidden tools in AgentCI?"
+            },
+            "result": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n- A model swap changes routing decisions (billing queries go to the wrong agent)\n- A prompt edit silently skips a tool call (vector search stops firing)\n- A new model costs 6x more per query (surprise invoice at month-end)\n- A RAG retriever returns irrelevant docs (hallucinated answers in production)\n- A guardrail stops firing after a refactor (PII leaks through)\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## CI/CD\n\n### Does AgentCI integrate with GitHub Actions?\nYes. Run `agentci init` to generate a `.github/workflows/agentci.yml`. When correctness checks fail, they appear as `::error` annotations directly in the PR \"Files Changed\" tab. Path and cost warnings appear as `::warning` annotations. This is first-in-class among agent testing tools.\n\n### What are the exit codes?\n- 0 \u2014 All correctness checks pass (warnings may be printed)\n- 1 \u2014 One or more correctness failures (blocks the merge)\n- 2 \u2014 Infrastructure or runtime error\n\n## Comparisons\n\n### How does AgentCI compare to promptfoo?\npromptfoo is a prompt evaluation tool focused on LLM output quality with a web UI. AgentCI is a CI/CD-native agent testing framework focused on multi-step agent behavior (tool sequences, routing, handoffs, cost tracking). AgentCI's three-layer severity model, GitHub annotations, trajectory metrics, and baseline versioning are not available in promptfoo.\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior. \n\n4. **Validate your spec:**\n   ```bash\n   agentci validate agentci_spec.yaml\n   ```\n\n5. **Run tests:**\n   ```bash\n   agentci test --config agentci_spec.yaml --format console\n   ```\n\n6. **Save a golden baseline:**\n   ```bash\n   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml\n   ```\n\n7. **Diff against baselines:**\n   ```bash\n   agentci diff --baseline v1 --compare v2 --agent my-agent\n   ```\n\n### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.\n\n## Automated Example Agents\n\nAgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.\n\n### RAG Agent (LangGraph)\n**Directory:** `DemoAgents/examples/rag-agent/`\n**Architecture:** Retrieval \u2192 Grade \u2192 Rewrite/Generate pipeline\n\n### Support Router (OpenAI Agents SDK)\n**Directory:** `DemoAgents/examples/support-router/`\n**Architecture:** Triage \u2192 Specialist multi-agent handoff with guardrails\n\n### DevAgent (Anthropic SDK)\n**Directory:** `DemoAgents/examples/dev-agent/`\n**Architecture:** Sequential 8-tool GitHub repository analyzer\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version",
+            "error": null,
+            "timestamp": "2026-07-09T20:59:39.728058+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-07-09T20:59:39.728075+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1172.798375133425,
+            "timestamp": "2026-07-09T20:59:36.959999Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1635.1436250843108,
+            "timestamp": "2026-07-09T20:59:39.723755Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {},
+        "attributes": {},
+        "from_agent": null,
+        "to_agent": null,
+        "guardrail_name": null,
+        "guardrail_triggered": false
+      }
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 4696.307041682303,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
+    "test_name": "",
+    "agent_name": "rag-agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "How do I fail the CI pipeline if the agent uses forbidden tools?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "add2b90f-27cb-4206-8e8f-a46e85623d45"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 29,
+              "prompt_tokens": 400,
+              "total_tokens": 429,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dzq8GAU0Rcnf8t7ix3LtvWQePkB3Y",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f48ad-c5ea-7021-a22b-7d537d8d5262-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "How to fail the CI pipeline if the agent uses forbidden tools in AgentCI?"
+              },
+              "id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 400,
+            "output_tokens": 29,
+            "total_tokens": 429,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "### What makes AgentCI unique?\n1. **Three-layer severity model** \u2014 Correctness (hard fail), Path (soft warn), Cost (soft warn). No other tool does this.\n2. **GitHub PR annotations** \u2014 First-in-class inline `::error` and `::warning` in the PR diff view.\n3. **Trajectory metrics** \u2014 Tool recall, precision, F1, sequence similarity, loop detection.\n4. **Multi-agent routing assertions** \u2014 `expected_handoff`, `max_handoff_count`.\n5. **YAML spec format** \u2014 Declarative, human-readable test definitions.\n6. **Open source and self-hosted** \u2014 No vendor lock-in, no telemetry, Apache 2.0.\n\n# About AgentCI\n\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.\n\n## The Problem AgentCI Solves\n\nWhen you build AI agents, you make changes constantly \u2014 swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:\n\n- A model swap changes routing decisions (billing queries go to the wrong agent)\n- A prompt edit silently skips a tool call (vector search stops firing)\n- A new model costs 6x more per query (surprise invoice at month-end)\n- A RAG retriever returns irrelevant docs (hallucinated answers in production)\n- A guardrail stops firing after a refactor (PII leaks through)\n\n# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD\n\n## CI/CD\n\n### Does AgentCI integrate with GitHub Actions?\nYes. Run `agentci init` to generate a `.github/workflows/agentci.yml`. When correctness checks fail, they appear as `::error` annotations directly in the PR \"Files Changed\" tab. Path and cost warnings appear as `::warning` annotations. This is first-in-class among agent testing tools.\n\n### What are the exit codes?\n- 0 \u2014 All correctness checks pass (warnings may be printed)\n- 1 \u2014 One or more correctness failures (blocks the merge)\n- 2 \u2014 Infrastructure or runtime error\n\n## Comparisons\n\n### How does AgentCI compare to promptfoo?\npromptfoo is a prompt evaluation tool focused on LLM output quality with a web UI. AgentCI is a CI/CD-native agent testing framework focused on multi-step agent behavior (tool sequences, routing, handoffs, cost tracking). AgentCI's three-layer severity model, GitHub annotations, trajectory metrics, and baseline versioning are not available in promptfoo.\n\n3. **Write your spec:**\n   Edit `agentci_spec.yaml` to define your agent's expected behavior. \n\n4. **Validate your spec:**\n   ```bash\n   agentci validate agentci_spec.yaml\n   ```\n\n5. **Run tests:**\n   ```bash\n   agentci test --config agentci_spec.yaml --format console\n   ```\n\n6. **Save a golden baseline:**\n   ```bash\n   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml\n   ```\n\n7. **Diff against baselines:**\n   ```bash\n   agentci diff --baseline v1 --compare v2 --agent my-agent\n   ```\n\n### How does AgentCI compare to DeepEval?\nDeepEval provides LLM evaluation metrics (faithfulness, hallucination, etc.) as Python assertions. AgentCI provides the same LLM-as-judge capabilities plus trajectory analysis, routing verification, cost budgets, golden baseline diffing, and CI/CD integration. DeepEval doesn't track tool sequences or agent handoffs.\n\n### How does AgentCI compare to LangSmith?\nLangSmith is a production observability platform (logging, tracing, monitoring). AgentCI is a pre-deployment testing framework (regression detection, CI/CD integration). They're complementary: use LangSmith to monitor production, use AgentCI to prevent regressions before deployment. LangSmith is a paid SaaS product; AgentCI is free and self-hosted.\n\n## Automated Example Agents\n\nAgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.\n\n### RAG Agent (LangGraph)\n**Directory:** `DemoAgents/examples/rag-agent/`\n**Architecture:** Retrieval \u2192 Grade \u2192 Rewrite/Generate pipeline\n\n### Support Router (OpenAI Agents SDK)\n**Directory:** `DemoAgents/examples/support-router/`\n**Architecture:** Triage \u2192 Specialist multi-agent handoff with guardrails\n\n### DevAgent (Anthropic SDK)\n**Directory:** `DemoAgents/examples/dev-agent/`\n**Architecture:** Sequential 8-tool GitHub repository analyzer\n\nTraditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.\n\n## How AgentCI Works\n\nAgentCI records what your agent *actually did* \u2014 every tool call, LLM invocation, routing decision, and cost \u2014 as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:\n\n1. **Correctness Layer** (Hard Fail) \u2014 Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.\n2. **Path Layer** (Soft Warning) \u2014 Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.\n3. **Cost Layer** (Soft Warning) \u2014 Did the agent stay within budget? Token count, LLM calls, latency, dollar cost.\n\n## Current Version",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "fe6f135a-faa2-4d94-b973-ed28bbb7a437",
+          "tool_call_id": "call_XwKCbXyw6vtDE98fcl6jSUbu",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "d2c575d8-3306-4c4e-8974-22c84983322f",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "To fail the CI pipeline if the agent uses forbidden tools, you should define your agent's expected behavior in the `agentci_spec.yaml` file, including assertions that specify which tools are forbidden. When you run tests with AgentCI, if the agent uses any of these forbidden tools, the correctness checks will fail, triggering the following exit code:\n\n- **1** \u2014 One or more correctness failures (blocks the merge).\n\nThis exit code will ensure that the CI pipeline fails, preventing the merge of any code that violates the defined constraints.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 107,
+              "prompt_tokens": 1625,
+              "total_tokens": 1732,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 1536
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_a151a364ab",
+            "id": "chatcmpl-Dzq8IL9WD8kcMKazkur2OV6C4VyPS",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f48ad-cee7-7fc0-a500-1961aad88ee1-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 1625,
+            "output_tokens": 107,
+            "total_tokens": 1732,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 1536
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ],
+      "sub_questions": [],
+      "is_decomposed": false
+    },
+    "metadata": {
+      "final_output": "To fail the CI pipeline if the agent uses forbidden tools, you should define your agent's expected behavior in the `agentci_spec.yaml` file, including assertions that specify which tools are forbidden. When you run tests with AgentCI, if the agent uses any of these forbidden tools, the correctness checks will fail, triggering the following exit code:\n\n- **1** \u2014 One or more correctness failures (blocks the merge).\n\nThis exit code will ensure that the CI pipeline fails, preventing the merge of any code that violates the defined constraints."
+    }
+  },
+  "Does AgentCI support Anthropic models for testing?": {
+    "trace_id": "6decfc85f5044474",
+    "created_at": "2026-07-07T15:39:26.314210Z",
+    "spans": [
+      {
+        "span_id": "8b379740376d4257",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "rag-agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "Does AgentCI support Anthropic models for testing?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "dadec92b-760a-4bd9-94cf-81775b82db43"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 23,
+                  "prompt_tokens": 396,
+                  "total_tokens": 419,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2BLa71eYt0nREQpDTVrBwEtGlTM",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f3d3b-f374-7150-bf34-53bee09fd0bf-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "Does AgentCI support Anthropic models for testing?"
+                  },
+                  "id": "call_FHMhz244B2Itsl9EOcLCKC6M",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 396,
+                "output_tokens": 23,
+                "total_tokens": 419,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "348ced0e-45a7-4e6d-b85a-aef9b2dd729f",
+              "tool_call_id": "call_FHMhz244B2Itsl9EOcLCKC6M",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "2ec1a85c-2d8a-477b-81a7-4bdf41696ed8",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "Yes, AgentCI supports testing with Anthropic models. It includes a mock system called AnthropicMocker, which allows you to define scripted responses for your tests. This ensures your testing can run deterministically and instantly, without incurring any API costs.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 51,
+                  "prompt_tokens": 456,
+                  "total_tokens": 507,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_39589d11a4",
+                "id": "chatcmpl-Dz2BSp4NZZfQW0dunwO3xYkcvqjfz",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f3d3c-0fbd-7c32-aa2d-2037cc4f17f3-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 456,
+                "output_tokens": 51,
+                "total_tokens": 507,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ],
+          "sub_questions": [],
+          "is_decomposed": false
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "Does AgentCI support Anthropic models for testing?"
+            },
+            "result": "# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD",
+            "error": null,
+            "timestamp": "2026-07-07T15:39:35.630324+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-07-07T15:39:35.630330+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 800.4329171963036,
+            "timestamp": "2026-07-07T15:39:27.765226Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1424.2150839418173,
+            "timestamp": "2026-07-07T15:39:35.629750Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {},
+        "attributes": {},
+        "from_agent": null,
+        "to_agent": null,
+        "guardrail_name": null,
+        "guardrail_triggered": false
+      }
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 9316.060042008758,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
+    "test_name": "",
+    "agent_name": "rag-agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "Does AgentCI support Anthropic models for testing?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "dadec92b-760a-4bd9-94cf-81775b82db43"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 23,
+              "prompt_tokens": 396,
+              "total_tokens": 419,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2BLa71eYt0nREQpDTVrBwEtGlTM",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f3d3b-f374-7150-bf34-53bee09fd0bf-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "Does AgentCI support Anthropic models for testing?"
+              },
+              "id": "call_FHMhz244B2Itsl9EOcLCKC6M",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 396,
+            "output_tokens": 23,
+            "total_tokens": 419,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "348ced0e-45a7-4e6d-b85a-aef9b2dd729f",
+          "tool_call_id": "call_FHMhz244B2Itsl9EOcLCKC6M",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "2ec1a85c-2d8a-477b-81a7-4bdf41696ed8",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "Yes, AgentCI supports testing with Anthropic models. It includes a mock system called AnthropicMocker, which allows you to define scripted responses for your tests. This ensures your testing can run deterministically and instantly, without incurring any API costs.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 51,
+              "prompt_tokens": 456,
+              "total_tokens": 507,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_39589d11a4",
+            "id": "chatcmpl-Dz2BSp4NZZfQW0dunwO3xYkcvqjfz",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f3d3c-0fbd-7c32-aa2d-2037cc4f17f3-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 456,
+            "output_tokens": 51,
+            "total_tokens": 507,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ],
+      "sub_questions": [],
+      "is_decomposed": false
+    },
+    "metadata": {
+      "final_output": "Yes, AgentCI supports testing with Anthropic models. It includes a mock system called AnthropicMocker, which allows you to define scripted responses for your tests. This ensures your testing can run deterministically and instantly, without incurring any API costs."
+    }
+  },
+  "Is AgentCI free to use?": {
+    "trace_id": "7a83b2f179db4033",
+    "created_at": "2026-07-07T15:39:35.630464Z",
+    "spans": [
+      {
+        "span_id": "00eed6cbf6564435",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "rag-agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "Is AgentCI free to use?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "1df9db5c-42b2-47b5-8554-cad3226573b1"
+            },
+            {
+              "content": "",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 20,
+                  "prompt_tokens": 393,
+                  "total_tokens": 413,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2BVUm3xLJdOxmSjM1w5NynMdEn1",
+                "service_tier": "default",
+                "finish_reason": "tool_calls",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f3d3c-19bb-7390-a62a-1272f0cf6a04-0",
+              "tool_calls": [
+                {
+                  "name": "retrieve_docs",
+                  "args": {
+                    "query": "Is AgentCI free to use?"
+                  },
+                  "id": "call_eYSPLFS2yPdczUeIr6x5PFE3",
+                  "type": "tool_call"
+                }
+              ],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 393,
+                "output_tokens": 20,
+                "total_tokens": 413,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            },
+            {
+              "content": "# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "retrieve_docs",
+              "id": "834bd8d1-b9cb-4df1-98e0-5ef26e577079",
+              "tool_call_id": "call_eYSPLFS2yPdczUeIr6x5PFE3",
+              "artifact": null,
+              "status": "success"
+            },
+            {
+              "content": "{\"binary_score\": \"yes\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "ai",
+              "name": "grade_artifacts",
+              "id": "a14104c1-8a18-4714-a47f-5c681a365ae9",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": null
+            },
+            {
+              "content": "Yes, AgentCI is free to use. It is an open-source tool under the Apache 2.0 License, which allows you to use it for free in any project, whether commercial or otherwise. There are no paid tiers, usage limits, or telemetry involved.",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 54,
+                  "prompt_tokens": 453,
+                  "total_tokens": 507,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_39589d11a4",
+                "id": "chatcmpl-Dz2BXWiR6YCh9YWD7vxD2ZwsJLCJN",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f3d3c-21ef-72d2-beac-199412cf91fe-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 453,
+                "output_tokens": 54,
+                "total_tokens": 507,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ],
+          "sub_questions": [],
+          "is_decomposed": false
+        },
+        "tool_calls": [
+          {
+            "tool_name": "retrieve_docs",
+            "arguments": {
+              "query": "Is AgentCI free to use?"
+            },
+            "result": "# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD",
+            "error": null,
+            "timestamp": "2026-07-07T15:39:39.954287+00:00",
+            "duration_ms": 0.0
+          },
+          {
+            "tool_name": "grade_artifacts",
+            "arguments": {
+              "content": "{\"binary_score\": \"yes\"}"
+            },
+            "result": null,
+            "error": null,
+            "timestamp": "2026-07-07T15:39:39.954294+00:00",
+            "duration_ms": 0.0
+          }
+        ],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 723.6200417391956,
+            "timestamp": "2026-07-07T15:39:37.486796Z"
+          },
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 1088.2547916844487,
+            "timestamp": "2026-07-07T15:39:39.952419Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {},
+        "attributes": {},
+        "from_agent": null,
+        "to_agent": null,
+        "guardrail_name": null,
+        "guardrail_triggered": false
+      }
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 4323.815458919853,
+    "total_llm_calls": 2,
+    "total_tool_calls": 2,
+    "test_name": "",
+    "agent_name": "rag-agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "Is AgentCI free to use?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "1df9db5c-42b2-47b5-8554-cad3226573b1"
+        },
+        {
+          "content": "",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 20,
+              "prompt_tokens": 393,
+              "total_tokens": 413,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2BVUm3xLJdOxmSjM1w5NynMdEn1",
+            "service_tier": "default",
+            "finish_reason": "tool_calls",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f3d3c-19bb-7390-a62a-1272f0cf6a04-0",
+          "tool_calls": [
+            {
+              "name": "retrieve_docs",
+              "args": {
+                "query": "Is AgentCI free to use?"
+              },
+              "id": "call_eYSPLFS2yPdczUeIr6x5PFE3",
+              "type": "tool_call"
+            }
+          ],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 393,
+            "output_tokens": 20,
+            "total_tokens": 413,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        },
+        {
+          "content": "# AgentCI FAQ\n\n## General\n\n### What is AgentCI?\nAgentCI is an open-source, trace-based regression testing framework for AI agents. It records what your agent actually did (every tool call, LLM invocation, routing decision, and cost) and compares it against known-good baselines. When something drifts, you see exactly what changed \u2014 in your terminal, in your CI/CD pipeline, and as inline annotations on your GitHub PR.\n\n### Is AgentCI free?\nYes. AgentCI is open source under the Apache 2.0 License. You can use it for free in any project, commercial or otherwise. There are no paid tiers, no usage limits, and no telemetry.\n\n### Do I need API keys to run AgentCI tests?\nNo. AgentCI includes a mock system (OpenAIMocker and AnthropicMocker) that lets you define scripted LLM responses. This means your tests run deterministically, instantly, and with zero API cost. LLM-as-judge assertions do require an API key, but they're optional and can be skipped in CI when keys aren't available.\n\n## CI/CD",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "retrieve_docs",
+          "id": "834bd8d1-b9cb-4df1-98e0-5ef26e577079",
+          "tool_call_id": "call_eYSPLFS2yPdczUeIr6x5PFE3",
+          "artifact": null,
+          "status": "success"
+        },
+        {
+          "content": "{\"binary_score\": \"yes\"}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "ai",
+          "name": "grade_artifacts",
+          "id": "a14104c1-8a18-4714-a47f-5c681a365ae9",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": null
+        },
+        {
+          "content": "Yes, AgentCI is free to use. It is an open-source tool under the Apache 2.0 License, which allows you to use it for free in any project, whether commercial or otherwise. There are no paid tiers, usage limits, or telemetry involved.",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 54,
+              "prompt_tokens": 453,
+              "total_tokens": 507,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_39589d11a4",
+            "id": "chatcmpl-Dz2BXWiR6YCh9YWD7vxD2ZwsJLCJN",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f3d3c-21ef-72d2-beac-199412cf91fe-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 453,
+            "output_tokens": 54,
+            "total_tokens": 507,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ],
+      "sub_questions": [],
+      "is_decomposed": false
+    },
+    "metadata": {
+      "final_output": "Yes, AgentCI is free to use. It is an open-source tool under the Apache 2.0 License, which allows you to use it for free in any project, whether commercial or otherwise. There are no paid tiers, usage limits, or telemetry involved."
+    }
+  },
+  "What's the weather in Austin?": {
+    "trace_id": "f9d86fa1004847e0",
+    "created_at": "2026-07-07T15:39:39.954515Z",
+    "spans": [
+      {
+        "span_id": "b9559c1614394beb",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "rag-agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "What's the weather in Austin?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "cf4c33e0-7c11-408e-80f3-4a9172354662"
+            },
+            {
+              "content": "I'm specialized in AgentCI and can't provide weather information. If you have any questions about AgentCI, feel free to ask!",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 26,
+                  "prompt_tokens": 392,
+                  "total_tokens": 418,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2BZgYHbVh4q2fmXRm4X78CZ9HlF",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f3d3c-2a05-7f61-8962-50008a8cba25-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 392,
+                "output_tokens": 26,
+                "total_tokens": 418,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ],
+          "sub_questions": [],
+          "is_decomposed": false
+        },
+        "tool_calls": [],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 801.688333041966,
+            "timestamp": "2026-07-07T15:39:41.735658Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {},
+        "attributes": {},
+        "from_agent": null,
+        "to_agent": null,
+        "guardrail_name": null,
+        "guardrail_triggered": false
+      }
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 1783.6640840396285,
+    "total_llm_calls": 1,
+    "total_tool_calls": 0,
+    "test_name": "",
+    "agent_name": "rag-agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "What's the weather in Austin?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "cf4c33e0-7c11-408e-80f3-4a9172354662"
+        },
+        {
+          "content": "I'm specialized in AgentCI and can't provide weather information. If you have any questions about AgentCI, feel free to ask!",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 26,
+              "prompt_tokens": 392,
+              "total_tokens": 418,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2BZgYHbVh4q2fmXRm4X78CZ9HlF",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f3d3c-2a05-7f61-8962-50008a8cba25-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 392,
+            "output_tokens": 26,
+            "total_tokens": 418,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ],
+      "sub_questions": [],
+      "is_decomposed": false
+    },
+    "metadata": {
+      "final_output": "I'm specialized in AgentCI and can't provide weather information. If you have any questions about AgentCI, feel free to ask!"
+    }
+  },
+  "How do I configure an AWS load balancer for the enterprise tier?": {
+    "trace_id": "c2a09f954d0e4358",
+    "created_at": "2026-07-07T15:39:41.738415Z",
+    "spans": [
+      {
+        "span_id": "8bed99dcb4f243bc",
+        "parent_span_id": null,
+        "kind": "agent",
+        "name": "rag-agent",
+        "input_data": null,
+        "output_data": null,
+        "stop_reason": null,
+        "graph_state": {
+          "messages": [
+            {
+              "content": "How do I configure an AWS load balancer for the enterprise tier?",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "human",
+              "name": null,
+              "id": "89e71e15-863a-4d60-b501-65199404c806"
+            },
+            {
+              "content": "I'm here to assist you with questions about AgentCI. If you have any inquiries regarding AgentCI, please feel free to ask!",
+              "additional_kwargs": {
+                "refusal": null
+              },
+              "response_metadata": {
+                "token_usage": {
+                  "completion_tokens": 27,
+                  "prompt_tokens": 400,
+                  "total_tokens": 427,
+                  "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                  },
+                  "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                  }
+                },
+                "model_provider": "openai",
+                "model_name": "gpt-4o-mini-2024-07-18",
+                "system_fingerprint": "fp_b4abb0dc92",
+                "id": "chatcmpl-Dz2BbRjbE4klPQE7L4gBv68vmciJO",
+                "service_tier": "default",
+                "finish_reason": "stop",
+                "logprobs": null
+              },
+              "type": "ai",
+              "name": null,
+              "id": "lc_run--019f3d3c-32cf-7f03-a8ec-695d730d88cb-0",
+              "tool_calls": [],
+              "invalid_tool_calls": [],
+              "usage_metadata": {
+                "input_tokens": 400,
+                "output_tokens": 27,
+                "total_tokens": 427,
+                "input_token_details": {
+                  "audio": 0,
+                  "cache_read": 0
+                },
+                "output_token_details": {
+                  "audio": 0,
+                  "reasoning": 0
+                }
+              }
+            }
+          ],
+          "sub_questions": [],
+          "is_decomposed": false
+        },
+        "tool_calls": [],
+        "llm_calls": [
+          {
+            "model": "gpt-4o-mini",
+            "provider": "openai",
+            "input_messages": [],
+            "output_text": "",
+            "tokens_in": 0,
+            "tokens_out": 0,
+            "stop_reason": null,
+            "cost_usd": 0.0,
+            "duration_ms": 831.0952917672694,
+            "timestamp": "2026-07-07T15:39:44.014939Z"
+          }
+        ],
+        "total_tokens_in": 0,
+        "total_tokens_out": 0,
+        "total_cost_usd": 0.0,
+        "duration_ms": 0.0,
+        "metadata": {},
+        "attributes": {},
+        "from_agent": null,
+        "to_agent": null,
+        "guardrail_name": null,
+        "guardrail_triggered": false
+      }
+    ],
+    "total_cost_usd": 0.0,
+    "total_tokens": 0,
+    "total_duration_ms": 2277.6133748702705,
+    "total_llm_calls": 1,
+    "total_tool_calls": 0,
+    "test_name": "",
+    "agent_name": "rag-agent",
+    "framework": "",
+    "graph_state": {
+      "messages": [
+        {
+          "content": "How do I configure an AWS load balancer for the enterprise tier?",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "human",
+          "name": null,
+          "id": "89e71e15-863a-4d60-b501-65199404c806"
+        },
+        {
+          "content": "I'm here to assist you with questions about AgentCI. If you have any inquiries regarding AgentCI, please feel free to ask!",
+          "additional_kwargs": {
+            "refusal": null
+          },
+          "response_metadata": {
+            "token_usage": {
+              "completion_tokens": 27,
+              "prompt_tokens": 400,
+              "total_tokens": 427,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              }
+            },
+            "model_provider": "openai",
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_b4abb0dc92",
+            "id": "chatcmpl-Dz2BbRjbE4klPQE7L4gBv68vmciJO",
+            "service_tier": "default",
+            "finish_reason": "stop",
+            "logprobs": null
+          },
+          "type": "ai",
+          "name": null,
+          "id": "lc_run--019f3d3c-32cf-7f03-a8ec-695d730d88cb-0",
+          "tool_calls": [],
+          "invalid_tool_calls": [],
+          "usage_metadata": {
+            "input_tokens": 400,
+            "output_tokens": 27,
+            "total_tokens": 427,
+            "input_token_details": {
+              "audio": 0,
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "audio": 0,
+              "reasoning": 0
+            }
+          }
+        }
+      ],
+      "sub_questions": [],
+      "is_decomposed": false
+    },
+    "metadata": {
+      "final_output": "I'm here to assist you with questions about AgentCI. If you have any inquiries regarding AgentCI, please feel free to ask!"
+    }
   }
 }

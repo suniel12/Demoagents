@@ -1,10 +1,10 @@
 # DevAgent — GitHub Repository Health Analyzer
 
-> An AI-powered agent that analyzes GitHub repositories for code quality, dependency health, security signals, and community activity. Built as the reference demo for [AgentCI](https://github.com/your-org/agentci) — the CI/CD testing framework for AI agents.
+> An AI-powered agent that analyzes GitHub repositories for code quality, dependency health, security signals, and community activity. Built as the reference demo for [CIAgent](https://github.com/suniel12/ciagent) — the CI/CD testing framework for AI agents.
 
 ## Why This Exists
 
-DevAgent is not just a useful tool — it's the **dogfooding vehicle** for AgentCI. Every testing challenge that developers face when building AI agents shows up naturally in this project:
+DevAgent is not just a useful tool — it's the **dogfooding vehicle** for CIAgent. Every testing challenge that developers face when building AI agents shows up naturally in this project:
 
 - **Tool selection**: Does the agent pick the right tool for the job?
 - **Sequencing**: Does it call tools in the right order?
@@ -12,11 +12,11 @@ DevAgent is not just a useful tool — it's the **dogfooding vehicle** for Agent
 - **Cost guardrails**: Does a single repo analysis stay within budget?
 - **Output quality**: Is the health report accurate and specific?
 
-Each phase of development adds complexity and a corresponding new layer of AgentCI tests.
+Each phase of development adds complexity and a corresponding new layer of CIAgent tests.
 
 ## Project Phases
 
-| Phase | Focus | Tools | AgentCI Capabilities Tested |
+| Phase | Focus | Tools | CIAgent Capabilities Tested |
 |-------|-------|-------|-----------------------------|
 | **0** | Foundation | `github_repo_metadata` | Trace capture, basic assertions, cost tracking |
 | **1** | Multi-tool sequential | + `github_list_files`, `github_read_file`, `dependency_analyzer` | Sequencing assertions, golden trace diffing |
@@ -43,8 +43,8 @@ cp .env.example .env
 # Run the agent
 python -m devagent.agent.run "https://github.com/langchain-ai/langchain"
 
-# Run AgentCI tests
-agentci test tests/
+# Run CIAgent tests
+ciagent test tests/
 ```
 
 ## Architecture
