@@ -1,12 +1,12 @@
-# AgentCI Architecture Overview
+# CIAgent Architecture Overview
 
 ## System Architecture
 
-AgentCI is organized into four main layers:
+CIAgent is organized into four main layers:
 
 ### 1. Schema Layer
-- `agentci_spec.yaml` — Declarative test specification
-- `spec_models.py` — Pydantic models for validation (AgentCISpec, GoldenQuery, CorrectnessSpec, PathSpec, CostSpec)
+- `ciagent_spec.yaml` — Declarative test specification
+- `spec_models.py` — Pydantic models for validation (CIAgentSpec, GoldenQuery, CorrectnessSpec, PathSpec, CostSpec)
 - `generate_schema.py` — Auto-generates JSON Schema for IDE autocomplete
 - `loader.py` — YAML loading with defaults merging and tag filtering
 

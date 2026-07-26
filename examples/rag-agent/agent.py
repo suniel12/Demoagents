@@ -35,7 +35,7 @@ vectorstore = InMemoryVectorStore.from_documents(documents=splits, embedding=Ope
 retriever = vectorstore.as_retriever(search_kwargs={"k": 8})
 
 def retrieve_docs(query: str) -> str:
-    """Retrieve AgentCI documentation from the knowledge base."""
+    """Retrieve CIAgent documentation from the knowledge base."""
     docs = retriever.invoke(query)
     return "\n\n".join(doc.page_content for doc in docs)
 
@@ -57,31 +57,31 @@ class GradeOutput(BaseModel):
 
 class DecomposeOutput(BaseModel):
     sub_questions: list[str] = Field(description=(
-        "Atomic sub-questions if the query has 2+ DISTINCT AgentCI-only questions. "
+        "Atomic sub-questions if the query has 2+ DISTINCT CIAgent-only questions. "
         "Empty list for single questions, greetings, out-of-scope, or mixed-intent."
     ))
 
 ### Graph Nodes ###
 
 def decompose_query(state: RAGState) -> dict:
-    """Detect compound AgentCI queries and break them into atomic sub-questions."""
+    """Detect compound CIAgent queries and break them into atomic sub-questions."""
     original_query = state["messages"][0].content
     decompose_llm = llm.with_structured_output(DecomposeOutput)
     prompt = (
-        "You are a query decomposition assistant for an AgentCI documentation chatbot.\n\n"
-        "Your job: determine if a query contains 2 or more DISTINCT AgentCI-related questions "
+        "You are a query decomposition assistant for an CIAgent documentation chatbot.\n\n"
+        "Your job: determine if a query contains 2 or more DISTINCT CIAgent-related questions "
         "that each need separate information. If so, return them as atomic sub-questions.\n\n"
         "RULES:\n"
-        "1. Only decompose when EVERY sub-question is about AgentCI. If ANY part is out-of-scope "
+        "1. Only decompose when EVERY sub-question is about CIAgent. If ANY part is out-of-scope "
         "(weather, AWS, sports, cooking, celebrities), return an empty list.\n"
         "2. Only decompose when there are genuinely 2+ distinct information needs.\n"
         "3. Greetings, single questions, and unanswerable single questions → return [].\n"
-        "4. Mixed-intent queries (some AgentCI, some not) → return [] (the triage node handles them).\n\n"
+        "4. Mixed-intent queries (some CIAgent, some not) → return [] (the triage node handles them).\n\n"
         "EXAMPLES:\n"
         "- 'Can I get a refund if I'm on Enterprise, and who do I contact for support?' "
         "→ ['Can I get a refund on the Enterprise plan?', 'Who do I contact for support?']\n"
-        "- 'How do I install AgentCI and what's the weather in Tokyo?' → [] (mixed-intent)\n"
-        "- 'How do I install AgentCI?' → [] (single question)\n"
+        "- 'How do I install CIAgent and what's the weather in Tokyo?' → [] (mixed-intent)\n"
+        "- 'How do I install CIAgent?' → [] (single question)\n"
         "- 'Hello!' → [] (greeting)\n\n"
         f"Query: {original_query}"
     )
@@ -96,29 +96,29 @@ def decompose_query(state: RAGState) -> dict:
 def generate_query_or_respond(state: RAGState):
     """First LLM call to decide if retrieval is needed or answer directly."""
     system = SystemMessage(content=(
-        "You are an AgentCI documentation assistant. You help users with questions about "
-        "AgentCI — the open-source, trace-based regression testing framework for AI agents.\n\n"
-        "You can answer questions about: installation and setup, the agentci_spec.yaml format, "
-        "You can answer questions about: installation and setup, the agentci_spec.yaml format, "
+        "You are an CIAgent documentation assistant. You help users with questions about "
+        "CIAgent — the open-source, trace-based regression testing framework for AI agents.\n\n"
+        "You can answer questions about: installation and setup, the ciagent_spec.yaml format, "
+        "You can answer questions about: installation and setup, the ciagent_spec.yaml format, "
         "the three-layer evaluation model (Correctness / Path / Cost), CLI commands, "
         "assertions and metrics, the mock system, CI/CD and GitHub Actions integration, "
         "golden baselines and the diff engine, demo agents (RAG Agent, Support Router, DevAgent), "
-        "the roadmap, pricing, licensing, open-source status, and how AgentCI compares to other "
+        "the roadmap, pricing, licensing, open-source status, and how CIAgent compares to other "
         "tools (DeepEval, promptfoo, LangSmith, Braintrust). Assume any software/SaaS related question "
-        "is intended about AgentCI unless proven otherwise.\n\n"
+        "is intended about CIAgent unless proven otherwise.\n\n"
         "DECISION RULES:\n"
-        "1. If the question is ENTIRELY about AgentCI or AI agent testing, call retrieve_docs "
+        "1. If the question is ENTIRELY about CIAgent or AI agent testing, call retrieve_docs "
         "with the full question.\n"
-        "2. If the question is a MIX — some parts about AgentCI, some unrelated (e.g. 'How do I "
-        "install AgentCI AND what is the weather?') — strip out the unrelated parts and only pass the relevant query to retrieve_docs.\n"
-        "3. If the question is ENTIRELY unrelated to AgentCI or AI software (e.g. weather only, sports only, "
+        "2. If the question is a MIX — some parts about CIAgent, some unrelated (e.g. 'How do I "
+        "install CIAgent AND what is the weather?') — strip out the unrelated parts and only pass the relevant query to retrieve_docs.\n"
+        "3. If the question is ENTIRELY unrelated to CIAgent or AI software (e.g. weather only, sports only, "
         "cooking), do NOT call retrieve_docs. Reply with a friendly, brief response. For greetings, "
-        "greet back warmly and offer to help with AgentCI questions. For off-topic questions, briefly "
-        "say you specialize in AgentCI and offer to help with that instead.\n"
-        "- Never answer from pre-trained knowledge for AgentCI topics — always retrieve first."
+        "greet back warmly and offer to help with CIAgent questions. For off-topic questions, briefly "
+        "say you specialize in CIAgent and offer to help with that instead.\n"
+        "- Never answer from pre-trained knowledge for CIAgent topics — always retrieve first."
     ))
     messages = [system] + state["messages"]
-    llm_with_tools = llm.bind_tools([{"name": "retrieve_docs", "description": "Retrieve AgentCI documentation from the knowledge base.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}])
+    llm_with_tools = llm.bind_tools([{"name": "retrieve_docs", "description": "Retrieve CIAgent documentation from the knowledge base.", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}])
     response = llm_with_tools.invoke(messages)
     return {"messages": [response]}
 
@@ -151,7 +151,7 @@ def multi_retrieve(state: RAGState) -> dict:
              for i, (q, d) in enumerate(zip(sub_questions, results))]
     combined_docs = "\n\n".join(parts)
 
-    # Synthetic AIMessage with tool_calls so AgentCI's attach_langgraph_state
+    # Synthetic AIMessage with tool_calls so CIAgent's attach_langgraph_state
     # captures each retrieve_docs call (it only reads tool_calls from AIMessages).
     synthetic_tool_calls = [
         {"name": "retrieve_docs", "args": {"query": q}, "id": f"multi_retrieve_{i}"}
@@ -178,7 +178,7 @@ def grade_documents(state: RAGState):
     answerability-biased prompt (a doc saying the topic doesn't exist IS a valid answer).
 
     For single queries: grade against the actual retrieval query (not the raw user input)
-    to prevent the rewrite loop on mixed queries where only the AgentCI part was sent to
+    to prevent the rewrite loop on mixed queries where only the CIAgent part was sent to
     retrieve_docs.
     """
     docs_content = state["messages"][-1].content
@@ -216,15 +216,15 @@ def generate_answer(state: RAGState):
 
     messages = [
         SystemMessage(content=(
-            "You are an AgentCI documentation assistant answering from a retrieved knowledge base.\n\n"
+            "You are an CIAgent documentation assistant answering from a retrieved knowledge base.\n\n"
             "RULES:\n"
-            "1. Answer the AgentCI-related parts of the question using ONLY the provided context. "
+            "1. Answer the CIAgent-related parts of the question using ONLY the provided context. "
             "Do not use pre-trained knowledge.\n"
-            "2. If the context does not cover the AgentCI part of the question, say: "
+            "2. If the context does not cover the CIAgent part of the question, say: "
             "'I don't have that information in my knowledge base.'\n"
-            "3. If the user's question contains parts clearly unrelated to AgentCI "
+            "3. If the user's question contains parts clearly unrelated to CIAgent "
             "(e.g. weather, sports, recipes), simply ignore those parts. "
-            "Do NOT add disclaimers like 'I can only help with AgentCI topics' — "
+            "Do NOT add disclaimers like 'I can only help with CIAgent topics' — "
             "just answer the in-scope parts naturally.\n"
             "4. Keep responses helpful and natural. Do not end responses with scope disclaimers.\n"
             "5. When counting or listing items, always name each item with key details from the context.\n"
@@ -249,7 +249,7 @@ def rewrite_question(state: RAGState):
         "args": {"query": response.content},
         "id": "rewrite_tc"
     }
-    # Name the message rewrite_question so AgentCI / LangGraph traces catch it
+    # Name the message rewrite_question so CIAgent / LangGraph traces catch it
     return {"messages": [AIMessage(content="", tool_calls=[tool_call], name="rewrite_question")]}
 
 

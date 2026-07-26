@@ -2,17 +2,17 @@
 
 ## Installation
 
-Install AgentCI using pip:
+Install CIAgent using pip:
 
 ```bash
 pip install ciagent
 ```
 
-AgentCI requires Python 3.10 or later.
+CIAgent requires Python 3.10 or later.
 
 ## Dependencies
 
-AgentCI has minimal required dependencies:
+CIAgent has minimal required dependencies:
 - pydantic (for schema validation)
 - click (for CLI)
 - rich (for colorful terminal output)
@@ -25,39 +25,39 @@ Optional dependencies for specific features:
 
 ## Quick Start
 
-1. **Install AgentCI:**
+1. **Install CIAgent:**
    ```bash
    pip install ciagent
    ```
 
 2. **Initialize your project:**
    ```bash
-   agentci init
+   ciagent init
    ```
    This generates:
-   - `.github/workflows/agentci.yml` — GitHub Actions workflow
-   - `agentci_spec.yaml` — Your test specification
+   - `.github/workflows/ciagent.yml` — GitHub Actions workflow
+   - `ciagent_spec.yaml` — Your test specification
    - `.git/hooks/pre-push` — Optional pre-push hook
 
 3. **Write your spec:**
-   Edit `agentci_spec.yaml` to define your agent's expected behavior. 
+   Edit `ciagent_spec.yaml` to define your agent's expected behavior. 
 
 4. **Validate your spec:**
    ```bash
-   agentci validate agentci_spec.yaml
+   ciagent validate ciagent_spec.yaml
    ```
 
 5. **Run tests:**
    ```bash
-   agentci test --config agentci_spec.yaml --format console
+   ciagent test --config ciagent_spec.yaml --format console
    ```
 
 6. **Save a golden baseline:**
    ```bash
-   agentci save --agent my-agent --version v1 --trace-file trace.json --config agentci_spec.yaml
+   ciagent save --agent my-agent --version v1 --trace-file trace.json --config ciagent_spec.yaml
    ```
 
 7. **Diff against baselines:**
    ```bash
-   agentci diff --baseline v1 --compare v2 --agent my-agent
+   ciagent diff --baseline v1 --compare v2 --agent my-agent
    ```

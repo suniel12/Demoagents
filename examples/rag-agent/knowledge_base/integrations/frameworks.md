@@ -1,18 +1,18 @@
 # Supported Agent Frameworks
 
-AgentCI works seamlessly with the following AI agent frameworks out of the box:
+CIAgent works seamlessly with the following AI agent frameworks out of the box:
 
-- **OpenAI Agents SDK** — Native AgentCITraceProcessor (2 lines to enable)
+- **OpenAI Agents SDK** — Native CIAgentTraceProcessor (2 lines to enable)
 - **LangGraph / LangChain** — Captures conditional edges and tool calls via state attachment
 - **Anthropic (raw)** — AnthropicMocker for zero-cost replay; native tool_use capture
 - **Any Python agent** — Manual Trace/Span construction for custom frameworks
 
 ### Custom Python Agents
-If you are using CrewAI or AutoGen, you can still use AgentCI. You will need to construct the `Trace` and `Span` objects manually from your framework's debug output hooks and return the final `Trace` object from your runner function script. AgentCI's engine parses these standardized `Trace` outputs.
+If you are using CrewAI or AutoGen, you can still use CIAgent. You will need to construct the `Trace` and `Span` objects manually from your framework's debug output hooks and return the final `Trace` object from your runner function script. CIAgent's engine parses these standardized `Trace` outputs.
 
 ## Automated Example Agents
 
-AgentCI ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.
+CIAgent ships with three demo agents that showcase different architectures and testing patterns. All three run with zero API keys using the mock system.
 
 ### RAG Agent (LangGraph)
 **Directory:** `DemoAgents/examples/rag-agent/`

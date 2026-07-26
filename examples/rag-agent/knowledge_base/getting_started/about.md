@@ -1,8 +1,8 @@
-# About AgentCI
+# About CIAgent
 
-AgentCI is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.
+CIAgent is an open-source, trace-based regression testing framework for AI agents. It was created by Sunil Pandey to solve a critical gap in the AI agent ecosystem: there was no way to know if your agent broke after a model swap, prompt change, or dependency update until users complained.
 
-## The Problem AgentCI Solves
+## The Problem CIAgent Solves
 
 When you build AI agents, you make changes constantly — swapping models, editing prompts, updating tools, changing routing logic. Each change can silently break behavior:
 
@@ -14,9 +14,9 @@ When you build AI agents, you make changes constantly — swapping models, editi
 
 Traditional unit tests don't catch these because agent behavior is probabilistic, not deterministic. You can't just assertEqual() on LLM output.
 
-## How AgentCI Works
+## How CIAgent Works
 
-AgentCI records what your agent *actually did* — every tool call, LLM invocation, routing decision, and cost — as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:
+CIAgent records what your agent *actually did* — every tool call, LLM invocation, routing decision, and cost — as a structured Trace. It then compares traces against known-good baselines using a three-layer evaluation:
 
 1. **Correctness Layer** (Hard Fail) — Did the agent give the right answer? Deterministic checks (string matching, regex) plus LLM-as-a-judge for subjective quality.
 2. **Path Layer** (Soft Warning) — Did the agent take the right path? Tool recall, precision, sequence similarity, loop detection, handoff verification.
@@ -24,8 +24,8 @@ AgentCI records what your agent *actually did* — every tool call, LLM invocati
 
 ## Current Version
 
-AgentCI is currently at version 2.0. The core trace model, three-layer evaluation engine, diff engine, YAML spec format, CLI tools, and GitHub Actions integration are all stable and production-ready.
+CIAgent is currently at version 2.0. The core trace model, three-layer evaluation engine, diff engine, YAML spec format, CLI tools, and GitHub Actions integration are all stable and production-ready.
 
 ## License
 
-AgentCI is open source under the Apache 2.0 License.
+CIAgent is open source under the Apache 2.0 License.

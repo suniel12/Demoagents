@@ -1,7 +1,7 @@
-from demo_runner import run_for_agentci
+from demo_runner import run_for_ciagent
 import json
 
-trace = run_for_agentci("How do I install AgentCI and what's the weather in Tokyo?")
+trace = run_for_ciagent("How do I install AgentCI and what's the weather in Tokyo?")
 for span in trace.spans:
     print(f"Span: {span.name} (Kind: {span.kind})")
     print(f"  Attrs: {span.attributes}")
