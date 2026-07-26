@@ -17,7 +17,7 @@ def run_agent(question: str):
 
 
 def test_retrieval_triggered_for_knowledge_question():
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.called("retrieve_docs")
 
 
@@ -27,21 +27,21 @@ def test_no_retrieval_for_greeting():
 
 
 def test_cost_within_budget():
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.cost_under(0.01)
 
 
 GOLDEN_QUERIES = [
     {
-        "query": "How do I install AgentCI?",
+        "query": "How do I install CIAgent?",
         "category": "direct_hit",
         "expected_in_answer": ["pip install ciagent", "3.10"],
         "not_in_answer": ["npm install"],
         "expected_tool": "retrieve_docs",
-        "expected_doc_keywords": ["install", "agentci"],
+        "expected_doc_keywords": ["install", "ciagent"],
     },
     {
-        "query": "What are the three evaluation layers in AgentCI?",
+        "query": "What are the three evaluation layers in CIAgent?",
         "category": "multi_chunk",
         "expected_in_answer": ["correctness", "path", "cost"],
         "expected_tool": "retrieve_docs",
@@ -50,7 +50,7 @@ GOLDEN_QUERIES = [
         "query": "What's the CEO's favorite restaurant?",
         "category": "out_of_scope",
         "expected_tool": None,
-        "llm_judge_rule": "The agent must decline to answer rather than hallucinate an answer. Declining while redirecting the user to its documented specialty (e.g. 'I specialize in AgentCI topics and don't have information on that') counts as a clean decline."
+        "llm_judge_rule": "The agent must decline to answer rather than hallucinate an answer. Declining while redirecting the user to its documented specialty (e.g. 'I specialize in CIAgent topics and don't have information on that') counts as a clean decline."
     },
     {
         "query": "Hello!",
@@ -64,14 +64,14 @@ GOLDEN_QUERIES = [
         "expected_tool": "retrieve_docs",
     },
     {
-        "query": "Does AgentCI support Anthropic models for testing?",
+        "query": "Does CIAgent support Anthropic models for testing?",
         "category": "direct_hit",
         "expected_in_answer": ["AnthropicMocker"],
         "not_in_answer": ["Bedrock"],
         "expected_tool": "retrieve_docs",
     },
     {
-        "query": "Is AgentCI free to use?",
+        "query": "Is CIAgent free to use?",
         "category": "direct_hit",
         "expected_in_answer": ["open source", "Apache 2.0"],
         "expected_tool": "retrieve_docs",
@@ -80,13 +80,13 @@ GOLDEN_QUERIES = [
         "query": "What's the weather in Austin?",
         "category": "out_of_scope",
         "expected_tool": None,
-        "expected_in_answer": ["agentci", "can only answer", "documentation assistant"],
+        "expected_in_answer": ["ciagent", "can only answer", "documentation assistant"],
     },
     {
         "query": "How do I configure an AWS load balancer for the enterprise tier?",
         "category": "out_of_scope",
         "expected_tool": None,
-        "llm_judge_rule": "The agent must cleanly decline to answer the question since AWS configuration is outside its AgentCI domain. It MUST NOT provide external knowledge, tutorials, or instructions about AWS."
+        "llm_judge_rule": "The agent must cleanly decline to answer the question since AWS configuration is outside its CIAgent domain. It MUST NOT provide external knowledge, tutorials, or instructions about AWS."
     },
 ]
 
@@ -126,24 +126,24 @@ def test_golden_query(case):
 
 def test_mock_mode_matches_live_behavior():
     """Verify that mock mode produces identical trace structure to live mode."""
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.called("retrieve_docs")
     assert trace.total_cost_usd >= 0
     assert trace.metadata.get("final_output")
 
 
 def test_grading_step_exists():
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.called("grade_artifacts")
 
 
 def test_relevant_docs_pass_grading():
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.called("grade_artifacts")
 
 
 def test_cost_with_grading():
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.cost_under(0.015)
 
 
@@ -156,26 +156,26 @@ def test_out_of_scope_skips_retrieval():
 
 
 def test_rewrite_triggered_for_vague_query():
-    trace = run_agent("What is the exact release date for AgentCI version 4.0?")
+    trace = run_agent("What is the exact release date for CIAgent version 4.0?")
     assert trace.called("rewrite_question"), \
         f"Expected rewrite_question in {trace.tool_call_sequence}"
 
 
 def test_no_rewrite_for_clear_query():
-    trace = run_agent("How do I install AgentCI?")
+    trace = run_agent("How do I install CIAgent?")
     assert trace.never_called("rewrite_question"), \
         f"Unexpected rewrite_question in {trace.tool_call_sequence}"
 
 
 def test_max_retries():
     """In-scope but unanswerable queries may still rewrite, but are bounded."""
-    trace = run_agent("What is the name of the top contributor to the AgentCI codebase who lives in California?")
+    trace = run_agent("What is the name of the top contributor to the CIAgent codebase who lives in California?")
     assert trace.loop_count("rewrite_question") <= 3
     assert trace.cost_under(0.05)
 
 
 def test_execution_path_with_rewrite():
-    trace = run_agent("What is the exact release date for AgentCI version 4.0?")
+    trace = run_agent("What is the exact release date for CIAgent version 4.0?")
     assert trace.called("retrieve_docs")
     assert trace.called("grade_artifacts")
     assert trace.called("rewrite_question")
@@ -184,7 +184,7 @@ def test_execution_path_with_rewrite():
 
 
 def test_compound_query_decomposed_within_budget():
-    """Compound AgentCI query uses multi-path (no rewrite loop) and stays within budget."""
+    """Compound CIAgent query uses multi-path (no rewrite loop) and stays within budget."""
     trace = run_agent(
         "Can I get a refund if I'm on the Enterprise plan, and who do I contact for support?"
     )
@@ -196,8 +196,8 @@ def test_compound_query_decomposed_within_budget():
 
 
 def test_mixed_intent_not_decomposed():
-    """Mixed-intent query (AgentCI + weather) is NOT decomposed; single-path handles it."""
-    trace = run_agent("How do I install AgentCI and what's the weather in Tokyo?")
+    """Mixed-intent query (CIAgent + weather) is NOT decomposed; single-path handles it."""
+    trace = run_agent("How do I install CIAgent and what's the weather in Tokyo?")
     assert trace.called("retrieve_docs")
     assert trace.never_called("rewrite_question"), \
         f"Unexpected rewrite_question for mixed-intent: {trace.tool_call_sequence}"

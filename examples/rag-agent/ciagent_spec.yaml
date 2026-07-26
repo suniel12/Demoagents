@@ -6,7 +6,7 @@ judge_config:
   temperature: 0
 baseline_dir: ./baselines
 queries:
-- query: What frameworks does AgentCI support out of the box?
+- query: What frameworks does CIAgent support out of the box?
   description: Tests that the agent retrieves and accurately summarizes supported
     agent frameworks from the knowledge base.
   tags:
@@ -22,7 +22,7 @@ queries:
     - OpenAI Agents SDK
     - Anthropic
     llm_judge:
-    - rule: The agent should accurately describe the frameworks AgentCI supports based
+    - rule: The agent should accurately describe the frameworks CIAgent supports based
         on retrieved documentation. The answer should be informative and helpful,
         covering at least the major supported frameworks. If the KB mentions specific
         integration details, the agent should reflect them accurately.
@@ -40,15 +40,15 @@ queries:
   correctness:
     llm_judge:
     - rule: The agent should decline to answer the cooking question since it is outside
-        its AgentCI domain. It should not provide a recipe or any cooking instructions.
-        It should briefly acknowledge it specializes in AgentCI and offer to help
+        its CIAgent domain. It should not provide a recipe or any cooking instructions.
+        It should briefly acknowledge it specializes in CIAgent and offer to help
         with that instead. The decline should be friendly, not abrupt.
       threshold: 0.8
   cost:
     max_llm_calls: 4
 - query: Hi there!
   description: Tests that the agent responds warmly to a greeting without invoking
-    retrieval or fabricating AgentCI facts unprompted.
+    retrieval or fabricating CIAgent facts unprompted.
   tags:
   - edge-case
   - greeting
@@ -58,13 +58,13 @@ queries:
   correctness:
     llm_judge:
     - rule: The agent should respond with a friendly greeting and indicate readiness
-        to help with AgentCI questions. It should not fabricate any AgentCI facts
+        to help with CIAgent questions. It should not fabricate any CIAgent facts
         unprompted or launch into an unsolicited product pitch. A warm, brief, welcoming
         response is ideal.
       threshold: 0.7
   cost:
     max_llm_calls: 4
-- query: What Python version does AgentCI require?
+- query: What Python version does CIAgent require?
   description: Tests retrieval and accurate answer for a simple factual installation
     question covered directly in the KB.
   tags:
@@ -79,7 +79,7 @@ queries:
     - '3.10'
   cost:
     max_llm_calls: 8
-- query: What CLI commands does AgentCI provide?
+- query: What CLI commands does CIAgent provide?
   description: Tests retrieval and enumeration of CLI commands documented in the KB
     (validate, test, diff, save, baselines, init).
   tags:
@@ -98,7 +98,7 @@ queries:
     - init
   cost:
     max_llm_calls: 8
-- query: How does AgentCI compare to LangSmith and DeepEval?
+- query: How does CIAgent compare to LangSmith and DeepEval?
   description: Tests retrieval and a comparison answer for a competitive-positioning
     question mentioned in the KB.
   tags:
@@ -109,7 +109,7 @@ queries:
     - retrieve_docs
   correctness:
     llm_judge:
-    - rule: The agent should highlight differentiators of AgentCI based on retrieved
+    - rule: The agent should highlight differentiators of CIAgent based on retrieved
         documentation, such as the three-layer evaluation model, GitHub PR annotations,
         or trajectory metrics. It should not fabricate benchmarks or pricing comparisons
         that are not in the documentation.
@@ -117,7 +117,7 @@ queries:
       context_file: knowledge_base/faq/faq.md
   cost:
     max_llm_calls: 8
-- query: Does AgentCI work with CrewAI or AutoGen?
+- query: Does CIAgent work with CrewAI or AutoGen?
   description: Tests retrieval of framework support information for non-natively-supported
     frameworks mentioned in the KB.
   tags:
@@ -140,7 +140,7 @@ queries:
   cost:
     max_llm_calls: 8
 - query: How do I save a golden baseline and then diff it against a new run?
-  description: Tests a compound but fully in-scope question covering two related AgentCI
+  description: Tests a compound but fully in-scope question covering two related CIAgent
     workflow steps documented in the KB.
   tags:
   - in-scope
@@ -151,13 +151,13 @@ queries:
     - retrieve_docs
   correctness:
     any_expected_in_answer:
-    - agentci save
-    - agentci diff
+    - ciagent save
+    - ciagent diff
     - baseline
     - golden
   cost:
     max_llm_calls: 8
-- query: Can I use AgentCI without any API keys?
+- query: Can I use CIAgent without any API keys?
   description: Tests retrieval of the mock system information and accurate answer
     about zero-cost testing.
   tags:
@@ -172,7 +172,7 @@ queries:
     - AnthropicMocker
     - mock
     llm_judge:
-    - rule: The agent should clearly convey that AgentCI can run tests without API
+    - rule: The agent should clearly convey that CIAgent can run tests without API
         keys using its mock system. The answer should be accurate to the documentation
         and not imply any hidden requirements.
       threshold: 0.6
@@ -189,8 +189,8 @@ queries:
   correctness:
     llm_judge:
     - rule: The agent should politely decline to answer, indicating it specializes
-        in AgentCI documentation. It should not provide a cookie recipe or any unrelated
-        content, and should offer to help with AgentCI questions instead.
+        in CIAgent documentation. It should not provide a cookie recipe or any unrelated
+        content, and should offer to help with CIAgent questions instead.
       threshold: 0.8
   cost:
     max_llm_calls: 4
@@ -206,13 +206,13 @@ queries:
   correctness:
     llm_judge:
     - rule: The agent should respond with a friendly greeting and offer to help with
-        AgentCI questions. It should not fabricate any AgentCI facts unprompted.
+        CIAgent questions. It should not fabricate any CIAgent facts unprompted.
       threshold: 0.7
   cost:
     max_llm_calls: 4
-- query: How do I install AgentCI and what is the population of Tokyo?
+- query: How do I install CIAgent and what is the population of Tokyo?
   description: Tests mixed-intent handling where one part is in-scope and one is entirely
-    off-topic; agent should answer the AgentCI part only.
+    off-topic; agent should answer the CIAgent part only.
   tags:
   - edge-case
   - mixed-intent
@@ -225,14 +225,14 @@ queries:
     - pip install
     - install
     llm_judge:
-    - rule: The agent should answer the AgentCI installation question accurately based
+    - rule: The agent should answer the CIAgent installation question accurately based
         on retrieved documentation. It should either skip or honestly decline the
         Tokyo population question without fabricating an answer, and should not penalize
         itself for being honest about knowledge gaps.
       threshold: 0.6
   cost:
     max_llm_calls: 8
-- query: What is the Trace data model in AgentCI and how does the LLM judge work?
+- query: What is the Trace data model in CIAgent and how does the LLM judge work?
   description: Tests decomposition and parallel retrieval for two distinct in-scope
     sub-questions both covered in the KB.
   tags:
@@ -256,7 +256,7 @@ queries:
     max_llm_calls: 8
 - query: Who won the Super Bowl last year?
   description: Tests that a sports question triggers no retrieval and a polite redirect
-    to AgentCI topics.
+    to CIAgent topics.
   tags:
   - out-of-scope
   - boundary
@@ -265,12 +265,12 @@ queries:
   correctness:
     llm_judge:
     - rule: The agent should decline to answer the sports question and redirect the
-        user to AgentCI-related topics. It must not hallucinate a Super Bowl result
+        user to CIAgent-related topics. It must not hallucinate a Super Bowl result
         or provide sports commentary.
       threshold: 0.8
   cost:
     max_llm_calls: 4
-- query: What are the optional pip dependencies for AgentCI and how do I set up GitHub
+- query: What are the optional pip dependencies for CIAgent and how do I set up GitHub
     Actions for it?
   description: Tests a compound in-scope query requiring retrieval across two distinct
     KB sections (installation and CI/CD integration).

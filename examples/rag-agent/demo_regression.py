@@ -1,8 +1,8 @@
 """
-Demo: AgentCI Regression Report
+Demo: CIAgent Regression Report
 
 Run the agent against key queries and compare with a saved baseline.
-This showcases how AgentCI catches regressions on model swaps.
+This showcases how CIAgent catches regressions on model swaps.
 """
 import os
 import sys
@@ -30,7 +30,7 @@ def main():
         print("❌ Baseline not found. Run 'make baseline' first to save golden traces.")
         return
 
-    print("\n============ AgentCI Regression Report ============")
+    print("\n============ CIAgent Regression Report ============")
     print(f"Comparing: current run vs. baseline 'rag-v1-gpt4o-mini'\n")
 
     queries = [

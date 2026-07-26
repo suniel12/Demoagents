@@ -1,6 +1,6 @@
 import yaml
 
-with open('agentci_spec.yaml', 'r') as f:
+with open('ciagent_spec.yaml', 'r') as f:
     spec = yaml.safe_load(f)
 
 # The original 4 queries are already there. We will completely replace the queries list
@@ -8,7 +8,7 @@ with open('agentci_spec.yaml', 'r') as f:
 
 queries = [
     {
-        "query": "How do I install AgentCI?",
+        "query": "How do I install CIAgent?",
         "description": "Core in-scope question — agent must retrieve from docs",
         "tags": ["smoke", "in-scope", "happy-path"],
         "correctness": {
@@ -23,7 +23,7 @@ queries = [
         "cost": {"max_llm_calls": 5, "max_total_tokens": 3000}
     },
     {
-        "query": "What are the three evaluation layers in AgentCI?",
+        "query": "What are the three evaluation layers in CIAgent?",
         "description": "Core in-scope multi-chunk retrieval",
         "tags": ["in-scope"],
         "correctness": {"expected_in_answer": ["correctness", "path", "cost"]},
@@ -55,14 +55,14 @@ queries = [
         "path": {"expected_tools": ["retrieve_docs"]}
     },
     {
-        "query": "Does AgentCI support Anthropic models for testing?",
+        "query": "Does CIAgent support Anthropic models for testing?",
         "description": "Core in-scope technical 2",
         "tags": ["in-scope"],
         "correctness": {"expected_in_answer": ["AnthropicMocker"], "not_in_answer": ["Bedrock"]},
         "path": {"expected_tools": ["retrieve_docs"]}
     },
     {
-        "query": "Is AgentCI free to use?",
+        "query": "Is CIAgent free to use?",
         "description": "Core in-scope licensing",
         "tags": ["in-scope"],
         "correctness": {"expected_in_answer": ["open source", "Apache 2.0"]},
@@ -72,7 +72,7 @@ queries = [
         "query": "What's the weather in Austin?",
         "description": "Out of scope specific",
         "tags": ["out-of-scope"],
-        "correctness": {"expected_in_answer": ["agentci", "can only answer", "documentation assistant"]},
+        "correctness": {"expected_in_answer": ["ciagent", "can only answer", "documentation assistant"]},
         "path": {"max_tool_calls": 0}
     },
     {
@@ -88,20 +88,20 @@ queries = [
         "path": {"max_tool_calls": 0}
     },
     {
-        "query": "How do I install AgentCI and what's the weather in Tokyo?",
+        "query": "How do I install CIAgent and what's the weather in Tokyo?",
         "description": "Mixed-intent query — must retrieve for installation but decline weather",
         "tags": ["edge-case", "mixed-intent"],
         "correctness": {"expected_in_answer": ["pip install"], "not_in_answer": ["degrees", "forecast", "sunny"]},
         "path": {"expected_tools": ["retrieve_docs"], "max_tool_calls": 5}
     },
     {
-        "query": "What is the exact release date for AgentCI version 4.0?",
+        "query": "What is the exact release date for CIAgent version 4.0?",
         "description": "Unanswerable query that triggers rewrite_question",
         "tags": ["rewrite-loop"],
         "path": {"expected_tools": ["rewrite_question"]}
     },
     {
-        "query": "What is the name of the top contributor to the AgentCI codebase who lives in California?",
+        "query": "What is the name of the top contributor to the CIAgent codebase who lives in California?",
         "description": "Unanswerable query that tests max retries bounds",
         "tags": ["rewrite-loop", "max-retries"],
         "path": {"expected_tools": ["rewrite_question"]}
@@ -110,7 +110,7 @@ queries = [
 
 spec["queries"] = queries
 
-with open('agentci_spec.yaml', 'w') as f:
+with open('ciagent_spec.yaml', 'w') as f:
     yaml.dump(spec, f, sort_keys=False)
 
-print("Updated agentci_spec.yaml with all queries from test_rag.py")
+print("Updated ciagent_spec.yaml with all queries from test_rag.py")

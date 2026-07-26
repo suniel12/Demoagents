@@ -46,7 +46,7 @@
 - query_pattern: "Hello!"
   llm_responses:
     - role: assistant
-      content: "Hello! How can I help you with AgentCI today?"
+      content: "Hello! How can I help you with CIAgent today?"
   retrieval_results: []
   cost: 0.0010
   tokens: {prompt: 100, completion: 20}
@@ -85,7 +85,7 @@
       tool: retrieve_docs
       args: {"query": "SOC 2 compliance"}
     - role: assistant
-      content: "Yes, AgentCI is SOC 2 Type II certified."
+      content: "Yes, CIAgent is SOC 2 Type II certified."
   retrieval_results:
     - doc_id: "legal/privacy-chunk-1"
       score: 0.95

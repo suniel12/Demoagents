@@ -2,7 +2,7 @@
 
 This is a complete, production-ready RAG agent example demonstrating how to use **CIAgent** for trace-level regression testing.
 
-It implements the LangGraph Agentic RAG tutorial with a custom AgentCI knowledge base and includes a comprehensive test suite that catches logic regressions, cost spikes, and tool-call failures.
+It implements the LangGraph Agentic RAG tutorial with a custom CIAgent knowledge base and includes a comprehensive test suite that catches logic regressions, cost spikes, and tool-call failures.
 
 ## 60-second Quickstart
 
@@ -59,14 +59,14 @@ make compare MODEL=gpt-4o
 
 ## Project Structure
 
-- `knowledge_base/` — 10 curated markdown files for AgentCI policies, products, support, and legal docs.
+- `knowledge_base/` — 10 curated markdown files for CIAgent policies, products, support, and legal docs.
 - `agent.py` — LangGraph workflow: retrieve → grade → rewrite → generate.
 - `tests/test_rag.py` — 17 test cases covering direct hits, multi-chunk queries, out-of-scope handling, rewrite loops, cost guards, and regression baselines.
 - `mocks/responses.yaml` — Pre-recorded LLM decisions and retrieval results for mock-mode testing.
 - `golden/` — Saved baseline traces for regression comparison.
 - `save_baseline.py` — Script to re-record golden baselines from live runs.
 - `demo_regression.py` — Standalone demo of CIAgent's regression report.
-- `chat.py` — Interactive CLI to chat with the AgentCI RAG agent.
+- `chat.py` — Interactive CLI to chat with the CIAgent RAG agent.
 
 ## For Coding Agents
 
