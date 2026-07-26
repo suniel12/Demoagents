@@ -11,7 +11,7 @@ from agents.tracing import set_trace_processors
 from agents.tracing.processor_interface import TracingProcessor
 from agents.exceptions import InputGuardrailTripwireTriggered
 
-from ciagent.adapters.openai_agents import AgentCITraceProcessor
+from ciagent.adapters.openai_agents import CIAgentTraceProcessor
 from .agents.triage import triage_agent
 
 
@@ -19,10 +19,10 @@ from .agents.triage import triage_agent
 load_dotenv()
 
 # Global trace processor instance — shared across all runs
-_processor = AgentCITraceProcessor()
+_processor = CIAgentTraceProcessor()
 
 
-def get_processor() -> AgentCITraceProcessor:
+def get_processor() -> CIAgentTraceProcessor:
     """Return the shared AgentCI trace processor."""
     return _processor
 

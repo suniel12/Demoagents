@@ -54,7 +54,7 @@ python chat.py
 
 ## CIAgent Integration
 
-This demo uses CIAgent's `AgentCITraceProcessor` to capture traces from the OpenAI Agents SDK. The trace captures:
+This demo uses CIAgent's `CIAgentTraceProcessor` to capture traces from the OpenAI Agents SDK. The trace captures:
 
 - **Handoffs** — which agent routed to which specialist
 - **Tool calls** — which tools were called with what arguments

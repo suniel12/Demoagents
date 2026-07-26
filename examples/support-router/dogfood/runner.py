@@ -20,11 +20,11 @@ from agents.exceptions import InputGuardrailTripwireTriggered
 from agents.tracing import set_trace_processors
 from agents.tracing.processor_interface import TracingProcessor
 
-from ciagent.adapters.openai_agents import AgentCITraceProcessor
+from ciagent.adapters.openai_agents import CIAgentTraceProcessor
 from support_router.agents.triage import triage_agent
 
 DEFAULT_MODEL = "gpt-4o-mini"  # the config the bug was found on
-_processor = AgentCITraceProcessor()
+_processor = CIAgentTraceProcessor()
 
 
 async def _run_async(query: str):
