@@ -29,9 +29,9 @@ def get_trajectory(state):
 
 def main():
     print("==================================================")
-    print("🤖 AgentCI Documentation Assistant 🤖")
+    print("🤖 CIAgent Documentation Assistant 🤖")
     print("==================================================")
-    print("Ask anything about AgentCI — installation, specs, CLI, comparisons, roadmap.")
+    print("Ask anything about CIAgent — installation, specs, CLI, comparisons, roadmap.")
     print("Watch the agent's 'Trajectory' to see it retrieve, grade, and rewrite queries!")
     print("Type 'exit' or 'quit' to quit.\n")
 

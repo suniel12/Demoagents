@@ -10,7 +10,7 @@ on:
       - '.github/workflows/**'
 
 jobs:
-  agentci-tests:
+  ciagent-tests:
     runs-on: ubuntu-latest
     defaults:
       run:

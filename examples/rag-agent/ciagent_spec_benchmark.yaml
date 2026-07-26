@@ -1,11 +1,11 @@
-# yaml-language-server: $schema=../../AgentCI/src/agentci/schema/agentci_spec.schema.json
+# yaml-language-server: $schema=../../AgentCI/src/ciagent/schema/ciagent_spec.schema.json
 #
-# AgentCI Dogfood Benchmark — RAG Agent
+# CIAgent Dogfood Benchmark — RAG Agent
 #
 # WHAT THIS IS
 # ------------
-# A formal regression spec covering all RAG agent edge cases that drove AgentCI's
-# design. This is the permanent benchmark run in CI on every AgentCI release.
+# A formal regression spec covering all RAG agent edge cases that drove CIAgent's
+# design. This is the permanent benchmark run in CI on every CIAgent release.
 #
 # It covers 5 canonical failure modes:
 #   1. Happy path (in-scope, must retrieve)
@@ -16,14 +16,14 @@
 #
 # RUNNING
 # -------
-#   agentci validate DemoAgents/examples/rag-agent/agentci_spec_benchmark.yaml
+#   ciagent validate DemoAgents/examples/rag-agent/ciagent_spec_benchmark.yaml
 #
-# Full live test (requires AGENTCI_LIVE_TESTS=1 and API keys):
-#   AGENTCI_LIVE_TESTS=1 agentci test --config agentci_spec_benchmark.yaml
+# Full live test (requires CIAGENT_LIVE_TESTS=1 and API keys):
+#   CIAGENT_LIVE_TESTS=1 ciagent test --config ciagent_spec_benchmark.yaml
 #
 # HOW TO USE AS A REGRESSION GATE
 # --------------------------------
-# Add this to your CI to ensure AgentCI releases don't break the RAG agent:
+# Add this to your CI to ensure CIAgent releases don't break the RAG agent:
 #   See: .github/workflows/benchmark.yml
 
 version: 1
@@ -35,9 +35,9 @@ defaults:
     # Applied to every query — hallucination guard on all answers
     hallucination_check:
       rule: >
-        All factual claims in the response are grounded in the AgentCI
+        All factual claims in the response are grounded in the CIAgent
         documentation or the agent's retrieved context. No facts from the
-        model's pre-training knowledge should be presented as AgentCI-specific.
+        model's pre-training knowledge should be presented as CIAgent-specific.
       threshold: 0.8
   cost:
     max_cost_multiplier: 2.0    # No query should cost > 2× the golden baseline
@@ -52,7 +52,7 @@ queries:
   # ── Benchmark Case 1: Happy Path — In-Scope Install Question ───────────────
   # The canonical "should retrieve and answer" test. If this fails, the
   # retriever is broken or the agent is ignoring in-scope queries.
-  - query: "How do I install AgentCI?"
+  - query: "How do I install CIAgent?"
     description: >
       BENCHMARK-1: Core in-scope question. Agent must call the retriever and
       provide clear installation steps.
@@ -66,10 +66,10 @@ queries:
       llm_judge:
         - rule: >
             Response provides clear, step-by-step installation instructions
-            including the pip install command for AgentCI.
+            including the pip install command for CIAgent.
           threshold: 0.7
         - rule: >
-            Response is specific to AgentCI — not generic Python installation advice.
+            Response is specific to CIAgent — not generic Python installation advice.
           threshold: 0.6
 
     path:
@@ -103,7 +103,7 @@ queries:
       llm_judge:
         - rule: >
             Agent politely declines to answer the weather question and explains
-            this is outside its AgentCI knowledge domain.
+            this is outside its CIAgent knowledge domain.
           threshold: 0.8
 
     path:
@@ -136,7 +136,7 @@ queries:
       llm_judge:
         - rule: >
             Agent does NOT provide AWS load balancer configuration steps.
-            It declines and explains it is an AgentCI-focused assistant.
+            It declines and explains it is an CIAgent-focused assistant.
           threshold: 0.9    # High threshold — hallucination is a critical failure
 
     path:
@@ -195,11 +195,11 @@ queries:
       llm_judge:
         - rule: >
             The response explicitly states that an "auto-summarize" feature does
-            not exist in AgentCI, rather than providing instructions for it.
+            not exist in CIAgent, rather than providing instructions for it.
             A vague "I'm not sure" is NOT sufficient.
           threshold: 0.8
         - rule: >
-            The response offers an alternative — what AgentCI features DO exist
+            The response offers an alternative — what CIAgent features DO exist
             for reviewing agent runs (e.g., golden traces, CI reports).
           threshold: 0.6
 

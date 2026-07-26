@@ -5,7 +5,7 @@
 # canonical 5-case regression suite (install, out-of-scope, hallucination,
 # mixed-intent, premise-refusal).
 #
-# Live test execution (requires API keys) is gated on AGENTCI_LIVE_TESTS=1
+# Live test execution (requires API keys) is gated on CIAGENT_LIVE_TESTS=1
 # to control cost in CI. Schema validation always runs.
 
 name: CIAgent Dogfood Benchmark
@@ -53,7 +53,7 @@ jobs:
 
       - name: Validate dogfood benchmark spec
         run: |
-          ciagent validate examples/rag-agent/agentci_spec_benchmark.yaml
+          ciagent validate examples/rag-agent/ciagent_spec_benchmark.yaml
 
       - name: Validate pattern specs
         run: |
@@ -65,10 +65,10 @@ jobs:
   benchmark-live:
     name: Run Live Benchmark
     runs-on: ubuntu-latest
-    # Only run live tests when explicitly requested or when AGENTCI_LIVE_TESTS secret is set
+    # Only run live tests when explicitly requested or when CIAGENT_LIVE_TESTS secret is set
     if: >
       github.event.inputs.live_tests == 'true' ||
-      vars.AGENTCI_LIVE_TESTS == '1'
+      vars.CIAGENT_LIVE_TESTS == '1'
     needs: benchmark-validate
 
     steps:
@@ -91,6 +91,6 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          AGENTCI_LIVE_TESTS: "1"
+          CIAGENT_LIVE_TESTS: "1"
         run: |
-          ciagent validate agentci_spec_benchmark.yaml
+          ciagent validate ciagent_spec_benchmark.yaml

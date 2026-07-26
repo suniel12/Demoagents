@@ -11,4 +11,4 @@ baseline:
 
 compare:
 	# Run tests specifying the baseline to compare against
-	AGENT_MODEL=$(MODEL) pytest tests/test_rag.py --agentci-compare "rag-v1-gpt4o-mini"
+	AGENT_MODEL=$(MODEL) pytest tests/test_rag.py --ciagent-compare "rag-v1-gpt4o-mini"
